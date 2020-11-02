@@ -3,8 +3,8 @@ const path = require('path');
 module.exports = {
     mode: 'development',
     entry: {
-        'pcui': './src/index.js',
-        'pcui-react': './src/components/index.js'
+        'pcuiGraph': './src/index.js',
+        'pcuiGraph-react': './src/components/index.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),

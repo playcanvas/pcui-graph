@@ -1,4 +1,4 @@
-import { Element } from '@playcanvas/pcui/pcui';
+import { Element } from '@playcanvas/pcui';
 import { Observer } from '@playcanvas/pcui/pcui-binding';
 import { diff } from 'json-diff';
 import GraphView from './graph-view';
@@ -26,10 +26,14 @@ const deepCopyFunction = (inObject) => {
 
 
 export var GRAPH_ACTIONS = {
-    ADD_NODE: 0,
-    DELETE_NODE: 1,
-    ADD_EDGE: 2,
-    DELETE_EDGE: 3
+    ADD_NODE: 'EVENT_ADD_NODE',
+    UPDATE_NODE_POSITION: 'EVENT_UPDATE_NODE_POSITION',
+    DELETE_NODE: 'EVENT_DELETE_NODE',
+    SELECT_NODE: 'EVENT_SELECT_NODE',
+    ADD_EDGE: 'EVENT_ADD_EDGE',
+    DELETE_EDGE: 'EVENT_DELETE_EDGE',
+    SELECT_EDGE: 'EVENT_SELECT_EDGE',
+    DESELECT_ITEM: 'EVENT_DESELECT_ITEM'
 };
 
 /**
@@ -37,6 +41,36 @@ export var GRAPH_ACTIONS = {
  * @classdesc Represents a graph.
  * @mixes pcui.IFocusable
  */
+
+class SelectedItem {
+    constructor(graph, type, id) {
+        this._graph = graph;
+        this._type = type;
+        this._id = id;
+    }
+
+    selectItem() {
+        switch (this._type) {
+            case 'NODE':
+                this._graph.view.selectNode(this._id);
+                break;
+            case 'EDGE':
+                this._graph.view.selectEdge(this._id);
+                break;
+        }
+    }
+
+    deselectItem() {
+        switch (this._type) {
+            case 'NODE':
+                this._graph.view.deselectNode(this._id);
+                break;
+            case 'EDGE':
+                this._graph.view.deselectEdge(this._id);
+                break;
+        }
+    }
+}
 class Graph extends Element {
     /**
      * Creates a new Graph.
@@ -56,18 +90,30 @@ class Graph extends Element {
 
         this._suppressGraphDataEvents = false;
 
-        this.view = new GraphView(this.dom, this._graphSchema);
+        this.view = new GraphView(this.dom, this._graphSchema, this._graphData);
 
         this._buildGraphFromData();
         this._addContextMenu();
+
+        this._selectedItem = null;
+        this.view.onBlankSelection(() => {
+            if (this._selectedItem) {
+                this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.DESELECT_ITEM, { detail: {
+                    type: this._selectedItem._type,
+                    id: this._selectedItem._id
+                } }));
+                this._selectedItem.deselectItem();
+                this._selectedItem = null;
+            }
+        });
     }
 
     _buildGraphFromData() {
         Object.keys(this._graphData.get(`data.nodes`)).forEach(nodeKey => {
-            this.createNode(this._graphData.get(`data.nodes.${nodeKey}`));
+            this.createNode(this._graphData.get(`data.nodes.${nodeKey}`), undefined, true);
         });
         Object.keys(this._graphData.get(`data.edges`)).forEach(edgeKey => {
-            this._createConnectedEdge(this._graphData.get(`data.edges.${edgeKey}`), edgeKey);
+            this.createConnectedEdge(this._graphData.get(`data.edges.${edgeKey}`), edgeKey, true);
         });
     }
 
@@ -82,9 +128,15 @@ class Graph extends Element {
                         };
                         delete node.action;
                         delete node.text;
+                        delete node.onClick;
                         this.createNode(node, e);
                         this._graphData.set(`data.nodes.${node.id}`, node);
-                        this.dom.dispatchEvent(new CustomEvent('createNode', { detail: node }));
+                        this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.SELECT_NODE, { detail: node }));
+                        if (this._selectedItem) {
+                            this._selectedItem.deselectItem();
+                        }
+                        this._selectedItem = new SelectedItem(this, 'NODE', node.id);
+                        this._selectedItem.selectItem();
                     };
                 }
             }
@@ -98,44 +150,85 @@ class Graph extends Element {
         return edge.from.includes(this._graphData.get(`data.nodes.${source}.nodeType`)) && edge.to.includes(this._graphData.get(`data.nodes.${target}.nodeType`));
     }
 
-    _createConnectedEdge(edge, edgeId) {
+    createConnectedEdge(edge, edgeId, suppressEvents) {
         var edgeSchema = this._graphSchema.edges[edge.edgeType];
-        this.view.addEdge(edge, edgeSchema, edgeId);
+        this.view.addEdge(edge, edgeSchema, edgeId, (edge) => {
+            this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.SELECT_EDGE, { detail: { edge, edgeId } }));
+            if (this._selectedItem) {
+                this._selectedItem.deselectItem();
+            }
+            this._selectedItem = new SelectedItem(this, 'EDGE', edgeId);
+            this._selectedItem.selectItem();
+        });
         var contextMenuItems = deepCopyFunction(edgeSchema.contextMenuItems).map(item => {
             if (item.action === GRAPH_ACTIONS.DELETE_EDGE) {
-                item.onClick = () => this._deleteEdge(edgeId);
+                item.onClick = () => this.deleteEdge(edgeId);
             }
             return item;
         });
         this.view.addEdgeContextMenu(edgeId, contextMenuItems);
+        if (!this._graphData.get(`data.edges.${edgeId}`)) {
+            this._graphData.set(`data.edges.${edgeId}`, edge);
+        }
+        if (!suppressEvents) this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.ADD_EDGE, { detail: edge }));
     }
 
     _createUnconnectedEdgeForNode(node, edgeType) {
         const onEdgeConnected = (targetNodeId) => {
-            this._graphData.set(`data.edges.${node.id}-${targetNodeId}`, {
+            var edgeId = `${node.id}-${targetNodeId}`;
+            var edge = {
                 from: node.id,
                 to: targetNodeId,
                 edgeType: edgeType,
                 conditions: {}
-            });
+            };
+            this.createConnectedEdge(edge, edgeId);
+            this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.SELECT_EDGE, { detail: { edge, edgeId } }));
+            if (this._selectedItem) {
+                this._selectedItem.deselectItem();
+            }
+            this._selectedItem = new SelectedItem(this, 'EDGE', edgeId);
+            this._selectedItem.selectItem();
         };
         var edgeSchema = this._graphSchema.edges[edgeType];
         this.view.addUnconnectedEdge(node.id, edgeType, edgeSchema, this._isValidEdge.bind(this), onEdgeConnected);
     }
 
-    createNode(node, event) {
+    createNode(node, event, suppressEvents) {
+        var nodeSchema = this._graphSchema.nodes[node.nodeType];
+        node = this.view.addNode(
+            node,
+            nodeSchema,
+            event,
+            (edgeId, edge) => {
+                this.createConnectedEdge(edge, edgeId);
+            },
+            (node) => {
+                this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.SELECT_NODE, { detail: node }));
+                if (this._selectedItem) {
+                    this._selectedItem.deselectItem();
+                }
+                this._selectedItem = new SelectedItem(this, 'NODE', node.id);
+                this._selectedItem.selectItem();
+            }
+        );
+
         if (!this._graphData.get(`data.nodes.${node.id}`)) {
             this._graphData.set(`data.nodes.${node.id}`, node);
         }
-        var nodeSchema = this._graphSchema.nodes[node.nodeType];
-        this.view.addNode(node, nodeSchema, event, (edgeId, edge) => {
-            this._createConnectedEdge(edge, edgeId);
-            this._graphData.set(`data.edges.${edgeId}`, edge);
-        });
-        this.view.addNodeEvent(node.id, 'updatePosition', (pos) => {
-            this._graphData.set(`data.nodes.${node.id}.posX`, pos.x);
-            this._graphData.set(`data.nodes.${node.id}.posY`, pos.y);
-        });
+        if (!suppressEvents) this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.ADD_NODE, { detail: node }));
+        this.view.addNodeEvent(
+            node.id,
+            'updatePosition',
+            (pos) => {
+                var currNode = this._graphData.get(`data.nodes.${node.id}`);
+                if (pos.x !== currNode.posX || pos.y !== currNode.posY) {
+                    this._graphData.set(`data.nodes.${node.id}.posX`, pos.x);
+                    this._graphData.set(`data.nodes.${node.id}.posY`, pos.y);
+                    this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.UPDATE_NODE_POSITION, { detail: this._graphData.get(`data.nodes.${node.id}`) }));
+                }
+            }
+        );
         this._graphData.on(`data.nodes.${node.id}.name:set`, (value) => {
             this.view.updateNodeName(node.id, value);
         });
@@ -145,28 +238,49 @@ class Graph extends Element {
                 item.onClick = () => this._createUnconnectedEdgeForNode(node, item.edgeType);
             }
             if (item.action === GRAPH_ACTIONS.DELETE_NODE) {
-                item.onClick = () => this._deleteNode(node);
+                item.onClick = () => this.deleteNode(node.id);
             }
             return item;
         });
         this.view.addNodeContextMenu(node.id, contextMenuItems);
     }
 
-    _deleteNode(node) {
-        this.view.removeNode(node.id);
-        this._graphData.unset(`data.nodes.${node.id}`);
+    updateNodePosition(nodeId, pos) {
+        this._graphData.set(`data.nodes.${nodeId}.posX`, pos.x);
+        this._graphData.set(`data.nodes.${nodeId}.posY`, pos.y);
+        this.view.updateNodePosition(nodeId, pos);
+    }
+
+    updateNodeName(nodeId, name) {
+        this._graphData.set(`data.nodes.${nodeId}.name`, name);
+        this.view.updateNodeName(nodeId, name);
+    }
+
+    deleteNode(nodeId, suppressEvents) {
+        this.view.removeNode(nodeId);
+        const node = this._graphData.get(`data.nodes.${nodeId}`);
+        if (!suppressEvents) this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.DELETE_NODE, { detail: node }));
+        this._graphData.unset(`data.nodes.${nodeId}`);
         var edgeKeys = Object.keys(this._graphData.get('data.edges'));
         for (var i = 0; i < edgeKeys.length; i++) {
             var edge = this._graphData.get(`data.edges.${edgeKeys[i]}`);
-            if (edge.from === node.id || edge.to === node.id){
+            if (edge.from === nodeId || edge.to === nodeId){
                 this._graphData.unset(`data.edges.${edgeKeys[i]}`);
+                if (!suppressEvents) this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.DELETE_EDGE, { detail: edge }));
             }
         }
     }
 
-    _deleteEdge(edgeId) {
+    deleteEdge(edgeId, suppressEvents) {
         this.view.removeEdge(edgeId);
+        if (!suppressEvents) this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.DELETE_EDGE, { detail: this._graphData.get(`data.edges.${edgeId}`) }));
         this._graphData.unset(`data.edges.${edgeId}`);
+    }
+
+    on(eventName, callback) {
+        this.dom.addEventListener(eventName, (e) => {
+            callback(e.detail);
+        });
     }
 }
 

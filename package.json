@@ -23,7 +23,7 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "sass-loader": "^9.0.2",
-    "@playcanvas/pcui": "^1.0.3"
+    "@playcanvas/pcui": "^1.0.4"
   },
   "scripts": {
     "build": "webpack --config webpack.config.js",

@@ -9,10 +9,11 @@ import 'backbone';
 import * as joint from 'jointjs';
 
 class GraphView {
-    constructor(dom, graphSchema) {
-        this._graphSchema = graphSchema;
+    constructor(dom, graphSchema, graphData) {
 
         this._dom = dom;
+        this._graphSchema = graphSchema;
+        this._graphData = graphData;
 
         this._graph = new joint.dia.Graph();
 
@@ -202,7 +203,7 @@ class GraphView {
         return this._nodes[id];
     }
 
-    addNode(node, nodeSchema, event, onCreateEdge) {
+    addNode(node, nodeSchema, event, onCreateEdge, onNodeSelected) {
         const scale = this._paper.scale().sx;
         if (event) {
             node.posX = (-this._paper.translate().tx * 1.0 / scale) + ((event.clientX - this._paper.el.getBoundingClientRect().x) * 1.0 / scale);
@@ -236,7 +237,6 @@ class GraphView {
         });
 
         var rect = new rectElement({
-            id: node.id,
             attrs: {
                 body: {
                     fill: nodeSchema.fill,
@@ -379,14 +379,24 @@ class GraphView {
                 }
             }));
         }
-
         this._graph.addCell(rect);
+
+        this._paper.findViewByModel(rect).on('element:pointerdown', function () {
+            onNodeSelected(node);
+        });
+
         this._nodes[node.id] = rect;
         this._nodes[rect.id] = node;
+
+        return node;
     }
 
     updateNodeName(id, name) {
         this.getNode(id).attr('label/text', name);
+    }
+
+    updateNodePosition(id, pos) {
+        this.getNode(id).position(pos.x, pos.y);
     }
 
     addNodeEvent(id, event, callback) {
@@ -452,7 +462,7 @@ class GraphView {
         return link;
     }
 
-    addEdge(edge, edgeSchema, edgeId) {
+    addEdge(edge, edgeSchema, edgeId, onEdgeSelected) {
         var link = this._createEdge(edgeSchema);
         var sourceNode = this.getNode(edge.from);
         if (Number.isFinite(edge.outPort)) {
@@ -474,6 +484,10 @@ class GraphView {
         }
         this._edges[edgeId] = link;
         this._graph.addCell(link);
+
+        this._paper.findViewByModel(link).on('cell:pointerdown', function () {
+            onEdgeSelected(edge);
+        });
     }
 
     addUnconnectedEdge(nodeId, edgeType, edgeSchema, validateEdge, callback) {
@@ -506,6 +520,7 @@ class GraphView {
                 link.target(cellView.model);
                 shouldLink = true;
                 callback(targetNodeId);
+                this._graph.removeCells(link);
             } else {
                 this._graph.removeCells(link);
             }
@@ -550,6 +565,40 @@ class GraphView {
                 this._graphData.unset('data.selectedItem');
             }
         });
+    }
+
+    onBlankSelection(callback) {
+        this._paper.on('blank:pointerdown', () => {
+            callback();
+        });
+    }
+
+    selectNode(id) {
+        var node = this.getNode(id);
+        var cellView = this._paper.findViewByModel(node);
+        cellView.model.attr('body/stroke', 'white');
+    }
+
+    selectEdge(id) {
+        var edge = this.getEdge(id);
+        var cellView = this._paper.findViewByModel(edge);
+        cellView.model.attr('line/stroke', 'white');
+        cellView.model.attr('line/strokeWidth', 3);
+    }
+
+    deselectNode(id) {
+        var node = this.getNode(id);
+        var cellView = this._paper.findViewByModel(node);
+        var nodeSchema = this._graphSchema.nodes[this.getNode(node.id).nodeType];
+        cellView.model.attr('body/stroke', nodeSchema.stroke);
+    }
+
+    deselectEdge(id) {
+        var edge = this.getEdge(id);
+        var cellView = this._paper.findViewByModel(edge);
+        var edgeSchema = this._graphSchema.edges[this._graphData.get(`data.edges.${id}.edgeType`)];
+        cellView.model.attr('line/stroke', edgeSchema.stroke);
+        cellView.model.attr('line/strokeWidth', edgeSchema.strokeWidth || 1);
     }
 }
 
