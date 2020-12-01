@@ -1,6 +1,6 @@
 import './style.scss';
-import { Label } from '@playcanvas/pcui';
-import { Container } from '@playcanvas/pcui';
+import { Label } from '../../pcui.js';
+import { Container } from '../../pcui.js';
 
 const CLASS_ContextMenu = 'pcui-contextmenu';
 const CLASS_ContextMenu_active = CLASS_ContextMenu + '-active';

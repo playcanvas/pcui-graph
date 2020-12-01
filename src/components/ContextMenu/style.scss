@@ -45,9 +45,10 @@
 .pcui-contextmenu {
     div: {
         font-weight: bold;
+        background-color: #232e30 !important;
     }
     div:hover {
-        background-color: darkslategray;
+        background-color: darkslategray !important;
         cursor: pointer;
     }
     div.pcui-contextmenu-parent:after {

@@ -23,15 +23,16 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "sass-loader": "^9.0.2",
-    "@playcanvas/pcui": "^1.0.4"
+    "@playcanvas/pcui": "git://github.com/playcanvas/pcui.git"
   },
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "lint": "eslint --ext .js src",
-    "storybook": "jsdoc -r -X src/components > ./.storybook/utils/jsdoc-ast.json && start-storybook -p 9009 -s public",
+    "storybook": "jsdoc -r -X src/components > ./.storybook/utils/jsdoc-ast.json && start-storybook -p 9010 -s public",
     "docs:local": "cd docs && jekyll build --config _config_local.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
     "docs:build": "cd docs && jekyll build && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
-    "pcui:publish": "npm run build && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && npm publish dist"
+    "pcui:publish": "npm run build && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && npm publish dist",
+    "installpcui": "cd node_modules/@playcanvas/pcui; npm install; EXTRACT_CSS=true npm run build; cp dist/pcui.js ../../../src/pcui.js"
   },
   "browserslist": {
     "production": [
