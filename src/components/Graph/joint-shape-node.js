@@ -69,15 +69,6 @@ const jointShapeElementView = (paper) => joint.dia.ElementView.extend({
             top: ${bbox.height / 2 * paper.scale().sx}px;
             transform: translate(${paper.translate().tx + paper.scale().sx * bbox.x - bbox.width / 2}px, ${paper.translate().ty + paper.scale().sx * bbox.y - (bbox.height / 2)}px) scale(${paper.scale().sx});
         `);
-        // this.div.find('label').text(this.model.get('label'));
-        // this.div.find('span').text(this.model.get('select'));
-        // this.div.css({
-        //     width: bbox.width,
-        //     height: bbox.height,
-        //     left: bbox.x,
-        //     top: bbox.y,
-        //     transform: 'rotate(' + (this.model.get('angle') || 0) + 'deg)'
-        // });
     },
     removeBox: function (evt) {
         this.div.remove();

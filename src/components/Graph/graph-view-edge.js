@@ -49,7 +49,7 @@ class GraphViewEdge {
         if (edgeSchema.targetMarker) {
             link.attr('line/targetMarker', {
                 'type': 'path',
-                'd': 'M 10 -7 0 0 10 7 Z',
+                'd': 'm-2.57106,0.93353c-0.56989,-0.39644 -0.57234,-1.2387 -0.00478,-1.63846l7.25619,-5.11089c0.66251,-0.46663 1.57585,0.00721 1.57585,0.81756l0,10.1587c0,0.8077 -0.90803,1.2821 -1.57106,0.8209l-7.2562,-5.04781z',
                 'stroke': edgeSchema.targetMarkerStroke || edgeSchema.stroke,
                 'fill': edgeSchema.targetMarkerStroke || edgeSchema.stroke
             });
@@ -65,6 +65,7 @@ class GraphViewEdge {
 
     addContextMenu(items) {
         var edgeCell = this._paper.findViewByModel(this.model);
+        if (!edgeCell) return;
         var contextMenu = document.createElement('div');
         this._paper.el.appendChild(contextMenu);
         new ContextMenu({
@@ -104,7 +105,7 @@ class GraphViewEdge {
         const edgeSchema = this._edgeSchema;
         this.model.attr('line/sourceMarker', {
             'type': 'path',
-            'd': 'M 10 -7 0 0 10 7 Z',
+            'd': 'm-2.57106,0.93353c-0.56989,-0.39644 -0.57234,-1.2387 -0.00478,-1.63846l7.25619,-5.11089c0.66251,-0.46663 1.57585,0.00721 1.57585,0.81756l0,10.1587c0,0.8077 -0.90803,1.2821 -1.57106,0.8209l-7.2562,-5.04781z',
             'stroke': edgeSchema.targetMarkerStroke || edgeSchema.stroke,
             'fill': edgeSchema.targetMarkerStroke || edgeSchema.stroke
         });
@@ -114,7 +115,7 @@ class GraphViewEdge {
         const edgeSchema = this._edgeSchema;
         this.model.attr('line/targetMarker', {
             'type': 'path',
-            'd': 'M 10 -7 0 0 10 7 Z',
+            'd': 'm-2.57106,0.93353c-0.56989,-0.39644 -0.57234,-1.2387 -0.00478,-1.63846l7.25619,-5.11089c0.66251,-0.46663 1.57585,0.00721 1.57585,0.81756l0,10.1587c0,0.8077 -0.90803,1.2821 -1.57106,0.8209l-7.2562,-5.04781z',
             'stroke': edgeSchema.targetMarkerStroke || edgeSchema.stroke,
             'fill': edgeSchema.targetMarkerStroke || edgeSchema.stroke
         });

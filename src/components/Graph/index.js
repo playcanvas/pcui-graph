@@ -99,6 +99,9 @@ class Graph extends Element {
                         delete node.action;
                         delete node.text;
                         delete node.onClick;
+                        if (node.name) {
+                            node.name = `${node.name} ${Object.keys(this._graphData.get('data.nodes')).length}`;
+                        }
                         this.createNode(node, e);
                         this._graphData.set(`data.nodes.${node.id}`, node);
                         this.selectNode(node);
@@ -203,7 +206,7 @@ class Graph extends Element {
         }
     }
 
-    onNodeAttributeUpdated(nodeId, value) {
+    onNodeAttributeUpdated(nodeId, attribute, value) {
         this._graphData.set(`data.nodes.${nodeId}.${attribute.name}`, value);
         this.dom.dispatchEvent(
             new CustomEvent(
@@ -242,8 +245,8 @@ class Graph extends Element {
                 this.view.addNodeEvent(
                     node.id,
                     `updateAttribute`,
-                    this.onNodePositionUpdated.bind(this),
-                    attribute.name
+                    this.onNodeAttributeUpdated.bind(this),
+                    attribute
                 );
             });
         }
@@ -277,23 +280,25 @@ class Graph extends Element {
         if (!this._graphData.get(`data.nodes.${nodeId}`)) return;
         this.view.removeNode(nodeId);
         const node = this._graphData.get(`data.nodes.${nodeId}`);
-        if (!suppressEvents) this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.DELETE_NODE, { detail: node }));
         this._graphData.unset(`data.nodes.${nodeId}`);
+        var edges = [];
         var edgeKeys = Object.keys(this._graphData.get('data.edges'));
         for (var i = 0; i < edgeKeys.length; i++) {
             var edge = this._graphData.get(`data.edges.${edgeKeys[i]}`);
             if (edge.from === nodeId || edge.to === nodeId) {
                 this._graphData.unset(`data.edges.${edgeKeys[i]}`);
-                if (!suppressEvents) this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.DELETE_EDGE, { detail: edge }));
+                edges.push(edgeKeys[i]);
+                this.view.removeEdge(`${edge.from}-${edge.to}`);
             }
         }
+        if (!suppressEvents) this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.DELETE_NODE, { detail: { node, edges } }));
     }
 
     deleteEdge(edgeId, suppressEvents) {
         if (!this._graphData.get(`data.edges.${edgeId}`)) return;
         var { from, to } = this._graphData.get(`data.edges.${edgeId}`) || {};
         this.view.removeEdge(`${from}-${to}`);
-        if (!suppressEvents) this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.DELETE_EDGE, { detail: this._graphData.get(`data.edges.${edgeId}`) }));
+        if (!suppressEvents) this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.DELETE_EDGE, { detail: { edgeId: edgeId, edge: this._graphData.get(`data.edges.${edgeId}`) } }));
         this._graphData.unset(`data.edges.${edgeId}`);
         var edges = this._graphData.get(`data.edges`);
         Object.keys(edges).forEach(edgeKey => {

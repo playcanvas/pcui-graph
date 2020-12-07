@@ -116,10 +116,6 @@ class GraphView extends JointGraph {
         if (this._edges[id]) {
             return this._edges[id];
         }
-        var nodes = String(id).split('-');
-        if (this._edges[`${nodes[1]}-${nodes[0]}`]) {
-            return this._edges[`${nodes[1]}-${nodes[0]}`];
-        }
     }
 
     addEdge(edgeData, edgeSchema, onEdgeSelected) {
@@ -147,15 +143,8 @@ class GraphView extends JointGraph {
 
     removeEdge(id) {
         let edge = this.getEdge(id);
-        this._graph.removeCells(edge.model);
+        if (edge) this._graph.removeCells(edge.model);
         delete this._edges[id];
-        var nodes = String(id).split('-');
-        id = `${nodes[1]}-${nodes[0]}`;
-        if (this._edges[id]) {
-            edge = this.getEdge(id);
-            this._graph.removeCells(edge.model);
-            delete this._edges[id];
-        }
     }
 
     addUnconnectedEdge(nodeId, edgeType, edgeSchema, validateEdge, onEdgeConnected) {

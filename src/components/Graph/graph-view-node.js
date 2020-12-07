@@ -224,6 +224,7 @@ class GraphViewNode {
     }
 
     addContextMenu(items) {
+        console.log('here');
         var nodeView = this._paper.findViewByModel(this.model);
         var contextMenu = document.createElement('div');
         this._paper.el.appendChild(contextMenu);
@@ -251,7 +252,10 @@ class GraphViewNode {
             this.model.attr('label/text', value);
         }
         const attributeElement = document.querySelector(`#nodediv_${this.model.id}`).querySelector(`#input_${attribute}`);
-        if (attributeElement) attributeElement.ui.value = value;
+        if (attributeElement) {
+            attributeElement.ui.value = value;
+            attributeElement.ui.error = false;
+        }
     }
 
     updatePosition(pos) {
@@ -268,11 +272,24 @@ class GraphViewNode {
                 break;
             }
             case 'updateAttribute': {
-                document.querySelector(`#nodediv_${this.model.id}`).querySelector(`#input_${attribute}`).ui.on('change', (value) => {
-                    if (attribute === 'name') {
+                document.querySelector(`#nodediv_${this.model.id}`).querySelector(`#input_${attribute.name}`).ui.on('change', (value) => {
+                    if (attribute.name === 'name') {
+                        var nameTaken = false;
+                        Object.keys(this._graphView._graphData.get('data.nodes')).forEach(nodeKey => {
+                            var node = this._graphView._graphData.get('data.nodes')[nodeKey];
+                            if (node.name === value) {
+                                nameTaken = true;
+                            }
+                        });
+                        const attributeElement = document.querySelector(`#nodediv_${this.model.id}`).querySelector(`#input_${attribute.name}`);
+                        if (nameTaken) {
+                            attributeElement.ui.error = true;
+                            return;
+                        }
+                        attributeElement.ui.error = false;
                         this.model.attr('label/text', value);
                     }
-                    callback(this.nodeData.id, value);
+                    callback(this.nodeData.id, attribute, value);
                 });
                 break;
             }
