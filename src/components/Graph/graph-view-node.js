@@ -224,7 +224,6 @@ class GraphViewNode {
     }
 
     addContextMenu(items) {
-        console.log('here');
         var nodeView = this._paper.findViewByModel(this.model);
         var contextMenu = document.createElement('div');
         this._paper.el.appendChild(contextMenu);

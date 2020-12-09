@@ -56,7 +56,14 @@ class GraphViewEdge {
         } else {
             link.attr('line/targetMarker', null);
         }
-        link.attr('line/sourceMarker', null);
+        link.attr('line/sourceMarker', {
+            'type': 'image',
+            'xlink:href': 'http://localhost:1338/dist/source-marker-default.png',
+            'width': 12,
+            'height': 12,
+            'y': -6,
+            'x': -6
+        });
         if (edgeSchema.smooth) {
             link.set('connector', { name: 'smooth' });
         }
@@ -85,6 +92,7 @@ class GraphViewEdge {
             stroke: '#F60',
             fill: '#F60'
         });
+        this.model.attr('line/sourceMarker/xlink:href', 'http://localhost:1338/dist/source-marker-active.png');
     }
 
     deselect() {
@@ -99,6 +107,7 @@ class GraphViewEdge {
             stroke: edgeSchema.targetMarkerStroke || edgeSchema.stroke,
             fill: edgeSchema.targetMarkerStroke || edgeSchema.stroke
         });
+        this.model.attr('line/sourceMarker/xlink:href', 'http://localhost:1338/dist/source-marker-default.png');
     }
 
     addSourceMarker() {
