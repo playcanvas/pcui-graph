@@ -141,6 +141,7 @@ class JointGraph {
     }
 
     adjustVertices(graph, cell) {
+        if (this.ignoreAdjustVertices) return;
         // if `cell` is a view, find its model
         cell = cell.model || cell;
         if (cell instanceof joint.dia.Element) {
@@ -222,12 +223,28 @@ class JointGraph {
                     var reverse = ((theta < 180) ? 1 : -1);
                     // we found the vertex
                     var angle = joint.g.toRad(theta + (sign * reverse * 90));
-                    // var vertex = joint.g.Point.fromPolar(offset, angle, midPoint);
-                    // replace vertices array with `vertex`
-                    sibling.vertices([
-                        joint.g.Point.fromPolar(offset, angle, midPoint)
-                    ]);
-                    sibling.set('connector', { name: 'smooth' });
+
+                    var shift = joint.g.Point.fromPolar(offset * sign, angle, 0);
+                    this.ignoreAdjustVertices = true;
+                    sibling.source(sibling.getSourceCell(), {
+                        anchor: {
+                            name: 'center',
+                            args: {
+                                dx: shift.x,
+                                dy: shift.y,
+                            }
+                        } 
+                    });
+                    sibling.target(sibling.getTargetCell(), {
+                        anchor: {
+                            name: 'center',
+                            args: {
+                                dx: shift.x,
+                                dy: shift.y,
+                            }
+                        } 
+                    });
+                    this.ignoreAdjustVertices = false;
                 });
             }
         }
