@@ -1,4 +1,4 @@
-import { ContextMenu } from '../ContextMenu';
+import { ContextMenu } from '../../pcui';
 import * as joint from 'jointjs';
 
 class GraphViewEdge {

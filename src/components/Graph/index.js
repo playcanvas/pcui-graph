@@ -67,7 +67,7 @@ class Graph extends Element {
 
         this._suppressGraphDataEvents = false;
 
-        this.view = new GraphView(this.dom, this._graphSchema, this._graphData);
+        this.view = new GraphView(this, this.dom, this._graphSchema, this._graphData);
 
         this._buildGraphFromData();
         this._addCanvasContextMenu();
@@ -221,6 +221,19 @@ class Graph extends Element {
         );
     }
 
+    initialiseNodeContextMenuItems(node, items) {
+        var contextMenuItems = deepCopyFunction(items).map(item => {
+            if (item.action === GRAPH_ACTIONS.ADD_EDGE) {
+                item.onClick = () => this._createUnconnectedEdgeForNode(node, item.edgeType);
+            }
+            if (item.action === GRAPH_ACTIONS.DELETE_NODE) {
+                item.onClick = () => this.deleteNode(node.id);
+            }
+            return item;
+        });
+        return contextMenuItems;
+    }
+
     createNode(node, domEvent, suppressEvents) {
         var nodeSchema = this._graphSchema.nodes[node.nodeType];
         node = this.view.addNode(
@@ -250,16 +263,7 @@ class Graph extends Element {
                 );
             });
         }
-
-        var contextMenuItems = deepCopyFunction(nodeSchema.contextMenuItems).map(item => {
-            if (item.action === GRAPH_ACTIONS.ADD_EDGE) {
-                item.onClick = () => this._createUnconnectedEdgeForNode(node, item.edgeType);
-            }
-            if (item.action === GRAPH_ACTIONS.DELETE_NODE) {
-                item.onClick = () => this.deleteNode(node.id);
-            }
-            return item;
-        });
+        var contextMenuItems = this.initialiseNodeContextMenuItems(node, nodeSchema.contextMenuItems);
         this.view.addNodeContextMenu(node.id, contextMenuItems);
     }
 
@@ -274,6 +278,11 @@ class Graph extends Element {
         if (!this._graphData.get(`data.nodes.${nodeId}`)) return;
         this._graphData.set(`data.nodes.${nodeId}.${attribute}`, value);
         this.view.updateNodeAttribute(nodeId, attribute, value);
+    }
+
+    updateNodeType(nodeId, nodeType) {
+        this._graphData.set(`data.nodes.${nodeId}.nodeType`, nodeType);
+        this.view.updateNodeType(nodeId, nodeType);
     }
 
     deleteNode(nodeId, suppressEvents) {

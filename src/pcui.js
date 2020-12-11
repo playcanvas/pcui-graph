@@ -3138,6 +3138,9 @@ var ContextMenu_ContextMenu =
  * Creates a new ContextMenu.
  *
  * @param {object} args - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
+ * @param {object[]} [args.items] - The array of items used to populate the array. Example item: { 'text': 'Hello World', 'onClick': () => console.log('Hello World') }.
+ * @param {object} [args.dom] - The dom element to attach this context menu to.
+ * @param {object} [args.triggerElement] - The dom element that will trigger the context menu to open when right clicked. If undefined args.dom will be used.
  */
 function ContextMenu(args) {
   var _this = this;
@@ -3148,8 +3151,12 @@ function ContextMenu(args) {
   this._menu = new Container["a" /* default */]({
     dom: args.dom
   });
+  this._menu.contextMenu = this;
+  this.args = args;
 
   this._menu.class.add(CLASS_ContextMenu);
+
+  var menu = this._menu;
 
   var removeMenu = function removeMenu() {
     _this._menu.class.remove(CLASS_ContextMenu_active);
@@ -3157,12 +3164,13 @@ function ContextMenu(args) {
     document.removeEventListener('click', removeMenu);
   };
 
-  if (args.dom) {
-    args.dom.parentElement.addEventListener('contextmenu', function (e) {
+  var triggerElement = args.triggerElement || args.dom.parentElement;
+
+  if (triggerElement) {
+    this._contextMenuEvent = triggerElement.addEventListener('contextmenu', function (e) {
       e.preventDefault();
-
-      _this._menu.class.add(CLASS_ContextMenu_active);
-
+      e.stopPropagation();
+      menu.class.add(CLASS_ContextMenu_active);
       var maxMenuHeight = args.items.length * 27.0;
       var maxMenuWidth = 150.0;
       var left = e.clientX;
@@ -3178,7 +3186,7 @@ function ContextMenu(args) {
         left -= leftDiff;
       }
 
-      args.dom.setAttribute("style", "left: ".concat(left, "px; top: ").concat(top, "px"));
+      menu.dom.setAttribute("style", "left: ".concat(left, "px; top: ").concat(top, "px"));
       document.addEventListener('click', removeMenu);
     });
   }
@@ -3192,7 +3200,7 @@ function ContextMenu(args) {
       menuItemElement.on('click', function (e) {
         e.stopPropagation();
         removeMenu();
-        menuItem.onClick();
+        menuItem.onClick(e);
       });
     }
 

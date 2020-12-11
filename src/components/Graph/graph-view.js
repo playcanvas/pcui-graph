@@ -1,15 +1,16 @@
 import JointGraph from './joint-graph.js';
 import GraphViewNode from './graph-view-node.js';
 import GraphViewEdge from './graph-view-edge.js';
-import { ContextMenu } from '../ContextMenu';
-import { Vec2, Vec3 } from 'playcanvas';
+import { ContextMenu } from '../../pcui';
+import { Vec2 } from 'playcanvas';
 import * as joint from 'jointjs';
 import { jointShapeElement, jointShapeElementView } from './joint-shape-node.js';
 
 class GraphView extends JointGraph {
-    constructor(dom, graphSchema, graphData) {
+    constructor(parent, dom, graphSchema, graphData) {
         super(dom);
 
+        this._parent = parent;
         this._dom = dom;
         this._graphSchema = graphSchema;
         this._graphData = graphData;
@@ -108,6 +109,10 @@ class GraphView extends JointGraph {
 
     updateNodePosition(id, pos) {
         this.getNode(id).updatePosition(pos);
+    }
+
+    updateNodeType(id, nodeType) {
+        this.getNode(id).updateNodeType(nodeType);
     }
 
     addNodeEvent(id, event, callback, attribute) {

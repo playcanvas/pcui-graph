@@ -1,5 +1,4 @@
-import { ContextMenu } from '../ContextMenu';
-import { TextInput, BooleanInput, NumericInput, Container, Label } from '../../pcui.js';
+import { TextInput, BooleanInput, NumericInput, Container, Label, ContextMenu } from '../../pcui.js';
 import * as joint from 'jointjs';
 import { Vec2 } from 'playcanvas';
 
@@ -227,22 +226,11 @@ class GraphViewNode {
         var nodeView = this._paper.findViewByModel(this.model);
         var contextMenu = document.createElement('div');
         this._paper.el.appendChild(contextMenu);
-        new ContextMenu({
+        this._contextMenuElement = contextMenu;
+        this._contextMenu = new ContextMenu({
             triggerElement: nodeView.el,
             dom: contextMenu,
-            items: items
-        });
-    }
-
-    addEdgeContextMenu(edgeId, items) {
-        var edgeModel = this.getEdge(edgeId);
-        var edgeCell = this._paper.findViewByModel(edgeModel);
-        var contextMenu = document.createElement('div');
-        this._paper.el.appendChild(contextMenu);
-        new ContextMenu({
-            triggerElement: edgeCell.el,
-            dom: contextMenu,
-            items: items
+            items: this._graphView._parent.initialiseNodeContextMenuItems(this.nodeData, items)
         });
     }
 
@@ -255,6 +243,12 @@ class GraphViewNode {
             attributeElement.ui.value = value;
             attributeElement.ui.error = false;
         }
+    }
+
+    updateNodeType(nodeType) {
+        this._paper.findViewByModel(this.model).el.removeEventListener('contextmenu', this._contextMenu._contextMenuEvent);
+        this._paper.el.removeChild(this._contextMenuElement);
+        this.addContextMenu(this._graphSchema.nodes[nodeType].contextMenuItems);
     }
 
     updatePosition(pos) {
