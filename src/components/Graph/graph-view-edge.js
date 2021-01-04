@@ -1,6 +1,10 @@
 import { ContextMenu } from '../../pcui';
 import * as joint from 'jointjs';
 
+import sourceMarkerDefaultImage from '../../assets/source-marker-default.png';
+import sourceMarkerActiveImage from '../../assets/source-marker-active.png';
+import sourceMarkerDeactiveImage from '../../assets/source-marker-deactive.png';
+
 class GraphViewEdge {
     constructor(graphView, paper, graph, graphSchema, edgeData, edgeSchema, onEdgeSelected) {
         this._graphView = graphView;
@@ -9,6 +13,7 @@ class GraphViewEdge {
         this._graphSchema = graphSchema;
         this.edgeData = edgeData;
         this._edgeSchema = edgeSchema;
+        this.state = GraphViewEdge.STATES.DEFAULT;
 
         var link = GraphViewEdge.createLink(edgeSchema);
         var sourceNode = this._graphView.getNode(edgeData.from);
@@ -58,7 +63,7 @@ class GraphViewEdge {
         }
         link.attr('line/sourceMarker', {
             'type': 'image',
-            'xlink:href': 'http://localhost:1338/dist/source-marker-default.png',
+            'xlink:href': sourceMarkerDefaultImage,
             'width': 12,
             'height': 12,
             'y': -6,
@@ -92,7 +97,8 @@ class GraphViewEdge {
             stroke: '#F60',
             fill: '#F60'
         });
-        this.model.attr('line/sourceMarker/xlink:href', 'http://localhost:1338/dist/source-marker-active.png');
+        this.model.attr('line/sourceMarker/xlink:href', sourceMarkerActiveImage);
+        this.state = GraphViewEdge.STATES.SELECTED;
     }
 
     deselect() {
@@ -107,7 +113,23 @@ class GraphViewEdge {
             stroke: edgeSchema.targetMarkerStroke || edgeSchema.stroke,
             fill: edgeSchema.targetMarkerStroke || edgeSchema.stroke
         });
-        this.model.attr('line/sourceMarker/xlink:href', 'http://localhost:1338/dist/source-marker-default.png');
+        this.model.attr('line/sourceMarker/xlink:href', sourceMarkerDefaultImage);
+        this.state = GraphViewEdge.STATES.DEFAULT;
+    }
+
+    mute() {
+        const edgeSchema = this._edgeSchema;
+        this.model.attr('line/stroke', '#42495B');
+        this.model.attr('line/strokeWidth', edgeSchema.strokeWidth || 1);
+        this.model.attr('line/targetMarker', {
+            stroke: '#9BA1A3',
+            fill: '#9BA1A3'
+        });
+        this.model.attr('line/sourceMarker', {
+            stroke: '#9BA1A3',
+            fill: '#9BA1A3'
+        });
+        this.model.attr('line/sourceMarker/xlink:href', sourceMarkerDeactiveImage);
     }
 
     addSourceMarker() {
@@ -130,5 +152,10 @@ class GraphViewEdge {
         });
     }
 }
+
+GraphViewEdge.STATES = {
+    DEFAULT: 0,
+    SELECTED: 1
+};
 
 export default GraphViewEdge;

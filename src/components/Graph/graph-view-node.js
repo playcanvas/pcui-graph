@@ -9,6 +9,7 @@ class GraphViewNode {
         this._graph = graph;
         this._graphSchema = graphSchema;
         this.nodeData = nodeData;
+        this.state = GraphViewNode.STATES.DEFAULT;
 
         if (domEvent) {
             var pos = this._graphView.getWindowToGraphPosition(new Vec2(domEvent.clientX, domEvent.clientY));
@@ -296,12 +297,39 @@ class GraphViewNode {
                 strokeWidth: 1
             }
         });
+        this.state = GraphViewNode.STATES.SELECTED;
+    }
+
+    hover() {
+        if (this.state === GraphViewNode.STATES.SELECTED) return;
+
+        this.model.attr({
+            body: {
+                stroke: 'rgba(255, 102, 0, 0.32)',
+                strokeWidth: 1
+            }
+        });
+    }
+
+    hoverRemove() {
+        if (this.state === GraphViewNode.STATES.DEFAULT) {
+            this.deselect();
+        } else if (this.state === GraphViewNode.STATES.SELECTED) {
+            this.select();
+        }
+
     }
 
     deselect() {
         var nodeSchema = this._graphSchema.nodes[this.nodeData.nodeType];
         this.model.attr('body/stroke', nodeSchema.stroke);
+        this.state = GraphViewNode.STATES.DEFAULT;
     }
 }
+
+GraphViewNode.STATES = {
+    DEFAULT: 0,
+    SELECTED: 1
+};
 
 export default GraphViewNode;

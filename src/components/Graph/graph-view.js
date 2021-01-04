@@ -6,6 +6,20 @@ import { Vec2 } from 'playcanvas';
 import * as joint from 'jointjs';
 import { jointShapeElement, jointShapeElementView } from './joint-shape-node.js';
 
+export var GRAPH_ACTIONS = {
+    ADD_NODE: 'EVENT_ADD_NODE',
+    UPDATE_NODE_POSITION: 'EVENT_UPDATE_NODE_POSITION',
+    UPDATE_NODE_ATTRIBUTE: 'EVENT_UPDATE_NODE_ATTRIBUTE',
+    DELETE_NODE: 'EVENT_DELETE_NODE',
+    SELECT_NODE: 'EVENT_SELECT_NODE',
+    ADD_EDGE: 'EVENT_ADD_EDGE',
+    DELETE_EDGE: 'EVENT_DELETE_EDGE',
+    SELECT_EDGE: 'EVENT_SELECT_EDGE',
+    DESELECT_ITEM: 'EVENT_DESELECT_ITEM',
+    UPDATE_TRANSLATE: 'EVENT_UPDATE_TRANSLATE',
+    UPDATE_SCALE: 'EVENT_UPDATE_SCALE'
+};
+
 class GraphView extends JointGraph {
     constructor(parent, dom, graphSchema, graphData) {
         super(dom);
@@ -25,6 +39,87 @@ class GraphView extends JointGraph {
         this._graph.on('add', (cell) => this.updateNodePortColor(cell, 'white'));
         this._graph.on('remove', (cell) => this.updateNodePortColor(cell, 'black'));
         this._graph.on('change:target', (cell) => this.updateNodePortColor(cell, 'white'));
+
+        this._paper.on('cell:mousewheel', () => {
+            parent.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.UPDATE_SCALE, { detail: { scale: this._paper.scale().sx } } ));
+        });
+        this._paper.on('blank:mousewheel', () => {
+            parent.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.UPDATE_SCALE, { detail: { scale: this._paper.scale().sx } } ));
+        });
+        this._paper.on('blank:pointerup', () => {
+            parent.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.UPDATE_TRANSLATE, { detail: { pos: { x: this._paper.translate().tx, y: this._paper.translate().ty } } }));
+        });
+
+        this._paper.on({
+            'cell:mouseenter': (cellView) => {
+                var selectedEdgeId;
+                var node = this.getNode(cellView.model.id);
+                if (node && node.state !== GraphViewNode.STATES.SELECTED) {
+                    node.hover();
+                    selectedEdgeId = this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE' ? this.getEdge(this._parent._selectedItem._id).model.id : null;
+                    Object.keys(this._edges).forEach(edgeKey => {
+                        var currEdge = this.getEdge(edgeKey);
+                        if (currEdge.model.id === selectedEdgeId) return;
+                        if (![currEdge.edgeData.from, currEdge.edgeData.to].includes(node.nodeData.id)) {
+                            currEdge.mute();
+                        } else {
+                            currEdge.deselect();
+                        }
+                    });
+                }
+                var edge = this.getEdge(cellView.model.id);
+                if (edge && edge.state !== GraphViewEdge.STATES.SELECTED) {
+                    edge.deselect();
+                    selectedEdgeId = this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE' ? this.getEdge(this._parent._selectedItem._id).model.id : null;
+                    Object.keys(this._edges).forEach(edgeKey => {
+                        var currEdge = this.getEdge(edgeKey);
+                        if ((edge.model.id !== currEdge.model.id) && (selectedEdgeId !== currEdge.model.id)) {
+                            currEdge.mute();
+                        }
+                    });
+                    this.getNode(edge.edgeData.from).hover();
+                    this.getNode(edge.edgeData.to).hover();
+                }
+            },
+            'cell:mouseleave': (cellView) => {
+                var selectedEdge;
+
+                var node = this.getNode(cellView.model.id);
+                if (node && node.state !== GraphViewNode.STATES.SELECTED) {
+                    selectedEdge = this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE' ? this.getEdge(this._parent._selectedItem._id) : null;
+                    if (!selectedEdge || ![selectedEdge.edgeData.from, selectedEdge.edgeData.to].includes(node.nodeData.id)) {
+                        node.hoverRemove();
+                    }
+                    Object.keys(this._edges).forEach(edgeKey => {
+                        var currEdge = this.getEdge(edgeKey);
+                        if (selectedEdge && currEdge.model.id === selectedEdge.model.id) return;
+                        currEdge.deselect();
+                    });
+                }
+                var edge = this.getEdge(cellView.model.id);
+                if (edge && edge.state !== GraphViewEdge.STATES.SELECTED) {
+                    Object.keys(this._edges).forEach(edgeKey => {
+                        var currEdge = this.getEdge(edgeKey);
+                        if (currEdge.state === GraphViewEdge.STATES.SELECTED) {
+                            currEdge.select();
+                        } else if (currEdge.state === GraphViewEdge.STATES.DEFAULT) {
+                            if (this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE') {
+                                currEdge.mute();
+                            } else {
+                                currEdge.deselect();
+                            }
+                        }
+                    });
+                    selectedEdge = this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE' ? this.getEdge(this._parent._selectedItem._id) : null;
+                    if (!selectedEdge || ![selectedEdge.edgeData.from, selectedEdge.edgeData.to].includes(edge.edgeData.from)) {
+                        this.getNode(edge.edgeData.from).hoverRemove();
+                    }
+                    if (!selectedEdge || ![selectedEdge.edgeData.from, selectedEdge.edgeData.to].includes(edge.edgeData.to)) {
+                        this.getNode(edge.edgeData.to).hoverRemove();
+                    }
+                }
+            }
+        });
     }
 
     updateNodePortColor(cell, color) {
@@ -145,6 +240,7 @@ class GraphView extends JointGraph {
                 onEdgeSelected
             );
             this._edges[`${edgeData.from}-${edgeData.to}`] = edge;
+            this._edges[edge.model.id] = edge;
         }
         return edge.edgeData;
     }
@@ -152,6 +248,7 @@ class GraphView extends JointGraph {
     removeEdge(id) {
         let edge = this.getEdge(id);
         if (edge) this._graph.removeCells(edge.model);
+        delete this._edges[edge.model.id];
         delete this._edges[id];
     }
 
@@ -204,7 +301,13 @@ class GraphView extends JointGraph {
 
     selectNode(id) {
         const node = this.getNode(id);
-        if (node) node.select();
+        if (node) {
+            node.select();
+            Object.keys(this._edges).forEach(edgeKey => {
+                var currEdge = this.getEdge(edgeKey);
+                currEdge.deselect();
+            });
+        }
     }
 
     deselectNode(id) {
@@ -214,12 +317,46 @@ class GraphView extends JointGraph {
 
     selectEdge(id) {
         var edge = this.getEdge(id);
-        if (edge) edge.select();
+        if (edge) {
+            edge.select();
+            Object.keys(this._edges).forEach(edgeKey => {
+                var currEdge = this.getEdge(edgeKey);
+                if (edge.model.id !== currEdge.model.id) {
+                    currEdge.mute();
+                }
+            });
+            this.getNode(edge.edgeData.from).hover();
+            this.getNode(edge.edgeData.to).hover();
+        }
     }
 
     deselectEdge(id) {
         var edge = this.getEdge(id);
-        if (edge) edge.deselect();
+        if (edge) {
+            Object.keys(this._edges).forEach(edgeKey => {
+                var currEdge = this.getEdge(edgeKey);
+                currEdge.deselect();
+            });
+            this.getNode(edge.edgeData.from).hoverRemove();
+            this.getNode(edge.edgeData.to).hoverRemove();
+        }
+    }
+
+    setGraphPosition(posX, posY) {
+        this._paper.translate(posX, posY);
+    }
+
+    getGraphPosition() {
+        var t = this._paper.translate();
+        return { x: t.tx, y: t.ty };
+    }
+
+    setGraphScale(scale) {
+        this._paper.scale(scale);
+    }
+
+    getGraphScale() {
+        return this._paper.scale().sx;
     }
 }
 

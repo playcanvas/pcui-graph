@@ -1,5 +1,5 @@
-import { Element } from '../../pcui.js';
-import { Observer } from '@playcanvas/pcui/dist/pcui-binding';
+import { Element } from '@playcanvas/pcui/pcui';
+import { Observer } from '@playcanvas/pcui/pcui-binding';
 import { diff } from 'json-diff';
 import { deepCopyFunction } from './util';
 import GraphView from './graph-view';
@@ -15,7 +15,9 @@ export var GRAPH_ACTIONS = {
     ADD_EDGE: 'EVENT_ADD_EDGE',
     DELETE_EDGE: 'EVENT_DELETE_EDGE',
     SELECT_EDGE: 'EVENT_SELECT_EDGE',
-    DESELECT_ITEM: 'EVENT_DESELECT_ITEM'
+    DESELECT_ITEM: 'EVENT_DESELECT_ITEM',
+    UPDATE_TRANSLATE: 'EVENT_UPDATE_TRANSLATE',
+    UPDATE_SCALE: 'EVENT_UPDATE_SCALE'
 };
 
 class SelectedItem {
@@ -320,6 +322,25 @@ class Graph extends Element {
                 this.selectEdge(edge);
             }
         });
+    }
+
+    setGraphPosition(posX, posY) {
+        this.view.setGraphPosition(posX, posY);
+    }
+
+    getGraphPosition() {
+        return this.view.getGraphPosition();
+    }
+
+    setGraphScale(scale) {
+        this.view.setGraphScale(scale);
+        Object.keys(this.view._nodes).forEach(nodeKey => {
+            this.view._paper.findViewByModel(this.view._nodes[nodeKey].model).updateBox();
+        });
+    }
+
+    getGraphScale() {
+        return this.view.getGraphScale();
     }
 
     on(eventName, callback) {

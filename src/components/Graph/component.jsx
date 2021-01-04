@@ -1,6 +1,6 @@
 import React from 'react';
 import Element from './index';
-import { Element as ElementComponent } from '@playcanvas/pcui/dist/pcui-react';
+import { Element as ElementComponent } from '@playcanvas/pcui/pcui-react';
 
 class GraphComponent extends ElementComponent {
     constructor(props) {

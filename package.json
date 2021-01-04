@@ -22,8 +22,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "sass-loader": "^9.0.2",
-    "@playcanvas/pcui": "git://github.com/playcanvas/pcui.git"
+    "sass-loader": "^9.0.2"
   },
   "scripts": {
     "build": "webpack --config webpack.config.js",
@@ -31,8 +30,7 @@
     "storybook": "jsdoc -r -X src/components > ./.storybook/utils/jsdoc-ast.json && start-storybook -p 9010 -s public",
     "docs:local": "cd docs && jekyll build --config _config_local.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
     "docs:build": "cd docs && jekyll build && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
-    "pcui:publish": "npm run build && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && npm publish dist",
-    "installpcui": "cd node_modules/@playcanvas/pcui; npm install; EXTRACT_CSS=true npm run build; cp dist/pcui.js ../../../src/pcui.js"
+    "pcui:publish": "npm run build && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && npm publish dist"
   },
   "browserslist": {
     "production": [
@@ -59,6 +57,7 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
     "@playcanvas/eslint-config": "^1.0.6",
+    "@playcanvas/pcui": "^1.1.5",
     "@storybook/addon-actions": "^6.0.3",
     "@storybook/addon-backgrounds": "^6.0.3",
     "@storybook/addon-controls": "^6.0.0-beta.15",
@@ -80,6 +79,7 @@
     "react-app-rewire-alias": "^0.1.6",
     "react-app-rewired": "^2.1.6",
     "react-is": "^16.13.1",
+    "url-loader": "^4.1.1",
     "webpack-cli": "^3.3.12"
   },
   "directories": {
