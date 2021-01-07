@@ -1,7 +1,7 @@
 import JointGraph from './joint-graph.js';
 import GraphViewNode from './graph-view-node.js';
 import GraphViewEdge from './graph-view-edge.js';
-import { ContextMenu } from '../../pcui';
+import { ContextMenu } from '../../pcui-external';
 import { Vec2 } from 'playcanvas';
 import * as joint from 'jointjs';
 import { jointShapeElement, jointShapeElementView } from './joint-shape-node.js';
@@ -348,7 +348,7 @@ class GraphView extends JointGraph {
 
     getGraphPosition() {
         var t = this._paper.translate();
-        return { x: t.tx, y: t.ty };
+        return new Vec2([t.tx, t.ty]);
     }
 
     setGraphScale(scale) {

@@ -1,4 +1,4 @@
-import { TextInput, BooleanInput, NumericInput, Container, Label, ContextMenu } from '../../pcui.js';
+import { TextInput, BooleanInput, NumericInput, Container, Label, ContextMenu } from '../../pcui-external.js';
 import * as joint from 'jointjs';
 import { Vec2 } from 'playcanvas';
 

@@ -1,5 +1,5 @@
-import { Element } from '@playcanvas/pcui/pcui';
-import { Observer } from '@playcanvas/pcui/pcui-binding';
+import { Element } from '../../pcui-external';
+import { Observer } from '../../pcui-binding-external';
 import { diff } from 'json-diff';
 import { deepCopyFunction } from './util';
 import GraphView from './graph-view';
@@ -308,6 +308,7 @@ class Graph extends Element {
     deleteEdge(edgeId, suppressEvents) {
         if (!this._graphData.get(`data.edges.${edgeId}`)) return;
         var { from, to } = this._graphData.get(`data.edges.${edgeId}`) || {};
+        if (this._selectedItem._id === `${from}-${to}`) this.deselectItem();
         this.view.removeEdge(`${from}-${to}`);
         if (!suppressEvents) this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.DELETE_EDGE, { detail: { edgeId: edgeId, edge: this._graphData.get(`data.edges.${edgeId}`) } }));
         this._graphData.unset(`data.edges.${edgeId}`);
