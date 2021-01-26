@@ -223,7 +223,12 @@ class GraphView extends JointGraph {
     }
 
     addEdge(edgeData, edgeSchema, onEdgeSelected) {
-        let edge = this.getEdge(`${edgeData.from}-${edgeData.to}`);
+        let edge;
+        if (Number.isFinite(edgeData.outPort)) {
+            edge = this.getEdge(`${edgeData.from},${edgeData.outPort}-${edgeData.to},${edgeData.inPort}`);
+        } else {
+            edge = this.getEdge(`${edgeData.from}-${edgeData.to}`);
+        }
         if (edge) {
             if (edgeData.to === edge.edgeData.to) {
                 if (!edgeData.outPort) {
@@ -244,7 +249,11 @@ class GraphView extends JointGraph {
                 edgeSchema,
                 onEdgeSelected
             );
-            this._edges[`${edgeData.from}-${edgeData.to}`] = edge;
+            if (Number.isFinite(edgeData.outPort)) {
+                this._edges[`${edgeData.from},${edgeData.outPort}-${edgeData.to},${edgeData.inPort}`] = edge;
+            } else {
+                this._edges[`${edgeData.from}-${edgeData.to}`] = edge;
+            }
             this._edges[edge.model.id] = edge;
         }
         return edge.edgeData;

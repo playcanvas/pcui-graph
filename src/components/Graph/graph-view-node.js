@@ -167,6 +167,7 @@ class GraphViewNode {
                     }
                 });
                 this._graph.on('change:target', (cell) => {
+                    if (this._suppressChangeTargetEvent) return;
                     var target = cell.get('target');
                     if (!target || !target.id || target.id !== this.model.id) return;
                     var source = cell.get('source');
@@ -180,10 +181,10 @@ class GraphViewNode {
                             inPort: Number(target.port.replace('in', '')),
                             edgeType: port.type
                         };
-                        onCreateEdge(edgeId, edge);
                         this._suppressChangeTargetEvent = true;
                         this._graph.removeCells(cell);
                         this._suppressChangeTargetEvent = false;
+                        onCreateEdge(edgeId, edge);
                     }
                 });
             });

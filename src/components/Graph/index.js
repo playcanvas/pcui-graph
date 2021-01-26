@@ -156,7 +156,11 @@ class Graph extends Element {
             }
             return item;
         });
-        this.view.addEdgeContextMenu(`${edge.from}-${edge.to}`, contextMenuItems);
+        if (Number.isFinite(edge.outPort)) {
+            this.view.addEdgeContextMenu(`${edge.from},${edge.outPort}-${edge.to},${edge.inPort}`, contextMenuItems);
+        } else {
+            this.view.addEdgeContextMenu(`${edge.from}-${edge.to}`, contextMenuItems);
+        }
         if (!this._graphData.get(`data.edges.${edgeId}`)) {
             this._graphData.set(`data.edges.${edgeId}`, edge);
         }
