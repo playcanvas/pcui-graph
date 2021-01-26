@@ -9,7 +9,7 @@ import { Vec2 } from 'playcanvas';
 
 class JointGraph {
 
-    constructor(dom) {
+    constructor(dom, config = {}) {
 
         this._graph = new joint.dia.Graph({}, { cellNamespace: joint.shape });
 
@@ -28,7 +28,7 @@ class JointGraph {
             defaultLink: (cellView, magnet) => {
                 var defaultLink = new joint.shapes.standard.Link({
                     connector: {
-                        name: 'smooth'
+                        name: 'normal'
                     }
                 });
                 defaultLink.attr({
@@ -43,12 +43,12 @@ class JointGraph {
             validateConnection: (cellViewS, magnetS, cellViewT, magnetT, end, linkView) => {
                 if (joint.V(cellViewS).id === joint.V(cellViewT).id) return false;
                 if (!joint.V(magnetS) || !joint.V(magnetT)) return false;
-                if (joint.V(magnetS).attr('stroke') !== joint.V(magnetT).attr('stroke')) return false;
                 var sPort = joint.V(magnetS).attr('port');
-                var tPort = joint.V(magnetT).attr('port');
+                var tPort = joint.V(magnetT.parentNode).attr('port');
                 if ((sPort.includes('in') && tPort.includes('in')) || (sPort.includes('out') && tPort.includes('out'))) return false;
-                if (tPort.includes('in') && joint.V(magnetT).attr('fill') === 'white') return false;
-                if (sPort.includes('in') && joint.V(magnetS).attr('fill') === 'white') return false;
+                if (sPort.includes('in') && joint.V(magnetS.children[1]).attr().visibility !== 'hidden') return false;
+                if (tPort.includes('in') && joint.V(magnetT.parentNode.children[1]).attr().visibility !== 'hidden') return false;
+                if (cellViewS._portElementsCache[sPort].portContentElement.children()[0].attr().edgeType !== cellViewT._portElementsCache[tPort].portContentElement.children()[0].attr().edgeType) return false;
                 return true;
             },
             markAvailable: true,
@@ -101,13 +101,16 @@ class JointGraph {
         this._paper.on('cell:mousewheel', handleCellMouseWheel);
         this._paper.on('blank:mousewheel', handleCanvasMouseWheel);
 
-        var adjustGraphVertices = _.partial(this.adjustVertices.bind(this), this._graph);
+        if (config.adjustVertices) {
+            var adjustGraphVertices = _.partial(this.adjustVertices.bind(this), this._graph);
 
-        // adjust vertices when a cell is removed or its source/target was changed
-        this._graph.on('add remove change:source change:target', adjustGraphVertices);
+            // adjust vertices when a cell is removed or its source/target was changed
+            this._graph.on('add remove change:source change:target', adjustGraphVertices);
 
-        // adjust vertices when the user stops interacting with an element
-        this._paper.on('cell:pointerup', adjustGraphVertices);
+            // adjust vertices when the user stops interacting with an element
+            this._paper.on('cell:pointerup', adjustGraphVertices);
+        }
+
 
     }
 

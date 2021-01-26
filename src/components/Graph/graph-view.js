@@ -21,8 +21,8 @@ export var GRAPH_ACTIONS = {
 };
 
 class GraphView extends JointGraph {
-    constructor(parent, dom, graphSchema, graphData) {
-        super(dom);
+    constructor(parent, dom, graphSchema, graphData, config) {
+        super(dom, config);
 
         this._parent = parent;
         this._dom = dom;
@@ -36,9 +36,9 @@ class GraphView extends JointGraph {
         joint.shapes.html.Element = jointShapeElement();
         joint.shapes.html.ElementView = jointShapeElementView(this._paper);
 
-        this._graph.on('add', (cell) => this.updateNodePortColor(cell, 'white'));
-        this._graph.on('remove', (cell) => this.updateNodePortColor(cell, 'black'));
-        this._graph.on('change:target', (cell) => this.updateNodePortColor(cell, 'white'));
+        this._graph.on('add', (cell) => this.updateNodePort(cell, true));
+        this._graph.on('remove', (cell) => this.updateNodePort(cell, false));
+        this._graph.on('change:target', (cell) => this.updateNodePort(cell, true));
 
         this._paper.on('cell:mousewheel', () => {
             parent.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.UPDATE_SCALE, { detail: { scale: this._paper.scale().sx } } ));
@@ -81,9 +81,10 @@ class GraphView extends JointGraph {
                     this.getNode(edge.edgeData.to).hover();
                 }
             },
-            'cell:mouseleave': (cellView) => {
+            'cell:mouseleave': (cellView, e) => {
                 var selectedEdge;
 
+                if (e.relatedTarget && e.relatedTarget.classList.contains('graph-node-input')) return;
                 var node = this.getNode(cellView.model.id);
                 if (node && node.state !== GraphViewNode.STATES.SELECTED) {
                     selectedEdge = this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE' ? this.getEdge(this._parent._selectedItem._id) : null;
@@ -122,12 +123,12 @@ class GraphView extends JointGraph {
         });
     }
 
-    updateNodePortColor(cell, color) {
+    updateNodePort(cell, connected) {
         var source = cell.get('source');
         var target = cell.get('target');
         if (source && source.port && target && target.port) {
-            this._paper.findViewByModel(source.id)._portElementsCache[source.port].portContentElement.attr('fill', color);
-            this._paper.findViewByModel(target.id)._portElementsCache[target.port].portContentElement.attr('fill', color);
+            this._paper.findViewByModel(source.id)._portElementsCache[source.port].portContentElement.children()[1].attr('visibility', connected ? 'visible' : 'hidden');
+            this._paper.findViewByModel(target.id)._portElementsCache[target.port].portContentElement.children()[1].attr('visibility', connected ? 'visible' : 'hidden');
         }
     }
 
@@ -225,9 +226,13 @@ class GraphView extends JointGraph {
         let edge = this.getEdge(`${edgeData.from}-${edgeData.to}`);
         if (edge) {
             if (edgeData.to === edge.edgeData.to) {
-                edge.addTargetMarker();
+                if (!edgeData.outPort) {
+                    edge.addTargetMarker();
+                }
             } else {
-                edge.addSourceMarker();
+                if (!edgeData.inPort) {
+                    edge.addSourceMarker();
+                }
             }
         } else {
             edge = new GraphViewEdge(
@@ -261,14 +266,15 @@ class GraphView extends JointGraph {
             var sourceNodeView = this._paper.findViewByModel(this.getNode(nodeId).model);
             var sourceNodePos = this.getGraphPosition(sourceNodeView.el.getBoundingClientRect());
             var pointerVector = mousePos.clone().sub(sourceNodePos);
-            pointerVector = pointerVector.sub(pointerVector.clone().normalize().scale(10.0));
-            pointerVector = sourceNodePos.add(pointerVector);
+            var direction = (new Vec2(e.clientX, e.clientY)).clone().sub(sourceNodeView.el.getBoundingClientRect()).normalize().scale(20);
+            pointerVector = sourceNodePos.add(pointerVector).sub(direction);
             link.target({
                 x: pointerVector.x,
                 y: pointerVector.y
             });
         };
         const cellPointerDownEvent = (cellView) => {
+            if (!this.getNode(cellView.model.id)) return;
             var targetNodeId = this.getNode(cellView.model.id).nodeData.id;
             var nodeModel = this.getNode(nodeId).model;
             // test whether a valid connection has been made

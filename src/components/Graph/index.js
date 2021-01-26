@@ -69,7 +69,7 @@ class Graph extends Element {
 
         this._suppressGraphDataEvents = false;
 
-        this.view = new GraphView(this, this.dom, this._graphSchema, this._graphData);
+        this.view = new GraphView(this, this.dom, this._graphSchema, this._graphData, args.config);
 
         this._buildGraphFromData();
         this._addCanvasContextMenu();
@@ -283,8 +283,10 @@ class Graph extends Element {
     }
 
     updateNodeType(nodeId, nodeType) {
-        this._graphData.set(`data.nodes.${nodeId}.nodeType`, nodeType);
-        this.view.updateNodeType(nodeId, nodeType);
+        if (nodeType && this._graphData.get(`data.nodes.${nodeId}`)) {
+            this._graphData.set(`data.nodes.${nodeId}.nodeType`, nodeType);
+            this.view.updateNodeType(nodeId, nodeType);
+        }
     }
 
     deleteNode(nodeId, suppressEvents) {
@@ -308,7 +310,7 @@ class Graph extends Element {
     deleteEdge(edgeId, suppressEvents) {
         if (!this._graphData.get(`data.edges.${edgeId}`)) return;
         var { from, to } = this._graphData.get(`data.edges.${edgeId}`) || {};
-        if (this._selectedItem._id === `${from}-${to}`) this.deselectItem();
+        if (this._selectedItem && this._selectedItem._id === `${from}-${to}`) this.deselectItem();
         this.view.removeEdge(`${from}-${to}`);
         if (!suppressEvents) this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.DELETE_EDGE, { detail: { edgeId: edgeId, edge: this._graphData.get(`data.edges.${edgeId}`) } }));
         this._graphData.unset(`data.edges.${edgeId}`);

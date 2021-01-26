@@ -1,6 +1,8 @@
 const path = require('path');
 
-module.exports = {
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+var config = {
     mode: 'development',
     entry: {
         'pcuiGraph': './src/index.js',
@@ -58,5 +60,15 @@ module.exports = {
             'node_modules'
         ],
         extensions: ['.jsx', '.js']
-    }
+    },
+    plugins: []
 };
+
+
+if (process.env.ANALYZE_BUNDLE) {
+    config.plugins.push(
+        new BundleAnalyzerPlugin()
+    );
+}
+
+module.exports = config;

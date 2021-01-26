@@ -47,10 +47,10 @@ class GraphViewNode {
                     refY: 1
                 },
                 icon: {
-                    text: '',
+                    text: nodeSchema.icon || '',
                     fontFamily: 'pc-icon',
                     fontSize: 14,
-                    fill: nodeSchema.iconColor || '#17ADB1',
+                    fill: nodeSchema.iconColor || '#F60',
                     refX: 8,
                     refY: 8
                 },
@@ -91,13 +91,22 @@ class GraphViewNode {
                                 }
                             }
                         },
-                        markup: '<rect class="port-body"/>',
+                        markup: '<circle class="port-body"></circle><circle class="port-inner-body" visibility="hidden"></circle>',
                         attrs: {
                             '.port-body': {
                                 strokeWidth: 2,
-                                height: 10,
-                                width: 10,
-                                magnet: true
+                                fill: '#20292B',
+                                magnet: true,
+                                r: 5,
+                                cy: 5,
+                                cx: 1
+                            },
+                            '.port-inner-body': {
+                                strokeWidth: 2,
+                                stroke: '#0379EE',
+                                r: 1,
+                                cy: 5,
+                                cx: 1
                             }
                         }
                     },
@@ -114,13 +123,22 @@ class GraphViewNode {
                                 name: 'left', args: { y: 5, x: -5 }
                             }
                         },
-                        markup: '<rect class="port-body"/>',
+                        markup: '<circle class="port-body"></circle><circle class="port-inner-body" visibility="hidden"></circle>',
                         attrs: {
                             '.port-body': {
                                 strokeWidth: 2,
-                                height: 10,
-                                width: 10,
-                                magnet: true
+                                fill: '#20292B',
+                                magnet: true,
+                                r: 5,
+                                cy: 5,
+                                cx: 9
+                            },
+                            '.port-inner-body': {
+                                strokeWidth: 2,
+                                stroke: '#0379EE',
+                                r: 1,
+                                cy: 5,
+                                cx: 9
                             }
                         }
                     }
@@ -136,6 +154,7 @@ class GraphViewNode {
                     id: `in${i}`,
                     group: 'in',
                     edgeType: port.edgeType,
+                    markup: `<circle class="port-body" edgeType="${port.type}"></circle><circle class="port-inner-body" visibility="hidden"></circle>`,
                     attrs: {
                         '.port-body': {
                             stroke: this._graphSchema.edges[port.type].stroke
@@ -172,7 +191,9 @@ class GraphViewNode {
             nodeSchema.outPorts.forEach((port, i) => rect.addPort({
                 id: `out${i}`,
                 group: 'out',
+                markup: `<circle class="port-body" edgeType="${port.type}"></circle><circle class="port-inner-body" visibility="hidden"></circle>`,
                 attrs: {
+                    type: port.type,
                     '.port-body': {
                         stroke: this._graphSchema.edges[port.type].stroke
                     },
