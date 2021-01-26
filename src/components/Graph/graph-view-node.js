@@ -167,13 +167,15 @@ class GraphViewNode {
                     }
                 });
                 this._graph.on('change:target', (cell) => {
-                    var source = cell.get('source');
                     var target = cell.get('target');
-                    if (source && source.port && target && target.port && target.id === nodeData.id && Number(target.port.replace('in', '')) === i) {
-                        var edgeId = `${source.id},${source.port.replace('out', '')}-${target.id},${target.port.replace('in', '')}`;
+                    if (!target || !target.id || target.id !== this.model.id) return;
+                    var source = cell.get('source');
+                    if (source && source.port && target.port && Number(target.port.replace('in', '')) === i) {
+                        var sourceNodeId = this._graphView.getNode(source.id).nodeData.id;
+                        var edgeId = `${sourceNodeId},${source.port.replace('out', '')}-${this.nodeData.id},${target.port.replace('in', '')}`;
                         var edge = {
-                            to: target.id,
-                            from: source.id,
+                            to: this.nodeData.id,
+                            from: sourceNodeId,
                             outPort: Number(source.port.replace('out', '')),
                             inPort: Number(target.port.replace('in', '')),
                             edgeType: port.type

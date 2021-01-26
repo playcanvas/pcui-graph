@@ -386,3 +386,21 @@ document.querySelector('#root').setAttribute('style', 'position: fixed; width: 1
 setTimeout(() => {
     document.body.setAttribute('style', 'margin: 0px; padding: 0px;');
 }, 1);
+
+setTimeout(() => {
+    document.querySelector('.pcui-graph').ui.on(GRAPH_ACTIONS.ADD_NODE, (node) => {
+        console.log(GRAPH_ACTIONS.ADD_NODE, node);
+    });
+    document.querySelector('.pcui-graph').ui.on(GRAPH_ACTIONS.ADD_EDGE, (edge) => {
+        console.log(GRAPH_ACTIONS.ADD_EDGE, edge);
+    });
+    document.querySelector('.pcui-graph').ui.on(GRAPH_ACTIONS.DELETE_NODE, (node) => {
+        console.log(GRAPH_ACTIONS.DELETE_NODE, node);
+    });
+    document.querySelector('.pcui-graph').ui.on(GRAPH_ACTIONS.DELETE_EDGE, (edge) => {
+        console.log(GRAPH_ACTIONS.DELETE_EDGE, edge);
+    });
+    document.querySelector('.pcui-graph').ui.on(GRAPH_ACTIONS.UPDATE_NODE_POSITION, (node) => {
+        console.log(GRAPH_ACTIONS.UPDATE_NODE_POSITION, node);
+    });
+}, 500);
