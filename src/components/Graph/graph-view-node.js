@@ -1,6 +1,7 @@
-import { TextInput, BooleanInput, NumericInput, Container, Label, ContextMenu } from '../../pcui-external.js';
+import { TextInput, BooleanInput, NumericInput, Container, Label, ContextMenu, VectorInput } from '../../pcui-external.js';
 import * as joint from 'jointjs';
 import { Vec2 } from 'playcanvas';
+import { node } from 'prop-types';
 
 class GraphViewNode {
     constructor(graphView, paper, graph, graphSchema, nodeData, nodeSchema, domEvent, onCreateEdge, onNodeSelected) {
@@ -9,6 +10,7 @@ class GraphViewNode {
         this._graph = graph;
         this._graphSchema = graphSchema;
         this.nodeData = nodeData;
+        this.nodeSchema = nodeSchema;
         this.state = GraphViewNode.STATES.DEFAULT;
 
         if (domEvent) {
@@ -18,6 +20,7 @@ class GraphViewNode {
         }
         var rectHeight = 28;
         var portHeight = 0;
+        var attributeHeight = 0;
         if (nodeSchema.inPorts) {
             portHeight = (nodeSchema.inPorts.length * 25) + 10;
         }
@@ -26,10 +29,16 @@ class GraphViewNode {
             if (outHeight > portHeight) portHeight = outHeight;
         }
         if (nodeSchema.attributes) {
-            portHeight = nodeSchema.attributes.length * 32 + 10;
+            attributeHeight = nodeSchema.attributes.length * 32 + 10;
         }
-        var rectSize = { x: 226, y: rectHeight + portHeight };
+        var rectSize = { x: 226, y: rectHeight + portHeight + attributeHeight };
 
+        var labelName;
+        if (nodeSchema.outPorts || nodeSchema.inPorts) {
+            labelName = nodeData.attributes && nodeData.attributes.name ? `${nodeSchema.name} (${nodeData.attributes.name})` : nodeSchema.name;
+        } else {
+            labelName = nodeData.name;
+        }
         var rect = new joint.shapes.html.Element({
             attrs: {
                 body: {
@@ -55,7 +64,7 @@ class GraphViewNode {
                     refY: 8
                 },
                 label: {
-                    text: nodeData.name,
+                    text: labelName,
                     fill: 'white',
                     textAnchor: 'left',
                     refX: 28,
@@ -169,8 +178,14 @@ class GraphViewNode {
                 this._graph.on('change:target', (cell) => {
                     if (this._suppressChangeTargetEvent) return;
                     var target = cell.get('target');
-                    if (!target || !target.id || target.id !== this.model.id) return;
                     var source = cell.get('source');
+                    if (!target || !source) return;
+                    if (target && target.port && target.port.includes('out')) {
+                        var temp = target;
+                        target = source;
+                        source = temp;
+                    }
+                    if (!target || !target.id || target.id !== this.model.id) return;
                     if (source && source.port && target.port && Number(target.port.replace('in', '')) === i) {
                         var sourceNodeId = this._graphView.getNode(source.id).nodeData.id;
                         var edgeId = `${sourceNodeId},${source.port.replace('out', '')}-${this.nodeData.id},${target.port.replace('in', '')}`;
@@ -216,20 +231,59 @@ class GraphViewNode {
                 const container = new Container({ class: 'graph-node-container' });
                 const label = new Label({ text: attribute.name, class: 'graph-node-label' });
                 let input;
+                let nodeValue;
+                var dimensionMap = {
+                    0: 'x',
+                    1: 'y',
+                    2: 'z',
+                    3: 'w'
+                };
                 switch (attribute.type) {
                     case 'TEXT_INPUT':
-                        input = new TextInput({ class: 'graph-node-input' });
+                        nodeValue = nodeData.attributes[attribute.name];
+                        input = new TextInput({ class: 'graph-node-input', value: nodeValue });
                         break;
                     case 'BOOLEAN_INPUT':
-                        input = new BooleanInput({ class: 'graph-node-input' });
+                        nodeValue = nodeData.attributes[attribute.name];
+                        input = new BooleanInput({ class: 'graph-node-input', value: nodeValue });
                         break;
                     case 'NUMERIC_INPUT':
-                        input = new NumericInput({ class: 'graph-node-input', hideSlider: true });
+                        nodeValue = nodeData.attributes[attribute.name];
+                        input = new NumericInput({ class: 'graph-node-input', hideSlider: true, value: nodeValue.x });
+                        break;
+                    case 'VEC_2_INPUT':
+                        nodeValue = nodeData.attributes[attribute.name];
+                        input = new VectorInput({ dimensions: 2, class: 'graph-node-input', hideSlider: true, value: [
+                            nodeValue.x,
+                            nodeValue.y
+                        ] });
+                        input.dom.setAttribute('style', 'margin-right: 6px;');
+                        input.inputs.forEach(i => i._sliderControl.dom.remove());
+                        break;
+                    case 'VEC_3_INPUT':
+                        nodeValue = nodeData.attributes[attribute.name];
+                        input = new VectorInput({ dimensions: 3, class: 'graph-node-input', hideSlider: true, value: [
+                            nodeValue.x,
+                            nodeValue.y,
+                            nodeValue.z
+                        ] });
+                        input.dom.setAttribute('style', 'margin-right: 6px;');
+                        input.inputs.forEach(i => i._sliderControl.dom.remove());
+                        break;
+                    case 'VEC_4_INPUT':
+                        nodeValue = nodeData.attributes[attribute.name];
+                        input = new VectorInput({ dimensions: 4, class: 'graph-node-input', hideSlider: true, value: [
+                            nodeValue.x,
+                            nodeValue.y,
+                            nodeValue.z,
+                            nodeValue.w
+                        ] });
+                        input.dom.setAttribute('style', 'margin-right: 6px;');
+                        input.inputs.forEach(i => i._sliderControl.dom.remove());
                         break;
                 }
                 input.dom.setAttribute('id', `input_${attribute.name}`);
-                input.value = nodeData[attribute.name];
-                container.dom.setAttribute('style', 'margin-top: 5px; margin-bottom: 5px;');
+                container.dom.setAttribute('style', `margin-top: ${i === 0 ? 33 + portHeight : 5}px; margin-bottom: 5px;`);
                 container.append(label);
                 container.append(input);
                 nodeDiv.appendChild(container.dom);
@@ -261,7 +315,13 @@ class GraphViewNode {
 
     updateAttribute(attribute, value) {
         if (attribute === 'name') {
-            this.model.attr('label/text', value);
+            var labelName;
+            if (this.nodeSchema.outPorts || this.nodeSchema.inPorts) {
+                labelName = `${this.nodeSchema.name} (${value})`;
+            } else {
+                labelName = value;
+            }
+            this.model.attr('label/text', labelName);
         }
         const attributeElement = document.querySelector(`#nodediv_${this.model.id}`).querySelector(`#input_${attribute}`);
         if (attributeElement) {
@@ -305,7 +365,13 @@ class GraphViewNode {
                             return;
                         }
                         attributeElement.ui.error = false;
-                        this.model.attr('label/text', value);
+                        var labelName;
+                        if (this.nodeSchema.outPorts || this.nodeSchema.inPorts) {
+                            labelName = `${this.nodeSchema.name} (${value})`;
+                        } else {
+                            labelName = value;
+                        }
+                        this.model.attr('label/text', labelName);
                     }
                     callback(this.nodeData.id, attribute, value);
                 });

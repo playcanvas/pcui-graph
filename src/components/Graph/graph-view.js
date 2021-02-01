@@ -52,25 +52,30 @@ class GraphView extends JointGraph {
 
         this._paper.on({
             'cell:mouseenter': (cellView) => {
+                var selectedEdge;
                 var selectedEdgeId;
                 var node = this.getNode(cellView.model.id);
                 if (node && node.state !== GraphViewNode.STATES.SELECTED) {
                     node.hover();
-                    selectedEdgeId = this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE' ? this.getEdge(this._parent._selectedItem._id).model.id : null;
-                    Object.keys(this._edges).forEach(edgeKey => {
-                        var currEdge = this.getEdge(edgeKey);
-                        if (currEdge.model.id === selectedEdgeId) return;
-                        if (![currEdge.edgeData.from, currEdge.edgeData.to].includes(node.nodeData.id)) {
-                            currEdge.mute();
-                        } else {
-                            currEdge.deselect();
-                        }
-                    });
+                    selectedEdge = this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE' ? this.getEdge(this._parent._selectedItem._id) : null;
+                    if (selectedEdge) selectedEdgeId = selectedEdge.model.id;
+                    if (this._config.edgeHoverEffect) {
+                        Object.keys(this._edges).forEach(edgeKey => {
+                            var currEdge = this.getEdge(edgeKey);
+                            if (currEdge.model.id === selectedEdgeId) return;
+                            if (![currEdge.edgeData.from, currEdge.edgeData.to].includes(node.nodeData.id)) {
+                                currEdge.mute();
+                            } else {
+                                currEdge.deselect();
+                            }
+                        });
+                    }
                 }
                 var edge = this.getEdge(cellView.model.id);
-                if (edge && edge.state !== GraphViewEdge.STATES.SELECTED) {
+                if (this._config.edgeHoverEffect && edge && edge.state !== GraphViewEdge.STATES.SELECTED) {
                     edge.deselect();
-                    selectedEdgeId = this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE' ? this.getEdge(this._parent._selectedItem._id).model.id : null;
+                    selectedEdge = this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE' ? this.getEdge(this._parent._selectedItem._id) : null;
+                    if (selectedEdge) selectedEdgeId = selectedEdge.model.id;
                     Object.keys(this._edges).forEach(edgeKey => {
                         var currEdge = this.getEdge(edgeKey);
                         if ((edge.model.id !== currEdge.model.id) && (selectedEdgeId !== currEdge.model.id)) {
@@ -91,14 +96,16 @@ class GraphView extends JointGraph {
                     if (!selectedEdge || ![selectedEdge.edgeData.from, selectedEdge.edgeData.to].includes(node.nodeData.id)) {
                         node.hoverRemove();
                     }
-                    Object.keys(this._edges).forEach(edgeKey => {
-                        var currEdge = this.getEdge(edgeKey);
-                        if (selectedEdge && currEdge.model.id === selectedEdge.model.id) return;
-                        currEdge.deselect();
-                    });
+                    if (this._config.edgeHoverEffect) {
+                        Object.keys(this._edges).forEach(edgeKey => {
+                            var currEdge = this.getEdge(edgeKey);
+                            if (selectedEdge && currEdge.model.id === selectedEdge.model.id) return;
+                            currEdge.deselect();
+                        });
+                    }
                 }
                 var edge = this.getEdge(cellView.model.id);
-                if (edge && edge.state !== GraphViewEdge.STATES.SELECTED) {
+                if (this._config.edgeHoverEffect && edge && edge.state !== GraphViewEdge.STATES.SELECTED) {
                     Object.keys(this._edges).forEach(edgeKey => {
                         var currEdge = this.getEdge(edgeKey);
                         if (currEdge.state === GraphViewEdge.STATES.SELECTED) {
@@ -261,8 +268,10 @@ class GraphView extends JointGraph {
 
     removeEdge(id) {
         let edge = this.getEdge(id);
-        if (edge) this._graph.removeCells(edge.model);
-        delete this._edges[edge.model.id];
+        if (edge) {
+            this._graph.removeCells(edge.model);
+            delete this._edges[edge.model.id];
+        }
         delete this._edges[id];
     }
 

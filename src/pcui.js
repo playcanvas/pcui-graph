@@ -91,7 +91,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 26);
+/******/ 	return __webpack_require__(__webpack_require__.s = 84);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -100,20 +100,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return FLEX; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return GRID; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return HIDDEN; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return SCROLLABLE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return RESIZABLE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return READONLY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return GRID; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return HIDDEN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return SCROLLABLE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return RESIZABLE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return READONLY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return DISABLED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return COLLAPSIBLE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return COLLAPSED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return FOCUS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return MULTIPLE_VALUES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return MULTIPLE_VALUES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return ERROR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return FLASH; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return NOT_FLEXIBLE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return NOT_FLEXIBLE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return DEFAULT_MOUSEDOWN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return FONT_REGULAR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return FONT_BOLD; });
 var FLEX = 'pcui-flex';
 var GRID = 'pcui-grid';
 var HIDDEN = 'pcui-hidden';
@@ -129,6 +131,8 @@ var ERROR = 'pcui-error';
 var FLASH = 'flash';
 var NOT_FLEXIBLE = 'pcui-not-flexible';
 var DEFAULT_MOUSEDOWN = 'pcui-default-mousedown';
+var FONT_REGULAR = 'font-regular';
+var FONT_BOLD = 'font-bold';
 
 
 /***/ }),
@@ -136,19 +140,10 @@ var DEFAULT_MOUSEDOWN = 'pcui-default-mousedown';
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-// UNUSED EXPORTS: Element
-
-// CONCATENATED MODULE: ./src/components/Element/style.scss
-// extracted by mini-css-extract-plugin
-
-// EXTERNAL MODULE: ./src/class.js
-var src_class = __webpack_require__(0);
-
-// EXTERNAL MODULE: ./src/binding/events.js
-var events = __webpack_require__(5);
-
-// CONCATENATED MODULE: ./src/components/Element/index.js
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
+/* harmony import */ var _binding_events__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(10);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -275,7 +270,7 @@ var ELEMENT_REGISTRY = {};
  * @name Element
  * @classdesc The base class for all UI elements.
  * @augments Events
- * @property {boolean} enabled Gets / sets whether the Element or its parent chain is enabled or not. Defaults to true.
+ * @property {boolean} enabled=true Gets / sets whether the Element or its parent chain is enabled or not. Defaults to true.
  * @property {HTMLElement} dom Gets the root DOM node for this Element.
  * @property {Element} parent Gets the parent Element.
  * @property {boolean} hidden Gets / sets whether the Element is hidden.
@@ -291,7 +286,7 @@ var ELEMENT_REGISTRY = {};
  * @property {DOMTokenList} class Shortcut to pcui.Element.dom.classList.
  */
 
-var Element_Element = /*#__PURE__*/function (_Events) {
+var Element = /*#__PURE__*/function (_Events) {
   _inherits(Element, _Events);
 
   var _super = _createSuper(Element);
@@ -334,7 +329,10 @@ var Element_Element = /*#__PURE__*/function (_Events) {
     _this._dom.addEventListener('mouseout', _this._domEventMouseOut); // add element class
 
 
-    _this._dom.classList.add(CLASS_ELEMENT); // add user classes
+    _this._dom.classList.add(CLASS_ELEMENT); // add font regular class
+
+
+    _this._dom.classList.add(_class__WEBPACK_IMPORTED_MODULE_1__[/* FONT_REGULAR */ "j"]); // add user classes
 
 
     if (args.class) {
@@ -418,10 +416,10 @@ var Element_Element = /*#__PURE__*/function (_Events) {
     key: "flash",
     value: function flash() {
       if (this._flashTimeout) return;
-      this.classAdd(src_class["f" /* FLASH */]);
+      this.classAdd(_class__WEBPACK_IMPORTED_MODULE_1__[/* FLASH */ "f"]);
       this._flashTimeout = setTimeout(function () {
         this._flashTimeout = null;
-        this.classRemove(src_class["f" /* FLASH */]);
+        this.classRemove(_class__WEBPACK_IMPORTED_MODULE_1__[/* FLASH */ "f"]);
       }.bind(this), 200);
     }
   }, {
@@ -454,9 +452,9 @@ var Element_Element = /*#__PURE__*/function (_Events) {
     key: "_onEnabledChange",
     value: function _onEnabledChange(enabled) {
       if (enabled) {
-        this.classRemove(src_class["d" /* DISABLED */]);
+        this.classRemove(_class__WEBPACK_IMPORTED_MODULE_1__[/* DISABLED */ "d"]);
       } else {
-        this.classAdd(src_class["d" /* DISABLED */]);
+        this.classAdd(_class__WEBPACK_IMPORTED_MODULE_1__[/* DISABLED */ "d"]);
       }
 
       this.emit(enabled ? 'enable' : 'disable');
@@ -508,9 +506,9 @@ var Element_Element = /*#__PURE__*/function (_Events) {
     key: "_onReadOnlyChange",
     value: function _onReadOnlyChange(readOnly) {
       if (readOnly) {
-        this.classAdd(src_class["m" /* READONLY */]);
+        this.classAdd(_class__WEBPACK_IMPORTED_MODULE_1__[/* READONLY */ "o"]);
       } else {
-        this.classRemove(src_class["m" /* READONLY */]);
+        this.classRemove(_class__WEBPACK_IMPORTED_MODULE_1__[/* READONLY */ "o"]);
       }
 
       this.emit('readOnly', readOnly);
@@ -736,9 +734,9 @@ var Element_Element = /*#__PURE__*/function (_Events) {
       this._hidden = value;
 
       if (value) {
-        this.classAdd(src_class["j" /* HIDDEN */]);
+        this.classAdd(_class__WEBPACK_IMPORTED_MODULE_1__[/* HIDDEN */ "l"]);
       } else {
-        this.classRemove(src_class["j" /* HIDDEN */]);
+        this.classRemove(_class__WEBPACK_IMPORTED_MODULE_1__[/* HIDDEN */ "l"]);
       }
 
       this.emit(value ? 'hide' : 'show');
@@ -774,9 +772,9 @@ var Element_Element = /*#__PURE__*/function (_Events) {
       this._hasError = value;
 
       if (value) {
-        this.classAdd(src_class["e" /* ERROR */]);
+        this.classAdd(_class__WEBPACK_IMPORTED_MODULE_1__[/* ERROR */ "e"]);
       } else {
-        this.classRemove(src_class["e" /* ERROR */]);
+        this.classRemove(_class__WEBPACK_IMPORTED_MODULE_1__[/* ERROR */ "e"]);
       }
     }
   }, {
@@ -932,12 +930,12 @@ var Element_Element = /*#__PURE__*/function (_Events) {
   }]);
 
   return Element;
-}(events["a" /* default */]); // utility function to expose a CSS property
+}(_binding_events__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]); // utility function to expose a CSS property
 // via an Element.prototype property
 
 
 function exposeCssProperty(name) {
-  Object.defineProperty(Element_Element.prototype, name, {
+  Object.defineProperty(Element.prototype, name, {
     get: function get() {
       return this.style[name];
     },
@@ -949,27 +947,17 @@ function exposeCssProperty(name) {
 
 
 SIMPLE_CSS_PROPERTIES.forEach(exposeCssProperty);
-
-/* harmony default export */ var components_Element = __webpack_exports__["a"] = (Element_Element);
+/* harmony default export */ __webpack_exports__["a"] = (Element);
 
 /***/ }),
 /* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-// UNUSED EXPORTS: Container
-
-// CONCATENATED MODULE: ./src/components/Container/style.scss
-// extracted by mini-css-extract-plugin
-
-// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
-var Element = __webpack_require__(1);
-
-// EXTERNAL MODULE: ./src/class.js
-var src_class = __webpack_require__(0);
-
-// CONCATENATED MODULE: ./src/components/Container/index.js
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(35);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1001,7 +989,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 var RESIZE_HANDLE_SIZE = 4;
 var VALID_RESIZABLE_VALUES = [null, 'top', 'right', 'bottom', 'left'];
-var CLASS_RESIZING = src_class["n" /* RESIZABLE */] + '-resizing';
+var CLASS_RESIZING = _class__WEBPACK_IMPORTED_MODULE_2__[/* RESIZABLE */ "p"] + '-resizing';
 var CLASS_RESIZABLE_HANDLE = 'pcui-resizable-handle';
 var CLASS_CONTAINER = 'pcui-container';
 var CLASS_DRAGGED = CLASS_CONTAINER + '-dragged';
@@ -1037,22 +1025,15 @@ var CLASS_DRAGGED_CHILD = CLASS_DRAGGED + '-child';
  * @name Container
  * @classdesc A container is the basic building block for Elements that are grouped together.
  * A container can contain any other element including other containers.
- * @property {boolean} flex Gets / sets whether the container supports the flex layout. Cannot coexist with grid.
- * @property {boolean} grid Gets / sets whether the container supports the grid layout. Cannot coexist with flex.
- * @property {number} resizeMin Gets / sets the minimum size the Container can take when resized in pixels.
- * @property {number} resizeMax Gets / sets the maximum size the Container can take when resized in pixels.
- * @property {boolean} scrollable Gets / sets whether the container should be scrollable. Defaults to false.
- * @property {string} resizable Gets / sets whether the Container is resizable and where the resize handle is located. Can
- * be one of 'top', 'bottom', 'right', 'left'. Set to null to disable resizing.
  * @augments Element
- * @mixes pcui.IContainer
- * @mixes pcui.IFlex
- * @mixes pcui.IGrid
- * @mixes pcui.IScrollable
- * @mixes pcui.IResizable
+ * @mixes IContainer
+ * @mixes IFlex
+ * @mixes IGrid
+ * @mixes IScrollable
+ * @mixes IResizable
  */
 
-var Container_Container = /*#__PURE__*/function (_Element) {
+var Container = /*#__PURE__*/function (_Element) {
   _inherits(Container, _Element);
 
   var _super = _createSuper(Container);
@@ -1077,10 +1058,17 @@ var Container_Container = /*#__PURE__*/function (_Element) {
     _this._domEventScroll = _this._onScroll.bind(_assertThisInitialized(_this));
     _this.domContent = _this._dom; // scroll
 
-    _this.scrollable = args.scrollable !== undefined ? args.scrollable : false; // flex
+    _this._scrollable = false;
 
+    if (args.scrollable) {
+      _this.scrollable = true;
+    } // flex
+
+
+    _this._flex = false;
     _this.flex = !!args.flex; // grid
 
+    _this._grid = false;
     var grid = !!args.grid;
 
     if (grid) {
@@ -1686,9 +1674,9 @@ var Container_Container = /*#__PURE__*/function (_Element) {
       this._flex = value;
 
       if (value) {
-        this.classAdd(src_class["g" /* FLEX */]);
+        this.classAdd(_class__WEBPACK_IMPORTED_MODULE_2__[/* FLEX */ "g"]);
       } else {
-        this.classRemove(src_class["g" /* FLEX */]);
+        this.classRemove(_class__WEBPACK_IMPORTED_MODULE_2__[/* FLEX */ "g"]);
       }
     }
   }, {
@@ -1701,9 +1689,9 @@ var Container_Container = /*#__PURE__*/function (_Element) {
       this._grid = value;
 
       if (value) {
-        this.classAdd(src_class["i" /* GRID */]);
+        this.classAdd(_class__WEBPACK_IMPORTED_MODULE_2__[/* GRID */ "k"]);
       } else {
-        this.classRemove(src_class["i" /* GRID */]);
+        this.classRemove(_class__WEBPACK_IMPORTED_MODULE_2__[/* GRID */ "k"]);
       }
     }
   }, {
@@ -1716,9 +1704,9 @@ var Container_Container = /*#__PURE__*/function (_Element) {
       this._scrollable = value;
 
       if (value) {
-        this.classAdd(src_class["o" /* SCROLLABLE */]);
+        this.classAdd(_class__WEBPACK_IMPORTED_MODULE_2__[/* SCROLLABLE */ "q"]);
       } else {
-        this.classRemove(src_class["o" /* SCROLLABLE */]);
+        this.classRemove(_class__WEBPACK_IMPORTED_MODULE_2__[/* SCROLLABLE */ "q"]);
       }
     }
   }, {
@@ -1736,7 +1724,7 @@ var Container_Container = /*#__PURE__*/function (_Element) {
 
 
       if (this._resizable) {
-        this.classRemove("".concat(src_class["n" /* RESIZABLE */], "-").concat(this._resizable));
+        this.classRemove("".concat(_class__WEBPACK_IMPORTED_MODULE_2__[/* RESIZABLE */ "p"], "-").concat(this._resizable));
       }
 
       this._resizable = value;
@@ -1744,8 +1732,8 @@ var Container_Container = /*#__PURE__*/function (_Element) {
 
       if (value) {
         // add resize class and create / append resize handle
-        this.classAdd(src_class["n" /* RESIZABLE */]);
-        this.classAdd("".concat(src_class["n" /* RESIZABLE */], "-").concat(value));
+        this.classAdd(_class__WEBPACK_IMPORTED_MODULE_2__[/* RESIZABLE */ "p"]);
+        this.classAdd("".concat(_class__WEBPACK_IMPORTED_MODULE_2__[/* RESIZABLE */ "p"], "-").concat(value));
 
         if (!this._domResizeHandle) {
           this._createResizeHandle();
@@ -1754,7 +1742,7 @@ var Container_Container = /*#__PURE__*/function (_Element) {
         this._dom.appendChild(this._domResizeHandle);
       } else {
         // remove resize class and resize handle
-        this.classRemove(src_class["n" /* RESIZABLE */]);
+        this.classRemove(_class__WEBPACK_IMPORTED_MODULE_2__[/* RESIZABLE */ "p"]);
 
         if (this._domResizeHandle) {
           this._dom.removeChild(this._domResizeHandle);
@@ -1800,29 +1788,524 @@ var Container_Container = /*#__PURE__*/function (_Element) {
   }]);
 
   return Container;
-}(Element["a" /* default */]);
+}(_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
 
-
-/* harmony default export */ var components_Container = __webpack_exports__["a"] = (Container_Container);
+_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('container', Container);
+/* harmony default export */ __webpack_exports__["a"] = (Container);
 
 /***/ }),
 /* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-// UNUSED EXPORTS: Label
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+// eslint-disable-next-line func-names
 
-// CONCATENATED MODULE: ./src/components/Label/style.scss
-// extracted by mini-css-extract-plugin
+module.exports = function (useSourceMap) {
+  var list = []; // return the list of modules as css string
 
-// EXTERNAL MODULE: ./src/class.js
-var src_class = __webpack_require__(0);
+  list.toString = function toString() {
+    return this.map(function (item) {
+      var content = cssWithMappingToString(item, useSourceMap);
 
-// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
-var Element = __webpack_require__(1);
+      if (item[2]) {
+        return "@media ".concat(item[2], " {").concat(content, "}");
+      }
 
-// CONCATENATED MODULE: ./src/components/Label/index.js
+      return content;
+    }).join('');
+  }; // import a list of modules into the list
+  // eslint-disable-next-line func-names
+
+
+  list.i = function (modules, mediaQuery, dedupe) {
+    if (typeof modules === 'string') {
+      // eslint-disable-next-line no-param-reassign
+      modules = [[null, modules, '']];
+    }
+
+    var alreadyImportedModules = {};
+
+    if (dedupe) {
+      for (var i = 0; i < this.length; i++) {
+        // eslint-disable-next-line prefer-destructuring
+        var id = this[i][0];
+
+        if (id != null) {
+          alreadyImportedModules[id] = true;
+        }
+      }
+    }
+
+    for (var _i = 0; _i < modules.length; _i++) {
+      var item = [].concat(modules[_i]);
+
+      if (dedupe && alreadyImportedModules[item[0]]) {
+        // eslint-disable-next-line no-continue
+        continue;
+      }
+
+      if (mediaQuery) {
+        if (!item[2]) {
+          item[2] = mediaQuery;
+        } else {
+          item[2] = "".concat(mediaQuery, " and ").concat(item[2]);
+        }
+      }
+
+      list.push(item);
+    }
+  };
+
+  return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+  var content = item[1] || ''; // eslint-disable-next-line prefer-destructuring
+
+  var cssMapping = item[3];
+
+  if (!cssMapping) {
+    return content;
+  }
+
+  if (useSourceMap && typeof btoa === 'function') {
+    var sourceMapping = toComment(cssMapping);
+    var sourceURLs = cssMapping.sources.map(function (source) {
+      return "/*# sourceURL=".concat(cssMapping.sourceRoot || '').concat(source, " */");
+    });
+    return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+  }
+
+  return [content].join('\n');
+} // Adapted from convert-source-map (MIT)
+
+
+function toComment(sourceMap) {
+  // eslint-disable-next-line no-undef
+  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+  var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
+  return "/*# ".concat(data, " */");
+}
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+
+var stylesInDom = {};
+
+var	memoize = function (fn) {
+	var memo;
+
+	return function () {
+		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+		return memo;
+	};
+};
+
+var isOldIE = memoize(function () {
+	// Test for IE <= 9 as proposed by Browserhacks
+	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
+	// Tests for existence of standard globals is to allow style-loader
+	// to operate correctly into non-standard environments
+	// @see https://github.com/webpack-contrib/style-loader/issues/177
+	return window && document && document.all && !window.atob;
+});
+
+var getTarget = function (target, parent) {
+  if (parent){
+    return parent.querySelector(target);
+  }
+  return document.querySelector(target);
+};
+
+var getElement = (function (fn) {
+	var memo = {};
+
+	return function(target, parent) {
+                // If passing function in options, then use it for resolve "head" element.
+                // Useful for Shadow Root style i.e
+                // {
+                //   insertInto: function () { return document.querySelector("#foo").shadowRoot }
+                // }
+                if (typeof target === 'function') {
+                        return target();
+                }
+                if (typeof memo[target] === "undefined") {
+			var styleTarget = getTarget.call(this, target, parent);
+			// Special case to return head of iframe instead of iframe itself
+			if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
+				try {
+					// This will throw an exception if access to iframe is blocked
+					// due to cross-origin restrictions
+					styleTarget = styleTarget.contentDocument.head;
+				} catch(e) {
+					styleTarget = null;
+				}
+			}
+			memo[target] = styleTarget;
+		}
+		return memo[target]
+	};
+})();
+
+var singleton = null;
+var	singletonCounter = 0;
+var	stylesInsertedAtTop = [];
+
+var	fixUrls = __webpack_require__(32);
+
+module.exports = function(list, options) {
+	if (typeof DEBUG !== "undefined" && DEBUG) {
+		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+	}
+
+	options = options || {};
+
+	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
+
+	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+	// tags it will allow on a page
+	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
+
+	// By default, add <style> tags to the <head> element
+        if (!options.insertInto) options.insertInto = "head";
+
+	// By default, add <style> tags to the bottom of the target
+	if (!options.insertAt) options.insertAt = "bottom";
+
+	var styles = listToStyles(list, options);
+
+	addStylesToDom(styles, options);
+
+	return function update (newList) {
+		var mayRemove = [];
+
+		for (var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+
+			domStyle.refs--;
+			mayRemove.push(domStyle);
+		}
+
+		if(newList) {
+			var newStyles = listToStyles(newList, options);
+			addStylesToDom(newStyles, options);
+		}
+
+		for (var i = 0; i < mayRemove.length; i++) {
+			var domStyle = mayRemove[i];
+
+			if(domStyle.refs === 0) {
+				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
+
+				delete stylesInDom[domStyle.id];
+			}
+		}
+	};
+};
+
+function addStylesToDom (styles, options) {
+	for (var i = 0; i < styles.length; i++) {
+		var item = styles[i];
+		var domStyle = stylesInDom[item.id];
+
+		if(domStyle) {
+			domStyle.refs++;
+
+			for(var j = 0; j < domStyle.parts.length; j++) {
+				domStyle.parts[j](item.parts[j]);
+			}
+
+			for(; j < item.parts.length; j++) {
+				domStyle.parts.push(addStyle(item.parts[j], options));
+			}
+		} else {
+			var parts = [];
+
+			for(var j = 0; j < item.parts.length; j++) {
+				parts.push(addStyle(item.parts[j], options));
+			}
+
+			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+		}
+	}
+}
+
+function listToStyles (list, options) {
+	var styles = [];
+	var newStyles = {};
+
+	for (var i = 0; i < list.length; i++) {
+		var item = list[i];
+		var id = options.base ? item[0] + options.base : item[0];
+		var css = item[1];
+		var media = item[2];
+		var sourceMap = item[3];
+		var part = {css: css, media: media, sourceMap: sourceMap};
+
+		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
+		else newStyles[id].parts.push(part);
+	}
+
+	return styles;
+}
+
+function insertStyleElement (options, style) {
+	var target = getElement(options.insertInto)
+
+	if (!target) {
+		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
+	}
+
+	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
+
+	if (options.insertAt === "top") {
+		if (!lastStyleElementInsertedAtTop) {
+			target.insertBefore(style, target.firstChild);
+		} else if (lastStyleElementInsertedAtTop.nextSibling) {
+			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
+		} else {
+			target.appendChild(style);
+		}
+		stylesInsertedAtTop.push(style);
+	} else if (options.insertAt === "bottom") {
+		target.appendChild(style);
+	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
+		var nextSibling = getElement(options.insertAt.before, target);
+		target.insertBefore(style, nextSibling);
+	} else {
+		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
+	}
+}
+
+function removeStyleElement (style) {
+	if (style.parentNode === null) return false;
+	style.parentNode.removeChild(style);
+
+	var idx = stylesInsertedAtTop.indexOf(style);
+	if(idx >= 0) {
+		stylesInsertedAtTop.splice(idx, 1);
+	}
+}
+
+function createStyleElement (options) {
+	var style = document.createElement("style");
+
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
+
+	if(options.attrs.nonce === undefined) {
+		var nonce = getNonce();
+		if (nonce) {
+			options.attrs.nonce = nonce;
+		}
+	}
+
+	addAttrs(style, options.attrs);
+	insertStyleElement(options, style);
+
+	return style;
+}
+
+function createLinkElement (options) {
+	var link = document.createElement("link");
+
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
+	options.attrs.rel = "stylesheet";
+
+	addAttrs(link, options.attrs);
+	insertStyleElement(options, link);
+
+	return link;
+}
+
+function addAttrs (el, attrs) {
+	Object.keys(attrs).forEach(function (key) {
+		el.setAttribute(key, attrs[key]);
+	});
+}
+
+function getNonce() {
+	if (false) {}
+
+	return __webpack_require__.nc;
+}
+
+function addStyle (obj, options) {
+	var style, update, remove, result;
+
+	// If a transform function was defined, run it on the css
+	if (options.transform && obj.css) {
+	    result = typeof options.transform === 'function'
+		 ? options.transform(obj.css) 
+		 : options.transform.default(obj.css);
+
+	    if (result) {
+	    	// If transform returns a value, use that instead of the original css.
+	    	// This allows running runtime transformations on the css.
+	    	obj.css = result;
+	    } else {
+	    	// If the transform function returns a falsy value, don't add this css.
+	    	// This allows conditional loading of css
+	    	return function() {
+	    		// noop
+	    	};
+	    }
+	}
+
+	if (options.singleton) {
+		var styleIndex = singletonCounter++;
+
+		style = singleton || (singleton = createStyleElement(options));
+
+		update = applyToSingletonTag.bind(null, style, styleIndex, false);
+		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
+
+	} else if (
+		obj.sourceMap &&
+		typeof URL === "function" &&
+		typeof URL.createObjectURL === "function" &&
+		typeof URL.revokeObjectURL === "function" &&
+		typeof Blob === "function" &&
+		typeof btoa === "function"
+	) {
+		style = createLinkElement(options);
+		update = updateLink.bind(null, style, options);
+		remove = function () {
+			removeStyleElement(style);
+
+			if(style.href) URL.revokeObjectURL(style.href);
+		};
+	} else {
+		style = createStyleElement(options);
+		update = applyToTag.bind(null, style);
+		remove = function () {
+			removeStyleElement(style);
+		};
+	}
+
+	update(obj);
+
+	return function updateStyle (newObj) {
+		if (newObj) {
+			if (
+				newObj.css === obj.css &&
+				newObj.media === obj.media &&
+				newObj.sourceMap === obj.sourceMap
+			) {
+				return;
+			}
+
+			update(obj = newObj);
+		} else {
+			remove();
+		}
+	};
+}
+
+var replaceText = (function () {
+	var textStore = [];
+
+	return function (index, replacement) {
+		textStore[index] = replacement;
+
+		return textStore.filter(Boolean).join('\n');
+	};
+})();
+
+function applyToSingletonTag (style, index, remove, obj) {
+	var css = remove ? "" : obj.css;
+
+	if (style.styleSheet) {
+		style.styleSheet.cssText = replaceText(index, css);
+	} else {
+		var cssNode = document.createTextNode(css);
+		var childNodes = style.childNodes;
+
+		if (childNodes[index]) style.removeChild(childNodes[index]);
+
+		if (childNodes.length) {
+			style.insertBefore(cssNode, childNodes[index]);
+		} else {
+			style.appendChild(cssNode);
+		}
+	}
+}
+
+function applyToTag (style, obj) {
+	var css = obj.css;
+	var media = obj.media;
+
+	if(media) {
+		style.setAttribute("media", media)
+	}
+
+	if(style.styleSheet) {
+		style.styleSheet.cssText = css;
+	} else {
+		while(style.firstChild) {
+			style.removeChild(style.firstChild);
+		}
+
+		style.appendChild(document.createTextNode(css));
+	}
+}
+
+function updateLink (link, options, obj) {
+	var css = obj.css;
+	var sourceMap = obj.sourceMap;
+
+	/*
+		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
+		and there is no publicPath defined then lets turn convertToAbsoluteUrls
+		on by default.  Otherwise default to the convertToAbsoluteUrls option
+		directly
+	*/
+	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
+
+	if (options.convertToAbsoluteUrls || autoFixUrls) {
+		css = fixUrls(css);
+	}
+
+	if (sourceMap) {
+		// http://stackoverflow.com/a/26603875
+		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+	}
+
+	var blob = new Blob([css], { type: "text/css" });
+
+	var oldSrc = link.href;
+
+	link.href = URL.createObjectURL(blob);
+
+	if(oldSrc) URL.revokeObjectURL(oldSrc);
+}
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(39);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1856,10 +2339,10 @@ var CLASS_LABEL = 'pcui-label';
  * @property {string} text Gets / sets the text of the Label.
  * @property {boolean} renderChanges If true then the Label will flash when its text changes.
  * @augments Element
- * @mixes pcui.IBindable
+ * @mixes IBindable
  */
 
-var Label_Label = /*#__PURE__*/function (_Element) {
+var Label = /*#__PURE__*/function (_Element) {
   _inherits(Label, _Element);
 
   var _super = _createSuper(Label);
@@ -1886,7 +2369,7 @@ var Label_Label = /*#__PURE__*/function (_Element) {
     _this.text = args.text || args.value || '';
 
     if (args.allowTextSelection) {
-      _this.class.add(src_class["c" /* DEFAULT_MOUSEDOWN */]);
+      _this.class.add(_class__WEBPACK_IMPORTED_MODULE_1__[/* DEFAULT_MOUSEDOWN */ "c"]);
     }
 
     if (args.nativeTooltip) {
@@ -1908,7 +2391,7 @@ var Label_Label = /*#__PURE__*/function (_Element) {
   _createClass(Label, [{
     key: "_updateText",
     value: function _updateText(value) {
-      this.class.remove(src_class["k" /* MULTIPLE_VALUES */]);
+      this.class.remove(_class__WEBPACK_IMPORTED_MODULE_1__[/* MULTIPLE_VALUES */ "m"]);
       if (this._text === value) return false;
       this._text = value;
 
@@ -1963,7 +2446,7 @@ var Label_Label = /*#__PURE__*/function (_Element) {
       if (different) {
         this._updateText('');
 
-        this.class.add(src_class["k" /* MULTIPLE_VALUES */]);
+        this.class.add(_class__WEBPACK_IMPORTED_MODULE_1__[/* MULTIPLE_VALUES */ "m"]);
       } else {
         this._updateText(values[0]);
       }
@@ -1983,14 +2466,1159 @@ var Label_Label = /*#__PURE__*/function (_Element) {
   }]);
 
   return Label;
-}(Element["a" /* default */]);
+}(_Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]);
 
-
-/* harmony default export */ var components_Label = __webpack_exports__["a"] = (Label_Label);
+_Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].register('label', Label);
+/* harmony default export */ __webpack_exports__["a"] = (Label);
 
 /***/ }),
-/* 4 */,
-/* 5 */
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
+/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var _TextInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
+/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(0);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+/* global TreeView */
+
+var CLASS_ROOT = 'pcui-treeview-item';
+var CLASS_ICON = CLASS_ROOT + '-icon';
+var CLASS_TEXT = CLASS_ROOT + '-text';
+var CLASS_SELECTED = CLASS_ROOT + '-selected';
+var CLASS_OPEN = CLASS_ROOT + '-open';
+var CLASS_CONTENTS = CLASS_ROOT + '-contents';
+var CLASS_EMPTY = CLASS_ROOT + '-empty';
+var CLASS_RENAME = CLASS_ROOT + '-rename';
+/**
+ * @event
+ * @name TreeViewItem#select
+ * @description Fired when we select the TreeViewItem.
+ * @param {TreeViewItem} item - The item
+ */
+
+/**
+ * @event
+ * @name TreeViewItem#deselect
+ * @description Fired when we deselect the TreeViewItem.
+ * @param {TreeViewItem} item - The item
+ */
+
+/**
+ * @event
+ * @name TreeViewItem#open
+ * @description Fired when we open a TreeViewItem
+ * @param {TreeViewItem} item - The item
+ */
+
+/**
+ * @event
+ * @name TreeViewItem#close
+ * @description Fired when we close the TreeViewItem.
+ * @param {TreeViewItem} item - The item
+ */
+
+/**
+ * @name TreeViewItem
+ * @classdesc Represents a Tree View Item to be added to a pcui.TreeView.
+ * @mixes IFocusable
+ * @property {boolean} selected Whether the item is selected.
+ * @property {boolean} allowSelect=true Whether the item can be selected.
+ * @property {boolean} open Whether the item is open meaning showing its children.
+ * @property {boolean} parentsOpen Whether the parents of the item are open or closed.
+ * @property {boolean} allowDrag=true Whether this tree item can be dragged. Only considered if the parent treeview has allowDrag true.
+ * @property {boolean} allowDrop=true Whether dropping is allowed on the tree item.
+ * @property {string} text The text shown by the TreeViewItem.
+ * @property {number} The number of direct children.
+ * @property {Label} textLabel Gets the internal label that shows the text.
+ * @property {Label} iconLabel Gets the internal label that shows the icon.
+ * @property {TreeView} treeView Gets / sets the parent TreeView.
+ * @property {TreeViewItem} firstChild Gets the first child item.
+ * @property {TreeViewItem} lastChild Gets the last child item.
+ * @property {TreeViewItem} nextSibling Gets the first sibling item.
+ * @property {TreeViewItem} previousSibling Gets the last sibling item.
+ */
+
+var TreeViewItem = /*#__PURE__*/function (_Container) {
+  _inherits(TreeViewItem, _Container);
+
+  var _super = _createSuper(TreeViewItem);
+
+  /**
+   * Creates a new TreeViewItem.
+   *
+   * @param {object} [args] - The arguments.
+   */
+  function TreeViewItem(args) {
+    var _this;
+
+    _classCallCheck(this, TreeViewItem);
+
+    if (!args) {
+      args = {};
+    }
+
+    args.flex = true;
+    _this = _super.call(this, args);
+
+    _this.class.add(CLASS_ROOT, CLASS_EMPTY);
+
+    _this._containerContents = new _Container__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]({
+      class: CLASS_CONTENTS,
+      flex: true,
+      flexDirection: 'row',
+      tabIndex: 0
+    });
+
+    _this.append(_this._containerContents);
+
+    _this._containerContents.dom.draggable = true;
+    _this._labelIcon = new _Label__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]({
+      class: CLASS_ICON
+    });
+
+    _this._containerContents.append(_this._labelIcon);
+
+    _this._labelText = new _Label__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]({
+      class: CLASS_TEXT
+    });
+
+    _this._containerContents.append(_this._labelText);
+
+    _this.allowSelect = args.allowSelect !== undefined ? args.allowSelect : true;
+    _this.allowDrop = args.allowDrop !== undefined ? args.allowDrop : true;
+    _this.allowDrag = args.allowDrag !== undefined ? args.allowDrag : true;
+
+    if (args.text) {
+      _this.text = args.text;
+    }
+
+    _this._numChildren = 0; // used the the parent treeview
+
+    _this._treeOrder = -1;
+    _this._domEvtFocus = _this._onContentFocus.bind(_assertThisInitialized(_this));
+    _this._domEvtBlur = _this._onContentBlur.bind(_assertThisInitialized(_this));
+    _this._domEvtKeyDown = _this._onContentKeyDown.bind(_assertThisInitialized(_this));
+    _this._domEvtDragStart = _this._onContentDragStart.bind(_assertThisInitialized(_this));
+    _this._domEvtMouseDown = _this._onContentMouseDown.bind(_assertThisInitialized(_this));
+    _this._domEvtMouseUp = _this._onContentMouseUp.bind(_assertThisInitialized(_this));
+    _this._domEvtMouseOver = _this._onContentMouseOver.bind(_assertThisInitialized(_this));
+    _this._domEvtClick = _this._onContentClick.bind(_assertThisInitialized(_this));
+    _this._domEvtDblClick = _this._onContentDblClick.bind(_assertThisInitialized(_this));
+    _this._domEvtContextMenu = _this._onContentContextMenu.bind(_assertThisInitialized(_this));
+
+    _this._containerContents.dom.addEventListener('focus', _this._domEvtFocus);
+
+    _this._containerContents.dom.addEventListener('blur', _this._domEvtBlur);
+
+    _this._containerContents.dom.addEventListener('keydown', _this._domEvtKeyDown);
+
+    _this._containerContents.dom.addEventListener('dragstart', _this._domEvtDragStart);
+
+    _this._containerContents.dom.addEventListener('mousedown', _this._domEvtMouseDown);
+
+    _this._containerContents.dom.addEventListener('mouseover', _this._domEvtMouseOver);
+
+    _this._containerContents.dom.addEventListener('click', _this._domEvtClick);
+
+    _this._containerContents.dom.addEventListener('dblclick', _this._domEvtDblClick);
+
+    _this._containerContents.dom.addEventListener('contextmenu', _this._domEvtContextMenu);
+
+    return _this;
+  }
+
+  _createClass(TreeViewItem, [{
+    key: "_onAppendChild",
+    value: function _onAppendChild(element) {
+      _get(_getPrototypeOf(TreeViewItem.prototype), "_onAppendChild", this).call(this, element);
+
+      if (!(element instanceof TreeViewItem)) return;
+      this._numChildren++;
+      if (this._parent !== this._treeView) this.classRemove(CLASS_EMPTY);
+
+      if (this._treeView) {
+        this._treeView._onAppendTreeViewItem(element);
+      }
+    }
+  }, {
+    key: "_onRemoveChild",
+    value: function _onRemoveChild(element) {
+      if (element instanceof TreeViewItem) {
+        this._numChildren--;
+
+        if (this._numChildren === 0) {
+          this.classAdd(CLASS_EMPTY);
+        }
+
+        if (this._treeView) {
+          this._treeView._onRemoveTreeViewItem(element);
+        }
+      }
+
+      _get(_getPrototypeOf(TreeViewItem.prototype), "_onRemoveChild", this).call(this, element);
+    }
+  }, {
+    key: "_onContentKeyDown",
+    value: function _onContentKeyDown(evt) {
+      if (evt.target.tagName.toLowerCase() === 'input') return;
+      if (!this.allowSelect) return;
+
+      if (this._treeView) {
+        this._treeView._onChildKeyDown(evt, this);
+      }
+    }
+  }, {
+    key: "_onContentMouseDown",
+    value: function _onContentMouseDown(evt) {
+      if (!this._treeView || !this._treeView.allowDrag || !this._allowDrag) return;
+
+      this._treeView._updateModifierKeys(evt);
+
+      evt.stopPropagation();
+    }
+  }, {
+    key: "_onContentMouseUp",
+    value: function _onContentMouseUp(evt) {
+      evt.stopPropagation();
+      evt.preventDefault();
+      window.removeEventListener('mouseup', this._domEvtMouseUp);
+
+      if (this._treeView) {
+        this._treeView._onChildDragEnd(evt, this);
+      }
+    }
+  }, {
+    key: "_onContentMouseOver",
+    value: function _onContentMouseOver(evt) {
+      evt.stopPropagation();
+
+      if (this._treeView) {
+        this._treeView._onChildDragOver(evt, this);
+      } // allow hover event
+
+
+      _get(_getPrototypeOf(TreeViewItem.prototype), "_onMouseOver", this).call(this, evt);
+    }
+  }, {
+    key: "_onContentDragStart",
+    value: function _onContentDragStart(evt) {
+      evt.stopPropagation();
+      evt.preventDefault();
+      if (!this._treeView || !this._treeView.allowDrag) return;
+      if (this.class.contains(CLASS_RENAME)) return;
+
+      this._treeView._onChildDragStart(evt, this);
+
+      window.addEventListener('mouseup', this._domEvtMouseUp);
+    }
+  }, {
+    key: "_onContentClick",
+    value: function _onContentClick(evt) {
+      if (!this.allowSelect || evt.button !== 0) return;
+      if (evt.target.tagName.toLowerCase() === 'input') return;
+      evt.stopPropagation();
+
+      var rect = this._containerContents.dom.getBoundingClientRect();
+
+      if (this._numChildren > 0 && evt.clientX - rect.left < 0) {
+        this.open = !this.open;
+        this.focus();
+      } else if (this._treeView) {
+        this._treeView._onChildClick(evt, this);
+      }
+    }
+  }, {
+    key: "_onContentDblClick",
+    value: function _onContentDblClick(evt) {
+      if (!this._treeView || !this._treeView.allowRenaming || evt.button !== 0) return;
+      if (evt.target.tagName.toLowerCase() === 'input') return;
+      evt.stopPropagation();
+
+      var rect = this._containerContents.dom.getBoundingClientRect();
+
+      if (this.numChildren && evt.clientX - rect.left < 0) {
+        return;
+      }
+
+      if (this.allowSelect) {
+        this._treeView.deselect();
+
+        this._treeView._onChildClick(evt, this);
+      }
+
+      this.rename();
+    }
+  }, {
+    key: "_onContentContextMenu",
+    value: function _onContentContextMenu(evt) {
+      if (this._treeView && this._treeView._onContextMenu) {
+        this._treeView._onContextMenu(evt, this);
+      }
+    }
+  }, {
+    key: "_onContentFocus",
+    value: function _onContentFocus(evt) {
+      this.emit('focus');
+    }
+  }, {
+    key: "_onContentBlur",
+    value: function _onContentBlur(evt) {
+      this.emit('blur');
+    }
+  }, {
+    key: "rename",
+    value: function rename() {
+      var _this2 = this;
+
+      this.classAdd(CLASS_RENAME); // show text input to enter new text
+
+      var textInput = new _TextInput__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]({
+        renderChanges: false,
+        value: this.text,
+        class: _class__WEBPACK_IMPORTED_MODULE_3__[/* FONT_REGULAR */ "j"]
+      });
+      textInput.on('blur', function () {
+        textInput.destroy();
+      });
+      textInput.on('destroy', function () {
+        _this2.classRemove(CLASS_RENAME);
+
+        _this2.focus();
+      });
+      textInput.on('change', function (value) {
+        value = value.trim();
+
+        if (value) {
+          _this2.text = value;
+          textInput.destroy();
+        }
+      });
+      textInput.on('disable', function () {
+        // make sure text input is editable even if this
+        // tree item is disabled
+        textInput.input.removeAttribute('readonly');
+      });
+
+      this._containerContents.append(textInput);
+
+      textInput.focus(true);
+    }
+  }, {
+    key: "focus",
+    value: function focus() {
+      this._containerContents.dom.focus();
+    }
+  }, {
+    key: "blur",
+    value: function blur() {
+      this._containerContents.dom.blur();
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      if (this._destroyed) return;
+
+      this._containerContents.dom.removeEventListener('focus', this._domEvtFocus);
+
+      this._containerContents.dom.removeEventListener('blur', this._domEvtBlur);
+
+      this._containerContents.dom.removeEventListener('keydown', this._domEvtKeyDown);
+
+      this._containerContents.dom.removeEventListener('mousedown', this._domEvtMouseDown);
+
+      this._containerContents.dom.removeEventListener('dragstart', this._domEvtDragStart);
+
+      this._containerContents.dom.removeEventListener('mouseover', this._domEvtMouseOver);
+
+      this._containerContents.dom.removeEventListener('click', this._domEvtClick);
+
+      this._containerContents.dom.removeEventListener('dblclick', this._domEvtDblClick);
+
+      this._containerContents.dom.removeEventListener('contextmenu', this._domEvtContextMenu);
+
+      window.removeEventListener('mouseup', this._domEvtMouseUp);
+
+      _get(_getPrototypeOf(TreeViewItem.prototype), "destroy", this).call(this);
+    }
+  }, {
+    key: "selected",
+    get: function get() {
+      return this._containerContents.class.contains(CLASS_SELECTED);
+    },
+    set: function set(value) {
+      if (value) {
+        this.focus();
+      }
+
+      if (value === this.selected) return;
+
+      if (value) {
+        this._containerContents.classAdd(CLASS_SELECTED);
+
+        this.emit('select', this);
+
+        if (this._treeView) {
+          this._treeView._onChildSelected(this);
+        }
+      } else {
+        this._containerContents.classRemove(CLASS_SELECTED);
+
+        this.blur();
+        this.emit('deselect', this);
+
+        if (this._treeView) {
+          this._treeView._onChildDeselected(this);
+        }
+      }
+    }
+  }, {
+    key: "text",
+    get: function get() {
+      return this._labelText.value;
+    },
+    set: function set(value) {
+      if (this._labelText.value !== value) {
+        this._labelText.value = value;
+
+        if (this._treeView) {
+          this._treeView._onChildRename(this, value);
+        }
+      }
+    }
+  }, {
+    key: "textLabel",
+    get: function get() {
+      return this._labelText;
+    }
+  }, {
+    key: "iconLabel",
+    get: function get() {
+      return this._labelIcon;
+    }
+  }, {
+    key: "open",
+    get: function get() {
+      return this.class.contains(CLASS_OPEN) || this.parent === this._treeView;
+    },
+    set: function set(value) {
+      if (this.open === value) return;
+
+      if (value) {
+        if (!this.numChildren) return;
+        this.classAdd(CLASS_OPEN);
+        this.emit('open', this);
+      } else {
+        this.classRemove(CLASS_OPEN);
+        this.emit('close', this);
+      }
+    }
+  }, {
+    key: "parentsOpen",
+    get: function get() {
+      var parent = this.parent;
+
+      while (parent && parent instanceof TreeViewItem) {
+        if (!parent.open) return false;
+        parent = parent.parent;
+      }
+
+      return true;
+    },
+    set: function set(value) {
+      var parent = this.parent;
+
+      while (parent && parent instanceof TreeViewItem) {
+        parent.open = value;
+        parent = parent.parent;
+      }
+    }
+  }, {
+    key: "allowDrop",
+    get: function get() {
+      return this._allowDrop;
+    },
+    set: function set(value) {
+      this._allowDrop = value;
+    }
+  }, {
+    key: "allowDrag",
+    get: function get() {
+      return this._allowDrag;
+    },
+    set: function set(value) {
+      this._allowDrag = value;
+    }
+  }, {
+    key: "allowSelect",
+    get: function get() {
+      return this._allowSelect;
+    },
+    set: function set(value) {
+      this._allowSelect = value;
+    }
+  }, {
+    key: "treeView",
+    get: function get() {
+      return this._treeView;
+    },
+    set: function set(value) {
+      this._treeView = value;
+    }
+  }, {
+    key: "numChildren",
+    get: function get() {
+      return this._numChildren;
+    }
+  }, {
+    key: "firstChild",
+    get: function get() {
+      if (this._numChildren) {
+        for (var i = 0; i < this.dom.childNodes.length; i++) {
+          if (this.dom.childNodes[i].ui instanceof TreeViewItem) {
+            return this.dom.childNodes[i].ui;
+          }
+        }
+      }
+
+      return null;
+    }
+  }, {
+    key: "lastChild",
+    get: function get() {
+      if (this._numChildren) {
+        for (var i = this.dom.childNodes.length - 1; i >= 0; i--) {
+          if (this.dom.childNodes[i].ui instanceof TreeViewItem) {
+            return this.dom.childNodes[i].ui;
+          }
+        }
+      }
+
+      return null;
+    }
+  }, {
+    key: "nextSibling",
+    get: function get() {
+      var sibling = this.dom.nextSibling;
+
+      while (sibling && !(sibling.ui instanceof TreeViewItem)) {
+        sibling = sibling.nextSibling;
+      }
+
+      return sibling && sibling.ui;
+    }
+  }, {
+    key: "previousSibling",
+    get: function get() {
+      var sibling = this.dom.previousSibling;
+
+      while (sibling && !(sibling.ui instanceof TreeViewItem)) {
+        sibling = sibling.previousSibling;
+      }
+
+      return sibling && sibling.ui;
+    }
+  }]);
+
+  return TreeViewItem;
+}(_Container__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (TreeViewItem);
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export bytesToHuman */
+/* unused harmony export swapExtension */
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+var utils = {}; // utils.deepCopy
+
+utils.deepCopy = function deepCopy(data) {
+  if (data == null || _typeof(data) !== 'object') return data;
+
+  if (data instanceof Array) {
+    var arr = [];
+
+    for (var i = 0; i < data.length; i++) {
+      arr[i] = deepCopy(data[i]);
+    }
+
+    return arr;
+  }
+
+  var obj = {};
+
+  for (var key in data) {
+    if (data.hasOwnProperty(key)) obj[key] = deepCopy(data[key]);
+  }
+
+  return obj;
+};
+
+utils.isMobile = function () {
+  return /Android/i.test(navigator.userAgent) || /iPhone|iPad|iPod/i.test(navigator.userAgent);
+};
+/**
+ * @name utils.implements
+ * @description Adds properties and methods from the sourceClass
+ * to the targetClass but only if properties with the same name do not
+ * already exist in the targetClass.
+ * @param {object} targetClass - The target class.
+ * @param {object} sourceClass - The source class.
+ * @example utils.implements(pcui.Container, pcui.IContainer);
+ */
+
+
+utils.implements = function (targetClass, sourceClass) {
+  var properties = Object.getOwnPropertyDescriptors(sourceClass.prototype);
+
+  for (var key in properties) {
+    if (targetClass.prototype.hasOwnProperty(key)) {
+      delete properties[key];
+    }
+  }
+
+  Object.defineProperties(targetClass.prototype, properties);
+};
+/**
+ * @name utils.proxy
+ * @description Creates new properties on the target class that get / set
+ * the properties of the member.
+ * @param {object} targetClass - The target class
+ * @param {string} memberName - The name of the member of the target class that properties will be proxied to.
+ * @param {string[]} properties - A list of properties to be proxied.
+ * @example
+ * utils.proxy(pcui.SliderInput, '_numericInput', ['max', 'min', 'placeholder']);
+ */
+
+
+utils.proxy = function (targetClass, memberName, properties) {
+  properties.forEach(function (property) {
+    Object.defineProperty(targetClass.prototype, property, {
+      get: function get() {
+        return this[memberName][property];
+      },
+      set: function set(value) {
+        this[memberName][property] = value;
+      }
+    });
+  });
+}; // String.startsWith
+
+
+if (!String.prototype.startsWith) {
+  Object.defineProperty(String.prototype, 'startsWith', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: function value(str) {
+      var that = this;
+      var ceil = str.length;
+
+      for (var i = 0; i < ceil; i++) {
+        if (that[i] !== str[i]) return false;
+      }
+
+      return true;
+    }
+  });
+} // String.endsWith polyfill
+
+
+if (!String.prototype.endsWith) {
+  Object.defineProperty(String.prototype, 'endsWith', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: function value(str) {
+      var that = this;
+
+      for (var i = 0, ceil = str.length; i < ceil; i++) {
+        if (that[i + that.length - ceil] !== str[i]) return false;
+      }
+
+      return true;
+    }
+  });
+} // Appends query parameter to string (supposedly the string is a URL)
+// automatically figuring out if the separator should be ? or &.
+// Example: url.appendQuery('t=123').appendQuery('q=345');
+
+
+if (!String.prototype.appendQuery) {
+  Object.defineProperty(String.prototype, 'appendQuery', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: function value(queryParameter) {
+      var separator = this.indexOf('?') !== -1 ? '&' : '?';
+      return this + separator + queryParameter;
+    }
+  });
+}
+
+utils.arrayEquals = function (lhs, rhs) {
+  if (!lhs) return false;
+  if (!rhs) return false;
+  if (lhs.length !== rhs.length) return false;
+
+  for (var i = 0, l = lhs.length; i < l; i++) {
+    if (this[i] instanceof Array && rhs[i] instanceof Array) {
+      if (!this[i].equals(rhs[i])) return false;
+    } else if (this[i] !== rhs[i]) {
+      return false;
+    }
+  }
+
+  return true;
+}; // element.classList.add polyfill
+
+
+(function () {
+  var dummy = document.createElement('div'),
+      dtp = DOMTokenList.prototype,
+      add = dtp.add,
+      rem = dtp.remove;
+  dummy.classList.add('class1', 'class2'); // Older versions of the HTMLElement.classList spec didn't allow multiple
+  // arguments, easy to test for
+
+  if (!dummy.classList.contains('class2')) {
+    dtp.add = function () {
+      Array.prototype.forEach.call(arguments, add.bind(this));
+    };
+
+    dtp.remove = function () {
+      Array.prototype.forEach.call(arguments, rem.bind(this));
+    };
+  }
+})();
+
+var bytesToHuman = function bytesToHuman(bytes) {
+  if (isNaN(bytes) || bytes === 0) return '0 B';
+  var k = 1000;
+  var sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+  var i = Math.floor(Math.log(bytes) / Math.log(k));
+  return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
+}; // todo move this into proper library
+// replace the oldExtension in a path with the newExtension
+// return the new path
+// oldExtension and newExtension should have leading period
+
+var swapExtension = function swapExtension(path, oldExtension, newExtension) {
+  while (path.indexOf(oldExtension) >= 0) {
+    path = path.replace(oldExtension, newExtension);
+  }
+
+  return path;
+};
+/* harmony default export */ __webpack_exports__["a"] = (utils);
+
+/***/ }),
+/* 8 */,
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(45);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var CLASS_TEXT_INPUT = 'pcui-text-input';
+/**
+ * @name TextInput
+ * @classdesc The TextInput is an input element of type text.
+ * @augments Element
+ * @mixes IBindable
+ * @mixes IFocusable
+ * @property {string} placeholder Gets / sets the placeholder label that appears on the right of the input.
+ * @property {HTMLElement} input Gets the HTML input element.
+ * @property {boolean} renderChanges If true then the TextInput will flash when its text changes.
+ * @property {boolean} blurOnEnter=true Gets / sets whether pressing Enter will blur (unfocus) the field. Defaults to true.
+ * @property {boolean} blurOnEscape=true Gets / sets whether pressing Escape will blur (unfocus) the field. Defaults to true.
+ * @property {boolean} keyChange Gets / sets whether any key up event will cause a change event to be fired.} args
+ * @property {Function} onValidate A function that validates the value that is entered into the input and returns true if it is valid or false otherwise.
+ * If false then the input will be set in an error state and the value will not propagate to the binding.
+ */
+
+var TextInput = /*#__PURE__*/function (_Element) {
+  _inherits(TextInput, _Element);
+
+  var _super = _createSuper(TextInput);
+
+  /**
+   * Creates a new TextInput.
+   *
+   * @param {object} args - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
+   */
+  function TextInput(args) {
+    var _this;
+
+    _classCallCheck(this, TextInput);
+
+    if (!args) args = {};
+    _this = _super.call(this, args.dom ? args.dom : document.createElement('div'), args);
+
+    _this.class.add(CLASS_TEXT_INPUT);
+
+    var input = args.input;
+
+    if (!input) {
+      input = document.createElement('input');
+      input.ui = _assertThisInitialized(_this);
+      input.type = 'text';
+      input.tabIndex = 0;
+    }
+
+    _this._domInput = input;
+    _this._domEvtChange = _this._onInputChange.bind(_assertThisInitialized(_this));
+    _this._domEvtFocus = _this._onInputFocus.bind(_assertThisInitialized(_this));
+    _this._domEvtBlur = _this._onInputBlur.bind(_assertThisInitialized(_this));
+    _this._domEvtKeyDown = _this._onInputKeyDown.bind(_assertThisInitialized(_this));
+    _this._domEvtKeyUp = _this._onInputKeyUp.bind(_assertThisInitialized(_this));
+    _this._domEvtCtxMenu = _this._onInputCtxMenu.bind(_assertThisInitialized(_this));
+
+    _this._domInput.addEventListener('change', _this._domEvtChange);
+
+    _this._domInput.addEventListener('focus', _this._domEvtFocus);
+
+    _this._domInput.addEventListener('blur', _this._domEvtBlur);
+
+    _this._domInput.addEventListener('keydown', _this._domEvtKeyDown);
+
+    _this._domInput.addEventListener('contextmenu', _this._domEvtCtxMenu, false);
+
+    _this.dom.appendChild(_this._domInput);
+
+    _this._suspendInputChangeEvt = false;
+
+    if (args.value !== undefined) {
+      _this.value = args.value;
+    }
+
+    _this.placeholder = args.placeholder || null;
+    _this.renderChanges = args.renderChanges || false;
+    _this.blurOnEnter = args.blurOnEnter !== undefined ? args.blurOnEnter : true;
+    _this.blurOnEscape = args.blurOnEscape !== undefined ? args.blurOnEscape : true;
+    _this.keyChange = args.keyChange || false;
+
+    if (args.onValidate) {
+      _this.onValidate = args.onValidate;
+    }
+
+    _this.on('change', function () {
+      if (_this.renderChanges) {
+        _this.flash();
+      }
+    });
+
+    _this.on('disable', _this._updateInputReadOnly.bind(_assertThisInitialized(_this)));
+
+    _this.on('enable', _this._updateInputReadOnly.bind(_assertThisInitialized(_this)));
+
+    _this.on('readOnly', _this._updateInputReadOnly.bind(_assertThisInitialized(_this)));
+
+    _this._updateInputReadOnly();
+
+    return _this;
+  }
+
+  _createClass(TextInput, [{
+    key: "_onInputChange",
+    value: function _onInputChange(evt) {
+      if (this._suspendInputChangeEvt) return;
+
+      if (this._onValidate) {
+        var error = !this._onValidate(this.value);
+        this.error = error;
+
+        if (error) {
+          return;
+        }
+      } else {
+        this.error = false;
+      }
+
+      this.emit('change', this.value);
+
+      if (this._binding) {
+        this._binding.setValue(this.value);
+      }
+    }
+  }, {
+    key: "_onInputFocus",
+    value: function _onInputFocus(evt) {
+      this.class.add(_class__WEBPACK_IMPORTED_MODULE_2__[/* FOCUS */ "h"]);
+      this.emit('focus', evt);
+    }
+  }, {
+    key: "_onInputBlur",
+    value: function _onInputBlur(evt) {
+      this.class.remove(_class__WEBPACK_IMPORTED_MODULE_2__[/* FOCUS */ "h"]);
+      this.emit('blur', evt);
+    }
+  }, {
+    key: "_onInputKeyDown",
+    value: function _onInputKeyDown(evt) {
+      if (evt.keyCode === 27 && this.blurOnEscape || evt.keyCode === 13 && this.blurOnEnter) {
+        this._domInput.blur();
+      }
+
+      this.emit('keydown', evt);
+    }
+  }, {
+    key: "_onInputKeyUp",
+    value: function _onInputKeyUp(evt) {
+      this._onInputChange(evt);
+
+      this.emit('keyup', evt);
+    }
+  }, {
+    key: "_onInputCtxMenu",
+    value: function _onInputCtxMenu(evt) {
+      this._domInput.select();
+    }
+  }, {
+    key: "_updateInputReadOnly",
+    value: function _updateInputReadOnly() {
+      var readOnly = !this.enabled || this.readOnly;
+
+      if (readOnly) {
+        this._domInput.setAttribute('readonly', true);
+      } else {
+        this._domInput.removeAttribute('readonly');
+      }
+    }
+  }, {
+    key: "_updateValue",
+    value: function _updateValue(value) {
+      this.class.remove(_class__WEBPACK_IMPORTED_MODULE_2__[/* MULTIPLE_VALUES */ "m"]);
+
+      if (value && _typeof(value) === 'object') {
+        if (Array.isArray(value)) {
+          var isObject = false;
+
+          for (var i = 0; i < value.length; i++) {
+            if (value[i] && _typeof(value[i]) === 'object') {
+              isObject = true;
+              break;
+            }
+          }
+
+          value = isObject ? '[Not available]' : value.map(function (val) {
+            return val === null ? 'null' : val;
+          }).join(',');
+        } else {
+          value = '[Not available]';
+        }
+      }
+
+      if (value === this.value) return false;
+      this._suspendInputChangeEvt = true;
+      this._domInput.value = value === null || value === undefined ? '' : value;
+      this._suspendInputChangeEvt = false;
+      this.emit('change', value);
+      return true;
+    }
+    /**
+     * @name TextInput#focus
+     * @description Focuses the Element.
+     * @param {boolean} select - If true then this will also select the text after focusing.
+     */
+
+  }, {
+    key: "focus",
+    value: function focus(select) {
+      this._domInput.focus();
+
+      if (select) {
+        this._domInput.select();
+      }
+    }
+    /**
+     * @name TextInput#blur
+     * @description Blurs (unfocuses) the Element.
+     */
+
+  }, {
+    key: "blur",
+    value: function blur() {
+      this._domInput.blur();
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      if (this._destroyed) return;
+
+      this._domInput.removeEventListener('change', this._domEvtChange);
+
+      this._domInput.removeEventListener('focus', this._domEvtFocus);
+
+      this._domInput.removeEventListener('blur', this._domEvtBlur);
+
+      this._domInput.removeEventListener('keydown', this._domEvtKeyDown);
+
+      this._domInput.removeEventListener('keyup', this._domEvtKeyUp);
+
+      this._domInput.removeEventListener('contextmenu', this._domEvtCtxMenu);
+
+      this._domInput = null;
+
+      _get(_getPrototypeOf(TextInput.prototype), "destroy", this).call(this);
+    }
+  }, {
+    key: "value",
+    get: function get() {
+      return this._domInput.value;
+    },
+    set: function set(value) {
+      var changed = this._updateValue(value);
+
+      if (changed) {
+        // reset error
+        this.error = false;
+      }
+
+      if (changed && this._binding) {
+        this._binding.setValue(value);
+      }
+    }
+    /* eslint accessor-pairs: 0 */
+
+  }, {
+    key: "values",
+    set: function set(values) {
+      var different = false;
+      var value = values[0];
+
+      for (var i = 1; i < values.length; i++) {
+        if (values[i] !== value) {
+          different = true;
+          break;
+        }
+      }
+
+      if (different) {
+        this._updateValue(null);
+
+        this.class.add(_class__WEBPACK_IMPORTED_MODULE_2__[/* MULTIPLE_VALUES */ "m"]);
+      } else {
+        this._updateValue(values[0]);
+      }
+    }
+  }, {
+    key: "placeholder",
+    get: function get() {
+      return this.dom.getAttribute('placeholder');
+    },
+    set: function set(value) {
+      if (value) {
+        this.dom.setAttribute('placeholder', value);
+      } else {
+        this.dom.removeAttribute('placeholder');
+      }
+    }
+  }, {
+    key: "keyChange",
+    get: function get() {
+      return this._keyChange;
+    },
+    set: function set(value) {
+      if (this._keyChange === value) return;
+      this._keyChange = value;
+
+      if (value) {
+        this._domInput.addEventListener('keyup', this._domEvtKeyUp);
+      } else {
+        this._domInput.removeEventListener('keyup', this._domEvtKeyUp);
+      }
+    }
+  }, {
+    key: "input",
+    get: function get() {
+      return this._domInput;
+    }
+  }, {
+    key: "onValidate",
+    get: function get() {
+      return this._onValidate;
+    },
+    set: function set(value) {
+      this._onValidate = value;
+    }
+  }]);
+
+  return TextInput;
+}(_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
+
+_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('string', TextInput, {
+  renderChanges: true
+});
+/* harmony default export */ __webpack_exports__["a"] = (TextInput);
+
+/***/ }),
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2105,394 +3733,13 @@ EventHandle.prototype.on = function (name, fn) {
 /* harmony default export */ __webpack_exports__["a"] = (Events);
 
 /***/ }),
-/* 6 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-// CONCATENATED MODULE: ./src/components/TextInput/style.scss
-// extracted by mini-css-extract-plugin
-
-// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
-var Element = __webpack_require__(1);
-
-// EXTERNAL MODULE: ./src/class.js
-var src_class = __webpack_require__(0);
-
-// CONCATENATED MODULE: ./src/components/TextInput/index.js
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-var CLASS_TEXT_INPUT = 'pcui-text-input';
-/**
- * @name TextInput
- * @classdesc The TextInput is an input element of type text.
- * @augments Element
- * @mixes pcui.IBindable
- * @mixes pcui.IFocusable
- * @property {string} placeholder Gets / sets the placeholder label that appears on the right of the input.
- * @property {HTMLElement} input Gets the HTML input element.
- * @property {boolean} renderChanges If true then the TextInput will flash when its text changes.
- * @property {boolean} blurOnEnter Gets / sets whether pressing Enter will blur (unfocus) the field. Defaults to true.
- * @property {boolean} blurOnEscape Gets / sets whether pressing Escape will blur (unfocus) the field. Defaults to true.
- * @property {boolean} keyChange Gets / sets whether any key up event will cause a change event to be fired.} args
- * @property {Function} onValidate A function that validates the value that is entered into the input and returns true if it is valid or false otherwise.
- * If false then the input will be set in an error state and the value will not propagate to the binding.
- */
-
-var TextInput_TextInput = /*#__PURE__*/function (_Element) {
-  _inherits(TextInput, _Element);
-
-  var _super = _createSuper(TextInput);
-
-  /**
-   * Creates a new TextInput.
-   *
-   * @param {object} args - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
-   */
-  function TextInput(args) {
-    var _this;
-
-    _classCallCheck(this, TextInput);
-
-    if (!args) args = {};
-    _this = _super.call(this, args.dom ? args.dom : document.createElement('div'), args);
-
-    _this.class.add(CLASS_TEXT_INPUT);
-
-    var input = args.input;
-
-    if (!input) {
-      input = document.createElement('input');
-      input.ui = _assertThisInitialized(_this);
-      input.type = 'text';
-      input.tabIndex = 0;
-    }
-
-    _this._domInput = input;
-    _this._domEvtChange = _this._onInputChange.bind(_assertThisInitialized(_this));
-    _this._domEvtFocus = _this._onInputFocus.bind(_assertThisInitialized(_this));
-    _this._domEvtBlur = _this._onInputBlur.bind(_assertThisInitialized(_this));
-    _this._domEvtKeyDown = _this._onInputKeyDown.bind(_assertThisInitialized(_this));
-    _this._domEvtKeyUp = _this._onInputKeyUp.bind(_assertThisInitialized(_this));
-    _this._domEvtCtxMenu = _this._onInputCtxMenu.bind(_assertThisInitialized(_this));
-
-    _this._domInput.addEventListener('change', _this._domEvtChange);
-
-    _this._domInput.addEventListener('focus', _this._domEvtFocus);
-
-    _this._domInput.addEventListener('blur', _this._domEvtBlur);
-
-    _this._domInput.addEventListener('keydown', _this._domEvtKeyDown);
-
-    _this._domInput.addEventListener('contextmenu', _this._domEvtCtxMenu, false);
-
-    _this.dom.appendChild(_this._domInput);
-
-    _this._suspendInputChangeEvt = false;
-
-    if (args.value !== undefined) {
-      _this.value = args.value;
-    }
-
-    _this.placeholder = args.placeholder || null;
-    _this.renderChanges = args.renderChanges || false;
-    _this.blurOnEnter = args.blurOnEnter !== undefined ? args.blurOnEnter : true;
-    _this.blurOnEscape = args.blurOnEscape !== undefined ? args.blurOnEscape : true;
-    _this.keyChange = args.keyChange || false;
-
-    if (args.onValidate) {
-      _this.onValidate = args.onValidate;
-    }
-
-    _this.on('change', function () {
-      if (_this.renderChanges) {
-        _this.flash();
-      }
-    });
-
-    _this.on('disable', _this._updateInputReadOnly.bind(_assertThisInitialized(_this)));
-
-    _this.on('enable', _this._updateInputReadOnly.bind(_assertThisInitialized(_this)));
-
-    _this.on('readOnly', _this._updateInputReadOnly.bind(_assertThisInitialized(_this)));
-
-    _this._updateInputReadOnly();
-
-    return _this;
-  }
-
-  _createClass(TextInput, [{
-    key: "_onInputChange",
-    value: function _onInputChange(evt) {
-      if (this._suspendInputChangeEvt) return;
-
-      if (this._onValidate) {
-        var error = !this._onValidate(this.value);
-        this.error = error;
-
-        if (error) {
-          return;
-        }
-      } else {
-        this.error = false;
-      }
-
-      this.emit('change', this.value);
-
-      if (this._binding) {
-        this._binding.setValue(this.value);
-      }
-    }
-  }, {
-    key: "_onInputFocus",
-    value: function _onInputFocus(evt) {
-      this.class.add(src_class["h" /* FOCUS */]);
-      this.emit('focus', evt);
-    }
-  }, {
-    key: "_onInputBlur",
-    value: function _onInputBlur(evt) {
-      this.class.remove(src_class["h" /* FOCUS */]);
-      this.emit('blur', evt);
-    }
-  }, {
-    key: "_onInputKeyDown",
-    value: function _onInputKeyDown(evt) {
-      if (evt.keyCode === 27 && this.blurOnEscape || evt.keyCode === 13 && this.blurOnEnter) {
-        this._domInput.blur();
-      }
-
-      this.emit('keydown', evt);
-    }
-  }, {
-    key: "_onInputKeyUp",
-    value: function _onInputKeyUp(evt) {
-      this._onInputChange(evt);
-
-      this.emit('keyup', evt);
-    }
-  }, {
-    key: "_onInputCtxMenu",
-    value: function _onInputCtxMenu(evt) {
-      this._domInput.select();
-    }
-  }, {
-    key: "_updateInputReadOnly",
-    value: function _updateInputReadOnly() {
-      var readOnly = !this.enabled || this.readOnly;
-
-      if (readOnly) {
-        this._domInput.setAttribute('readonly', true);
-      } else {
-        this._domInput.removeAttribute('readonly');
-      }
-    }
-  }, {
-    key: "_updateValue",
-    value: function _updateValue(value) {
-      this.class.remove(src_class["k" /* MULTIPLE_VALUES */]);
-
-      if (value && _typeof(value) === 'object') {
-        if (Array.isArray(value)) {
-          var isObject = false;
-
-          for (var i = 0; i < value.length; i++) {
-            if (value[i] && _typeof(value[i]) === 'object') {
-              isObject = true;
-              break;
-            }
-          }
-
-          value = isObject ? '[Not available]' : value.map(function (val) {
-            return val === null ? 'null' : val;
-          }).join(',');
-        } else {
-          value = '[Not available]';
-        }
-      }
-
-      if (value === this.value) return false;
-      this._suspendInputChangeEvt = true;
-      this._domInput.value = value === null || value === undefined ? '' : value;
-      this._suspendInputChangeEvt = false;
-      this.emit('change', value);
-      return true;
-    }
-    /**
-     * @name TextInput#focus
-     * @description Focuses the Element.
-     * @param {boolean} select - If true then this will also select the text after focusing.
-     */
-
-  }, {
-    key: "focus",
-    value: function focus(select) {
-      this._domInput.focus();
-
-      if (select) {
-        this._domInput.select();
-      }
-    }
-    /**
-     * @name TextInput#blur
-     * @description Blurs (unfocuses) the Element.
-     */
-
-  }, {
-    key: "blur",
-    value: function blur() {
-      this._domInput.blur();
-    }
-  }, {
-    key: "destroy",
-    value: function destroy() {
-      if (this._destroyed) return;
-
-      this._domInput.removeEventListener('change', this._domEvtChange);
-
-      this._domInput.removeEventListener('focus', this._domEvtFocus);
-
-      this._domInput.removeEventListener('blur', this._domEvtBlur);
-
-      this._domInput.removeEventListener('keydown', this._domEvtKeyDown);
-
-      this._domInput.removeEventListener('keyup', this._domEvtKeyUp);
-
-      this._domInput.removeEventListener('contextmenu', this._domEvtCtxMenu);
-
-      this._domInput = null;
-
-      _get(_getPrototypeOf(TextInput.prototype), "destroy", this).call(this);
-    }
-  }, {
-    key: "value",
-    get: function get() {
-      return this._domInput.value;
-    },
-    set: function set(value) {
-      var changed = this._updateValue(value);
-
-      if (changed) {
-        // reset error
-        this.error = false;
-      }
-
-      if (changed && this._binding) {
-        this._binding.setValue(value);
-      }
-    }
-    /* eslint accessor-pairs: 0 */
-
-  }, {
-    key: "values",
-    set: function set(values) {
-      var different = false;
-      var value = values[0];
-
-      for (var i = 1; i < values.length; i++) {
-        if (values[i] !== value) {
-          different = true;
-          break;
-        }
-      }
-
-      if (different) {
-        this._updateValue(null);
-
-        this.class.add(src_class["k" /* MULTIPLE_VALUES */]);
-      } else {
-        this._updateValue(values[0]);
-      }
-    }
-  }, {
-    key: "placeholder",
-    get: function get() {
-      return this.dom.getAttribute('placeholder');
-    },
-    set: function set(value) {
-      if (value) {
-        this.dom.setAttribute('placeholder', value);
-      } else {
-        this.dom.removeAttribute('placeholder');
-      }
-    }
-  }, {
-    key: "keyChange",
-    get: function get() {
-      return this._keyChange;
-    },
-    set: function set(value) {
-      if (this._keyChange === value) return;
-      this._keyChange = value;
-
-      if (value) {
-        this._domInput.addEventListener('keyup', this._domEvtKeyUp);
-      } else {
-        this._domInput.removeEventListener('keyup', this._domEvtKeyUp);
-      }
-    }
-  }, {
-    key: "input",
-    get: function get() {
-      return this._domInput;
-    }
-  }, {
-    key: "onValidate",
-    get: function get() {
-      return this._onValidate;
-    },
-    set: function set(value) {
-      this._onValidate = value;
-    }
-  }]);
-
-  return TextInput;
-}(Element["a" /* default */]);
-
-/* harmony default export */ var components_TextInput = __webpack_exports__["a"] = (TextInput_TextInput);
-
-/***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// UNUSED EXPORTS: Button
-
-// CONCATENATED MODULE: ./src/components/Button/style.scss
-// extracted by mini-css-extract-plugin
-
-// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
-var Element = __webpack_require__(1);
-
-// CONCATENATED MODULE: ./src/components/Button/index.js
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(41);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2525,10 +3772,11 @@ var CLASS_BUTTON = 'pcui-button';
 /**
  * @name Button
  * @classdesc Represents a button.
+ * @augments Element
  * @property {string} [text=Click Me] Gets / sets the text of the button
  * @property {string} size Gets / sets the 'size' type of the button. Can be null or 'small'.
  * @property {string} [icon=E401] The CSS code for an icon for the button. e.g. E401 (notice we omit the '\' character).
- * @mixes pcui.IFocusable
+ * @mixes IFocusable
  */
 
 var Button = /*#__PURE__*/function (_Element) {
@@ -2653,30 +3901,21 @@ var Button = /*#__PURE__*/function (_Element) {
   }]);
 
   return Button;
-}(Element["a" /* default */]);
+}(_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
 
-
-/* harmony default export */ var components_Button = __webpack_exports__["a"] = (Button);
+_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('button', Button);
+/* harmony default export */ __webpack_exports__["a"] = (Button);
 
 /***/ }),
-/* 8 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-// CONCATENATED MODULE: ./src/components/NumericInput/style.scss
-// extracted by mini-css-extract-plugin
-
-// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
-var Element = __webpack_require__(1);
-
-// EXTERNAL MODULE: ./src/components/TextInput/index.js + 1 modules
-var TextInput = __webpack_require__(6);
-
-// EXTERNAL MODULE: ./src/class.js
-var src_class = __webpack_require__(0);
-
-// CONCATENATED MODULE: ./src/components/NumericInput/index.js
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(43);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+/* harmony import */ var _TextInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
+/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(0);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2723,7 +3962,7 @@ var REGEX_COMMA = /,/g;
  * @augments TextInput
  */
 
-var NumericInput_NumericInput = /*#__PURE__*/function (_TextInput) {
+var NumericInput = /*#__PURE__*/function (_TextInput) {
   _inherits(NumericInput, _TextInput);
 
   var _super = _createSuper(NumericInput);
@@ -2766,7 +4005,9 @@ var NumericInput_NumericInput = /*#__PURE__*/function (_TextInput) {
 
     _this._oldValue = undefined;
     _this.value = value;
-    _this._sliderPrevValue = value;
+    _this._historyCombine = false;
+    _this._historyPostfix = null;
+    _this._sliderPrevValue = 0;
     _this.renderChanges = renderChanges;
     _this._domEvtPointerLock = null;
     _this._domEvtSliderMouseDown = null;
@@ -2774,7 +4015,7 @@ var NumericInput_NumericInput = /*#__PURE__*/function (_TextInput) {
     _this._domEvtMouseWheel = null;
 
     if (!args.hideSlider) {
-      _this._sliderControl = new Element["a" /* default */]();
+      _this._sliderControl = new _Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]();
 
       _this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL);
 
@@ -2783,38 +4024,26 @@ var NumericInput_NumericInput = /*#__PURE__*/function (_TextInput) {
       _this._domEvtSliderMouseDown = function () {
         _this._sliderControl.dom.requestPointerLock();
 
-        _this._sliderPrevValue = _this.value;
         _this._sliderMovement = 0.0;
+        _this._sliderPrevValue = _this.value;
+
+        if (_this.binding) {
+          _this._historyCombine = _this.binding.historyCombine;
+          _this._historyPostfix = _this.binding.historyPostfix;
+          _this.binding.historyCombine = true;
+          _this.binding.historyPostfix = "(".concat(Date.now(), ")");
+        }
       };
 
       _this._domEvtSliderMouseUp = function () {
         document.exitPointerLock();
+        _this.value = _this._sliderPrevValue + _this._sliderMovement;
 
-        if (_this._binding) {
-          var undoValue = _this._sliderPrevValue;
-          var redoValue = _this._sliderPrevValue + _this._sliderMovement;
-
-          var undo = function undo() {
-            var history = _this._binding._bindingElementToObservers._history;
-            _this._binding._bindingElementToObservers._history = null;
-            _this.value = undoValue;
-            _this._binding._bindingElementToObservers._history = history;
-          };
-
-          var redo = function redo() {
-            var history = _this._binding._bindingElementToObservers._history;
-            _this._binding._bindingElementToObservers._history = null;
-            _this.value = redoValue;
-            _this._binding._bindingElementToObservers._history = history;
-          };
-
-          _this._binding._bindingElementToObservers._history.add({
-            name: _this._binding.paths[0],
-            undo: undo,
-            redo: redo
-          });
-
-          redo();
+        if (_this.binding) {
+          _this.binding.historyCombine = _this._historyCombine;
+          _this.binding.historyPostfix = _this._historyPostfix;
+          _this._historyCombine = false;
+          _this._historyPostfix = null;
         }
       };
 
@@ -2952,7 +4181,7 @@ var NumericInput_NumericInput = /*#__PURE__*/function (_TextInput) {
 
       this._oldValue = value;
       this._domInput.value = value;
-      this.class.remove(src_class["k" /* MULTIPLE_VALUES */]);
+      this.class.remove(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
 
       if (different) {
         this.emit('change', value);
@@ -2994,20 +4223,12 @@ var NumericInput_NumericInput = /*#__PURE__*/function (_TextInput) {
     set: function set(value) {
       value = this._normalizeValue(value);
 
-      var forceUpdate = this.class.contains(src_class["k" /* MULTIPLE_VALUES */]) && value === null && this._allowNull;
+      var forceUpdate = this.class.contains(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]) && value === null && this._allowNull;
 
       var changed = this._updateValue(value, forceUpdate);
 
-      if (changed && this._binding) {
-        var history = this._binding._bindingElementToObservers._history;
-
-        if (this._isScrolling()) {
-          this._binding._bindingElementToObservers._history = null;
-        }
-
-        this._binding.setValue(value);
-
-        this._binding._bindingElementToObservers._history = history;
+      if (changed && this.binding) {
+        this.binding.setValue(value);
       }
 
       if (this._sliderControl) {
@@ -3033,7 +4254,7 @@ var NumericInput_NumericInput = /*#__PURE__*/function (_TextInput) {
       if (different) {
         this._updateValue(null);
 
-        this.class.add(src_class["k" /* MULTIPLE_VALUES */]);
+        this.class.add(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
 
         if (this._sliderControl) {
           this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN);
@@ -3096,198 +4317,494 @@ var NumericInput_NumericInput = /*#__PURE__*/function (_TextInput) {
   }]);
 
   return NumericInput;
-}(TextInput["a" /* default */]);
+}(_TextInput__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]);
 
-/* harmony default export */ var components_NumericInput = __webpack_exports__["a"] = (NumericInput_NumericInput);
+_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('number', NumericInput, {
+  renderChanges: true
+});
+/* harmony default export */ __webpack_exports__["a"] = (NumericInput);
 
 /***/ }),
-/* 9 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(37);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
+/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5);
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(11);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-// UNUSED EXPORTS: ContextMenu
-
-// CONCATENATED MODULE: ./src/components/ContextMenu/style.scss
-// extracted by mini-css-extract-plugin
-
-// EXTERNAL MODULE: ./src/components/Label/index.js + 1 modules
-var Label = __webpack_require__(3);
-
-// EXTERNAL MODULE: ./src/components/Container/index.js + 1 modules
-var Container = __webpack_require__(2);
-
-// CONCATENATED MODULE: ./src/components/ContextMenu/index.js
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
 
-var CLASS_ContextMenu = 'pcui-contextmenu';
-var CLASS_ContextMenu_active = CLASS_ContextMenu + '-active';
-var CLASS_ContextMenu_parent = CLASS_ContextMenu + '-parent';
-var CLASS_ContextMenu_child = CLASS_ContextMenu + '-child';
-var CLASS_ContextMenu_parent_active = CLASS_ContextMenu_parent + '-active';
+
+
+
+
+var CLASS_PANEL = 'pcui-panel';
+var CLASS_PANEL_HEADER = CLASS_PANEL + '-header';
+var CLASS_PANEL_HEADER_TITLE = CLASS_PANEL_HEADER + '-title';
+var CLASS_PANEL_CONTENT = CLASS_PANEL + '-content';
+var CLASS_PANEL_HORIZONTAL = CLASS_PANEL + '-horizontal';
+var CLASS_PANEL_SORTABLE_ICON = CLASS_PANEL + '-sortable-icon';
+var CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove'; // TODO: document panelType
+
 /**
- * @name ContextMenu
- * @classdesc Represents a context menu.
+ * @event
+ * @name Panel#collapse
+ * @description Fired when the panel gets collapsed
  */
 
-var ContextMenu_ContextMenu =
 /**
- * Creates a new ContextMenu.
- *
- * @param {object} args - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
- * @param {object[]} [args.items] - The array of items used to populate the array. Example item: { 'text': 'Hello World', 'onClick': () => console.log('Hello World') }.
- * @param {object} [args.dom] - The dom element to attach this context menu to.
- * @param {object} [args.triggerElement] - The dom element that will trigger the context menu to open when right clicked. If undefined args.dom will be used.
+ * @event
+ * @name Panel#expand
+ * @description Fired when the panel gets expanded
  */
-function ContextMenu(args) {
-  var _this = this;
 
-  _classCallCheck(this, ContextMenu);
+/**
+ * @name Panel
+ * @classdesc The Panel is a pcui.Container that itself contains a header container and a content container. The
+ * respective pcui.Container functions work using the content container. One can also append elements to the header of the Panel.
+ * @property {boolean} flex Gets / sets whether the container supports flex layout. Defaults to false. Cannot co-exist with grid.
+ * @property {boolean} grid Gets / sets whether the container supports grid layout. Defaults to false. Cannot co-exist with flex.
+ * @property {boolean} sortable Gets / sets whether the panel can be reordered
+ * @property {boolean} collapseHorizontally Gets / sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to false.
+ * @property {boolean} removable Gets / sets whether the panel can be removed
+ * @property {number} headerSize=32 The height of the header in pixels. Defaults to 32.
+ * @property {string} headerText The header text of the panel. Defaults to the empty string.
+ * @property {Container} header Gets the header container.
+ * @property {Container} content Gets the content container.
+ * @augments Container
+ * @mixes IContainer
+ * @mixes IFlex
+ * @mixes IGrid
+ * @mixes ICollapsible
+ * @mixes IScrollable
+ * @mixes IResizable
+ */
 
-  if (!args) args = {};
-  this._menu = new Container["a" /* default */]({
-    dom: args.dom
-  });
-  this._menu.contextMenu = this;
-  this.args = args;
+var Panel = /*#__PURE__*/function (_Container) {
+  _inherits(Panel, _Container);
 
-  this._menu.class.add(CLASS_ContextMenu);
+  var _super = _createSuper(Panel);
 
-  var menu = this._menu;
+  /**
+   * Creates a new Panel.
+   *
+   * @param {object} args - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
+   */
+  function Panel(args) {
+    var _this;
 
-  var removeMenu = function removeMenu() {
-    _this._menu.class.remove(CLASS_ContextMenu_active);
+    _classCallCheck(this, Panel);
 
-    document.removeEventListener('click', removeMenu);
-  };
+    if (!args) args = {};
+    var panelArgs = Object.assign({}, args);
+    panelArgs.flex = true;
+    delete panelArgs.grid;
+    delete panelArgs.flexDirection;
+    delete panelArgs.scrollable;
+    _this = _super.call(this, panelArgs);
 
-  var triggerElement = args.triggerElement || args.dom.parentElement;
+    _this.class.add(CLASS_PANEL);
 
-  if (triggerElement) {
-    this._contextMenuEvent = triggerElement.addEventListener('contextmenu', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      menu.class.add(CLASS_ContextMenu_active);
-      var maxMenuHeight = args.items.length * 27.0;
-      var maxMenuWidth = 150.0;
-      var left = e.clientX;
-      var top = e.clientY;
+    if (args.panelType) {
+      _this.class.add(CLASS_PANEL + '-' + args.panelType);
+    } // do not call reflow on every update while
+    // we are initializing
 
-      if (maxMenuHeight + top > window.innerHeight) {
-        var topDiff = maxMenuHeight + top - window.innerHeight;
-        top -= topDiff;
-      }
 
-      if (maxMenuWidth + left > window.innerWidth) {
-        var leftDiff = maxMenuWidth + left - window.innerWidth;
-        left -= leftDiff;
-      }
+    _this._suspendReflow = true; // initialize header container
 
-      menu.dom.setAttribute("style", "left: ".concat(left, "px; top: ").concat(top, "px"));
-      document.addEventListener('click', removeMenu);
-    });
+    _this._initializeHeader(args); // initialize content container
+
+
+    _this._initializeContent(args); // header size
+
+
+    _this.headerSize = args.headerSize !== undefined ? args.headerSize : 32;
+    _this._domEvtDragStart = _this._onDragStart.bind(_assertThisInitialized(_this));
+    _this._domEvtDragMove = _this._onDragMove.bind(_assertThisInitialized(_this));
+    _this._domEvtDragEnd = _this._onDragEnd.bind(_assertThisInitialized(_this)); // collapse related
+
+    _this._reflowTimeout = null;
+    _this._widthBeforeCollapse = null;
+    _this._heightBeforeCollapse = null;
+    _this.collapsible = args.collapsible || false;
+    _this.collapsed = args.collapsed || false;
+    _this.collapseHorizontally = args.collapseHorizontally || false;
+    _this._iconSort = null;
+    _this.sortable = args.sortable || false;
+    _this._btnRemove = null;
+    _this.removable = args.removable || false; // set the contents container to be the content DOM element
+    // from now on calling append functions on the panel will append themn
+    // elements to the contents container
+
+    _this.domContent = _this._containerContent.dom; // execute reflow now after all fields have been initialized
+
+    _this._suspendReflow = false;
+
+    _this._reflow();
+
+    return _this;
   }
 
-  if (!args.items) return;
-  args.items.forEach(function (menuItem, i) {
-    var menuItemElement = new Container["a" /* default */]();
-    menuItemElement.dom.setAttribute("style", "top: ".concat(i * 27.0, "px"));
+  _createClass(Panel, [{
+    key: "_initializeHeader",
+    value: function _initializeHeader(args) {
+      // header container
+      this._containerHeader = new _Container__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]({
+        flex: true,
+        flexDirection: 'row',
+        class: [CLASS_PANEL_HEADER, _class__WEBPACK_IMPORTED_MODULE_1__[/* FONT_BOLD */ "i"]]
+      }); // header title
 
-    if (menuItem.onClick) {
-      menuItemElement.on('click', function (e) {
-        e.stopPropagation();
-        removeMenu();
-        menuItem.onClick(e);
+      this._labelTitle = new _Label__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"]({
+        text: args.headerText,
+        class: [CLASS_PANEL_HEADER_TITLE, _class__WEBPACK_IMPORTED_MODULE_1__[/* FONT_BOLD */ "i"]]
       });
+
+      this._containerHeader.append(this._labelTitle); // use native click listener because the pcui.Element#click event is only fired
+      // if the element is enabled. However we still want to catch header click events in order
+      // to collapse them
+
+
+      this._containerHeader.dom.addEventListener('click', this._onHeaderClick.bind(this));
+
+      this.append(this._containerHeader);
     }
+  }, {
+    key: "_onHeaderClick",
+    value: function _onHeaderClick(evt) {
+      if (!this._collapsible) return;
+      if (evt.target !== this.header.dom && evt.target !== this._labelTitle.dom) return; // toggle collapsed
 
-    var menuItemLabel = new Label["a" /* default */]({
-      text: menuItem.text
-    });
-    menuItemElement.append(menuItemLabel);
-
-    _this._menu.dom.append(menuItemElement.dom);
-
-    if (menuItem.items) {
-      menuItem.items.forEach(function (childItem, j) {
-        var childMenuItemElement = new Container["a" /* default */]({
-          class: CLASS_ContextMenu_child
-        });
-        childMenuItemElement.dom.setAttribute("style", "top: ".concat(j * 27.0, "px; left: 150px;"));
-        childMenuItemElement.on('click', function (e) {
-          e.stopPropagation();
-          removeMenu();
-          childItem.onClick();
-        });
-        var childMenuItemLabel = new Label["a" /* default */]({
-          text: childItem.text
-        });
-        childMenuItemElement.append(childMenuItemLabel);
-        menuItemElement.append(childMenuItemElement);
-      });
-      menuItemElement.class.add(CLASS_ContextMenu_parent);
+      this.collapsed = !this.collapsed;
     }
-
-    menuItemElement.dom.addEventListener('mouseover', function (e) {
-      // if (!e.fromElement.classList.contains('pcui-contextmenu-parent')) return;
-      _this._menu.forEachChild(function (node) {
-        return node.class.remove(CLASS_ContextMenu_parent_active);
+  }, {
+    key: "_onClickRemove",
+    value: function _onClickRemove(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+      this.emit('click:remove');
+    }
+  }, {
+    key: "_initializeContent",
+    value: function _initializeContent(args) {
+      // containers container
+      this._containerContent = new _Container__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]({
+        class: CLASS_PANEL_CONTENT,
+        grid: args.grid,
+        flex: args.flex,
+        flexDirection: args.flexDirection,
+        scrollable: args.scrollable,
+        dom: args.container
       });
+      this.append(this._containerContent);
+    } // Collapses or expands the panel as needed
 
-      menuItemElement.class.add(CLASS_ContextMenu_parent_active);
-      var maxMenuHeight = menuItem.items ? menuItem.items.length * 27.0 : 0.0;
-      var maxMenuWidth = 150.0;
-      var left = e.clientX + maxMenuWidth > window.innerWidth ? -maxMenuWidth + 2.0 : maxMenuWidth;
-      var top = 0;
+  }, {
+    key: "_reflow",
+    value: function _reflow() {
+      var _this2 = this;
 
-      if (e.clientY + maxMenuHeight > window.innerHeight) {
-        top = -maxMenuHeight + 27.0;
+      if (this._suspendReflow) {
+        return;
       }
 
-      menuItemElement.forEachChild(function (node, j) {
-        if (j === 0) return;
-        node.dom.setAttribute("style", "top: ".concat(top + (j - 1) * 27.0, "px; left: ").concat(left, "px;"));
+      if (this._reflowTimeout) {
+        cancelAnimationFrame(this._reflowTimeout);
+        this._reflowTimeout = null;
+      }
+
+      if (this.hidden || !this.collapsible) return;
+
+      if (this.collapsed && this.collapseHorizontally) {
+        this._containerHeader.style.top = -this.headerSize + 'px';
+      } else {
+        this._containerHeader.style.top = '';
+      } // we rely on the content width / height and we have to
+      // wait for 1 frame before we can get the final values back
+
+
+      this._reflowTimeout = requestAnimationFrame(function () {
+        _this2._reflowTimeout = null;
+
+        if (_this2.collapsed) {
+          // remember size before collapse
+          if (!_this2._widthBeforeCollapse) {
+            _this2._widthBeforeCollapse = _this2.style.width;
+          }
+
+          if (!_this2._heightBeforeCollapse) {
+            _this2._heightBeforeCollapse = _this2.style.height;
+          }
+
+          if (_this2._collapseHorizontally) {
+            _this2.height = '';
+            _this2.width = _this2.headerSize;
+          } else {
+            _this2.height = _this2.headerSize;
+          } // add collapsed class after getting the width and height
+          // because if we add it before then because of overflow:hidden
+          // we might get innacurate width/heights.
+
+
+          _this2.class.add(_class__WEBPACK_IMPORTED_MODULE_1__[/* COLLAPSED */ "a"]);
+        } else {
+          // remove collapsed class first and the restore width and height
+          // (opposite order of collapsing)
+          _this2.class.remove(_class__WEBPACK_IMPORTED_MODULE_1__[/* COLLAPSED */ "a"]);
+
+          if (_this2._collapseHorizontally) {
+            _this2.height = '';
+
+            if (_this2._widthBeforeCollapse !== null) {
+              _this2.width = _this2._widthBeforeCollapse;
+            }
+          } else {
+            if (_this2._heightBeforeCollapse !== null) {
+              _this2.height = _this2._heightBeforeCollapse;
+            }
+          } // reset before collapse vars
+
+
+          _this2._widthBeforeCollapse = null;
+          _this2._heightBeforeCollapse = null;
+        }
       });
-    });
-  });
-};
+    }
+  }, {
+    key: "_onDragStart",
+    value: function _onDragStart(evt) {
+      if (this.disabled || this.readOnly) return;
+      evt.stopPropagation();
+      evt.preventDefault();
+      window.addEventListener('mouseup', this._domEvtDragEnd);
+      window.addEventListener('mouseleave', this._domEvtDragEnd);
+      window.addEventListener('mousemove', this._domEvtDragMove);
+      this.emit('dragstart');
 
+      if (this.parent && this.parent._onChildDragStart) {
+        this.parent._onChildDragStart(evt, this);
+      }
+    }
+  }, {
+    key: "_onDragMove",
+    value: function _onDragMove(evt) {
+      this.emit('dragmove');
 
-/* harmony default export */ var components_ContextMenu = __webpack_exports__["a"] = (ContextMenu_ContextMenu);
+      if (this.parent && this.parent._onChildDragStart) {
+        this.parent._onChildDragMove(evt, this);
+      }
+    }
+  }, {
+    key: "_onDragEnd",
+    value: function _onDragEnd(evt) {
+      window.removeEventListener('mouseup', this._domEvtDragEnd);
+      window.removeEventListener('mouseleave', this._domEvtDragEnd);
+      window.removeEventListener('mousemove', this._domEvtDragMove);
+
+      if (this._draggedChild === this) {
+        this._draggedChild = null;
+      }
+
+      this.emit('dragend');
+
+      if (this.parent && this.parent._onChildDragStart) {
+        this.parent._onChildDragEnd(evt, this);
+      }
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      if (this._destroyed) return;
+
+      if (this._reflowTimeout) {
+        cancelAnimationFrame(this._reflowTimeout);
+        this._reflowTimeout = null;
+      }
+
+      window.removeEventListener('mouseup', this._domEvtDragEnd);
+      window.removeEventListener('mouseleave', this._domEvtDragEnd);
+      window.removeEventListener('mousemove', this._domEvtDragMove);
+
+      _get(_getPrototypeOf(Panel.prototype), "destroy", this).call(this);
+    }
+  }, {
+    key: "collapsible",
+    get: function get() {
+      return this._collapsible;
+    },
+    set: function set(value) {
+      if (value === this._collapsible) return;
+      this._collapsible = value;
+
+      if (value) {
+        this.classAdd(_class__WEBPACK_IMPORTED_MODULE_1__[/* COLLAPSIBLE */ "b"]);
+      } else {
+        this.classRemove(_class__WEBPACK_IMPORTED_MODULE_1__[/* COLLAPSIBLE */ "b"]);
+      }
+
+      this._reflow();
+
+      if (this.collapsed) {
+        this.emit(value ? 'collapse' : 'expand');
+      }
+    }
+  }, {
+    key: "collapsed",
+    get: function get() {
+      return this._collapsed;
+    },
+    set: function set(value) {
+      if (this._collapsed === value) return;
+      this._collapsed = value;
+
+      this._reflow();
+
+      if (this.collapsible) {
+        this.emit(value ? 'collapse' : 'expand');
+      }
+    }
+  }, {
+    key: "sortable",
+    get: function get() {
+      return this._sortable;
+    },
+    set: function set(value) {
+      if (this._sortable === value) return;
+      this._sortable = value;
+
+      if (value) {
+        this._iconSort = new _Label__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"]({
+          class: CLASS_PANEL_SORTABLE_ICON
+        });
+
+        this._iconSort.dom.addEventListener('mousedown', this._domEvtDragStart);
+
+        this.header.prepend(this._iconSort);
+      } else if (this._iconSort) {
+        this._iconSort.destroy();
+
+        this._iconSort = null;
+      }
+    }
+  }, {
+    key: "removable",
+    get: function get() {
+      return !!this._btnRemove;
+    },
+    set: function set(value) {
+      if (this.removable === value) return;
+
+      if (value) {
+        this._btnRemove = new _Button__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"]({
+          icon: 'E289',
+          class: CLASS_PANEL_REMOVE
+        });
+
+        this._btnRemove.on('click', this._onClickRemove.bind(this));
+
+        this.header.append(this._btnRemove);
+      } else {
+        this._btnRemove.destroy();
+
+        this._btnRemove = null;
+      }
+    }
+  }, {
+    key: "collapseHorizontally",
+    get: function get() {
+      return this._collapseHorizontally;
+    },
+    set: function set(value) {
+      if (this._collapseHorizontally === value) return;
+      this._collapseHorizontally = value;
+
+      if (value) {
+        this.classAdd(CLASS_PANEL_HORIZONTAL);
+      } else {
+        this.classRemove(CLASS_PANEL_HORIZONTAL);
+      }
+
+      this._reflow();
+    }
+  }, {
+    key: "content",
+    get: function get() {
+      return this._containerContent;
+    }
+  }, {
+    key: "header",
+    get: function get() {
+      return this._containerHeader;
+    }
+  }, {
+    key: "headerText",
+    get: function get() {
+      return this._labelTitle.text;
+    },
+    set: function set(value) {
+      this._labelTitle.text = value;
+    }
+  }, {
+    key: "headerSize",
+    get: function get() {
+      return this._headerSize;
+    },
+    set: function set(value) {
+      this._headerSize = value;
+      var style = this._containerHeader.dom.style;
+      style.height = Math.max(0, value) + 'px';
+      style.lineHeight = style.height;
+
+      this._reflow();
+    }
+  }]);
+
+  return Panel;
+}(_Container__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]);
+
+_Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].register('panel', Panel);
+/* harmony default export */ __webpack_exports__["a"] = (Panel);
 
 /***/ }),
-/* 10 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-// UNUSED EXPORTS: SelectInput
-
-// CONCATENATED MODULE: ./src/components/SelectInput/style.scss
-// extracted by mini-css-extract-plugin
-
-// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
-var Element = __webpack_require__(1);
-
-// EXTERNAL MODULE: ./src/components/Container/index.js + 1 modules
-var Container = __webpack_require__(2);
-
-// EXTERNAL MODULE: ./src/components/TextInput/index.js + 1 modules
-var TextInput = __webpack_require__(6);
-
-// EXTERNAL MODULE: ./src/components/Button/index.js + 1 modules
-var Button = __webpack_require__(7);
-
-// EXTERNAL MODULE: ./src/components/Label/index.js + 1 modules
-var Label = __webpack_require__(3);
-
-// EXTERNAL MODULE: ./src/class.js
-var src_class = __webpack_require__(0);
-
-// CONCATENATED MODULE: ./src/helpers/search.js
+/* unused harmony export searchStringEditDistance */
+/* unused harmony export searchCharsContains */
+/* unused harmony export searchStringTokenize */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return searchItems; });
 // calculate, how many string `a`
 // requires edits, to become string `b`
 var searchStringEditDistance = function searchStringEditDistance(a, b) {
@@ -3478,7 +4995,1554 @@ var searchItems = function searchItems(items, search, args) {
 
   return records;
 };
-// CONCATENATED MODULE: ./src/components/SelectInput/index.js
+
+/***/ }),
+/* 15 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(53);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+
+
+var CLASS_ContextMenu = 'pcui-contextmenu';
+var CLASS_ContextMenu_active = CLASS_ContextMenu + '-active';
+var CLASS_ContextMenu_parent = CLASS_ContextMenu + '-parent';
+var CLASS_ContextMenu_child = CLASS_ContextMenu + '-child';
+var CLASS_ContextMenu_parent_active = CLASS_ContextMenu_parent + '-active';
+/**
+ * @name ContextMenu
+ * @classdesc Represents a context menu.
+ */
+
+var ContextMenu =
+/**
+ * Creates a new ContextMenu.
+ *
+ * @param {object} args - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
+ * @param {object[]} [args.items] - The array of items used to populate the array. Example item: { 'text': 'Hello World', 'onClick': () => console.log('Hello World') }.
+ * @param {object} [args.dom] - The dom element to attach this context menu to.
+ * @param {object} [args.triggerElement] - The dom element that will trigger the context menu to open when right clicked. If undefined args.dom will be used.
+ */
+function ContextMenu(args) {
+  var _this = this;
+
+  _classCallCheck(this, ContextMenu);
+
+  if (!args) args = {};
+  this._menu = new _Container__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]({
+    dom: args.dom
+  });
+  this._menu.contextMenu = this;
+  this.args = args;
+
+  this._menu.class.add(CLASS_ContextMenu);
+
+  var menu = this._menu;
+
+  var removeMenu = function removeMenu() {
+    _this._menu.class.remove(CLASS_ContextMenu_active);
+
+    document.removeEventListener('click', removeMenu);
+  };
+
+  var triggerElement = args.triggerElement || args.dom.parentElement;
+
+  if (triggerElement) {
+    this._contextMenuEvent = triggerElement.addEventListener('contextmenu', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      menu.class.add(CLASS_ContextMenu_active);
+      var maxMenuHeight = args.items.length * 27.0;
+      var maxMenuWidth = 150.0;
+      var left = e.clientX;
+      var top = e.clientY;
+
+      if (maxMenuHeight + top > window.innerHeight) {
+        var topDiff = maxMenuHeight + top - window.innerHeight;
+        top -= topDiff;
+      }
+
+      if (maxMenuWidth + left > window.innerWidth) {
+        var leftDiff = maxMenuWidth + left - window.innerWidth;
+        left -= leftDiff;
+      }
+
+      menu.dom.setAttribute("style", "left: ".concat(left, "px; top: ").concat(top, "px"));
+      document.addEventListener('click', removeMenu);
+    });
+  }
+
+  if (!args.items) return;
+  args.items.forEach(function (menuItem, i) {
+    var menuItemElement = new _Container__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]();
+    menuItemElement.dom.setAttribute("style", "top: ".concat(i * 27.0, "px"));
+
+    if (menuItem.onClick) {
+      menuItemElement.on('click', function (e) {
+        e.stopPropagation();
+        removeMenu();
+        menuItem.onClick(e);
+      });
+    }
+
+    var menuItemLabel = new _Label__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]({
+      text: menuItem.text
+    });
+    menuItemElement.append(menuItemLabel);
+
+    _this._menu.dom.append(menuItemElement.dom);
+
+    if (menuItem.items) {
+      menuItem.items.forEach(function (childItem, j) {
+        var childMenuItemElement = new _Container__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]({
+          class: CLASS_ContextMenu_child
+        });
+        childMenuItemElement.dom.setAttribute("style", "top: ".concat(j * 27.0, "px; left: 150px;"));
+        childMenuItemElement.on('click', function (e) {
+          e.stopPropagation();
+          removeMenu();
+          childItem.onClick(e);
+        });
+        var childMenuItemLabel = new _Label__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]({
+          text: childItem.text
+        });
+        childMenuItemElement.append(childMenuItemLabel);
+        menuItemElement.append(childMenuItemElement);
+      });
+      menuItemElement.class.add(CLASS_ContextMenu_parent);
+    }
+
+    menuItemElement.dom.addEventListener('mouseover', function (e) {
+      _this._menu.forEachChild(function (node) {
+        return node.class.remove(CLASS_ContextMenu_parent_active);
+      });
+
+      menuItemElement.class.add(CLASS_ContextMenu_parent_active);
+      if (!e.fromElement.classList.contains('pcui-contextmenu-parent')) return;
+      var maxMenuHeight = menuItem.items ? menuItem.items.length * 27.0 : 0.0;
+      var maxMenuWidth = 150.0;
+      var left = e.clientX + maxMenuWidth > window.innerWidth ? -maxMenuWidth + 2.0 : maxMenuWidth;
+      var top = 0;
+
+      if (e.clientY + maxMenuHeight > window.innerHeight) {
+        top = -maxMenuHeight + 27.0;
+      }
+
+      menuItemElement.forEachChild(function (node, j) {
+        if (j === 0) return;
+        node.dom.setAttribute("style", "top: ".concat(top + (j - 1) * 27.0, "px; left: ").concat(left, "px;"));
+      });
+    });
+  });
+};
+
+_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('contextmenu', ContextMenu);
+/* harmony default export */ __webpack_exports__["a"] = (ContextMenu);
+
+/***/ }),
+/* 16 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _helpers_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(30);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
+/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
+/* harmony import */ var _Panel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(13);
+/* harmony import */ var _NumericInput__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(12);
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(11);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function set(target, property, value, receiver) { if (typeof Reflect !== "undefined" && Reflect.set) { set = Reflect.set; } else { set = function set(target, property, value, receiver) { var base = _superPropBase(target, property); var desc; if (base) { desc = Object.getOwnPropertyDescriptor(base, property); if (desc.set) { desc.set.call(receiver, value); return true; } else if (!desc.writable) { return false; } } desc = Object.getOwnPropertyDescriptor(receiver, property); if (desc) { if (!desc.writable) { return false; } desc.value = value; Object.defineProperty(receiver, property, desc); } else { _defineProperty(receiver, property, value); } return true; }; } return set(target, property, value, receiver); }
+
+function _set(target, property, value, receiver, isStrict) { var s = set(target, property, value, receiver || target); if (!s && isStrict) { throw new Error('failed to set property'); } return value; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+
+
+var CLASS_ARRAY_INPUT = 'pcui-array-input';
+var CLASS_ARRAY_EMPTY = 'pcui-array-empty';
+var CLASS_ARRAY_SIZE = CLASS_ARRAY_INPUT + '-size';
+var CLASS_ARRAY_CONTAINER = CLASS_ARRAY_INPUT + '-items';
+var CLASS_ARRAY_ELEMENT = CLASS_ARRAY_INPUT + '-item';
+var CLASS_ARRAY_DELETE = CLASS_ARRAY_ELEMENT + '-delete';
+/**
+ * @event
+ * @name ArrayInput#linkElement
+ * @param {Element} element - The array element
+ * @param {number} index - The index of the array element
+ * @param {string} path - The path linked
+ * @description Fired when an array element is linked to observers
+ */
+
+/**
+ * @event
+ * @name ArrayInput#unlinkElement
+ * @param {Element} element - The array element
+ * @param {number} index - The index of the array element
+ * @description Fired when an array element is unlinked from observers
+ */
+
+/**
+ * @name ArrayInput
+ * @classdesc Element that allows editing an array of values.
+ * @property {boolean} renderChanges - If true the input will flash when changed.
+ * @augments Element
+ * @mixes IBindable
+ * @mixes IFocusable
+ */
+
+var ArrayInput = /*#__PURE__*/function (_Element) {
+  _inherits(ArrayInput, _Element);
+
+  var _super = _createSuper(ArrayInput);
+
+  /**
+   * Creates a new ArrayInput.
+   *
+   * @param {object} args - The arguments.
+   * @param {string} [args.type] - The type of values that the array can hold.
+   * @param {boolean} [args.fixedSize] - If true then editing the number of elements that the array has will not be allowed.
+   * @param {object} [args.elementArgs] - Arguments for each array Element.
+   */
+  function ArrayInput(args) {
+    var _this;
+
+    _classCallCheck(this, ArrayInput);
+
+    args = Object.assign({}, args); // remove binding because we want to set it later
+
+    var binding = args.binding;
+    delete args.binding;
+    var container = new _Container__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]({
+      dom: args.dom,
+      flex: true
+    });
+    _this = _super.call(this, container.dom, args);
+    _this._container = container;
+    _this._container.parent = _assertThisInitialized(_this);
+
+    _this.class.add(CLASS_ARRAY_INPUT, CLASS_ARRAY_EMPTY);
+
+    _this._usePanels = args.usePanels || false;
+    _this._fixedSize = !!args.fixedSize;
+    _this._inputSize = new _NumericInput__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"]({
+      class: [CLASS_ARRAY_SIZE],
+      placeholder: 'Array Size',
+      value: 0,
+      hideSlider: true,
+      step: 1,
+      precision: 0,
+      min: 0,
+      readOnly: _this._fixedSize
+    });
+
+    _this._inputSize.on('change', _this._onSizeChange.bind(_assertThisInitialized(_this)));
+
+    _this._inputSize.on('focus', _this._onFocus.bind(_assertThisInitialized(_this)));
+
+    _this._inputSize.on('blur', _this._onBlur.bind(_assertThisInitialized(_this)));
+
+    _this._suspendSizeChangeEvt = false;
+
+    _this._container.append(_this._inputSize);
+
+    _this._containerArray = new _Container__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]({
+      class: CLASS_ARRAY_CONTAINER,
+      hidden: true
+    });
+
+    _this._containerArray.on('append', function () {
+      _this._containerArray.hidden = false;
+    });
+
+    _this._containerArray.on('remove', function () {
+      _this._containerArray.hidden = _this._arrayElements.length == 0;
+    });
+
+    _this._container.append(_this._containerArray);
+
+    _this._suspendArrayElementEvts = false;
+    _this._arrayElementChangeTimeout = null;
+    _this._getDefaultFn = args.getDefaultFn || null;
+    var valueType = args.elementArgs && args.elementArgs.type || args.type;
+
+    if (!ArrayInput.DEFAULTS.hasOwnProperty(valueType)) {
+      valueType = 'string';
+    }
+
+    delete args.dom;
+    _this._valueType = valueType;
+    _this._elementType = args.type;
+    _this._elementArgs = args.elementArgs || args;
+    _this._arrayElements = []; // set binding now
+
+    _this.binding = binding;
+    _this._values = [];
+
+    if (args.value) {
+      _this.value = args.value;
+    }
+
+    _this.renderChanges = args.renderChanges || false;
+    return _this;
+  }
+
+  _createClass(ArrayInput, [{
+    key: "_onSizeChange",
+    value: function _onSizeChange(size) {
+      var _this2 = this;
+
+      // if size is explicitely 0 then add empty class
+      // size can also be null with multi-select so do not
+      // check just !size
+      if (size === 0) {
+        this.class.add(CLASS_ARRAY_EMPTY);
+      } else {
+        this.class.remove(CLASS_ARRAY_EMPTY);
+      }
+
+      if (size === null) return;
+      if (this._suspendSizeChangeEvt) return; // initialize default value for each new array element
+
+      var defaultValue;
+
+      var initDefaultValue = function initDefaultValue() {
+        if (_this2._getDefaultFn) {
+          defaultValue = _this2._getDefaultFn();
+        } else {
+          defaultValue = ArrayInput.DEFAULTS[_this2._valueType];
+
+          if (_this2._valueType === 'curveset') {
+            defaultValue = _helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].deepCopy(defaultValue);
+
+            if (Array.isArray(_this2._elementArgs.curves)) {
+              for (var i = 0; i < _this2._elementArgs.curves.length; i++) {
+                defaultValue.keys.push([0, 0]);
+              }
+            }
+          } else if (_this2._valueType === 'gradient') {
+            defaultValue = _helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].deepCopy(defaultValue);
+
+            if (_this2._elementArgs.channels) {
+              for (var _i = 0; _i < _this2._elementArgs.channels; _i++) {
+                defaultValue.keys.push([0, 1]);
+              }
+            }
+          }
+        }
+      }; // resize array
+
+
+      var values = this._values.map(function (array) {
+        if (!array) {
+          array = new Array(size);
+
+          for (var i = 0; i < size; i++) {
+            array[i] = _helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].deepCopy(ArrayInput.DEFAULTS[_this2._valueType]);
+            if (defaultValue === undefined) initDefaultValue();
+            array[i] = _helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].deepCopy(defaultValue);
+          }
+        } else if (array.length < size) {
+          var newArray = new Array(size - array.length);
+
+          for (var _i2 = 0; _i2 < newArray.length; _i2++) {
+            newArray[_i2] = _helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].deepCopy(ArrayInput.DEFAULTS[_this2._valueType]);
+            if (defaultValue === undefined) initDefaultValue();
+            newArray[_i2] = _helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].deepCopy(defaultValue);
+          }
+
+          array = array.concat(newArray);
+        } else {
+          var _newArray = new Array(size);
+
+          for (var _i3 = 0; _i3 < size; _i3++) {
+            _newArray[_i3] = _helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].deepCopy(array[_i3]);
+          }
+
+          array = _newArray;
+        }
+
+        return array;
+      });
+
+      if (!values.length) {
+        var array = new Array(size);
+
+        for (var i = 0; i < size; i++) {
+          array[i] = _helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].deepCopy(ArrayInput.DEFAULTS[this._valueType]);
+          if (defaultValue === undefined) initDefaultValue();
+          array[i] = _helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].deepCopy(defaultValue);
+        }
+
+        values.push(array);
+      }
+
+      this._updateValues(values, true);
+    }
+  }, {
+    key: "_onFocus",
+    value: function _onFocus() {
+      this.emit('focus');
+    }
+  }, {
+    key: "_onBlur",
+    value: function _onBlur() {
+      this.emit('blur');
+    }
+  }, {
+    key: "_createArrayElement",
+    value: function _createArrayElement() {
+      var _this3 = this;
+
+      var args = Object.assign({}, this._elementArgs);
+
+      if (args.binding) {
+        args.binding = args.binding.clone();
+      } else if (this._binding) {
+        args.binding = this._binding.clone();
+      } // set renderChanges after value is set
+      // to prevent flashing on initial value set
+
+
+      args.renderChanges = false;
+      var container;
+
+      if (this._usePanels) {
+        container = new _Panel__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"]({
+          headerText: "[".concat(this._arrayElements.length, "]"),
+          removable: !this._fixedSize,
+          collapsible: true,
+          class: [CLASS_ARRAY_ELEMENT, CLASS_ARRAY_ELEMENT + '-' + this._elementType]
+        });
+      } else {
+        container = new _Container__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]({
+          flex: true,
+          flexDirection: 'row',
+          alignItems: 'center',
+          class: [CLASS_ARRAY_ELEMENT, CLASS_ARRAY_ELEMENT + '-' + this._elementType]
+        });
+      }
+
+      if (this._elementType === 'json' && args.attributes) {
+        args.attributes = args.attributes.map(function (attr) {
+          if (!attr.path) return attr; // fix paths to include array element index
+
+          attr = Object.assign({}, attr);
+          var parts = attr.path.split('.');
+          parts.splice(parts.length - 1, 0, _this3._arrayElements.length);
+          attr.path = parts.join('.');
+          return attr;
+        });
+      }
+
+      var element = _Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].create(this._elementType, args);
+      container.append(element);
+      element.renderChanges = this.renderChanges;
+      var entry = {
+        container: container,
+        element: element
+      };
+
+      this._arrayElements.push(entry);
+
+      if (!this._usePanels) {
+        if (!this._fixedSize) {
+          var btnDelete = new _Button__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"]({
+            icon: 'E289',
+            size: 'small',
+            class: CLASS_ARRAY_DELETE,
+            tabIndex: -1 // skip buttons on tab
+
+          });
+          btnDelete.on('click', function () {
+            _this3._removeArrayElement(entry);
+          });
+          container.append(btnDelete);
+        }
+      } else {
+        container.on('click:remove', function () {
+          _this3._removeArrayElement(entry);
+        });
+      }
+
+      element.on('change', function (value) {
+        _this3._onArrayElementChange(entry, value);
+      });
+
+      this._containerArray.append(container);
+
+      return entry;
+    }
+  }, {
+    key: "_removeArrayElement",
+    value: function _removeArrayElement(entry) {
+      var index = this._arrayElements.indexOf(entry);
+
+      if (index === -1) return; // remove row from every array in values
+
+      var values = this._values.map(function (array) {
+        if (!array) return null;
+        array.splice(index, 1);
+        return array;
+      });
+
+      this._updateValues(values, true);
+    }
+  }, {
+    key: "_onArrayElementChange",
+    value: function _onArrayElementChange(entry, value) {
+      var _this4 = this;
+
+      if (this._suspendArrayElementEvts) return;
+
+      var index = this._arrayElements.indexOf(entry);
+
+      if (index === -1) return; // Set the value to the same row of every array in values.
+
+      this._values.forEach(function (array) {
+        if (array && array.length > index) {
+          array[index] = value;
+        }
+      }); // use a timeout here because when our values change they will
+      // first emit change events on each array element. However since the
+      // whole array changed we are going to fire a 'change' event later from
+      // our '_updateValues' function. We only want to emit a 'change' event
+      // here when only the array element changed value and not the whole array so
+      // wait a bit and fire the change event later otherwise the _updateValues function
+      // will cancel this timeout and fire a change event for the whole array instead
+
+
+      this._arrayElementChangeTimeout = setTimeout(function () {
+        _this4._arrayElementChangeTimeout = null;
+
+        _this4.emit('change', _this4.value);
+      });
+    }
+  }, {
+    key: "_linkArrayElement",
+    value: function _linkArrayElement(element, index) {
+      var observers = this._binding.observers;
+      var paths = this._binding.paths;
+      var useSinglePath = paths.length === 1 || observers.length !== paths.length;
+      element.unlink();
+      element.value = null;
+      this.emit('unlinkElement', element, index);
+      var path = useSinglePath ? paths[0] + ".".concat(index) : paths.map(function (path) {
+        return "".concat(path, ".").concat(index);
+      });
+      element.link(observers, path);
+      this.emit('linkElement', element, index, path);
+    }
+  }, {
+    key: "_updateValues",
+    value: function _updateValues(values, applyToBinding) {
+      this._values = values || [];
+      this._suspendArrayElementEvts = true;
+      this._suspendSizeChangeEvt = true; // apply values to the binding
+
+      if (applyToBinding && this._binding) {
+        this._binding.setValues(values);
+      } // each row of this array holds
+      // all the values for that row
+
+
+      var valuesPerRow = []; // holds the length of each array
+
+      var arrayLengths = [];
+      values.forEach(function (array) {
+        if (!array) return;
+        arrayLengths.push(array.length);
+        array.forEach(function (item, i) {
+          if (!valuesPerRow[i]) {
+            valuesPerRow[i] = [];
+          }
+
+          valuesPerRow[i].push(item);
+        });
+      });
+      var lastElementIndex = -1;
+
+      for (var i = 0; i < valuesPerRow.length; i++) {
+        // if the number of values on this row does not match
+        // the number of arrays then stop adding rows
+        if (valuesPerRow[i].length !== values.length) {
+          break;
+        } // create row if it doesn't exist
+
+
+        if (!this._arrayElements[i]) {
+          this._createArrayElement();
+        } // bind to observers for that row or just display the values
+
+
+        if (this._binding && this._binding.observers) {
+          this._linkArrayElement(this._arrayElements[i].element, i);
+        } else {
+          if (valuesPerRow[i].length > 1) {
+            this._arrayElements[i].element.values = valuesPerRow[i];
+          } else {
+            this._arrayElements[i].element.value = valuesPerRow[i][0];
+          }
+        }
+
+        lastElementIndex = i;
+      } // destory elements that are no longer in our values
+
+
+      for (var _i4 = this._arrayElements.length - 1; _i4 > lastElementIndex; _i4--) {
+        this._arrayElements[_i4].container.destroy();
+
+        this._arrayElements.splice(_i4, 1);
+      }
+
+      this._inputSize.values = arrayLengths;
+      this._suspendSizeChangeEvt = false;
+      this._suspendArrayElementEvts = false;
+
+      if (this._arrayElementChangeTimeout) {
+        clearTimeout(this._arrayElementChangeTimeout);
+        this._arrayElementChangeTimeout = null;
+      }
+
+      this.emit('change', this.value);
+    }
+  }, {
+    key: "focus",
+    value: function focus() {
+      this._inputSize.focus();
+    }
+  }, {
+    key: "blur",
+    value: function blur() {
+      this._inputSize.blur();
+    }
+    /**
+     * @name ArrayInput#forEachArrayElement
+     * @description Executes the specified function for each array element.
+     * @param {Function} fn - The function with signature (element, index) => bool to execute. If the function returns
+     * false then the iteration will early out.
+     */
+
+  }, {
+    key: "forEachArrayElement",
+    value: function forEachArrayElement(fn) {
+      this._containerArray.forEachChild(function (container, i) {
+        return fn(container.dom.firstChild.ui, i);
+      });
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      if (this._destroyed) return;
+      this._arrayElements.length = 0;
+
+      _get(_getPrototypeOf(ArrayInput.prototype), "destroy", this).call(this);
+    }
+  }, {
+    key: "binding",
+    get: function get() {
+      return _get(_getPrototypeOf(ArrayInput.prototype), "binding", this);
+    } // override binding setter to create
+    // the same type of binding on each array element too
+    ,
+    set: function set(value) {
+      _set(_getPrototypeOf(ArrayInput.prototype), "binding", value, this, true);
+
+      this._arrayElements.forEach(function (entry) {
+        entry.element.binding = value ? value.clone() : null;
+      });
+    }
+  }, {
+    key: "value",
+    get: function get() {
+      // construct value from values of array elements
+      return this._arrayElements.map(function (entry) {
+        return entry.element.value;
+      });
+    },
+    set: function set(value) {
+      if (!Array.isArray(value)) {
+        value = [null];
+      }
+
+      var current = this.value || [];
+      if (_helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].arrayEquals(current, value)) return; // update values and binding
+
+      this._updateValues(new Array(this._values.length || 1).fill(value), true);
+    }
+    /* eslint accessor-pairs: 0 */
+
+  }, {
+    key: "values",
+    set: function set(values) {
+      if (_helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].arrayEquals(this._values, values)) return; // update values but do not update binding
+
+      this._updateValues(values, false);
+    }
+  }, {
+    key: "renderChanges",
+    get: function get() {
+      return this._renderChanges;
+    },
+    set: function set(value) {
+      this._renderChanges = value;
+
+      this._arrayElements.forEach(function (entry) {
+        entry.element.renderChanges = value;
+      });
+    }
+  }]);
+
+  return ArrayInput;
+}(_Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]);
+
+ArrayInput.DEFAULTS = {
+  boolean: false,
+  number: 0,
+  string: '',
+  vec2: [0, 0],
+  vec3: [0, 0, 0],
+  vec4: [0, 0, 0, 0]
+};
+
+for (var type in ArrayInput.DEFAULTS) {
+  _Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].register("array:".concat(type), ArrayInput, {
+    type: type,
+    renderChanges: true
+  });
+}
+
+_Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].register('array:select', ArrayInput, {
+  type: 'select',
+  renderChanges: true
+});
+/* harmony default export */ __webpack_exports__["a"] = (ArrayInput);
+
+/***/ }),
+/* 17 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(47);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _toggle_style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(49);
+/* harmony import */ var _toggle_style_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_toggle_style_scss__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
+/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(0);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var CLASS_BOOLEAN_INPUT = 'pcui-boolean-input';
+var CLASS_BOOLEAN_INPUT_TICKED = CLASS_BOOLEAN_INPUT + '-ticked';
+var CLASS_BOOLEAN_INPUT_TOGGLE = CLASS_BOOLEAN_INPUT + '-toggle';
+/**
+ * @name BooleanInput
+ * @classdesc A checkbox element.
+ * @property {boolean} renderChanges If true the input will flash when changed.
+ * @augments Element
+ * @mixes IBindable
+ * @mixes IFocusable
+ */
+
+var BooleanInput = /*#__PURE__*/function (_Element) {
+  _inherits(BooleanInput, _Element);
+
+  var _super = _createSuper(BooleanInput);
+
+  /**
+   * Creates a new pcui.BooleanInput.
+   *
+   * @param {object} args - The arguments.
+   * @param {string} [args.type] - The type of checkbox currently can be null or 'toggle'.
+   */
+  function BooleanInput(args) {
+    var _this;
+
+    _classCallCheck(this, BooleanInput);
+
+    args = Object.assign({
+      tabIndex: 0
+    }, args);
+    _this = _super.call(this, args.dom ? args.dom : document.createElement('div'), args);
+
+    if (args.type === 'toggle') {
+      _this.class.add(CLASS_BOOLEAN_INPUT_TOGGLE);
+    } else {
+      _this.class.add(CLASS_BOOLEAN_INPUT);
+    }
+
+    _this.class.add(_class__WEBPACK_IMPORTED_MODULE_3__[/* NOT_FLEXIBLE */ "n"]);
+
+    _this._domEventKeyDown = _this._onKeyDown.bind(_assertThisInitialized(_this));
+    _this._domEventFocus = _this._onFocus.bind(_assertThisInitialized(_this));
+    _this._domEventBlur = _this._onBlur.bind(_assertThisInitialized(_this));
+
+    _this.dom.addEventListener('keydown', _this._domEventKeyDown);
+
+    _this.dom.addEventListener('focus', _this._domEventFocus);
+
+    _this.dom.addEventListener('blur', _this._domEventBlur);
+
+    _this._value = null;
+
+    if (args.value !== undefined) {
+      _this.value = args.value;
+    }
+
+    _this.renderChanges = args.renderChanges;
+    return _this;
+  }
+
+  _createClass(BooleanInput, [{
+    key: "_onClick",
+    value: function _onClick(evt) {
+      if (this.enabled) {
+        this.focus();
+      }
+
+      if (this.enabled && !this.readOnly) {
+        this.value = !this.value;
+      }
+
+      return _get(_getPrototypeOf(BooleanInput.prototype), "_onClick", this).call(this, evt);
+    }
+  }, {
+    key: "_onKeyDown",
+    value: function _onKeyDown(evt) {
+      if (evt.keyCode === 27) {
+        this.blur();
+        return;
+      }
+
+      if (!this.enabled || this.readOnly) return;
+
+      if (evt.keyCode === 32) {
+        evt.stopPropagation();
+        evt.preventDefault();
+        this.value = !this.value;
+      }
+    }
+  }, {
+    key: "_onFocus",
+    value: function _onFocus() {
+      this.emit('focus');
+    }
+  }, {
+    key: "_onBlur",
+    value: function _onBlur() {
+      this.emit('blur');
+    }
+  }, {
+    key: "_updateValue",
+    value: function _updateValue(value) {
+      this.class.remove(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
+      if (value === this.value) return false;
+      this._value = value;
+
+      if (value) {
+        this.class.add(CLASS_BOOLEAN_INPUT_TICKED);
+      } else {
+        this.class.remove(CLASS_BOOLEAN_INPUT_TICKED);
+      }
+
+      if (this.renderChanges) {
+        this.flash();
+      }
+
+      this.emit('change', value);
+      return true;
+    }
+  }, {
+    key: "focus",
+    value: function focus() {
+      this.dom.focus();
+    }
+  }, {
+    key: "blur",
+    value: function blur() {
+      this.dom.blur();
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      if (this._destroyed) return;
+      this.dom.removeEventListener('keydown', this._domEventKeyDown);
+      this.dom.removeEventListener('focus', this._domEventFocus);
+      this.dom.removeEventListener('blur', this._domEventBlur);
+
+      _get(_getPrototypeOf(BooleanInput.prototype), "destroy", this).call(this);
+    }
+  }, {
+    key: "value",
+    get: function get() {
+      return this._value;
+    },
+    set: function set(value) {
+      var changed = this._updateValue(value);
+
+      if (changed && this._binding) {
+        this._binding.setValue(value);
+      }
+    }
+    /* eslint accessor-pairs: 0 */
+
+  }, {
+    key: "values",
+    set: function set(values) {
+      var different = false;
+      var value = values[0];
+
+      for (var i = 1; i < values.length; i++) {
+        if (values[i] !== value) {
+          different = true;
+          break;
+        }
+      }
+
+      if (different) {
+        this._updateValue(null);
+
+        this.class.add(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
+      } else {
+        this._updateValue(values[0]);
+      }
+    }
+  }]);
+
+  return BooleanInput;
+}(_Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]);
+
+_Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].register('boolean', BooleanInput, {
+  renderChanges: true
+});
+/* harmony default export */ __webpack_exports__["a"] = (BooleanInput);
+
+/***/ }),
+/* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(51);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var CLASS_ROOT = 'pcui-code';
+var CLASS_INNER = CLASS_ROOT + '-inner';
+/**
+ * @name Code
+ * @augments Container
+ * @property {string} text The Text to display in the code block
+ * @classdesc Represents a code block.
+ */
+
+var Code = /*#__PURE__*/function (_Container) {
+  _inherits(Code, _Container);
+
+  var _super = _createSuper(Code);
+
+  /**
+   * Creates a new spinner.
+   *
+   * @param {object} [args] - The arguments
+   * @param {string} [args.text] - The text to display in the code block;
+   */
+  function Code(args) {
+    var _this;
+
+    _classCallCheck(this, Code);
+
+    if (!args) args = {};
+    _this = _super.call(this, args);
+
+    _this.class.add(CLASS_ROOT);
+
+    _this._inner = new _Label__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]();
+
+    _this.append(_this._inner);
+
+    _this._inner.class.add(CLASS_INNER);
+
+    if (args.text) {
+      _this.text = args.text;
+    }
+
+    return _this;
+  }
+
+  _createClass(Code, [{
+    key: "text",
+    set: function set(value) {
+      this._text = value;
+      this._inner.text = value;
+    },
+    get: function get() {
+      return this._text;
+    }
+  }]);
+
+  return Code;
+}(_Container__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]);
+
+_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('code', Code);
+/* harmony default export */ __webpack_exports__["a"] = (Code);
+
+/***/ }),
+/* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(55);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var CLASS_ROOT = 'pcui-divider';
+/**
+ * @name Divider
+ * @augments Element
+ * @classdesc Represents a vertical division between two elements
+ */
+
+var Divider = /*#__PURE__*/function (_Element) {
+  _inherits(Divider, _Element);
+
+  var _super = _createSuper(Divider);
+
+  function Divider(args) {
+    var _this;
+
+    _classCallCheck(this, Divider);
+
+    if (!args) args = {};
+    _this = _super.call(this, args.dom ? args.dom : document.createElement('div'), args);
+
+    _this.class.add(CLASS_ROOT);
+
+    return _this;
+  }
+
+  return Divider;
+}(_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
+
+_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('divider', Divider);
+/* harmony default export */ __webpack_exports__["a"] = (Divider);
+
+/***/ }),
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(57);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var CLASS_INFOBOX = 'pcui-infobox';
+/**
+ * @name InfoBox
+ * @classdesc Represents an information box.
+ * @augments Container
+ * @property {string} icon The CSS code for an icon for the info box. e.g. E401 (notice we omit the '\' character).
+ * @property {string} title Gets / sets the 'title' of the info box
+ * @property {string} text Gets / sets the 'text' of the info box
+ */
+
+var InfoBox = /*#__PURE__*/function (_Container) {
+  _inherits(InfoBox, _Container);
+
+  var _super = _createSuper(InfoBox);
+
+  /**
+   * Creates a new InfoBox.
+   *
+   * @param {object} args - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
+   * @param {boolean} [args.unsafe] - If true then the innerHTML property will be used to set the title/text. Otherwise textContent will be used instead.
+   */
+  function InfoBox(args) {
+    var _this;
+
+    _classCallCheck(this, InfoBox);
+
+    if (!args) args = {};
+    _this = _super.call(this, args);
+
+    _this.class.add(CLASS_INFOBOX);
+
+    _this._titleElement = new _Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]();
+    _this._textElement = new _Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]();
+
+    _this.append(_this._titleElement);
+
+    _this.append(_this._textElement);
+
+    _this._unsafe = args.unsafe || false;
+    _this.icon = args.icon || '';
+    _this.title = args.title || '';
+    _this.text = args.text || '';
+    return _this;
+  }
+
+  _createClass(InfoBox, [{
+    key: "icon",
+    get: function get() {
+      return this._icon;
+    },
+    set: function set(value) {
+      if (this._icon === value) return;
+      this._icon = value;
+
+      if (value) {
+        // set data-icon attribute but first convert the value to a code point
+        this.dom.setAttribute('data-icon', String.fromCodePoint(parseInt(value, 16)));
+      } else {
+        this.dom.removeAttribute('data-icon');
+      }
+    }
+  }, {
+    key: "title",
+    get: function get() {
+      return this._title;
+    },
+    set: function set(value) {
+      if (this._title === value) return;
+      this._title = value;
+
+      if (this._unsafe) {
+        this._titleElement.dom.innerHTML = value;
+      } else {
+        this._titleElement.dom.textContent = value;
+      }
+    }
+  }, {
+    key: "text",
+    get: function get() {
+      return this._text;
+    },
+    set: function set(value) {
+      if (this._text === value) return;
+      this._text = value;
+
+      if (this._unsafe) {
+        this._textElement.dom.innerHTML = value;
+      } else {
+        this._textElement.dom.textContent = value;
+      }
+    }
+  }]);
+
+  return InfoBox;
+}(_Container__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
+
+_Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].register('infobox', InfoBox);
+/* harmony default export */ __webpack_exports__["a"] = (InfoBox);
+
+/***/ }),
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(59);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var CLASS_OVERLAY = 'pcui-overlay';
+var CLASS_OVERLAY_INNER = CLASS_OVERLAY + '-inner';
+var CLASS_OVERLAY_CLICKABLE = CLASS_OVERLAY + '-clickable';
+var CLASS_OVERLAY_TRANSPARENT = CLASS_OVERLAY + '-transparent';
+var CLASS_OVERLAY_CONTENT = CLASS_OVERLAY + '-content';
+/**
+ * @name Overlay
+ * @classdesc An overlay element.
+ * @property {boolean} clickable Whether the overlay can be hidden by clicking on it.
+ * @property {boolean} transparent Whether the overlay is transparent.
+ * @augments Container
+ */
+
+var Overlay = /*#__PURE__*/function (_Container) {
+  _inherits(Overlay, _Container);
+
+  var _super = _createSuper(Overlay);
+
+  /**
+   * Creates a new pcui.Overlay.
+   *
+   * @param {object} args - The arguments.
+   */
+  function Overlay(args) {
+    var _this;
+
+    _classCallCheck(this, Overlay);
+
+    if (!args) args = {};
+    _this = _super.call(this, args);
+
+    _this.class.add(CLASS_OVERLAY);
+
+    _this._domClickableOverlay = document.createElement('div');
+    _this._domClickableOverlay.ui = _assertThisInitialized(_this);
+    _this._domClickableOverlay.classList = CLASS_OVERLAY_INNER;
+
+    _this.dom.appendChild(_this._domClickableOverlay);
+
+    _this._domEventMouseDown = _this._onMouseDown.bind(_assertThisInitialized(_this));
+
+    _this._domClickableOverlay.addEventListener('mousedown', _this._domEventMouseDown);
+
+    _this.domContent = document.createElement('div');
+    _this.domContent.ui = _assertThisInitialized(_this);
+
+    _this.domContent.classList.add(CLASS_OVERLAY_CONTENT);
+
+    _this.dom.appendChild(_this.domContent);
+
+    _this.clickable = args.clickable || false;
+    _this.transparent = args.transparent || false;
+    return _this;
+  }
+
+  _createClass(Overlay, [{
+    key: "_onMouseDown",
+    value: function _onMouseDown(evt) {
+      var _this2 = this;
+
+      if (!this.clickable) return; // some field might be in focus
+
+      document.body.blur(); // wait till blur is done
+
+      requestAnimationFrame(function () {
+        _this2.hidden = true;
+      });
+      evt.preventDefault();
+    }
+    /**
+     * @name Overlay#position
+     * @description Position the overlay at specific x, y coordinates.
+     * @param {number} x - The x coordinate
+     * @param {number} y - The y coordinate
+     */
+
+  }, {
+    key: "position",
+    value: function position(x, y) {
+      var area = this._domClickableOverlay.getBoundingClientRect();
+
+      var rect = this.domContent.getBoundingClientRect();
+      x = Math.max(0, Math.min(area.width - rect.width, x));
+      y = Math.max(0, Math.min(area.height - rect.height, y));
+      this.domContent.style.position = 'absolute';
+      this.domContent.style.left = "".concat(x, "px");
+      this.domContent.style.top = "".concat(y, "px");
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      if (this._destroyed) return;
+
+      this._domClickableOverlay.removeEventListener('mousedown', this._domEventMouseDown);
+
+      _get(_getPrototypeOf(Overlay.prototype), "destroy", this).call(this);
+    }
+  }, {
+    key: "clickable",
+    get: function get() {
+      return this.class.contains(CLASS_OVERLAY_CLICKABLE);
+    },
+    set: function set(value) {
+      if (value) {
+        this.class.add(CLASS_OVERLAY_CLICKABLE);
+      } else {
+        this.class.remove(CLASS_OVERLAY_CLICKABLE);
+      }
+    }
+  }, {
+    key: "transparent",
+    get: function get() {
+      return this.class.contains(CLASS_OVERLAY_TRANSPARENT);
+    },
+    set: function set(value) {
+      if (value) {
+        this.class.add(CLASS_OVERLAY_TRANSPARENT);
+      } else {
+        this.class.remove(CLASS_OVERLAY_TRANSPARENT);
+      }
+    }
+  }]);
+
+  return Overlay;
+}(_Container__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]);
+
+_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('overlay', Overlay);
+/* harmony default export */ __webpack_exports__["a"] = (Overlay);
+
+/***/ }),
+/* 22 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(61);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var CLASS_ROOT = 'pcui-progress';
+var CLASS_INNER = CLASS_ROOT + '-inner';
+/**
+ * @name Progress
+ * @classdesc Represents a bar that can highlight progress of an activity.
+ * @augments Container
+ * @property {number} value Gets / sets the value of the progress bar (between 0 and 100).
+ */
+
+var Progress = /*#__PURE__*/function (_Container) {
+  _inherits(Progress, _Container);
+
+  var _super = _createSuper(Progress);
+
+  function Progress(args) {
+    var _this;
+
+    _classCallCheck(this, Progress);
+
+    if (!args) args = {};
+    _this = _super.call(this, args);
+
+    _this.class.add(CLASS_ROOT);
+
+    _this._inner = new _Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]();
+
+    _this.append(_this._inner);
+
+    _this._inner.class.add(CLASS_INNER);
+
+    if (args.value !== undefined) {
+      _this.value = args.value;
+    }
+
+    return _this;
+  }
+
+  _createClass(Progress, [{
+    key: "value",
+    set: function set(val) {
+      if (this._value === val) return;
+      this._value = val;
+      this._inner.width = "".concat(this._value, "%");
+      this.emit('change', val);
+    },
+    get: function get() {
+      return this._value;
+    }
+  }]);
+
+  return Progress;
+}(_Container__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]);
+
+_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('progress', Progress);
+/* harmony default export */ __webpack_exports__["a"] = (Progress);
+
+/***/ }),
+/* 23 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
+/* harmony import */ var _TextInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9);
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(11);
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5);
+/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(0);
+/* harmony import */ var _helpers_search__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(14);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3545,7 +6609,7 @@ var DEFAULT_BOTTOM_OFFSET = 25;
  * @mixes IFocusable
  */
 
-var SelectInput_SelectInput = /*#__PURE__*/function (_Element) {
+var SelectInput = /*#__PURE__*/function (_Element) {
   _inherits(SelectInput, _Element);
 
   var _super = _createSuper(SelectInput);
@@ -3568,7 +6632,7 @@ var SelectInput_SelectInput = /*#__PURE__*/function (_Element) {
 
     if (!args) args = {}; // main container
 
-    var container = new Container["a" /* default */]({
+    var container = new _Container__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]({
       dom: args.dom
     });
     _this = _super.call(this, container.dom, args);
@@ -3577,7 +6641,7 @@ var SelectInput_SelectInput = /*#__PURE__*/function (_Element) {
 
     _this.class.add(CLASS_SELECT_INPUT);
 
-    _this._containerValue = new Container["a" /* default */]({
+    _this._containerValue = new _Container__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]({
       class: CLASS_SELECT_INPUT_CONTAINER_VALUE
     });
 
@@ -3600,7 +6664,7 @@ var SelectInput_SelectInput = /*#__PURE__*/function (_Element) {
     _this._createFn = args.createFn;
     _this._createLabelText = args.createLabelText || null; // displays current value
 
-    _this._labelValue = new Label["a" /* default */]({
+    _this._labelValue = new _Label__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"]({
       class: CLASS_VALUE,
       tabIndex: 0
     });
@@ -3611,7 +6675,7 @@ var SelectInput_SelectInput = /*#__PURE__*/function (_Element) {
 
     _this._timeoutLabelValueTabIndex = null; // dropdown icon
 
-    _this._labelIcon = new Label["a" /* default */]({
+    _this._labelIcon = new _Label__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"]({
       class: CLASS_ICON,
       hidden: args.allowInput && args.multiSelect
     });
@@ -3619,7 +6683,7 @@ var SelectInput_SelectInput = /*#__PURE__*/function (_Element) {
     _this._containerValue.append(_this._labelIcon); // input for searching or adding new entries
 
 
-    _this._input = new TextInput["a" /* default */]({
+    _this._input = new _TextInput__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]({
       class: CLASS_INPUT,
       blurOnEnter: false,
       keyChange: true
@@ -3643,7 +6707,7 @@ var SelectInput_SelectInput = /*#__PURE__*/function (_Element) {
     } // dropdown list
 
 
-    _this._containerOptions = new Container["a" /* default */]({
+    _this._containerOptions = new _Container__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]({
       class: CLASS_LIST,
       hidden: true
     });
@@ -3651,7 +6715,7 @@ var SelectInput_SelectInput = /*#__PURE__*/function (_Element) {
     _this._containerValue.append(_this._containerOptions); // tags container
 
 
-    _this._containerTags = new Container["a" /* default */]({
+    _this._containerTags = new _Container__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]({
       class: CLASS_TAGS,
       flex: true,
       flexDirection: 'row',
@@ -3726,12 +6790,12 @@ var SelectInput_SelectInput = /*#__PURE__*/function (_Element) {
     value: function _initializeCreateLabel() {
       var _this2 = this;
 
-      var container = new Container["a" /* default */]({
+      var container = new _Container__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]({
         class: CLASS_CREATE_NEW,
         flex: true,
         flexDirection: 'row'
       });
-      var label = new Label["a" /* default */]({
+      var label = new _Label__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"]({
         text: this._input.value,
         tabIndex: -1
       });
@@ -3776,7 +6840,7 @@ var SelectInput_SelectInput = /*#__PURE__*/function (_Element) {
         evtChange.unbind();
         evtChange = null;
       });
-      var labelCreateText = new Label["a" /* default */]({
+      var labelCreateText = new _Label__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"]({
         text: this._createLabelText
       });
       container.append(labelCreateText);
@@ -3990,15 +7054,15 @@ var SelectInput_SelectInput = /*#__PURE__*/function (_Element) {
     value: function _addTag(value) {
       var _this6 = this;
 
-      var container = new Container["a" /* default */]({
+      var container = new _Container__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]({
         flex: true,
         flexDirection: 'row',
         class: CLASS_TAG
       });
-      container.append(new Label["a" /* default */]({
+      container.append(new _Label__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"]({
         text: this._optionsIndex[value] || value
       }));
-      var btnRemove = new Button["a" /* default */]({
+      var btnRemove = new _Button__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"]({
         size: 'small',
         icon: 'E132',
         tabIndex: -1
@@ -4072,7 +7136,7 @@ var SelectInput_SelectInput = /*#__PURE__*/function (_Element) {
         var searchOptions = this.options.map(function (option) {
           return [option.t, option.v];
         });
-        var searchResults = searchItems(searchOptions, filter);
+        var searchResults = Object(_helpers_search__WEBPACK_IMPORTED_MODULE_7__[/* searchItems */ "a"])(searchOptions, filter);
         searchResults.forEach(function (result) {
           searchIndex[result] = true;
         });
@@ -4229,7 +7293,7 @@ var SelectInput_SelectInput = /*#__PURE__*/function (_Element) {
   }, {
     key: "_onFocus",
     value: function _onFocus() {
-      this.class.add(src_class["h" /* FOCUS */]);
+      this.class.add(_class__WEBPACK_IMPORTED_MODULE_6__[/* FOCUS */ "h"]);
       this.emit('focus');
 
       if (!this._input.hidden) {
@@ -4239,7 +7303,7 @@ var SelectInput_SelectInput = /*#__PURE__*/function (_Element) {
   }, {
     key: "_onBlur",
     value: function _onBlur() {
-      this.class.remove(src_class["h" /* FOCUS */]);
+      this.class.remove(_class__WEBPACK_IMPORTED_MODULE_6__[/* FOCUS */ "h"]);
       this.emit('blur');
     }
   }, {
@@ -4462,7 +7526,7 @@ var SelectInput_SelectInput = /*#__PURE__*/function (_Element) {
       this._options.forEach(function (option) {
         _this10._optionsIndex[option.v] = option.t;
         if (option.v === '') return;
-        var label = new Label["a" /* default */]({
+        var label = new _Label__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"]({
           text: option.t,
           tabIndex: -1
         });
@@ -4531,14 +7595,14 @@ var SelectInput_SelectInput = /*#__PURE__*/function (_Element) {
       this._input.value = '';
       this._lastInputValue = '';
       this._suspendInputChange = false;
-      this.class.remove(src_class["k" /* MULTIPLE_VALUES */]);
+      this.class.remove(_class__WEBPACK_IMPORTED_MODULE_6__[/* MULTIPLE_VALUES */ "m"]);
       value = this._convertValue(value);
 
       if (this._value === value || this.multiSelect && this._value && this._value.equals(value)) {
         // if the value is null because we are showing multiple values
         // but someone wants to actually set the value of all observers to null
         // then make sure we do not return early
-        if (value !== null || !this._allowNull || !this.class.contains(src_class["k" /* MULTIPLE_VALUES */])) {
+        if (value !== null || !this._allowNull || !this.class.contains(_class__WEBPACK_IMPORTED_MODULE_6__[/* MULTIPLE_VALUES */ "m"])) {
           return;
         }
       }
@@ -4588,7 +7652,7 @@ var SelectInput_SelectInput = /*#__PURE__*/function (_Element) {
           }
         }
 
-        this.class.add(src_class["k" /* MULTIPLE_VALUES */]);
+        this.class.add(_class__WEBPACK_IMPORTED_MODULE_6__[/* MULTIPLE_VALUES */ "m"]);
       } else {
         this.value = values[0];
       }
@@ -4604,32 +7668,703 @@ var SelectInput_SelectInput = /*#__PURE__*/function (_Element) {
   }]);
 
   return SelectInput;
-}(Element["a" /* default */]);
+}(_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
 
-
-/* harmony default export */ var components_SelectInput = __webpack_exports__["a"] = (SelectInput_SelectInput);
+_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('select', SelectInput, {
+  renderChanges: true
+});
+_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('multiselect', SelectInput, {
+  multiSelect: true,
+  renderChanges: true
+});
+_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('tags', SelectInput, {
+  allowInput: true,
+  allowCreate: true,
+  multiSelect: true,
+  renderChanges: true
+});
+/* harmony default export */ __webpack_exports__["a"] = (SelectInput);
 
 /***/ }),
-/* 11 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(65);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+/* harmony import */ var _NumericInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(12);
+/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(0);
+/* harmony import */ var _helpers_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-// UNUSED EXPORTS: BooleanInput
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-// CONCATENATED MODULE: ./src/components/BooleanInput/style.scss
-// extracted by mini-css-extract-plugin
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-// CONCATENATED MODULE: ./src/components/BooleanInput/toggle-style.scss
-// extracted by mini-css-extract-plugin
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
-var Element = __webpack_require__(1);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// EXTERNAL MODULE: ./src/class.js
-var src_class = __webpack_require__(0);
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-// CONCATENATED MODULE: ./src/components/BooleanInput/index.js
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+var CLASS_SLIDER = 'pcui-slider';
+var CLASS_SLIDER_CONTAINER = CLASS_SLIDER + '-container';
+var CLASS_SLIDER_BAR = CLASS_SLIDER + '-bar';
+var CLASS_SLIDER_HANDLE = CLASS_SLIDER + '-handle';
+var CLASS_SLIDER_ACTIVE = CLASS_SLIDER + '-active';
+var IS_CHROME = /Chrome\//.test(navigator.userAgent); // fields that are proxied between the slider and the numeric input
+
+var PROXY_FIELDS = ['allowNull', 'max', 'min', 'keyChange', 'placeholder', 'precision', 'renderChanges', 'step'];
+/**
+ * @name SliderInput
+ * @classdesc The SliderInput shows a pcui.NumericInput and a slider widget next to it. It acts as a proxy
+ * of the NumericInput.
+ * @property {number} min Gets / sets the minimum value that the numeric input field can take.
+ * @property {number} max Gets / sets the maximum value that the numeric input field can take.
+ * @property {number} sliderMin Gets / sets the minimum value that the slider field can take.
+ * @property {number} sliderMax Gets / sets the maximum value that the slider field can take.
+ * @property {number} pre Gets / sets the maximum number of decimals a value can take.
+ * @property {number} step Gets / sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
+ * @property {boolean} allowNull Gets / sets whether the value can be null. If not then it will be 0 instead of null.
+ * @augments Element
+ * @mixes IBindable
+ * @mixes IFocusable
+ */
+
+var SliderInput = /*#__PURE__*/function (_Element) {
+  _inherits(SliderInput, _Element);
+
+  var _super = _createSuper(SliderInput);
+
+  /**
+   * Creates a new SliderInput.
+   *
+   * @param {object} args - The arguments. Extends the pcui.NumericInput constructor arguments.
+   */
+  function SliderInput(args) {
+    var _this;
+
+    _classCallCheck(this, SliderInput);
+
+    args = Object.assign({}, args);
+    var inputArgs = {};
+    PROXY_FIELDS.forEach(function (field) {
+      inputArgs[field] = args[field];
+    });
+
+    if (inputArgs.precision === undefined) {
+      inputArgs.precision = 2;
+    } // binding should only go to the slider
+    // and the slider will propagate changes to the numeric input
+
+
+    delete inputArgs.binding;
+    _this = _super.call(this, args.dom ? args.dom : document.createElement('div'), args);
+    if (args.pre) _this.precision = args.pre;
+
+    _this.class.add(CLASS_SLIDER);
+
+    _this._historyCombine = false;
+    _this._historyPostfix = null;
+    _this._numericInput = new _NumericInput__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"](_objectSpread(_objectSpread({}, inputArgs), {}, {
+      hideSlider: true
+    })); // propagate change event
+
+    _this._numericInput.on('change', _this._onValueChange.bind(_assertThisInitialized(_this))); // propagate focus / blur events
+
+
+    _this._numericInput.on('focus', function () {
+      _this.emit('focus');
+    });
+
+    _this._numericInput.on('blur', function () {
+      _this.emit('blur');
+    });
+
+    _this._sliderMin = args.sliderMin !== undefined ? args.sliderMin : _this.min || 0;
+    _this._sliderMax = args.sliderMax !== undefined ? args.sliderMax : _this.max || 1;
+
+    _this.dom.appendChild(_this._numericInput.dom);
+
+    _this._numericInput.parent = _assertThisInitialized(_this);
+    _this._domSlider = document.createElement('div');
+
+    _this._domSlider.classList.add(CLASS_SLIDER_CONTAINER);
+
+    _this.dom.appendChild(_this._domSlider);
+
+    _this._domBar = document.createElement('div');
+
+    _this._domBar.classList.add(CLASS_SLIDER_BAR);
+
+    _this._domBar.ui = _assertThisInitialized(_this);
+
+    _this._domSlider.appendChild(_this._domBar);
+
+    _this._domHandle = document.createElement('div');
+    _this._domHandle.ui = _assertThisInitialized(_this);
+    _this._domHandle.tabIndex = 0;
+
+    _this._domHandle.classList.add(CLASS_SLIDER_HANDLE);
+
+    _this._domBar.appendChild(_this._domHandle);
+
+    _this._cursorHandleOffset = 0;
+    _this._domMouseDown = _this._onMouseDown.bind(_assertThisInitialized(_this));
+    _this._domMouseMove = _this._onMouseMove.bind(_assertThisInitialized(_this));
+    _this._domMouseUp = _this._onMouseUp.bind(_assertThisInitialized(_this));
+    _this._domTouchStart = _this._onTouchStart.bind(_assertThisInitialized(_this));
+    _this._domTouchMove = _this._onTouchMove.bind(_assertThisInitialized(_this));
+    _this._domTouchEnd = _this._onTouchEnd.bind(_assertThisInitialized(_this));
+    _this._domKeyDown = _this._onKeyDown.bind(_assertThisInitialized(_this));
+    _this._touchId = null;
+
+    _this._domSlider.addEventListener('mousedown', _this._domMouseDown);
+
+    _this._domSlider.addEventListener('touchstart', _this._domTouchStart, {
+      passive: true
+    });
+
+    _this._domHandle.addEventListener('keydown', _this._domKeyDown);
+
+    if (args.value !== undefined) {
+      _this.value = args.value;
+    } // update the handle in case a 0 value has been
+    // passed through the constructor
+
+
+    if (_this.value === 0) {
+      _this._updateHandle(0);
+    }
+
+    return _this;
+  }
+
+  _createClass(SliderInput, [{
+    key: "_onMouseDown",
+    value: function _onMouseDown(evt) {
+      if (evt.button !== 0 || !this.enabled || this.readOnly) return;
+
+      this._onSlideStart(evt.pageX);
+    }
+  }, {
+    key: "_onMouseMove",
+    value: function _onMouseMove(evt) {
+      evt.stopPropagation();
+      evt.preventDefault();
+
+      this._onSlideMove(evt.pageX);
+    }
+  }, {
+    key: "_onMouseUp",
+    value: function _onMouseUp(evt) {
+      evt.stopPropagation();
+      evt.preventDefault();
+
+      this._onSlideEnd(evt.pageX);
+    }
+  }, {
+    key: "_onTouchStart",
+    value: function _onTouchStart(evt) {
+      if (!this.enabled || this.readOnly) return;
+
+      for (var i = 0; i < evt.changedTouches.length; i++) {
+        var touch = evt.changedTouches[i];
+        if (!touch.target.ui || touch.target.ui !== this) continue;
+        this._touchId = touch.identifier;
+
+        this._onSlideStart(touch.pageX);
+
+        break;
+      }
+    }
+  }, {
+    key: "_onTouchMove",
+    value: function _onTouchMove(evt) {
+      for (var i = 0; i < evt.changedTouches.length; i++) {
+        var touch = evt.changedTouches[i];
+        if (touch.identifier !== this._touchId) continue;
+        evt.stopPropagation();
+        evt.preventDefault();
+
+        this._onSlideMove(touch.pageX);
+
+        break;
+      }
+    }
+  }, {
+    key: "_onTouchEnd",
+    value: function _onTouchEnd(evt) {
+      for (var i = 0; i < evt.changedTouches.length; i++) {
+        var touch = evt.changedTouches[i];
+        if (touch.identifier !== this._touchId) continue;
+        evt.stopPropagation();
+        evt.preventDefault();
+
+        this._onSlideEnd(touch.pageX);
+
+        this._touchId = null;
+        break;
+      }
+    }
+  }, {
+    key: "_onKeyDown",
+    value: function _onKeyDown(evt) {
+      if (evt.keyCode === 27) {
+        this.blur();
+        return;
+      }
+
+      if (!this.enabled || this.readOnly) return; // move slider with left / right arrow keys
+
+      if (evt.keyCode !== 37 && evt.keyCode !== 39) return;
+      evt.stopPropagation();
+      evt.preventDefault();
+      var x = evt.keyCode === 37 ? -1 : 1;
+
+      if (evt.shiftKey) {
+        x *= 10;
+      }
+
+      this.value += x * this.step;
+    }
+  }, {
+    key: "_updateHandle",
+    value: function _updateHandle(value) {
+      var left = Math.max(0, Math.min(1, ((value || 0) - this._sliderMin) / (this._sliderMax - this._sliderMin))) * 100;
+
+      var handleWidth = this._domHandle.getBoundingClientRect().width;
+
+      this._domHandle.style.left = "calc(".concat(left, "% + ").concat(handleWidth / 2, "px)");
+    }
+  }, {
+    key: "_onValueChange",
+    value: function _onValueChange(value) {
+      this._updateHandle(value);
+
+      this.emit('change', value);
+
+      if (this._binding) {
+        this._binding.setValue(value);
+      }
+    } // Calculates the distance in pixels between
+    // the cursor x and the middle of the handle.
+    // If the cursor is not on the handle sets the offset to 0
+
+  }, {
+    key: "_calculateCursorHandleOffset",
+    value: function _calculateCursorHandleOffset(pageX) {
+      // not sure why but the left side needs a margin of a couple of pixels
+      // to properly determine if the cursor is on the handle (in Chrome)
+      var margin = IS_CHROME ? 2 : 0;
+
+      var rect = this._domHandle.getBoundingClientRect();
+
+      var left = rect.left - margin;
+      var right = rect.right;
+
+      if (pageX >= left && pageX <= right) {
+        this._cursorHandleOffset = pageX - (left + (right - left) / 2);
+      } else {
+        this._cursorHandleOffset = 0;
+      }
+
+      return this._cursorHandleOffset;
+    }
+  }, {
+    key: "_onSlideStart",
+    value: function _onSlideStart(pageX) {
+      this._domHandle.focus();
+
+      if (this._touchId === null) {
+        window.addEventListener('mousemove', this._domMouseMove);
+        window.addEventListener('mouseup', this._domMouseUp);
+      } else {
+        window.addEventListener('touchmove', this._domTouchMove);
+        window.addEventListener('touchend', this._domTouchEnd);
+      }
+
+      this.class.add(CLASS_SLIDER_ACTIVE); // calculate the cursor - handle offset. If there is
+      // an offset that means the cursor is on the handle so
+      // do not move the handle until the cursor moves.
+
+      if (!this._calculateCursorHandleOffset(pageX)) {
+        this._onSlideMove(pageX);
+      }
+
+      if (this.binding) {
+        this._historyCombine = this.binding.historyCombine;
+        this._historyPostfix = this.binding.historyPostfix;
+        this.binding.historyCombine = true;
+        this.binding.historyPostfix = "(".concat(Date.now(), ")");
+      }
+    }
+  }, {
+    key: "_onSlideMove",
+    value: function _onSlideMove(pageX) {
+      var rect = this._domBar.getBoundingClientRect(); // reduce pageX by the initial cursor - handle offset
+
+
+      pageX -= this._cursorHandleOffset;
+      var x = Math.max(0, Math.min(1, (pageX - rect.left) / rect.width));
+      var range = this._sliderMax - this._sliderMin;
+      var value = x * range + this._sliderMin;
+      value = parseFloat(value.toFixed(this.precision), 10);
+      this.value = value;
+    }
+  }, {
+    key: "_onSlideEnd",
+    value: function _onSlideEnd(pageX) {
+      // when slide ends only move the handle if the cursor is no longer
+      // on the handle
+      if (!this._calculateCursorHandleOffset(pageX)) {
+        this._onSlideMove(pageX);
+      }
+
+      this.class.remove(CLASS_SLIDER_ACTIVE);
+
+      if (this._touchId === null) {
+        window.removeEventListener('mousemove', this._domMouseMove);
+        window.removeEventListener('mouseup', this._domMouseUp);
+      } else {
+        window.removeEventListener('touchmove', this._domTouchMove);
+        window.removeEventListener('touchend', this._domTouchEnd);
+      }
+
+      if (this.binding) {
+        this.binding.historyCombine = this._historyCombine;
+        this.binding.historyPostfix = this._historyPostfix;
+        this._historyCombine = false;
+        this._historyPostfix = null;
+      }
+    }
+  }, {
+    key: "focus",
+    value: function focus() {
+      this._numericInput.focus();
+    }
+  }, {
+    key: "blur",
+    value: function blur() {
+      this._domHandle.blur();
+
+      this._numericInput.blur();
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      if (this._destroyed) return;
+
+      this._domSlider.removeEventListener('mousedown', this._domMouseDown);
+
+      this._domSlider.removeEventListener('touchstart', this._domTouchStart);
+
+      this._domHandle.removeEventListener('keydown', this._domKeyDown);
+
+      this.dom.removeEventListener('mouseup', this._domMouseUp);
+      this.dom.removeEventListener('mousemove', this._domMouseMove);
+      this.dom.removeEventListener('touchmove', this._domTouchMove);
+      this.dom.removeEventListener('touchend', this._domTouchEnd);
+
+      _get(_getPrototypeOf(SliderInput.prototype), "destroy", this).call(this);
+    }
+  }, {
+    key: "sliderMin",
+    get: function get() {
+      return this._sliderMin;
+    },
+    set: function set(value) {
+      if (this._sliderMin === value) return;
+      this._sliderMin = value;
+
+      this._updateHandle(this.value);
+    }
+  }, {
+    key: "sliderMax",
+    get: function get() {
+      return this._sliderMax;
+    },
+    set: function set(value) {
+      if (this._sliderMax === value) return;
+      this._sliderMax = value;
+
+      this._updateHandle(this.value);
+    }
+  }, {
+    key: "value",
+    get: function get() {
+      return this._numericInput.value;
+    },
+    set: function set(value) {
+      this._numericInput.value = value;
+
+      if (this._numericInput.class.contains(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"])) {
+        this.class.add(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
+      } else {
+        this.class.remove(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
+      }
+    }
+    /* eslint accessor-pairs: 0 */
+
+  }, {
+    key: "values",
+    set: function set(values) {
+      this._numericInput.values = values;
+
+      if (this._numericInput.class.contains(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"])) {
+        this.class.add(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
+      } else {
+        this.class.remove(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
+      }
+    }
+  }]);
+
+  return SliderInput;
+}(_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
+
+_helpers_utils__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"].proxy(SliderInput, '_numericInput', PROXY_FIELDS);
+_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('slider', SliderInput, {
+  renderChanges: true
+});
+/* harmony default export */ __webpack_exports__["a"] = (SliderInput);
+
+/***/ }),
+/* 25 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(67);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var CLASS_ROOT = 'pcui-spinner';
+
+function createSmallThick(size, dom) {
+  var spinner = dom || document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  spinner.classList.add('spin');
+  spinner.setAttribute('width', size);
+  spinner.setAttribute('height', size);
+  spinner.setAttribute('viewBox', '0 0 14 14');
+  spinner.setAttribute('fill', 'none');
+  spinner.innerHTML = '<path d="M7 14C3.13871 14 0 10.8613 0 7C0 3.13871 3.13871 0 7 0C10.8613 0 14 3.13871 14 7C14 10.8613 10.8613 14 7 14ZM7 2.25806C4.38064 2.25806 2.25806 4.38064 2.25806 7C2.25806 9.61935 4.38064 11.7419 7 11.7419C9.61935 11.7419 11.7419 9.61935 11.7419 7C11.7419 4.38064 9.61935 2.25806 7 2.25806Z" fill="#773417"/><path class="pcui-spinner-highlight" d="M7 14V11.7419C9.61935 11.7419 11.7419 9.61935 11.7419 7H14C14 10.8613 10.8613 14 7 14Z" fill="#FF6600"/>';
+  return spinner;
+}
+/**
+ * @name Spinner
+ * @augments Element
+ * @classdesc Represents a spinning icon
+ */
+
+
+var Spinner = /*#__PURE__*/function (_Element) {
+  _inherits(Spinner, _Element);
+
+  var _super = _createSuper(Spinner);
+
+  /**
+   * Creates a new spinner.
+   *
+   * @param {object} [args] - The arguments
+   * @param {number} [args.size=12] - The pixel size of the spinner
+   */
+  function Spinner(args) {
+    var _this;
+
+    _classCallCheck(this, Spinner);
+
+    args = Object.assign({
+      type: Spinner.TYPE_SMALL_THICK
+    }, args);
+    var dom = null;
+
+    if (args.type === Spinner.TYPE_SMALL_THICK) {
+      dom = createSmallThick(args.size || 12, args.dom);
+    }
+
+    _this = _super.call(this, dom, args);
+
+    _this.class.add(CLASS_ROOT);
+
+    return _this;
+  }
+
+  return Spinner;
+}(_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
+
+Spinner.TYPE_SMALL_THICK = 'small-thick'; // add more types here
+
+/* harmony default export */ __webpack_exports__["a"] = (Spinner);
+
+/***/ }),
+/* 26 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(69);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+/* harmony import */ var _TextInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var CLASS_TEXT_AREA_INPUT = 'pcui-text-area-input';
+var CLASS_TEXT_AREA_INPUT_RESIZABLE = CLASS_TEXT_AREA_INPUT + '-resizable';
+var CLASS_TEXT_AREA_INPUT_RESIZABLE_NONE = CLASS_TEXT_AREA_INPUT_RESIZABLE + '-none';
+var CLASS_TEXT_AREA_INPUT_RESIZABLE_BOTH = CLASS_TEXT_AREA_INPUT_RESIZABLE + '-both';
+var CLASS_TEXT_AREA_INPUT_RESIZABLE_HORIZONTAL = CLASS_TEXT_AREA_INPUT_RESIZABLE + '-horizontal';
+var CLASS_TEXT_AREA_INPUT_RESIZABLE_VERTICAL = CLASS_TEXT_AREA_INPUT_RESIZABLE + '-vertical';
+/**
+ * @name TextAreaInput
+ * @classdesc The TextAreaInput wraps a textarea element. It has the same interface as pcui.TextInput.
+ * @augments TextInput
+ * @property {string} [resizable=none] Sets whether the size of the text area input can be modified by the user. Can be one of 'none', 'both', 'horizontal' or 'vertical'.
+ */
+
+var TextAreaInput = /*#__PURE__*/function (_TextInput) {
+  _inherits(TextAreaInput, _TextInput);
+
+  var _super = _createSuper(TextAreaInput);
+
+  /**
+   * Creates a new TextAreaInput.
+   *
+   * @param {object} args - The arguments. Extends the pcui.TextInput constructor arguments.
+   */
+  function TextAreaInput(args) {
+    var _this;
+
+    _classCallCheck(this, TextAreaInput);
+
+    args = Object.assign({
+      input: document.createElement('textarea')
+    }, args);
+    _this = _super.call(this, args);
+
+    _this.class.add(CLASS_TEXT_AREA_INPUT);
+
+    switch (args.resizable) {
+      case 'both':
+        _this.class.add(CLASS_TEXT_AREA_INPUT_RESIZABLE_BOTH);
+
+        break;
+
+      case 'horizontal':
+        _this.class.add(CLASS_TEXT_AREA_INPUT_RESIZABLE_HORIZONTAL);
+
+        break;
+
+      case 'vertical':
+        _this.class.add(CLASS_TEXT_AREA_INPUT_RESIZABLE_VERTICAL);
+
+        break;
+
+      case 'none':
+      default:
+        _this.class.add(CLASS_TEXT_AREA_INPUT_RESIZABLE_NONE);
+
+        break;
+    }
+
+    return _this;
+  }
+
+  _createClass(TextAreaInput, [{
+    key: "_onInputKeyDown",
+    value: function _onInputKeyDown(evt) {
+      if (evt.keyCode === 27 && this.blurOnEscape || evt.keyCode === 13 && this.blurOnEnter && !evt.shiftKey) {
+        this._domInput.blur();
+      }
+
+      this.emit('keydown', evt);
+    }
+  }]);
+
+  return TextAreaInput;
+}(_TextInput__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]);
+
+_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('text', TextAreaInput, {
+  renderChanges: true
+});
+/* harmony default export */ __webpack_exports__["a"] = (TextAreaInput);
+
+/***/ }),
+/* 27 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(71);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
+/* harmony import */ var _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6);
+/* harmony import */ var _helpers_search__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(14);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4660,509 +8395,1072 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var CLASS_BOOLEAN_INPUT = 'pcui-boolean-input';
-var CLASS_BOOLEAN_INPUT_TICKED = CLASS_BOOLEAN_INPUT + '-ticked';
-var CLASS_BOOLEAN_INPUT_TOGGLE = CLASS_BOOLEAN_INPUT + '-toggle';
+
+var CLASS_ROOT = 'pcui-treeview';
+var CLASS_DRAGGED_ITEM = CLASS_ROOT + '-item-dragged';
+var CLASS_DRAGGED_HANDLE = CLASS_ROOT + '-drag-handle';
+var CLASS_FILTERING = CLASS_ROOT + '-filtering';
+var CLASS_FILTER_RESULT = CLASS_FILTERING + '-result';
+var DRAG_AREA_INSIDE = 'inside';
+var DRAG_AREA_BEFORE = 'before';
+var DRAG_AREA_AFTER = 'after';
 /**
- * @name BooleanInput
- * @classdesc A checkbox element.
- * @property {boolean} renderChanges If true the input will flash when changed.
- * @augments Element
+ * @event
+ * @name TreeView#dragstart
+ * @param {TreeViewItem[]} items - The dragged items
+ * @description Fired when we start dragging a TreeViewItem
  */
 
-var BooleanInput_BooleanInput = /*#__PURE__*/function (_Element) {
-  _inherits(BooleanInput, _Element);
+/**
+ * @event
+ * @name TreeView#dragend
+ * @description Fired when we stop dragging a TreeViewItem
+ */
 
-  var _super = _createSuper(BooleanInput);
+/**
+ * @event
+ * @name TreeView#reparent
+ * @description Fired when we reparent TreeViewItems
+ * @param {object[]} items - An array of items we reparented. Each array element contains an object like so: {item, newParent, oldParent}.
+ */
+
+/**
+ * @event
+ * @name TreeView#select
+ * @description Fired when we select a TreeViewItem
+ * @param {TreeViewItem} item - The item
+ */
+
+/**
+ * @event
+ * @name TreeView#deselect
+ * @description Fired when we deselect a TreeViewItem
+ * @param {TreeViewItem} item - The item
+ */
+
+/**
+ * @event
+ * @name TreeView#rename
+ * @description Fired when we rename a TreeViewItem
+ * @param {TreeViewItem} item - The item
+ * @param {string} name - The new name
+ */
+
+/**
+ * @name TreeView
+ * @classdesc A container that can show a treeview like a hierarchy. The treeview contains
+ * pcui.TreeViewItems.
+ * @augments Container
+ * @property {boolean} allowDrag=true Whether dragging a TreeViewItem is allowed.
+ * @property {boolean} allowReordering=true Whether reordering TreeViewItems is allowed.
+ * @property {boolean} allowRenaming Whether renaming TreeViewItems is allowed by double clicking on them.
+ * @property {boolean} isDragging Whether we are currently dragging a TreeViewItem.
+ * @property {string} filter Gets / sets a filter that searches TreeViewItems and only shows the ones that are relevant to the filter.
+ * @property {TreeViewItem[]} selected Gets the selected TreeViewItems.
+ */
+
+var TreeView = /*#__PURE__*/function (_Container) {
+  _inherits(TreeView, _Container);
+
+  var _super = _createSuper(TreeView);
 
   /**
-   * Creates a new pcui.BooleanInput.
+   * Creates a new TreeView.
    *
-   * @param {object} args - The arguments.
-   * @param {string} [args.type] - The type of checkbox currently can be null or 'toggle'.
+   * @param {object} [args] - The arguments. All properties can be set through the arguments as well.
+   * @param {Function} [args.onContextMenu] - A function to be called when we right click on a TreeViewItem.
+   * @param {Function} [args.onReparent] - A function to be called when we try to reparent tree items. If a function is provided then the
+   * tree items will not be reparented by the TreeView but instead will rely on the function to reparent them as it sees fit.
    */
-  function BooleanInput(args) {
+  function TreeView(args) {
     var _this;
 
-    _classCallCheck(this, BooleanInput);
+    _classCallCheck(this, TreeView);
 
-    args = Object.assign({
-      tabIndex: 0
-    }, args);
-    _this = _super.call(this, args.dom ? args.dom : document.createElement('div'), args);
+    if (!args) args = {};
+    _this = _super.call(this, args);
 
-    if (args.type === 'toggle') {
-      _this.class.add(CLASS_BOOLEAN_INPUT_TOGGLE);
-    } else {
-      _this.class.add(CLASS_BOOLEAN_INPUT);
-    }
+    _this.class.add(CLASS_ROOT);
 
-    _this.class.add(src_class["l" /* NOT_FLEXIBLE */]);
+    _this._selectedItems = [];
+    _this._dragItems = [];
+    _this._allowDrag = args.allowDrag !== undefined ? args.allowDrag : true;
+    _this._allowReordering = args.allowReordering !== undefined ? args.allowReordering : true;
+    _this._allowRenaming = args.allowRenaming !== undefined ? args.allowRenaming : false;
+    _this._dragging = false;
+    _this._dragOverItem = null;
+    _this._dragArea = DRAG_AREA_INSIDE;
+    _this._dragScroll = 0;
+    _this._dragScrollInterval = null;
+    _this._dragHandle = new _Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"](document.createElement('div'), {
+      class: CLASS_DRAGGED_HANDLE
+    });
 
-    _this._domEventKeyDown = _this._onKeyDown.bind(_assertThisInitialized(_this));
-    _this._domEventFocus = _this._onFocus.bind(_assertThisInitialized(_this));
-    _this._domEventBlur = _this._onBlur.bind(_assertThisInitialized(_this));
+    _this.append(_this._dragHandle);
 
-    _this.dom.addEventListener('keydown', _this._domEventKeyDown);
+    _this._onContextMenu = args.onContextMenu;
+    _this._onReparentFn = args.onReparent;
+    _this._pressedCtrl = false;
+    _this._pressedShift = false;
+    _this._filter = null;
+    _this._filterResults = [];
+    _this._wasDraggingAllowedBeforeFiltering = _this._allowDrag;
+    _this._domEvtModifierKeys = _this._updateModifierKeys.bind(_assertThisInitialized(_this));
+    _this._domEvtMouseLeave = _this._onMouseLeave.bind(_assertThisInitialized(_this));
+    _this._domEvtDragMove = _this._onDragMove.bind(_assertThisInitialized(_this));
+    _this._domEvtMouseMove = _this._onMouseMove.bind(_assertThisInitialized(_this));
+    window.addEventListener('keydown', _this._domEvtModifierKeys);
+    window.addEventListener('keyup', _this._domEvtModifierKeys);
+    window.addEventListener('mousedown', _this._domEvtModifierKeys);
 
-    _this.dom.addEventListener('focus', _this._domEventFocus);
+    _this.dom.addEventListener('mouseleave', _this._domEvtMouseLeave);
 
-    _this.dom.addEventListener('blur', _this._domEventBlur);
+    _this._dragHandle.dom.addEventListener('mousemove', _this._domEvtDragMove);
 
-    _this._value = null;
+    _this._dragHandle.on('destroy', function (dom) {
+      dom.removeEventListener('mousemove', _this._domEvtDragMove);
+    });
 
-    if (args.value !== undefined) {
-      _this.value = args.value;
-    }
-
-    _this.renderChanges = args.renderChanges;
     return _this;
   }
 
-  _createClass(BooleanInput, [{
-    key: "_onClick",
-    value: function _onClick(evt) {
-      if (this.enabled) {
-        this.focus();
+  _createClass(TreeView, [{
+    key: "_updateModifierKeys",
+    value: function _updateModifierKeys(evt) {
+      this._pressedCtrl = evt.ctrlKey || evt.metaKey;
+      this._pressedShift = evt.shiftKey;
+    }
+    /**
+     * Finds the next tree item that is not currently hidden
+     *
+     * @param {TreeViewItem} currentItem - The current tree item
+     * @returns {TreeViewItem} The next tree item.
+     */
+
+  }, {
+    key: "_findNextVisibleTreeItem",
+    value: function _findNextVisibleTreeItem(currentItem) {
+      if (currentItem.numChildren > 0 && currentItem.open) {
+        return currentItem.firstChild;
       }
 
-      if (this.enabled && !this.readOnly) {
-        this.value = !this.value;
+      var sibling = currentItem.nextSibling;
+      if (sibling) return sibling;
+      var parent = currentItem.parent;
+      if (!(parent instanceof _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])) return null;
+      var parentSibling = parent.nextSibling;
+
+      while (!parentSibling) {
+        parent = parent.parent;
+
+        if (!(parent instanceof _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])) {
+          break;
+        }
+
+        parentSibling = parent.nextSibling;
       }
 
-      return _get(_getPrototypeOf(BooleanInput.prototype), "_onClick", this).call(this, evt);
+      return parentSibling;
     }
+    /**
+     * Finds the last visible child tree item of the specified tree item.
+     *
+     * @param {TreeViewItem} currentItem - The current item.
+     * @returns {TreeViewItem} The last child item.
+     */
+
   }, {
-    key: "_onKeyDown",
-    value: function _onKeyDown(evt) {
-      if (evt.keyCode === 27) {
-        this.blur();
-        return;
+    key: "_findLastVisibleChildTreeItem",
+    value: function _findLastVisibleChildTreeItem(currentItem) {
+      if (!currentItem.numChildren || !currentItem.open) return null;
+      var lastChild = currentItem.lastChild;
+
+      while (lastChild && lastChild.numChildren && lastChild.open) {
+        lastChild = lastChild.lastChild;
       }
 
-      if (!this.enabled || this.readOnly) return;
+      return lastChild;
+    }
+    /**
+     * Finds the previous visible tree item of the specified tree item.
+     *
+     * @param {TreeViewItem} currentItem - The current tree item.
+     * @returns {TreeViewItem} The previous item.
+     */
 
-      if (evt.keyCode === 32) {
-        evt.stopPropagation();
-        evt.preventDefault();
-        this.value = !this.value;
+  }, {
+    key: "_findPreviousVisibleTreeItem",
+    value: function _findPreviousVisibleTreeItem(currentItem) {
+      var sibling = currentItem.previousSibling;
+
+      if (sibling) {
+        if (sibling.numChildren > 0 && sibling.open) {
+          return this._findLastVisibleChildTreeItem(sibling);
+        }
+
+        return sibling;
       }
-    }
-  }, {
-    key: "_onFocus",
-    value: function _onFocus() {
-      this.emit('focus');
-    }
-  }, {
-    key: "_onBlur",
-    value: function _onBlur() {
-      this.emit('blur');
-    }
-  }, {
-    key: "_updateValue",
-    value: function _updateValue(value) {
-      this.class.remove(src_class["k" /* MULTIPLE_VALUES */]);
-      if (value === this.value) return false;
-      this._value = value;
 
-      if (value) {
-        this.class.add(CLASS_BOOLEAN_INPUT_TICKED);
+      var parent = currentItem.parent;
+      if (!(parent instanceof _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])) return null;
+      return parent;
+    }
+    /**
+     * Gets the visible tree items between the specified start and end tree items.
+     *
+     * @param {TreeViewItem} startChild - The start tree item.
+     * @param {TreeViewItem} endChild - The end tree item.
+     * @returns {TreeViewItem[]} The tree items.
+     */
+
+  }, {
+    key: "_getChildrenRange",
+    value: function _getChildrenRange(startChild, endChild) {
+      var result = []; // select search results if we are currently filtering tree view items
+
+      if (this._filterResults.length) {
+        var filterResults = this.dom.querySelectorAll(".".concat(CLASS_ROOT, "-item.").concat(CLASS_FILTER_RESULT));
+        var startIndex = -1;
+        var endIndex = -1;
+
+        for (var i = 0; i < filterResults.length; i++) {
+          var item = filterResults[i].ui;
+
+          if (item === startChild) {
+            startIndex = i;
+          } else if (item === endChild) {
+            endIndex = i;
+          }
+
+          if (startIndex !== -1 && endIndex !== -1) {
+            var start = startIndex < endIndex ? startIndex : endIndex;
+            var end = startIndex < endIndex ? endIndex : startIndex;
+
+            for (var j = start; j <= end; j++) {
+              result.push(filterResults[j].ui);
+            }
+
+            break;
+          }
+        }
       } else {
-        this.class.remove(CLASS_BOOLEAN_INPUT_TICKED);
+        // if we are not filtering the tree view then find the next visible tree item
+        var current = startChild;
+        var rectStart = startChild.dom.getBoundingClientRect();
+        var rectEnd = endChild.dom.getBoundingClientRect();
+
+        if (rectStart.top < rectEnd.top) {
+          while (current && current !== endChild) {
+            current = this._findNextVisibleTreeItem(current);
+
+            if (current && current !== endChild) {
+              result.push(current);
+            }
+          }
+        } else {
+          while (current && current !== endChild) {
+            current = this._findPreviousVisibleTreeItem(current);
+
+            if (current && current !== endChild) {
+              result.push(current);
+            }
+          }
+        }
+
+        result.push(endChild);
       }
 
-      if (this.renderChanges) {
-        this.flash();
+      return result;
+    }
+  }, {
+    key: "_onAppendChild",
+    value: function _onAppendChild(element) {
+      _get(_getPrototypeOf(TreeView.prototype), "_onAppendChild", this).call(this, element);
+
+      if (element instanceof _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]) {
+        this._onAppendTreeViewItem(element);
+      }
+    }
+  }, {
+    key: "_onRemoveChild",
+    value: function _onRemoveChild(element) {
+      if (element instanceof _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]) {
+        this._onRemoveTreeViewItem(element);
       }
 
-      this.emit('change', value);
-      return true;
+      _get(_getPrototypeOf(TreeView.prototype), "_onRemoveChild", this).call(this, element);
     }
   }, {
-    key: "focus",
-    value: function focus() {
-      this.dom.focus();
+    key: "_onAppendTreeViewItem",
+    value: function _onAppendTreeViewItem(element) {
+      var _this2 = this;
+
+      element.treeView = this;
+
+      if (this._filter) {
+        // add new item to filtered results if it
+        // satisfies the current filter
+        this._searchItems([[element.text, element]], this._filter);
+      } // do the same for all children of the element
+
+
+      element.forEachChild(function (child) {
+        if (child instanceof _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]) {
+          _this2._onAppendTreeViewItem(child);
+        }
+      });
     }
   }, {
-    key: "blur",
-    value: function blur() {
-      this.dom.blur();
+    key: "_onRemoveTreeViewItem",
+    value: function _onRemoveTreeViewItem(element) {
+      var _this3 = this;
+
+      element.selected = false; // do the same for all children of the element
+
+      element.forEachChild(function (child) {
+        if (child instanceof _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]) {
+          _this3._onRemoveTreeViewItem(child);
+        }
+      });
+    } // Called when a key is down on a child TreeViewItem.
+
+  }, {
+    key: "_onChildKeyDown",
+    value: function _onChildKeyDown(evt, element) {
+      if ([9, 37, 38, 39, 40].indexOf(evt.keyCode) === -1) return;
+      evt.preventDefault();
+      evt.stopPropagation();
+
+      if (evt.keyCode === 40) {
+        // down - select next tree item
+        if (this._selectedItems.length) {
+          var next = this._findNextVisibleTreeItem(element);
+
+          if (next) {
+            if (this._pressedShift || this._pressedCtrl) {
+              next.selected = true;
+            } else {
+              this._selectSingleItem(next);
+            }
+          }
+        }
+      } else if (evt.keyCode === 38) {
+        // up - select previous tree item
+        if (this._selectedItems.length) {
+          var prev = this._findPreviousVisibleTreeItem(element);
+
+          if (prev) {
+            if (this._pressedShift || this._pressedCtrl) {
+              prev.selected = true;
+            } else {
+              this._selectSingleItem(prev);
+            }
+          }
+        }
+      } else if (evt.keyCode === 37) {
+        // left (close)
+        if (element.parent !== this) {
+          element.open = false;
+        }
+      } else if (evt.keyCode === 39) {
+        // right (open)
+        element.open = true;
+      } else if (evt.keyCode === 9) {// tab
+        // skip
+      }
+    } // Called when we click on a child TreeViewItem
+
+  }, {
+    key: "_onChildClick",
+    value: function _onChildClick(evt, element) {
+      if (evt.button !== 0) return;
+      if (!element.allowSelect) return;
+
+      if (this._pressedCtrl) {
+        // toggle selection when Ctrl is pressed
+        element.selected = !element.selected;
+      } else if (this._pressedShift) {
+        // on shift add to selection
+        if (!this._selectedItems.length || this._selectedItems.length === 1 && this._selectedItems[0] === element) {
+          element.selected = true;
+          return;
+        }
+
+        var selected = this._selectedItems[this._selectedItems.length - 1];
+
+        this._openHierarchy(selected);
+
+        var children = this._getChildrenRange(selected, element);
+
+        children.forEach(function (child) {
+          if (child.allowSelect) {
+            child.selected = true;
+          }
+        });
+      } else {
+        // deselect other items
+        this._selectSingleItem(element);
+      }
+    }
+    /**
+     * Call specified function on every child TreeViewItem by traversing the hierarchy depth first.
+     *
+     * @param {Function} fn - The function to call. The function takes the TreeViewItem as an argument.
+     */
+
+  }, {
+    key: "_traverseDepthFirst",
+    value: function _traverseDepthFirst(fn) {
+      function traverse(item) {
+        if (!item || !(item instanceof _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])) return;
+        fn(item);
+
+        if (item.numChildren) {
+          for (var i = 0; i < item.dom.childNodes.length; i++) {
+            traverse(item.dom.childNodes[i].ui);
+          }
+        }
+      }
+
+      for (var i = 0; i < this.dom.childNodes.length; i++) {
+        traverse(this.dom.childNodes[i].ui);
+      }
+    }
+    /**
+     * Do a depth first traversal of all tree items
+     * and assign an order to them so that we know which one
+     * is above the other. Performance wise this means it traverses
+     * all tree items every time however seems to be pretty fast even with 15 - 20 K entities.
+     */
+
+  }, {
+    key: "_updateTreeOrder",
+    value: function _updateTreeOrder() {
+      var order = 0;
+
+      this._traverseDepthFirst(function (item) {
+        item._treeOrder = order++;
+      });
+    } // Called when we start dragging a TreeViewItem.
+
+  }, {
+    key: "_onChildDragStart",
+    value: function _onChildDragStart(evt, element) {
+      if (!this.allowDrag || this._dragging) return;
+      this._dragItems = []; // cannot drag root
+
+      if (element.parent === this) return;
+
+      if (this._selectedItems.indexOf(element) !== -1) {
+        var dragged = []; // check that all selected items to be dragged are
+        // at the same depth from the root
+
+        var desiredDepth = -1;
+
+        for (var i = 0; i < this._selectedItems.length; i++) {
+          var parent = this._selectedItems[i].parent;
+          var depth = 0;
+          var isChild = false;
+
+          while (parent && parent instanceof _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]) {
+            // if parent is already in dragged items then skip
+            // depth calculation for this item
+            if (this._selectedItems.indexOf(parent) !== -1) {
+              isChild = true;
+              break;
+            }
+
+            depth++;
+            parent = parent.parent;
+          }
+
+          if (!isChild) {
+            if (desiredDepth === -1) {
+              desiredDepth = depth;
+            } else if (desiredDepth !== depth) {
+              return;
+            }
+
+            dragged.push(this._selectedItems[i]);
+          }
+        } // add dragged class to each item
+
+
+        this._dragItems = dragged;
+      } else {
+        element.class.add(CLASS_DRAGGED_ITEM);
+
+        this._dragItems.push(element);
+      }
+
+      if (this._dragItems.length) {
+        this._dragItems.forEach(function (item) {
+          item.class.add(CLASS_DRAGGED_ITEM);
+        });
+
+        this.isDragging = true;
+        this.emit('dragstart', this._dragItems.slice());
+      }
+    } // Called when we stop dragging a TreeViewItem.
+
+  }, {
+    key: "_onChildDragEnd",
+    value: function _onChildDragEnd(evt, element) {
+      var _this4 = this;
+
+      if (!this.allowDrag || !this._dragging) return;
+
+      this._dragItems.forEach(function (item) {
+        return item.class.remove(CLASS_DRAGGED_ITEM);
+      });
+
+      if (this._dragOverItem) {
+        if (this._dragItems.length > 1) {
+          // sort items based on order in the hierarchy
+          if (this._dragItems.length > 1) {
+            this._updateTreeOrder();
+
+            this._dragItems.sort(function (a, b) {
+              return a._treeOrder - b._treeOrder;
+            });
+          }
+        }
+
+        if (this._dragItems.length) {
+          // reparent items
+          var reparented = [];
+          var lastDraggedItem = this._dragOverItem;
+
+          this._dragItems.forEach(function (item) {
+            if (item.parent !== _this4._dragOverItem || _this4._dragArea !== DRAG_AREA_INSIDE) {
+              var oldParent = item.parent;
+              var newParent = null;
+
+              if (!_this4._onReparentFn) {
+                item.parent.remove(item);
+              }
+
+              if (_this4._dragArea === DRAG_AREA_BEFORE) {
+                // If dragged before a TreeViewItem...
+                newParent = _this4._dragOverItem.parent;
+
+                if (!_this4._onReparentFn) {
+                  _this4._dragOverItem.parent.appendBefore(item, _this4._dragOverItem);
+                }
+              } else if (_this4._dragArea === DRAG_AREA_INSIDE) {
+                // If dragged inside a TreeViewItem...
+                newParent = _this4._dragOverItem;
+
+                if (!_this4._onReparentFn) {
+                  _this4._dragOverItem.append(item);
+
+                  _this4._dragOverItem.open = true;
+                }
+              } else if (_this4._dragArea === DRAG_AREA_AFTER) {
+                // If dragged after a TreeViewItem...
+                newParent = _this4._dragOverItem.parent;
+
+                if (!_this4._onReparentFn) {
+                  _this4._dragOverItem.parent.appendAfter(item, lastDraggedItem);
+                }
+
+                lastDraggedItem = item;
+              }
+
+              reparented.push({
+                item: item,
+                newParent: newParent,
+                oldParent: oldParent
+              });
+            }
+          });
+
+          if (reparented.length) {
+            if (this._onReparentFn) {
+              this._onReparentFn(reparented);
+            }
+
+            this.emit('reparent', reparented);
+          }
+        }
+      }
+
+      this._dragItems = [];
+      this.isDragging = false;
+      this.emit('dragend');
+    } // Called when we drag over a TreeViewItem.
+
+  }, {
+    key: "_onChildDragOver",
+    value: function _onChildDragOver(evt, element) {
+      if (!this._allowDrag || !this._dragging) return;
+
+      if (element.allowDrop && this._dragItems.indexOf(element) === -1) {
+        this._dragOverItem = element;
+      } else {
+        this._dragOverItem = null;
+      }
+
+      this._updateDragHandle();
+
+      this._onDragMove(evt);
+    } // Called when the mouse cursor leaves the tree view.
+
+  }, {
+    key: "_onMouseLeave",
+    value: function _onMouseLeave(evt) {
+      if (!this._allowDrag || !this._dragging) return;
+      this._dragOverItem = null;
+
+      this._updateDragHandle();
+    } // Called when the mouse moves while dragging
+
+  }, {
+    key: "_onMouseMove",
+    value: function _onMouseMove(evt) {
+      if (!this._dragging) return; // Determine if we need to scroll the treeview if we are dragging towards the edges
+
+      var rect = this.dom.getBoundingClientRect();
+      this._dragScroll = 0;
+
+      if (evt.clientY - rect.top < 32 && this.dom.scrollTop > 0) {
+        this._dragScroll = -1;
+      } else if (rect.bottom - evt.clientY < 32 && this.dom.scrollHeight - (rect.height + this.dom.scrollTop) > 0) {
+        this._dragScroll = 1;
+      }
+    } // Scroll treeview if we are dragging towards the edges
+
+  }, {
+    key: "_scrollWhileDragging",
+    value: function _scrollWhileDragging() {
+      if (!this._dragging) return;
+      if (this._dragScroll === 0) return;
+      this.dom.scrollTop += this._dragScroll * 8;
+      this._dragOverItem = null;
+
+      this._updateDragHandle();
+    } // Called while we drag the drag handle
+
+  }, {
+    key: "_onDragMove",
+    value: function _onDragMove(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+      if (!this._allowDrag || !this._dragOverItem) return;
+
+      var rect = this._dragHandle.dom.getBoundingClientRect();
+
+      var area = Math.floor((evt.clientY - rect.top) / rect.height * 5);
+      var oldArea = this._dragArea;
+      var oldDragOver = this._dragOverItem;
+
+      if (this._dragOverItem.parent === this) {
+        var parent = false;
+
+        for (var _i = 0; _i < this._dragItems.length; _i++) {
+          if (this._dragItems[_i].parent === this._dragOverItem) {
+            parent = true;
+            this._dragOverItem = null;
+            break;
+          }
+        }
+
+        if (!parent) {
+          this._dragArea = DRAG_AREA_INSIDE;
+        }
+      } else {
+        // check if we are trying to drag item inside any of its children
+        var invalid = false;
+
+        for (var _i2 = 0; _i2 < this._dragItems.length; _i2++) {
+          if (this._dragItems[_i2].dom.contains(this._dragOverItem.dom)) {
+            invalid = true;
+            break;
+          }
+        }
+
+        if (invalid) {
+          this._dragOverItem = null;
+        } else if (this._allowReordering && area <= 1 && this._dragItems.indexOf(this._dragOverItem.previousSibling) === -1) {
+          this._dragArea = DRAG_AREA_BEFORE;
+        } else if (this._allowReordering && area >= 4 && this._dragItems.indexOf(this._dragOverItem.nextSibling) === -1 && (this._dragOverItem.numChildren === 0 || !this._dragOverItem.open)) {
+          this._dragArea = DRAG_AREA_AFTER;
+        } else {
+          var _parent = false;
+
+          if (this._allowReordering && this._dragOverItem.open) {
+            for (var i = 0; i < this._dragItems.length; i++) {
+              if (this._dragItems[i].parent === this._dragOverItem) {
+                _parent = true;
+                this._dragArea = DRAG_AREA_BEFORE;
+                break;
+              }
+            }
+          }
+
+          if (!_parent) this._dragArea = DRAG_AREA_INSIDE;
+        }
+      }
+
+      if (oldArea !== this._dragArea || oldDragOver !== this._dragOverItem) {
+        this._updateDragHandle();
+      }
+    } // Updates the drag handle position and size
+
+  }, {
+    key: "_updateDragHandle",
+    value: function _updateDragHandle(dragOverItem, force) {
+      if (!force && (!this._allowDrag || !this._dragging)) return;
+
+      if (!dragOverItem) {
+        dragOverItem = this._dragOverItem;
+      }
+
+      if (!dragOverItem || dragOverItem.hidden || !dragOverItem.parentsOpen) {
+        this._dragHandle.hidden = true;
+      } else {
+        var rect = dragOverItem._containerContents.dom.getBoundingClientRect();
+
+        this._dragHandle.hidden = false;
+
+        this._dragHandle.class.remove(DRAG_AREA_AFTER, DRAG_AREA_BEFORE, DRAG_AREA_INSIDE);
+
+        this._dragHandle.class.add(this._dragArea);
+
+        var top = rect.top;
+        var left = rect.left;
+        var width = rect.width;
+
+        if (this.dom.parentElement) {
+          var parentRect = this.dom.parentElement.getBoundingClientRect();
+          left = Math.max(left, parentRect.left);
+          width = Math.min(width, this.dom.parentElement.clientWidth - left + parentRect.left);
+        }
+
+        this._dragHandle.style.top = top + 'px';
+        this._dragHandle.style.left = left + 'px';
+        this._dragHandle.style.width = width - 7 + 'px';
+      }
+    }
+    /**
+     * Opens all the parents of the specified item
+     *
+     * @param {TreeViewItem} endItem - The end tree view item
+     */
+
+  }, {
+    key: "_openHierarchy",
+    value: function _openHierarchy(endItem) {
+      endItem.parentsOpen = true;
+    }
+    /**
+     * Selects a tree view item
+     *
+     * @param {TreeViewItem} item - The tree view item
+     */
+
+  }, {
+    key: "_selectSingleItem",
+    value: function _selectSingleItem(item) {
+      var i = this._selectedItems.length;
+      var othersSelected = false;
+
+      while (i--) {
+        if (this._selectedItems[i] && this._selectedItems[i] !== item) {
+          this._selectedItems[i].selected = false;
+          othersSelected = true;
+        }
+      }
+
+      if (othersSelected) {
+        item.selected = true;
+      } else {
+        item.selected = !item.selected;
+      }
+    }
+    /**
+     * Called when a child tree view item is selected.
+     *
+     * @param {TreeViewItem} item - The tree view item.
+     */
+
+  }, {
+    key: "_onChildSelected",
+    value: function _onChildSelected(item) {
+      this._selectedItems.push(item);
+
+      this._openHierarchy(item);
+
+      this.emit('select', item);
+    }
+    /**
+     * Called when a child tree view item is deselected.
+     *
+     * @param {TreeViewItem} item - The tree view item.
+     * @param {Element} element - The element.
+     */
+
+  }, {
+    key: "_onChildDeselected",
+    value: function _onChildDeselected(element) {
+      var index = this._selectedItems.indexOf(element);
+
+      if (index !== -1) {
+        this._selectedItems.splice(index, 1);
+
+        this.emit('deselect', element);
+      }
+    }
+    /**
+     * Called when a child tree view item is renamed.
+     *
+     * @param {TreeViewItem} item - The tree view item.
+     * @param {string} newName - The new name.
+     */
+
+  }, {
+    key: "_onChildRename",
+    value: function _onChildRename(item, newName) {
+      if (this._filter) {
+        // unfilter this item
+        item.class.remove(CLASS_FILTER_RESULT);
+
+        var index = this._filterResults.indexOf(item);
+
+        if (index !== -1) {
+          this._filterResults.splice(index, 1);
+        } // see if we can include it in the current filter
+
+
+        this._searchItems([[item.text, item]], this._filter);
+      }
+
+      this.emit('rename', item, newName);
+    }
+  }, {
+    key: "_searchItems",
+    value: function _searchItems(searchArr, filter) {
+      var _this5 = this;
+
+      var results = Object(_helpers_search__WEBPACK_IMPORTED_MODULE_4__[/* searchItems */ "a"])(searchArr, filter);
+      if (!results.length) return;
+      results.forEach(function (item) {
+        _this5._filterResults.push(item);
+
+        item.class.add(CLASS_FILTER_RESULT);
+      });
+    }
+    /**
+     * Searches treeview
+     *
+     * @param {string} filter - The search filter
+     */
+
+  }, {
+    key: "_applyFilter",
+    value: function _applyFilter(filter) {
+      this._clearFilter();
+
+      this._wasDraggingAllowedBeforeFiltering = this._allowDrag;
+      this._allowDrag = false;
+      this.class.add(CLASS_FILTERING);
+      var search = [];
+
+      this._traverseDepthFirst(function (item) {
+        search.push([item.text, item]);
+      });
+
+      this._searchItems(search, filter);
+    }
+    /**
+     * Clears search filter.
+     */
+
+  }, {
+    key: "_clearFilter",
+    value: function _clearFilter() {
+      this._filterResults.forEach(function (item) {
+        if (item.destroyed) return;
+        item.class.remove(CLASS_FILTER_RESULT);
+      });
+
+      this._filterResults.length = 0;
+      this.class.remove(CLASS_FILTERING);
+      this._allowDrag = this._wasDraggingAllowedBeforeFiltering;
+    }
+  }, {
+    key: "showDragHandle",
+    value: function showDragHandle(treeItem) {
+      this._updateDragHandle(treeItem, true);
+    }
+    /**
+     * @name TreeView#deselect
+     * @description Deselects all selected tree view items.
+     */
+
+  }, {
+    key: "deselect",
+    value: function deselect() {
+      var i = this._selectedItems.length;
+
+      while (i--) {
+        if (this._selectedItems[i]) {
+          this._selectedItems[i].selected = false;
+        }
+      }
+    }
+    /**
+     * @name TreeView#clearTreeItems
+     * @description Removes all child tree view items
+     */
+
+  }, {
+    key: "clearTreeItems",
+    value: function clearTreeItems() {
+      var i = this.dom.childNodes.length;
+
+      while (i--) {
+        var dom = this.dom.childNodes[i];
+        if (!dom) continue;
+        var ui = dom.ui;
+
+        if (ui instanceof _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]) {
+          ui.destroy();
+        }
+      }
+
+      this._selectedItems = [];
+      this._dragItems = [];
+      this._allowDrag = this._wasDraggingAllowedBeforeFiltering;
     }
   }, {
     key: "destroy",
     value: function destroy() {
       if (this._destroyed) return;
-      this.dom.removeEventListener('keydown', this._domEventKeyDown);
-      this.dom.removeEventListener('focus', this._domEventFocus);
-      this.dom.removeEventListener('blur', this._domEventBlur);
+      window.removeEventListener('keydown', this._domEvtModifierKeys);
+      window.removeEventListener('keyup', this._domEvtModifierKeys);
+      window.removeEventListener('mousedown', this._domEvtModifierKeys);
+      window.removeEventListener('mousemove', this._domEvtMouseMove);
+      this.dom.removeEventListener('mouseleave', this._domEvtMouseLeave);
 
-      _get(_getPrototypeOf(BooleanInput.prototype), "destroy", this).call(this);
+      if (this._dragScrollInterval) {
+        clearInterval(this._dragScrollInterval);
+        this._dragScrollInterval = null;
+      }
+
+      _get(_getPrototypeOf(TreeView.prototype), "destroy", this).call(this);
     }
   }, {
-    key: "value",
+    key: "allowDrag",
     get: function get() {
-      return this._value;
+      return this._allowDrag;
     },
     set: function set(value) {
-      var changed = this._updateValue(value);
+      this._allowDrag = value;
 
-      if (changed && this._binding) {
-        this._binding.setValue(value);
+      if (this._filter) {
+        this._wasDraggingAllowedBeforeFiltering = value;
       }
     }
-    /* eslint accessor-pairs: 0 */
-
   }, {
-    key: "values",
-    set: function set(values) {
-      var different = false;
-      var value = values[0];
-
-      for (var i = 1; i < values.length; i++) {
-        if (values[i] !== value) {
-          different = true;
-          break;
-        }
-      }
-
-      if (different) {
-        this._updateValue(null);
-
-        this.class.add(src_class["k" /* MULTIPLE_VALUES */]);
-      } else {
-        this._updateValue(values[0]);
-      }
-    }
-  }]);
-
-  return BooleanInput;
-}(Element["a" /* default */]);
-
-
-/* harmony default export */ var components_BooleanInput = __webpack_exports__["a"] = (BooleanInput_BooleanInput);
-
-/***/ }),
-/* 12 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// CONCATENATED MODULE: ./src/components/Code/style.scss
-// extracted by mini-css-extract-plugin
-
-// EXTERNAL MODULE: ./src/components/Container/index.js + 1 modules
-var Container = __webpack_require__(2);
-
-// EXTERNAL MODULE: ./src/components/Label/index.js + 1 modules
-var Label = __webpack_require__(3);
-
-// CONCATENATED MODULE: ./src/components/Code/index.js
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-var CLASS_ROOT = 'pcui-code';
-var CLASS_INNER = CLASS_ROOT + '-inner';
-/**
- * @name Code
- * @augments Container
- * @classdesc Represents a code block.
- */
-
-var Code_Code = /*#__PURE__*/function (_Container) {
-  _inherits(Code, _Container);
-
-  var _super = _createSuper(Code);
-
-  /**
-   * Creates a new spinner.
-   *
-   * @param {object} [args] - The arguments
-   * @param {string} [args.text] - The text to display in the code block;
-   */
-  function Code(args) {
-    var _this;
-
-    _classCallCheck(this, Code);
-
-    if (!args) args = {};
-    _this = _super.call(this, args);
-
-    _this.class.add(CLASS_ROOT);
-
-    _this._inner = new Label["a" /* default */]();
-
-    _this.append(_this._inner);
-
-    _this._inner.class.add(CLASS_INNER);
-
-    if (args.text) {
-      _this.text = args.text;
-    }
-
-    return _this;
-  }
-
-  _createClass(Code, [{
-    key: "text",
-    set: function set(value) {
-      this._text = value;
-      this._inner.text = value;
-    },
+    key: "allowReordering",
     get: function get() {
-      return this._text;
-    }
-  }]);
-
-  return Code;
-}(Container["a" /* default */]);
-
-/* harmony default export */ var components_Code = __webpack_exports__["a"] = (Code_Code);
-
-/***/ }),
-/* 13 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// CONCATENATED MODULE: ./src/components/Divider/style.scss
-// extracted by mini-css-extract-plugin
-
-// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
-var Element = __webpack_require__(1);
-
-// CONCATENATED MODULE: ./src/components/Divider/index.js
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-var CLASS_ROOT = 'pcui-divider';
-/**
- * @name Divider
- * @augments Element
- * @classdesc Represents a vertical division between two elements
- */
-
-var Divider = /*#__PURE__*/function (_Element) {
-  _inherits(Divider, _Element);
-
-  var _super = _createSuper(Divider);
-
-  function Divider(args) {
-    var _this;
-
-    _classCallCheck(this, Divider);
-
-    if (!args) args = {};
-    _this = _super.call(this, args.dom ? args.dom : document.createElement('div'), args);
-
-    _this.class.add(CLASS_ROOT);
-
-    return _this;
-  }
-
-  return Divider;
-}(Element["a" /* default */]);
-
-/* harmony default export */ var components_Divider = __webpack_exports__["a"] = (Divider);
-
-/***/ }),
-/* 14 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// UNUSED EXPORTS: InfoBox
-
-// CONCATENATED MODULE: ./src/components/InfoBox/style.scss
-// extracted by mini-css-extract-plugin
-
-// EXTERNAL MODULE: ./src/components/Container/index.js + 1 modules
-var Container = __webpack_require__(2);
-
-// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
-var Element = __webpack_require__(1);
-
-// CONCATENATED MODULE: ./src/components/InfoBox/index.js
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-var CLASS_INFOBOX = 'pcui-infobox';
-/**
- * @name InfoBox
- * @classdesc Represents an information box.
- * @property {string} icon The CSS code for an icon for the info box. e.g. E401 (notice we omit the '\' character).
- * @property {string} title Gets / sets the 'title' of the info box
- * @property {string} text Gets / sets the 'text' of the info box
- */
-
-var InfoBox_InfoBox = /*#__PURE__*/function (_Container) {
-  _inherits(InfoBox, _Container);
-
-  var _super = _createSuper(InfoBox);
-
-  /**
-   * Creates a new InfoBox.
-   *
-   * @param {object} args - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
-   * @param {boolean} [args.unsafe] - If true then the innerHTML property will be used to set the title/text. Otherwise textContent will be used instead.
-   */
-  function InfoBox(args) {
-    var _this;
-
-    _classCallCheck(this, InfoBox);
-
-    if (!args) args = {};
-    _this = _super.call(this, args);
-
-    _this.class.add(CLASS_INFOBOX);
-
-    _this._titleElement = new Element["a" /* default */]();
-    _this._textElement = new Element["a" /* default */]();
-
-    _this.append(_this._titleElement);
-
-    _this.append(_this._textElement);
-
-    _this._unsafe = args.unsafe || false;
-    _this.icon = args.icon || '';
-    _this.title = args.title || '';
-    _this.text = args.text || '';
-    return _this;
-  }
-
-  _createClass(InfoBox, [{
-    key: "icon",
-    get: function get() {
-      return this._icon;
+      return this._allowReordering;
     },
     set: function set(value) {
-      if (this._icon === value) return;
-      this._icon = value;
+      this._allowReordering = value;
+    }
+  }, {
+    key: "allowRenaming",
+    get: function get() {
+      return this._allowRenaming;
+    },
+    set: function set(value) {
+      this._allowRenaming = value;
+    }
+  }, {
+    key: "isDragging",
+    get: function get() {
+      return this._dragging;
+    },
+    set: function set(value) {
+      if (this._dragging === value) return;
 
       if (value) {
-        // set data-icon attribute but first convert the value to a code point
-        this.dom.setAttribute('data-icon', String.fromCodePoint(parseInt(value, 16)));
+        this._dragging = true;
+
+        this._updateDragHandle(); // handle mouse move to scroll when dragging if necessary
+
+
+        if (this.scrollable) {
+          window.removeEventListener('mousemove', this._domEvtMouseMove);
+          window.addEventListener('mousemove', this._domEvtMouseMove);
+
+          if (!this._dragScrollInterval) {
+            this._dragScrollInterval = setInterval(this._scrollWhileDragging.bind(this), 1000 / 60);
+          }
+        }
       } else {
-        this.dom.removeAttribute('data-icon');
+        this._dragOverItem = null;
+
+        this._updateDragHandle();
+
+        this._dragging = false;
+        window.removeEventListener('mousemove', this._domEvtMouseMove);
+
+        if (this._dragScrollInterval) {
+          clearInterval(this._dragScrollInterval);
+          this._dragScrollInterval = null;
+        }
       }
     }
   }, {
-    key: "title",
+    key: "selected",
     get: function get() {
-      return this._title;
+      return this._selectedItems.slice();
+    }
+  }, {
+    key: "filter",
+    get: function get() {
+      return this._filter;
     },
     set: function set(value) {
-      if (this._title === value) return;
-      this._title = value;
+      if (this._filter === value) return;
+      this._filter = value;
 
-      if (this._unsafe) {
-        this._titleElement.dom.innerHTML = value;
+      if (value) {
+        this._applyFilter(value);
       } else {
-        this._titleElement.dom.textContent = value;
+        this._clearFilter();
       }
     }
   }, {
-    key: "text",
+    key: "pressedCtrl",
     get: function get() {
-      return this._text;
-    },
-    set: function set(value) {
-      if (this._text === value) return;
-      this._text = value;
-
-      if (this._unsafe) {
-        this._textElement.dom.innerHTML = value;
-      } else {
-        this._textElement.dom.textContent = value;
-      }
+      return this._pressedCtrl;
+    }
+  }, {
+    key: "pressedShift",
+    get: function get() {
+      return this._pressedShift;
     }
   }]);
 
-  return InfoBox;
-}(Container["a" /* default */]);
+  return TreeView;
+}(_Container__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
 
-
-/* harmony default export */ var components_InfoBox = __webpack_exports__["a"] = (InfoBox_InfoBox);
+/* harmony default export */ __webpack_exports__["a"] = (TreeView);
 
 /***/ }),
-/* 15 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-// CONCATENATED MODULE: ./src/components/VectorInput/style.scss
-// extracted by mini-css-extract-plugin
-
-// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
-var Element = __webpack_require__(1);
-
-// EXTERNAL MODULE: ./src/components/NumericInput/index.js + 1 modules
-var NumericInput = __webpack_require__(8);
-
-// EXTERNAL MODULE: ./src/class.js
-var src_class = __webpack_require__(0);
-
-// CONCATENATED MODULE: ./src/components/VectorInput/index.js
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(73);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+/* harmony import */ var _NumericInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(12);
+/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(0);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5204,9 +9502,11 @@ var CLASS_VECTOR_INPUT = 'pcui-vector-input';
  * @name VectorInput
  * @classdesc A vector input
  * @augments Element
+ * @mixes IBindable
+ * @mixes IFocusable
  */
 
-var VectorInput_VectorInput = /*#__PURE__*/function (_Element) {
+var VectorInput = /*#__PURE__*/function (_Element) {
   _inherits(VectorInput, _Element);
 
   var _super = _createSuper(VectorInput);
@@ -5243,7 +9543,7 @@ var VectorInput_VectorInput = /*#__PURE__*/function (_Element) {
     _this._inputs = new Array(dimensions);
 
     for (var i = 0; i < _this._inputs.length; i++) {
-      _this._inputs[i] = new NumericInput["a" /* default */]({
+      _this._inputs[i] = new _NumericInput__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]({
         min: args.min,
         max: args.max,
         precision: args.precision,
@@ -5291,16 +9591,16 @@ var VectorInput_VectorInput = /*#__PURE__*/function (_Element) {
       var showingMultipleValues = false;
 
       for (var i = 0; i < this._inputs.length; i++) {
-        if (this._inputs[i].class.contains(src_class["k" /* MULTIPLE_VALUES */])) {
+        if (this._inputs[i].class.contains(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"])) {
           showingMultipleValues = true;
           break;
         }
       }
 
       if (showingMultipleValues) {
-        this.class.add(src_class["k" /* MULTIPLE_VALUES */]);
+        this.class.add(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
       } else {
-        this.class.remove(src_class["k" /* MULTIPLE_VALUES */]);
+        this.class.remove(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
       }
 
       this.emit('change', this.value);
@@ -5308,8 +9608,8 @@ var VectorInput_VectorInput = /*#__PURE__*/function (_Element) {
   }, {
     key: "_updateValue",
     value: function _updateValue(value) {
-      this.class.remove(src_class["k" /* MULTIPLE_VALUES */]);
-      if (this.value.equals(value)) return false;
+      this.class.remove(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
+      if (JSON.stringify(this.value) === JSON.stringify(value)) return false;
       this._applyingChange = true;
 
       for (var i = 0; i < this._inputs.length; i++) {
@@ -5460,11 +9760,11 @@ var VectorInput_VectorInput = /*#__PURE__*/function (_Element) {
   }]);
 
   return VectorInput;
-}(Element["a" /* default */]); // add proxied properties
+}(_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]); // add proxied properties
 
 
 ['min', 'max', 'precision', 'step', 'renderChanges'].forEach(function (property) {
-  Object.defineProperty(VectorInput_VectorInput.prototype, property, {
+  Object.defineProperty(VectorInput.prototype, property, {
     get: function get() {
       return this._inputs[0][property];
     },
@@ -5475,1439 +9775,1271 @@ var VectorInput_VectorInput = /*#__PURE__*/function (_Element) {
     }
   });
 });
-/* harmony default export */ var components_VectorInput = __webpack_exports__["a"] = (VectorInput_VectorInput);
+_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('vec2', VectorInput, {
+  dimensions: 2,
+  renderChanges: true
+});
+_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('vec3', VectorInput, {
+  dimensions: 3,
+  renderChanges: true
+});
+_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('vec4', VectorInput, {
+  dimensions: 4,
+  renderChanges: true
+});
+/* harmony default export */ __webpack_exports__["a"] = (VectorInput);
 
 /***/ }),
-/* 16 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// CONCATENATED MODULE: ./src/components/Overlay/style.scss
-// extracted by mini-css-extract-plugin
+/**
+ * @name IBindable
+ * @classdesc Provides an interface for getting / setting a value for the Element.
+ * @property {*} value - Gets / sets the value of the Element.
+ * @property {Array<*>} values - Sets multiple values to the Element. It is up to the Element to determine how to display them.
+ */
+var IBindable = function IBindable() {
+  _classCallCheck(this, IBindable);
+};
+/**
+ * @event
+ * @name IBindable#change
+ * @description Fired when the value of the Element changes
+ * @param {*} value - The new value
+ */
 
-// EXTERNAL MODULE: ./src/components/Container/index.js + 1 modules
-var Container = __webpack_require__(2);
 
-// CONCATENATED MODULE: ./src/components/Overlay/index.js
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+/* harmony default export */ __webpack_exports__["a"] = (IBindable);
 
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(31);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-array-input{margin:6px;min-width:0}.pcui-array-input>.pcui-numeric-input{margin:0 0 6px 0}.pcui-array-input.pcui-array-empty>.pcui-numeric-input{margin:0}.pcui-array-input-item>*{margin-top:1px;margin-bottom:1px}.pcui-array-input-item>*:first-child:not(.pcui-not-flexible){flex-grow:1;flex-shrink:0}.pcui-array-input-item>.pcui-button{margin-left:-3px;margin-right:0;background-color:transparent;border:0}.pcui-array-input-item-asset>.pcui-button{margin-top:36px}.pcui-array-input.pcui-readonly .pcui-array-input-item-delete{display:none}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports) {
+
+/**
+ * When source maps are enabled, `style-loader` uses a link element with a data-uri to
+ * embed the css on the page. This breaks all relative urls because now they are relative to a
+ * bundle instead of the current page.
+ *
+ * One solution is to only use full urls, but that may be impossible.
+ *
+ * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
+ *
+ * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
+ *
+ */
+module.exports = function (css) {
+  // get current location
+  var location = typeof window !== "undefined" && window.location;
+
+  if (!location) {
+    throw new Error("fixUrls requires window.location");
+  } // blank or null?
+
+
+  if (!css || typeof css !== "string") {
+    return css;
+  }
+
+  var baseUrl = location.protocol + "//" + location.host;
+  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/"); // convert each url(...)
+
+  /*
+  This regular expression is just a way to recursively match brackets within
+  a string.
+  	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
+     (  = Start a capturing group
+       (?:  = Start a non-capturing group
+           [^)(]  = Match anything that isn't a parentheses
+           |  = OR
+           \(  = Match a start parentheses
+               (?:  = Start another non-capturing groups
+                   [^)(]+  = Match anything that isn't a parentheses
+                   |  = OR
+                   \(  = Match a start parentheses
+                       [^)(]*  = Match anything that isn't a parentheses
+                   \)  = Match a end parentheses
+               )  = End Group
+               *\) = Match anything and then a close parens
+           )  = Close non-capturing group
+           *  = Match anything
+        )  = Close capturing group
+   \)  = Match a close parens
+  	 /gi  = Get all matches, not the first.  Be case insensitive.
+   */
+
+  var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function (fullMatch, origUrl) {
+    // strip quotes (if they exist)
+    var unquotedOrigUrl = origUrl.trim().replace(/^"(.*)"$/, function (o, $1) {
+      return $1;
+    }).replace(/^'(.*)'$/, function (o, $1) {
+      return $1;
+    }); // already a full url? no change
+
+    if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/|\s*$)/i.test(unquotedOrigUrl)) {
+      return fullMatch;
+    } // convert the url to a full url
+
+
+    var newUrl;
+
+    if (unquotedOrigUrl.indexOf("//") === 0) {
+      //TODO: should we add protocol?
+      newUrl = unquotedOrigUrl;
+    } else if (unquotedOrigUrl.indexOf("/") === 0) {
+      // path should be relative to the base url
+      newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
+    } else {
+      // path should be relative to current directory
+      newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
+    } // send back the fixed url(...)
+
+
+    return "url(" + JSON.stringify(newUrl) + ")";
+  }); // send back the fixed css
+
+  return fixedCss;
+};
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(34);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular,.pcui-element{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}@-webkit-keyframes pcui-flash-animation{from{outline-color:#f60}to{outline-color:rgba(255,102,0,0)}}@keyframes pcui-flash-animation{from{outline-color:#f60}to{outline-color:rgba(255,102,0,0)}}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-element{border:0 solid #232e30}.pcui-element.flash{outline:1px solid #f60;-webkit-animation:pcui-flash-animation 200ms ease-in-out forwards;animation:pcui-flash-animation 200ms ease-in-out forwards}.pcui-element:focus{outline:none}.pcui-element::-moz-focus-inner{border:0}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(36);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-container{position:relative;min-width:0;min-height:0}.pcui-container.pcui-resizable>.pcui-resizable-handle{position:absolute;z-index:1;opacity:0;background-color:transparent}.pcui-container.pcui-resizable>.pcui-resizable-handle:hover{opacity:1}.pcui-container.pcui-resizable.pcui-resizable-resizing>.pcui-resizable-handle{opacity:1}.pcui-container.pcui-resizable.pcui-resizable-left>.pcui-resizable-handle,.pcui-container.pcui-resizable.pcui-resizable-right>.pcui-resizable-handle{top:0;bottom:0;width:1px;height:auto;cursor:ew-resize}.pcui-container.pcui-resizable.pcui-resizable-left>.pcui-resizable-handle{left:0;border-left:3px solid #20292b}.pcui-container.pcui-resizable.pcui-resizable-right>.pcui-resizable-handle{right:0;border-right:3px solid #20292b}.pcui-container.pcui-resizable.pcui-resizable-top>.pcui-resizable-handle,.pcui-container.pcui-resizable.pcui-resizable-bottom>.pcui-resizable-handle{left:0;right:0;width:auto;height:1px;cursor:ns-resize}.pcui-container.pcui-resizable.pcui-resizable-top>.pcui-resizable-handle{top:0;border-top:3px solid #20292b}.pcui-container.pcui-resizable.pcui-resizable-bottom>.pcui-resizable-handle{bottom:0;border-bottom:3px solid #20292b}.pcui-container-dragged{outline:2px solid #fff;box-sizing:border-box;opacity:0.7;z-index:1}.pcui-container-dragged-child{outline:1px dotted #f60;box-sizing:border-box}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(38);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon,.pcui-panel.pcui-collapsible>.pcui-panel-header:before,.pcui-panel-header,.pcui-panel-header-title{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon,.pcui-panel.pcui-collapsible>.pcui-panel-header:before{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex,.pcui-panel-header>.pcui-panel-sortable-icon{flex-direction:column}.pcui-flex:not(.pcui-hidden),.pcui-panel-header>.pcui-panel-sortable-icon:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-panel{background-color:#364346}.pcui-panel-header{background-color:#293538;color:#fff;font-size:12px;white-space:nowrap;padding-left:10px;flex-shrink:0;align-items:center}.pcui-panel-header-title{overflow:hidden;text-overflow:ellipsis;flex:1;color:inherit;font-size:inherit;white-space:inherit;margin:0 auto 0 0}.pcui-panel-content{flex:1}.pcui-panel.pcui-collapsible{transition:height 100ms, width 100ms}.pcui-panel.pcui-collapsible>.pcui-panel-header{cursor:pointer}.pcui-panel.pcui-collapsible>.pcui-panel-header:before{left:0;content:'\\E179';font-size:14px;margin-right:10px;text-align:center;color:#f60}.pcui-panel.pcui-collapsible>.pcui-panel-header:hover{color:#fff}.pcui-panel.pcui-collapsible>.pcui-panel-header:hover:before{color:#fff}.pcui-panel.pcui-collapsible.pcui-panel-normal>.pcui-panel-header:before{content:'\\E183';font-weight:200}.pcui-panel.pcui-collapsible>.pcui-panel-content{transition:visibility 100ms}.pcui-panel.pcui-collapsible.pcui-collapsed{overflow:hidden}.pcui-panel.pcui-collapsible.pcui-collapsed>.pcui-panel-content{visibility:hidden}.pcui-panel.pcui-collapsible.pcui-collapsed>.pcui-panel-header:before{content:'\\E180'}.pcui-panel.pcui-collapsible.pcui-collapsed.pcui-panel-normal>.pcui-panel-header:before{content:'\\E184'}.pcui-panel.pcui-collapsible.pcui-collapsed.pcui-panel-horizontal>.pcui-panel-header{width:2048px;-webkit-transform:rotate(90deg);-moz-transform:rotate(90deg);-ms-transform:rotate(90deg);-o-transform:rotate(90deg);transform:rotate(90deg);-webkit-transform-origin:0% 100%;-moz-transform-origin:0% 100%;-ms-transform-origin:0% 100%;-o-transform-origin:0% 100%;transform-origin:0% 100%}.pcui-panel.pcui-collapsible.pcui-collapsed.pcui-panel-horizontal>.pcui-panel-header:before{content:'\\E177'}.pcui-panel.pcui-collapsible.pcui-collapsed.pcui-panel-horizontal.pcui-panel-normal>.pcui-panel-header:before{content:'\\E181'}.pcui-panel.pcui-collapsible.pcui-collapsed.pcui-panel-horizontal>.pcui-panel-content{transition:none}.pcui-panel.pcui-resizable.pcui-collapsible.pcui-collapsed>.pcui-resizable-handle{display:none}.pcui-panel.pcui-resizable.pcui-resizable-resizing{transition:none}.pcui-panel.pcui-resizable.pcui-resizable-resizing>.pcui-panel-content{transition:none}.pcui-panel-header>.pcui-panel-sortable-icon{color:#5b7073;transition:color 100ms;flex-direction:row;align-items:center;margin:0 10px 0 0;height:100%}.pcui-panel-header>.pcui-panel-sortable-icon:before{content:' ';border-left:1px solid #364346;margin-right:10px;height:calc(100% - 14px);flex-shrink:0}.pcui-panel-header>.pcui-panel-sortable-icon:after{content:'.. .. ..';white-space:normal;width:12px;line-height:5px;overflow:hidden;height:24px;font-size:22px;letter-spacing:1px;flex-shrink:0}.pcui-panel:not(.pcui-disabled):not(.pcui-readonly)>.pcui-panel-header>.pcui-panel-sortable-icon:hover{color:#fff;cursor:move}.pcui-panel:not(.pcui-collapsible)>.pcui-panel-header>.pcui-panel-sortable-icon:before{display:none}.pcui-panel-remove{align-self:flex-end;order:100}.pcui-panel-remove:before{line-height:30px}.pcui-panel.pcui-readonly .pcui-panel-remove{display:none}.pcui-panel-header>.pcui-button{flex-shrink:0;margin:1px;background-color:transparent;border:0}.pcui-panel.pcui-disabled>.pcui-panel-header{background-color:#303d40;color:#999}.pcui-subpanel{box-sizing:border-box;margin:6px;border:1px solid #293538;border-radius:2px;background-color:#2c393c;color:#b1b8ba;font-size:12px}.pcui-subpanel .pcui-button{background-color:#364346;border-color:#293538}.pcui-subpanel .pcui-button:not(.pcui-disabled):not(.pcui-readonly):hover,.pcui-subpanel .pcui-button:not(.pcui-disabled):not(.pcui-readonly):focus{background-color:#364346}.pcui-subpanel .pcui-button:not(.pcui-disabled):not(.pcui-readonly):active{background-color:#2c393c}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(40);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont,.pcui-label.pcui-multiple-values:before{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect,.pcui-label.pcui-selectable:hover{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-label{display:inline-block;box-sizing:border-box;margin:6px;vertical-align:middle;transition:opacity 100ms;color:#b1b8ba;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;user-select:none}.pcui-label.pcui-default-mousedown{user-select:initial}.pcui-label.pcui-multiple-values{position:relative;color:transparent}.pcui-label.pcui-multiple-values:before{content:'...';color:#b1b8ba;white-space:nowrap;font-size:12px}.pcui-label.pcui-error{color:#d34141}.pcui-label.pcui-selectable:hover{color:#f60;text-decoration:underline}.pcui-label[placeholder]{position:relative}.pcui-label[placeholder]:after{content:attr(placeholder);position:absolute;top:0;right:0;padding:0 8px;color:#999;pointer-events:none}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(42);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon,.pcui-button[data-icon]:before{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon,.pcui-button[data-icon]:before{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect,.pcui-button{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-button{font-family:inherit;display:inline-block;border:1px solid #20292b;border-radius:2px;box-sizing:border-box;background-color:#2c393c;color:#b1b8ba;padding:0 8px;margin:6px;height:28px;line-height:28px;max-height:100%;vertical-align:middle;font-size:12px;font-weight:600;text-align:center;white-space:nowrap;cursor:pointer;transition:color 100ms, opacity 100ms, box-shadow 100ms;overflow:hidden;text-overflow:ellipsis}.pcui-button[data-icon]:before{content:attr(data-icon);font-weight:100;font-size:inherit;margin-right:6px;vertical-align:middle}.pcui-button[data-icon]:empty:before{margin-right:0}.pcui-button:not(.pcui-disabled):not(.pcui-readonly):hover,.pcui-button:not(.pcui-disabled):not(.pcui-readonly):focus{color:#fff;background-color:#2c393c;box-shadow:0 0 2px 1px rgba(255,102,0,0.3)}.pcui-button:not(.pcui-disabled):not(.pcui-readonly):active{background-color:#20292b;box-shadow:none}.pcui-button.pcui-readonly{opacity:.7;cursor:default}.pcui-button.pcui-disabled{opacity:.4;cursor:default}.pcui-button.pcui-small{height:24px;line-height:24px;font-size:10px}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(44);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-numeric-input-slider-control{display:none;position:absolute;width:10px;height:10px;right:3px;border:2px solid #20292b;background-color:#293538;border-radius:100px;z-index:9999;transform:translateY(-50%);top:50%;cursor:ew-resize}.pcui-numeric-input-slider-control:after{content:'\\E408';font-size:15px;font-family:'pc-icon';position:absolute;left:-5px;top:-5px;transform:rotateZ(90deg)}.pcui-numeric-input-slider-control:hover{opacity:50%;color:#b1b8ba}.pcui-numeric-input-slider-control-active{opacity:100% !important;color:#7f7 !important}.pcui-numeric-input-slider-control-hidden{display:none !important}.pcui-numeric-input:hover .pcui-numeric-input-slider-control{display:block}.pcui-numeric-input.pcui-disabled:hover .pcui-numeric-input-slider-control{display:none}.pcui-numeric-input.pcui-disabled .pcui-numeric-input-slider-control,.pcui-numeric-input.pcui-readonly .pcui-numeric-input-slider-control{display:none}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(46);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont,.pcui-text-input>input,.pcui-text-input.pcui-multiple-values:before{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-text-input{display:inline-block;border:1px solid #293538;border-radius:2px;box-sizing:border-box;margin:6px;min-height:24px;height:24px;background-color:#2c393c;vertical-align:top;transition:color 100ms, background-color 100ms, box-shadow 100ms;position:relative;color:#b1b8ba}.pcui-text-input>input{height:100%;width:calc(100% - 16px);padding:0 6px;line-height:1;color:inherit;background:transparent;border:none;outline:none;box-shadow:none}.pcui-text-input:before{color:inherit}.pcui-text-input.pcui-multiple-values:before{position:absolute;padding:0 8px;content:'...';white-space:nowrap;top:5px;font-size:12px}.pcui-text-input:not(.pcui-disabled):not(.pcui-readonly):hover{background-color:#293538;color:#fff}.pcui-text-input:not(.pcui-disabled):not(.pcui-readonly):not(.pcui-error):hover{box-shadow:0 0 2px 1px rgba(255,102,0,0.3)}.pcui-text-input:not(.pcui-disabled):not(.pcui-readonly).pcui-focus{background-color:#20292b;box-shadow:0 0 0 1px rgba(255,102,0,0.3)}.pcui-text-input.pcui-focus:after,.pcui-text-input.pcui-focus:before,.pcui-text-input:hover:after,.pcui-text-input:hover:before{display:none}.pcui-text-input.pcui-readonly{background-color:rgba(44,57,60,0.7);border-color:transparent}.pcui-text-input.pcui-disabled{color:#5b7073}.pcui-text-input.pcui-error{color:#b1b8ba;box-shadow:0 0 0 1px #d34141}.pcui-text-input[placeholder]{position:relative}.pcui-text-input[placeholder]:after{content:attr(placeholder);background-color:#2c393c;position:absolute;top:0;right:0;padding:0 8px;line-height:22px;font-size:10px;font-weight:600;white-space:nowrap;color:#829193;pointer-events:none}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(48);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon,.pcui-boolean-input.pcui-boolean-input-ticked:after{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon,.pcui-boolean-input.pcui-boolean-input-ticked:after{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-boolean-input{display:inline-block;position:relative;box-sizing:border-box;background-color:#2c393c;color:#fff;width:14px;height:14px;line-height:1;overflow:hidden;margin:6px;transition:opacity 100ms, background-color 100ms, box-shadow 100ms}.pcui-boolean-input:focus{outline:none}.pcui-boolean-input.pcui-boolean-input-ticked{background-color:#b1b8ba}.pcui-boolean-input.pcui-boolean-input-ticked:after{content:'\\E372';color:#20292b;background-color:inherit;font-size:19px;display:block;margin-top:-2px;margin-left:-2px}.pcui-boolean-input:not(.pcui-disabled):not(.pcui-readonly):hover,.pcui-boolean-input:not(.pcui-disabled):not(.pcui-readonly):focus{cursor:pointer;background-color:#293538;box-shadow:0 0 2px 1px rgba(255,102,0,0.3)}.pcui-boolean-input:not(.pcui-disabled):not(.pcui-readonly).pcui-boolean-input-ticked:hover,.pcui-boolean-input:not(.pcui-disabled):not(.pcui-readonly).pcui-boolean-input-ticked:focus{background-color:#b1b8ba}.pcui-boolean-input.pcui-disabled{opacity:.4}.pcui-boolean-input.pcui-multiple-values:after{position:absolute;font-size:17px;font-weight:bold;color:#b1b8ba;left:4px;top:-3px;content:'-'}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(50);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-boolean-input-toggle{display:inline-block;position:relative;width:30px;height:16px;border-radius:8px;flex-shrink:0;border:1px solid #293538;box-sizing:border-box;background-color:#364346;color:#fff;line-height:1;overflow:hidden;margin:6px;transition:opacity 100ms, background-color 100ms, box-shadow 100ms}.pcui-boolean-input-toggle:focus{outline:none}.pcui-boolean-input-toggle:after{content:'\\00a0';position:absolute;top:1px;left:1px;width:12px;height:12px;border-radius:6px;background-color:#5b7073;transition:left 100ms ease, background-color 100ms ease}.pcui-boolean-input-toggle.pcui-boolean-input-ticked{border-color:#293538}.pcui-boolean-input-toggle.pcui-boolean-input-ticked:after{left:15px;background-color:#69b875}.pcui-boolean-input-toggle:not(.pcui-disabled):not(.pcui-readonly):hover,.pcui-boolean-input-toggle:not(.pcui-disabled):not(.pcui-readonly):focus{cursor:pointer;border-color:#20292b;background-color:#20292b;box-shadow:0 0 2px 1px rgba(255,102,0,0.3)}.pcui-boolean-input-toggle:not(.pcui-disabled):not(.pcui-readonly):hover:after,.pcui-boolean-input-toggle:not(.pcui-disabled):not(.pcui-readonly):focus:after{background-color:#d34141}.pcui-boolean-input-toggle:not(.pcui-disabled):not(.pcui-readonly).pcui-boolean-input-ticked:hover,.pcui-boolean-input-toggle:not(.pcui-disabled):not(.pcui-readonly).pcui-boolean-input-ticked:focus{border-color:#20292b;background-color:#20292b}.pcui-boolean-input-toggle:not(.pcui-disabled):not(.pcui-readonly).pcui-boolean-input-ticked:after{background-color:#7f7}.pcui-boolean-input-toggle.pcui-readonly{opacity:.7}.pcui-boolean-input-toggle.pcui-disabled{opacity:.4}.pcui-boolean-input-toggle.pcui-multiple-values:after{left:8px;background-color:rgba(155,161,163,0.25)}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(52);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-code{background:#20292b;overflow:auto}.pcui-code .pcui-code-inner{color:#f60;font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:10px;white-space:pre}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(54);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-contextmenu{box-sizing:border-box;border:1px solid #293538;border-radius:2px;background-color:#2c393c;color:#b1b8ba;font-size:12px;font-weight:400;display:none;position:fixed;z-index:9999}.pcui-contextmenu-active{display:block}.pcui-contextmenu div{background-color:#2c393c;width:150px;position:absolute}.pcui-contextmenu div:before{content:\"\";position:absolute;top:0;bottom:0;left:0;right:0;z-index:-1;box-shadow:0 0 8px rgba(0,0,0,0.5)}.pcui-contextmenu-parent{cursor:auto !important}.pcui-contextmenu-parent div{display:none}.pcui-contextmenu-parent:hover div{display:block}.pcui-contextmenu-parent-active div{display:block}.pcui-contextmenu{div-font-weight:bold}.pcui-contextmenu div:hover{background-color:#364346;cursor:pointer}.pcui-contextmenu div.pcui-contextmenu-parent:after{content:'\\E160';font-family:'pc-icon';font-size:14px;text-align:center;background-color:transparent;color:#9ba1a3;line-height:14px;position:absolute;right:4px;top:50%;transform:translateY(-50%)}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(56);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-divider{height:1px;background-color:#2c393c;margin:6px 0}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(58);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon,.pcui-infobox[data-icon]:not(.pcui-hidden):before{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon,.pcui-infobox[data-icon]:not(.pcui-hidden):before{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-infobox{box-sizing:border-box;margin:6px;padding:12px;border:1px solid #293538;border-radius:2px;background-color:#2c393c;color:#b1b8ba;font-size:12px}.pcui-infobox :first-child{color:#fff;margin-bottom:2px}.pcui-infobox[data-icon]:not(.pcui-hidden){display:grid;grid:auto-flow / min-content 1fr}.pcui-infobox[data-icon]:not(.pcui-hidden):before{content:attr(data-icon);font-weight:100;font-size:16px;margin-right:12px;vertical-align:middle;grid-column:1;grid-row:1 / 3}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(60);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect,.pcui-overlay-inner{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex,.pcui-overlay{flex-direction:column}.pcui-flex:not(.pcui-hidden),.pcui-overlay:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-overlay{position:absolute;width:auto;height:auto;top:0;right:0;bottom:0;left:0;z-index:101;transition:opacity 100ms, visibility 100ms;justify-content:center;align-items:center;position:absolute}.pcui-overlay-inner{position:absolute;width:auto;height:auto;top:0;right:0;bottom:0;left:0;background-color:rgba(32,41,43,0.7)}.pcui-overlay-clickable>.pcui-overlay-inner{cursor:pointer}.pcui-overlay-transparent>.pcui-overlay-inner{background-color:transparent}.pcui-overlay-content{background-color:#364346;transition:width 100ms, height 100ms, margin-left 100ms, margin-top 100ms;box-shadow:7px 7px 7px rgba(0,0,0,0.15)}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(62);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-progress{height:4px;background-color:#20292b;transition:opacity 100ms;width:100%}.pcui-progress .pcui-progress-inner{width:0%;height:inherit;background:#f60;background:-webkit-gradient(left top, right bottom, color-stop(0%, #f60), color-stop(25%, #f60), color-stop(26%, #a84300), color-stop(50%, #a84300), color-stop(51%, #f60), color-stop(75%, #f60), color-stop(76%, #a84300), color-stop(100%, #a84300));background:-webkit-linear-gradient(-45deg, #f60 0%, #f60 25%, #a84300 26%, #a84300 50%, #f60 51%, #f60 75%, #a84300 76%, #a84300 100%);background:-moz-linear-gradient(-45deg, #f60 0%, #f60 25%, #a84300 26%, #a84300 50%, #f60 51%, #f60 75%, #a84300 76%, #a84300 100%);background:-ms-linear-gradient(-45deg, #f60 0%, #f60 25%, #a84300 26%, #a84300 50%, #f60 51%, #f60 75%, #a84300 76%, #a84300 100%);background:-o-linear-gradient(-45deg, #f60 0%, #f60 25%, #a84300 26%, #a84300 50%, #f60 51%, #f60 75%, #a84300 76%, #a84300 100%);background:linear-gradient(135deg, #f60 0%, #f60 25%, #a84300 26%, #a84300 50%, #f60 51%, #f60 75%, #a84300 76%, #a84300 100%);background-position:0px 0px;background-size:24px 24px;background-repeat:repeat;-webkit-animation:pcui-progress-background 1000ms linear infinite;animation:pcui-progress-background 1000ms linear infinite}.pcui-progress.pcui-error .pcui-progress-inner{background:#f60;background:-webkit-gradient(left top, right bottom, color-stop(0%, #f77), color-stop(25%, #f77), color-stop(26%, #ff2020), color-stop(50%, #ff2020), color-stop(51%, #f77), color-stop(75%, #f77), color-stop(76%, #ff2020), color-stop(100%, #ff2020));background:-webkit-linear-gradient(-45deg, #f77 0%, #f77 25%, #ff2020 26%, #ff2020 50%, #f77 51%, #f77 75%, #ff2020 76%, #ff2020 100%);background:-moz-linear-gradient(-45deg, #f77 0%, #f77 25%, #ff2020 26%, #ff2020 50%, #f77 51%, #f77 75%, #ff2020 76%, #ff2020 100%);background:-ms-linear-gradient(-45deg, #f77 0%, #f77 25%, #ff2020 26%, #ff2020 50%, #f77 51%, #f77 75%, #ff2020 76%, #ff2020 100%);background:-o-linear-gradient(-45deg, #f77 0%, #f77 25%, #ff2020 26%, #ff2020 50%, #f77 51%, #f77 75%, #ff2020 76%, #ff2020 100%);background:linear-gradient(135deg, #f77 0%, #f77 25%, #ff2020 26%, #ff2020 50%, #f77 51%, #f77 75%, #ff2020 76%, #ff2020 100%);background-position:0px 0px;background-size:24px 24px;background-repeat:repeat;-webkit-animation:none;animation:none}@-webkit-keyframes pcui-progress-background{from{background-position:0px 0}to{background-position:24px 0}}@keyframes pcui-progress-background{from{background-position:0px 0}to{background-position:24px 0}}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(64);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon,.pcui-select-input-icon:after,.pcui-select-input-list .pcui-label.pcui-selected:after,.pcui-select-input-create-new>.pcui-label:last-child:before{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon,.pcui-select-input-icon:after,.pcui-select-input-list .pcui-label.pcui-selected:after,.pcui-select-input-create-new>.pcui-label:last-child:before{font-family:'pc-icon'}.fixedFont,.pcui-select-input-value,.pcui-select-input-list .pcui-label,.pcui-select-input-tag>.pcui-label{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex,.pcui-select-input,.pcui-select-input-container-value{flex-direction:column}.pcui-flex:not(.pcui-hidden),.pcui-select-input:not(.pcui-hidden),.pcui-select-input-container-value:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-select-input{box-sizing:border-box;margin:6px;border-radius:2px;min-width:0}.pcui-select-input-container-value{background-color:#2c393c;transition:box-shadow 100ms, opacity 100ms}.pcui-select-input-shadow{position:absolute;width:100%;height:100%;transition:box-shadow 100ms;border-radius:2px;pointer-events:none;z-index:1}.pcui-select-input-value{margin:0;padding:0 24px 0 8px;height:24px;line-height:24px;font-size:12px;transition:background-color 100ms, color 100ms}.pcui-select-input-value:not(.pcui-hidden){display:block}.pcui-select-input-textinput{margin:0}.pcui-select-input-textinput:not(.pcui-disabled):not(.pcui-readonly):not(.pcui-error).pcui-focus,.pcui-select-input-textinput:not(.pcui-disabled):not(.pcui-readonly):not(.pcui-error):hover{box-shadow:none}.pcui-select-input-icon{position:absolute;right:6px;color:#5b7073;pointer-events:none;transition:color 100ms;margin:0;height:24px;line-height:24px}.pcui-select-input-icon:after{content:'\\E159';vertical-align:middle}.pcui-select-input.pcui-open .pcui-select-input-shadow{box-shadow:0 0 2px 1px rgba(255,102,0,0.3)}.pcui-select-input.pcui-open .pcui-select-input-value{color:#fff;background-color:#20292b}.pcui-select-input.pcui-open .pcui-select-input-icon:after{color:#fff;content:'\\E157'}.pcui-select-input-list{position:absolute;z-index:1;top:100%;width:100%;max-height:200px;overflow-y:auto;background-color:#293538}.pcui-select-input-list .pcui-label{font-size:12px;height:22px;line-height:22px;padding:0 24px 0 6px;margin:0;transition:background-color 100ms, color 100ms}.pcui-select-input-list .pcui-label:not(.pcui-hidden){display:block}.pcui-select-input-list .pcui-label.pcui-selected{color:#fff}.pcui-select-input-list .pcui-label.pcui-selected:after{content:'\\E133';color:#5b7073;position:absolute;right:6px}.pcui-select-input-fit-height .pcui-select-input-list{top:initial;bottom:100%}.pcui-select-input-fit-height .pcui-select-input-shadow{top:initial;bottom:0}.pcui-select-input-tags:not(.pcui-select-input-tags-empty){margin-top:1px;flex-wrap:wrap}.pcui-select-input-tag{background-color:#293538;align-items:center;border-radius:2px;border:1px solid #232e30;margin-right:2px;margin-top:2px;min-width:0;height:18px}.pcui-select-input-tag>*{margin:0;background-color:transparent;border:0}.pcui-select-input-tag>.pcui-label{padding:0 5px 0 8px}.pcui-select-input-tag>.pcui-button{padding:0 5px;height:18px;line-height:18px;flex-shrink:0}.pcui-select-input-tag>.pcui-button:not(.pcui-disabled):not(.pcui-readonly):hover{box-shadow:none;color:#d34141}.pcui-select-input-tag-not-everywhere>.pcui-label{opacity:0.5}.pcui-select-input-tag-not-everywhere>.pcui-label:before{content:'*';margin-right:5px}.pcui-select-input:not(.pcui-disabled):not(.pcui-readonly) .pcui-select-input-container-value:hover .pcui-select-input-shadow{box-shadow:0 0 2px 1px rgba(255,102,0,0.3)}.pcui-select-input:not(.pcui-disabled):not(.pcui-readonly) .pcui-select-input-container-value:hover .pcui-select-input-icon{color:#9ba1a3}.pcui-select-input:not(.pcui-disabled):not(.pcui-readonly).pcui-focus .pcui-select-input-shadow{box-shadow:0 0 2px 1px rgba(255,102,0,0.3)}.pcui-select-input:not(.pcui-disabled):not(.pcui-readonly).pcui-focus .pcui-select-input-icon{color:#9ba1a3}.pcui-select-input:not(.pcui-disabled):not(.pcui-readonly) .pcui-select-input-value:hover{color:#fff;background-color:#20292b;cursor:pointer}.pcui-select-input:not(.pcui-disabled):not(.pcui-readonly) .pcui-select-input-list>*:hover,.pcui-select-input:not(.pcui-disabled):not(.pcui-readonly) .pcui-select-input-list>.pcui-select-input-label-highlighted{background-color:#20292b;color:#fff;cursor:pointer}.pcui-select-input-create-new>.pcui-label{padding-right:6px}.pcui-select-input-create-new>.pcui-label:last-child{flex-shrink:0;margin-left:auto}.pcui-select-input-create-new>.pcui-label:last-child:before{content:'\\E120';margin-right:6px}.pcui-select-input.pcui-disabled{opacity:.4}.pcui-select-input.pcui-readonly .pcui-select-input-icon{display:none}.pcui-select-input.pcui-readonly.pcui-select-input-multi .pcui-select-input-container-value{display:none}.pcui-select-input.pcui-readonly.pcui-select-input-multi .pcui-select-input-tag>.pcui-button{display:none}.pcui-select-input.pcui-readonly.pcui-select-input-allow-input:not(.pcui-select-input-multi){opacity:.7}.pcui-select-input.pcui-readonly.pcui-select-input-allow-input:not(.pcui-select-input-multi) .pcui-select-input-textinput:after{display:none}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(66);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect,.pcui-slider{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-slider{display:inline-flex;height:24px;margin:6px;align-items:center}.pcui-slider>.pcui-numeric-input{flex:1;margin-left:0}.pcui-slider-container{flex:3}.pcui-slider-bar{position:relative;width:calc(100% - 18px);height:4px;margin:9px 8px;background-color:#2c393c;border:1px solid #293538}.pcui-slider-handle{position:absolute;top:-7px;left:0;margin-left:-9px;width:8px;height:16px;background-color:#5b7073;border:1px solid #293538;transition:left 100ms ease}.pcui-slider-handle:hover,.pcui-slider-handle:focus{outline:none}.pcui-slider-active{cursor:ew-resize}.pcui-slider-active .pcui-slider-bar{border-color:#20292b;background-color:#20292b}.pcui-slider-active .pcui-slider-handle{border-color:#20292b;background-color:#fff;transition:none}.pcui-slider:not(.pcui-disabled):not(.pcui-readonly):hover{cursor:pointer}.pcui-slider:not(.pcui-disabled):not(.pcui-readonly) .pcui-slider-handle:focus,.pcui-slider:not(.pcui-disabled):not(.pcui-readonly) .pcui-slider-handle:hover{cursor:ew-resize;outline:none;border-color:#20292b;background-color:#fff}.pcui-slider.pcui-readonly .pcui-numeric-input{flex:1}.pcui-slider.pcui-readonly .pcui-slider-bar{display:none}.pcui-slider.pcui-multiple-values .pcui-slider-handle{display:none}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(68);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-spinner{display:inline-block;margin:6px;vertical-align:middle}.pcui-spinner>path{animation-name:animation-spin;animation-duration:750ms;animation-iteration-count:infinite;animation-timing-function:linear;transform-origin:center}.pcui-spinner.pcui-error>path{animation:none;fill:#ff2020}.pcui-spinner.pcui-error>path.pcui-spinner-highlight{fill:#f77}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(70);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont,.pcui-text-area-input>textarea{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-text-area-input{min-height:48px;height:auto}.pcui-text-area-input>textarea{resize:none;height:100%;width:calc(100% - 16px);padding:0 8px;line-height:22px;color:inherit;background:transparent;border:none;outline:none;box-shadow:none;min-height:44px;min-width:172px}.pcui-text-area-input.pcui-text-area-input-resizable-none>textarea{resize:none}.pcui-text-area-input.pcui-text-area-input-resizable-both>textarea{resize:both}.pcui-text-area-input.pcui-text-area-input-resizable-horizontal>textarea{resize:horizontal}.pcui-text-area-input.pcui-text-area-input-resizable-vertical>textarea{resize:vertical}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(72);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon,.pcui-treeview-item-icon:after,.pcui-treeview-item:not(.pcui-treeview-item-empty)>.pcui-treeview-item-contents:before{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon,.pcui-treeview-item-icon:after,.pcui-treeview-item:not(.pcui-treeview-item-empty)>.pcui-treeview-item-contents:before{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect,.pcui-treeview{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-treeview{min-width:max-content}.pcui-treeview-item{position:relative;padding-left:24px}.pcui-treeview-item:before{content:'\\00a0';position:absolute;background-color:#313e41;width:2px;left:14px;top:-12px;bottom:12px}.pcui-treeview-item:last-child:before{height:25px;bottom:auto}.pcui-treeview-item.pcui-disabled>.pcui-treeview-item-contents>.pcui-treeview-item-text{opacity:.4}.pcui-treeview-item-contents{position:relative;color:#b1b8ba;margin-left:3px;border:1px solid transparent;align-items:center;height:24px;box-sizing:border-box}.pcui-treeview-item-contents:hover{cursor:pointer;color:#fff;background-color:#2c393c}.pcui-treeview-item-contents:hover>.pcui-treeview-item-icon{color:#fff}.pcui-treeview-item-icon{color:#5b7073;margin:0 2px 0 0;flex-shrink:0}.pcui-treeview-item-icon:before{content:'\\00a0';position:absolute;background-color:#313e41;left:-12px;top:10px;width:24px;height:2px}.pcui-treeview-item-icon:after{content:'\\E360';display:inline-block;vertical-align:sub;width:22px;height:22px;position:relative;z-index:1;text-align:center}.pcui-treeview-item-text{margin:0;flex-shrink:0;position:relative;z-index:1;transition:opacity 100ms;padding-right:8px;color:inherit}.pcui-treeview-item-contents.pcui-treeview-item-selected{background-color:#20292b;color:#fff}.pcui-treeview-item-contents.pcui-treeview-item-selected>.pcui-treeview-item-icon{color:#fff}.pcui-treeview-item:not(.pcui-treeview-item-empty)>.pcui-treeview-item-contents:before{content:'\\E120';position:absolute;font-size:10px;font-weight:bold;text-align:center;color:#b1b8ba;background-color:#2c393c;top:0;left:-24px;width:16px;height:16px;line-height:16px;margin:3px;cursor:pointer;z-index:1}.pcui-treeview-item:not(.pcui-treeview-item-empty).pcui-treeview-item-open>.pcui-treeview-item-contents:before{content:'\\E121'}.pcui-treeview>.pcui-treeview-item{padding-left:0}.pcui-treeview>.pcui-treeview-item:before{content:none}.pcui-treeview>.pcui-treeview-item>.pcui-treeview-item-contents{margin-left:0}.pcui-treeview>.pcui-treeview-item>.pcui-treeview-item-contents>.pcui-treeview-item-icon:before{content:none}.pcui-treeview>.pcui-treeview-item>.pcui-treeview-item-contents>.pcui-treeview-item-icon:after{margin-left:0}.pcui-treeview>.pcui-treeview-item>.pcui-treeview-item{padding-left:21px}.pcui-treeview>.pcui-treeview-item>.pcui-treeview-item:before{left:11px}.pcui-treeview:not(.pcui-treeview-filtering)>.pcui-treeview-item .pcui-treeview-item:not(.pcui-treeview-item-open):not(.pcui-treeview-item-empty)>.pcui-treeview-item{display:none}.pcui-treeview-item-dragged>.pcui-treeview-item-contents{background-color:rgba(44,57,60,0.5);color:#fff}.pcui-treeview-drag-handle{position:fixed;width:32px;height:20px;top:0;bottom:0;z-index:4;margin-top:-1px;margin-left:-1px}.pcui-treeview-drag-handle.before{border-top:4px solid #f60;padding-right:8px;height:24px}.pcui-treeview-drag-handle.inside{border:4px solid #f60}.pcui-treeview-drag-handle.after{border-bottom:4px solid #f60;padding-right:8px;height:24px}.pcui-treeview-item-contents:after{content:' ';display:block;clear:both}.pcui-treeview-item.pcui-treeview-item-rename>.pcui-treeview-item-contents>.pcui-treeview-item-text{display:none}.pcui-treeview-item.pcui-treeview-item-rename>.pcui-treeview-item-contents>.pcui-text-input{margin:0;flex-grow:1;box-shadow:none !important;border:0;background-color:transparent}.pcui-treeview-item.pcui-treeview-item-rename>.pcui-treeview-item-contents>.pcui-text-input>input{font-family:inherit;font-size:14px;padding:0}.pcui-treeview.pcui-treeview-filtering .pcui-treeview-item{padding-left:0}.pcui-treeview.pcui-treeview-filtering .pcui-treeview-item::before{display:none}.pcui-treeview.pcui-treeview-filtering .pcui-treeview-item:not(.pcui-treeview-filtering-result)>.pcui-treeview-item-contents{display:none}.pcui-treeview.pcui-treeview-filtering .pcui-treeview-item-contents{margin-left:0}.pcui-treeview-filtering-result .pcui-treeview-item-contents:before,.pcui-treeview-filtering-result .pcui-treeview-item-icon:before{display:none}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(74);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex,.pcui-vector-input{flex-direction:column}.pcui-flex:not(.pcui-hidden),.pcui-vector-input:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-vector-input{flex-direction:row;align-items:center}.pcui-vector-input>.pcui-numeric-input{flex:1;margin:6px 3px}.pcui-vector-input>.pcui-numeric-input:first-child{margin-left:0}.pcui-vector-input>.pcui-numeric-input:last-child{margin-right:0}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(76);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(4)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-hidden{display:none}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 77 */,
+/* 78 */,
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */,
+/* 84 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "IBindable", function() { return /* reexport */ IBindable["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "IFocusable", function() { return /* reexport */ interfaces_IFocusable; });
+__webpack_require__.d(__webpack_exports__, "ICollapsible", function() { return /* reexport */ interfaces_ICollapsible; });
+__webpack_require__.d(__webpack_exports__, "IScrollable", function() { return /* reexport */ interfaces_IScrollable; });
+__webpack_require__.d(__webpack_exports__, "IResizable", function() { return /* reexport */ interfaces_IResizable; });
+__webpack_require__.d(__webpack_exports__, "IFlex", function() { return /* reexport */ interfaces_IFocusable; });
+__webpack_require__.d(__webpack_exports__, "IGrid", function() { return /* reexport */ interfaces_IGrid; });
+__webpack_require__.d(__webpack_exports__, "ArrayInput", function() { return /* reexport */ ArrayInput["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "BooleanInput", function() { return /* reexport */ BooleanInput["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "Button", function() { return /* reexport */ Button["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "Code", function() { return /* reexport */ Code["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "Container", function() { return /* reexport */ Container["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "ContextMenu", function() { return /* reexport */ ContextMenu["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "Divider", function() { return /* reexport */ Divider["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "Element", function() { return /* reexport */ Element["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "InfoBox", function() { return /* reexport */ InfoBox["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "Label", function() { return /* reexport */ Label["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "NumericInput", function() { return /* reexport */ NumericInput["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "Overlay", function() { return /* reexport */ Overlay["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "Panel", function() { return /* reexport */ Panel["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "Progress", function() { return /* reexport */ Progress["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "SelectInput", function() { return /* reexport */ SelectInput["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "SliderInput", function() { return /* reexport */ SliderInput["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "Spinner", function() { return /* reexport */ Spinner["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "TextAreaInput", function() { return /* reexport */ TextAreaInput["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "TextInput", function() { return /* reexport */ TextInput["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "TreeView", function() { return /* reexport */ TreeView["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "TreeViewItem", function() { return /* reexport */ TreeViewItem["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "VectorInput", function() { return /* reexport */ VectorInput["a" /* default */]; });
+
+// EXTERNAL MODULE: ./src/interfaces/IBindable/index.js
+var IBindable = __webpack_require__(29);
+
+// CONCATENATED MODULE: ./src/interfaces/IFocusable/index.js
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-var CLASS_OVERLAY = 'pcui-overlay';
-var CLASS_OVERLAY_INNER = CLASS_OVERLAY + '-inner';
-var CLASS_OVERLAY_CLICKABLE = CLASS_OVERLAY + '-clickable';
-var CLASS_OVERLAY_TRANSPARENT = CLASS_OVERLAY + '-transparent';
-var CLASS_OVERLAY_CONTENT = CLASS_OVERLAY + '-content';
 /**
- * @name Overlay
- * @classdesc An overlay element.
- * @property {boolean} clickable Whether the overlay can be hidden by clicking on it.
- * @property {boolean} transparent Whether the overlay is transparent.
- * @augments Container
+ * @name IFocusable
+ * @classdesc Provides an interface for focusing / unfocusing an Element.
  */
-
-var Overlay = /*#__PURE__*/function (_Container) {
-  _inherits(Overlay, _Container);
-
-  var _super = _createSuper(Overlay);
-
-  /**
-   * Creates a new pcui.Overlay.
-   *
-   * @param {object} args - The arguments.
-   */
-  function Overlay(args) {
-    var _this;
-
-    _classCallCheck(this, Overlay);
-
-    if (!args) args = {};
-    _this = _super.call(this, args);
-
-    _this.class.add(CLASS_OVERLAY);
-
-    _this._domClickableOverlay = document.createElement('div');
-    _this._domClickableOverlay.ui = _assertThisInitialized(_this);
-    _this._domClickableOverlay.classList = CLASS_OVERLAY_INNER;
-
-    _this.dom.appendChild(_this._domClickableOverlay);
-
-    _this._domEventMouseDown = _this._onMouseDown.bind(_assertThisInitialized(_this));
-
-    _this._domClickableOverlay.addEventListener('mousedown', _this._domEventMouseDown);
-
-    _this.domContent = document.createElement('div');
-    _this.domContent.ui = _assertThisInitialized(_this);
-
-    _this.domContent.classList.add(CLASS_OVERLAY_CONTENT);
-
-    _this.dom.appendChild(_this.domContent);
-
-    _this.clickable = args.clickable || false;
-    _this.transparent = args.transparent || false;
-    return _this;
+var IFocusable = /*#__PURE__*/function () {
+  function IFocusable() {
+    _classCallCheck(this, IFocusable);
   }
 
-  _createClass(Overlay, [{
-    key: "_onMouseDown",
-    value: function _onMouseDown(evt) {
-      var _this2 = this;
+  _createClass(IFocusable, [{
+    key: "focus",
 
-      if (!this.clickable) return; // some field might be in focus
-
-      document.body.blur(); // wait till blur is done
-
-      requestAnimationFrame(function () {
-        _this2.hidden = true;
-      });
-      evt.preventDefault();
+    /**
+     * Focus on the element
+     */
+    value: function focus() {
+      throw new Error('Not implemented');
     }
     /**
-     * @name Overlay#position
-     * @description Position the overlay at specific x, y coordinates.
-     * @param {number} x - The x coordinate
-     * @param {number} y - The y coordinate
+     * Unfocus the element
      */
 
   }, {
-    key: "position",
-    value: function position(x, y) {
-      var area = this._domClickableOverlay.getBoundingClientRect();
-
-      var rect = this.domContent.getBoundingClientRect();
-      x = Math.max(0, Math.min(area.width - rect.width, x));
-      y = Math.max(0, Math.min(area.height - rect.height, y));
-      this.domContent.style.position = 'absolute';
-      this.domContent.style.left = "".concat(x, "px");
-      this.domContent.style.top = "".concat(y, "px");
-    }
-  }, {
-    key: "destroy",
-    value: function destroy() {
-      if (this._destroyed) return;
-
-      this._domClickableOverlay.removeEventListener('mousedown', this._domEventMouseDown);
-
-      _get(_getPrototypeOf(Overlay.prototype), "destroy", this).call(this);
-    }
-  }, {
-    key: "clickable",
-    get: function get() {
-      return this.class.contains(CLASS_OVERLAY_CLICKABLE);
-    },
-    set: function set(value) {
-      if (value) {
-        this.class.add(CLASS_OVERLAY_CLICKABLE);
-      } else {
-        this.class.remove(CLASS_OVERLAY_CLICKABLE);
-      }
-    }
-  }, {
-    key: "transparent",
-    get: function get() {
-      return this.class.contains(CLASS_OVERLAY_TRANSPARENT);
-    },
-    set: function set(value) {
-      if (value) {
-        this.class.add(CLASS_OVERLAY_TRANSPARENT);
-      } else {
-        this.class.remove(CLASS_OVERLAY_TRANSPARENT);
-      }
-    }
-  }]);
-
-  return Overlay;
-}(Container["a" /* default */]);
-
-/* harmony default export */ var components_Overlay = __webpack_exports__["a"] = (Overlay);
-
-/***/ }),
-/* 17 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// UNUSED EXPORTS: Panel
-
-// CONCATENATED MODULE: ./src/components/Panel/style.scss
-// extracted by mini-css-extract-plugin
-
-// EXTERNAL MODULE: ./src/class.js
-var src_class = __webpack_require__(0);
-
-// EXTERNAL MODULE: ./src/components/Container/index.js + 1 modules
-var Container = __webpack_require__(2);
-
-// EXTERNAL MODULE: ./src/components/Label/index.js + 1 modules
-var Label = __webpack_require__(3);
-
-// EXTERNAL MODULE: ./src/components/Button/index.js + 1 modules
-var Button = __webpack_require__(7);
-
-// CONCATENATED MODULE: ./src/components/Panel/index.js
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-
-
-var CLASS_PANEL = 'pcui-panel';
-var CLASS_PANEL_HEADER = CLASS_PANEL + '-header';
-var CLASS_PANEL_HEADER_TITLE = CLASS_PANEL_HEADER + '-title';
-var CLASS_PANEL_CONTENT = CLASS_PANEL + '-content';
-var CLASS_PANEL_HORIZONTAL = CLASS_PANEL + '-horizontal';
-var CLASS_PANEL_SORTABLE_ICON = CLASS_PANEL + '-sortable-icon';
-var CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove'; // TODO: document panelType
-
-/**
- * @event
- * @name Panel#collapse
- * @description Fired when the panel gets collapsed
- */
-
-/**
- * @event
- * @name Panel#expand
- * @description Fired when the panel gets expanded
- */
-
-/**
- * @name Panel
- * @classdesc The Panel is a pcui.Container that itself contains a header container and a content container. The
- * respective pcui.Container functions work using the content container. One can also append elements to the header of the Panel.
- * @property {boolean} flex Gets / sets whether the container supports flex layout. Defaults to false. Cannot co-exist with grid.
- * @property {boolean} grid Gets / sets whether the container supports grid layout. Defaults to false. Cannot co-exist with flex.
- * @property {boolean} collapsible Gets / sets whether the panel can be collapsed by clicking on its header or by setting collapsed to true. Defaults to false.
- * @property {boolean} sortable Gets / sets whether the panel can be reordered
- * @property {boolean} collapsed Gets / sets whether the panel is collapsed or expanded. Defaults to false.
- * @property {boolean} collapseHorizontally Gets / sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to false.
- * @property {boolean} removable Gets / sets whether the panel can be removed
- * @property {number} headerSize The height of the header in pixels. Defaults to 32.
- * @property {string} headerText The header text of the panel. Defaults to the empty string.
- * @property {Container} header Gets the header conttainer.
- * @property {Container} content Gets the content conttainer.
- * @augments Container
- * @mixes pcui.IContainer
- * @mixes pcui.IFlex
- * @mixes pcui.IGrid
- * @mixes pcui.IScrollable
- * @mixes pcui.IResizable
- */
-
-var Panel_Panel = /*#__PURE__*/function (_Container) {
-  _inherits(Panel, _Container);
-
-  var _super = _createSuper(Panel);
-
-  /**
-   * Creates a new Panel.
-   *
-   * @param {object} args - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
-   */
-  function Panel(args) {
-    var _this;
-
-    _classCallCheck(this, Panel);
-
-    if (!args) args = {};
-    var panelArgs = Object.assign({}, args);
-    panelArgs.flex = true;
-    delete panelArgs.grid;
-    delete panelArgs.flexDirection;
-    delete panelArgs.scrollable;
-    _this = _super.call(this, panelArgs);
-
-    _this.class.add(CLASS_PANEL);
-
-    if (args.panelType) {
-      _this.class.add(CLASS_PANEL + '-' + args.panelType);
-    } // do not call reflow on every update while
-    // we are initializing
-
-
-    _this._suspendReflow = true; // initialize header container
-
-    _this._initializeHeader(args); // initialize content container
-
-
-    _this._initializeContent(args); // header size
-
-
-    _this.headerSize = args.headerSize !== undefined ? args.headerSize : 32;
-    _this._domEvtDragStart = _this._onDragStart.bind(_assertThisInitialized(_this));
-    _this._domEvtDragMove = _this._onDragMove.bind(_assertThisInitialized(_this));
-    _this._domEvtDragEnd = _this._onDragEnd.bind(_assertThisInitialized(_this)); // collapse related
-
-    _this._reflowTimeout = null;
-    _this._widthBeforeCollapse = null;
-    _this._heightBeforeCollapse = null;
-    _this.collapsible = args.collapsible || false;
-    _this.collapsed = args.collapsed || false;
-    _this.collapseHorizontally = args.collapseHorizontally || false;
-    _this._iconSort = null;
-    _this.sortable = args.sortable || false;
-    _this._btnRemove = null;
-    _this.removable = args.removable || false; // set the contents container to be the content DOM element
-    // from now on calling append functions on the panel will append themn
-    // elements to the contents container
-
-    _this.domContent = _this._containerContent.dom; // execute reflow now after all fields have been initialized
-
-    _this._suspendReflow = false;
-
-    _this._reflow();
-
-    return _this;
-  }
-
-  _createClass(Panel, [{
-    key: "_initializeHeader",
-    value: function _initializeHeader(args) {
-      // header container
-      this._containerHeader = new Container["a" /* default */]({
-        flex: true,
-        flexDirection: 'row',
-        class: [CLASS_PANEL_HEADER, 'font-bold']
-      }); // header title
-
-      this._labelTitle = new Label["a" /* default */]({
-        text: args.headerText,
-        class: [CLASS_PANEL_HEADER_TITLE, 'font-bold']
-      });
-
-      this._containerHeader.append(this._labelTitle); // use native click listener because the pcui.Element#click event is only fired
-      // if the element is enabled. However we still want to catch header click events in order
-      // to collapse them
-
-
-      this._containerHeader.dom.addEventListener('click', this._onHeaderClick.bind(this));
-
-      this.append(this._containerHeader);
-    }
-  }, {
-    key: "_onHeaderClick",
-    value: function _onHeaderClick(evt) {
-      if (!this._collapsible) return;
-      if (evt.target !== this.header.dom && evt.target !== this._labelTitle.dom) return; // toggle collapsed
-
-      this.collapsed = !this.collapsed;
-    }
-  }, {
-    key: "_onClickRemove",
-    value: function _onClickRemove(evt) {
-      evt.preventDefault();
-      evt.stopPropagation();
-      this.emit('click:remove');
-    }
-  }, {
-    key: "_initializeContent",
-    value: function _initializeContent(args) {
-      // containers container
-      this._containerContent = new Container["a" /* default */]({
-        class: CLASS_PANEL_CONTENT,
-        grid: args.grid,
-        flex: args.flex,
-        flexDirection: args.flexDirection,
-        scrollable: args.scrollable,
-        dom: args.container
-      });
-      this.append(this._containerContent);
-    } // Collapses or expands the panel as needed
-
-  }, {
-    key: "_reflow",
-    value: function _reflow() {
-      var _this2 = this;
-
-      if (this._suspendReflow) {
-        return;
-      }
-
-      if (this._reflowTimeout) {
-        cancelAnimationFrame(this._reflowTimeout);
-        this._reflowTimeout = null;
-      }
-
-      if (this.hidden || !this.collapsible) return;
-
-      if (this.collapsed && this.collapseHorizontally) {
-        this._containerHeader.style.top = -this.headerSize + 'px';
-      } else {
-        this._containerHeader.style.top = '';
-      } // we rely on the content width / height and we have to
-      // wait for 1 frame before we can get the final values back
-
-
-      this._reflowTimeout = requestAnimationFrame(function () {
-        _this2._reflowTimeout = null;
-
-        if (_this2.collapsed) {
-          // remember size before collapse
-          if (!_this2._widthBeforeCollapse) {
-            _this2._widthBeforeCollapse = _this2.style.width;
-          }
-
-          if (!_this2._heightBeforeCollapse) {
-            _this2._heightBeforeCollapse = _this2.style.height;
-          }
-
-          if (_this2._collapseHorizontally) {
-            _this2.height = '';
-            _this2.width = _this2.headerSize;
-          } else {
-            _this2.height = _this2.headerSize;
-          } // add collapsed class after getting the width and height
-          // because if we add it before then because of overflow:hidden
-          // we might get innacurate width/heights.
-
-
-          _this2.class.add(src_class["a" /* COLLAPSED */]);
-        } else {
-          // remove collapsed class first and the restore width and height
-          // (opposite order of collapsing)
-          _this2.class.remove(src_class["a" /* COLLAPSED */]);
-
-          if (_this2._collapseHorizontally) {
-            _this2.height = '';
-
-            if (_this2._widthBeforeCollapse !== null) {
-              _this2.width = _this2._widthBeforeCollapse;
-            }
-          } else {
-            if (_this2._heightBeforeCollapse !== null) {
-              _this2.height = _this2._heightBeforeCollapse;
-            }
-          } // reset before collapse vars
-
-
-          _this2._widthBeforeCollapse = null;
-          _this2._heightBeforeCollapse = null;
-        }
-      });
-    }
-  }, {
-    key: "_onDragStart",
-    value: function _onDragStart(evt) {
-      if (this.disabled || this.readOnly) return;
-      evt.stopPropagation();
-      evt.preventDefault();
-      window.addEventListener('mouseup', this._domEvtDragEnd);
-      window.addEventListener('mouseleave', this._domEvtDragEnd);
-      window.addEventListener('mousemove', this._domEvtDragMove);
-      this.emit('dragstart');
-
-      if (this.parent && this.parent._onChildDragStart) {
-        this.parent._onChildDragStart(evt, this);
-      }
-    }
-  }, {
-    key: "_onDragMove",
-    value: function _onDragMove(evt) {
-      this.emit('dragmove');
-
-      if (this.parent && this.parent._onChildDragStart) {
-        this.parent._onChildDragMove(evt, this);
-      }
-    }
-  }, {
-    key: "_onDragEnd",
-    value: function _onDragEnd(evt) {
-      window.removeEventListener('mouseup', this._domEvtDragEnd);
-      window.removeEventListener('mouseleave', this._domEvtDragEnd);
-      window.removeEventListener('mousemove', this._domEvtDragMove);
-
-      if (this._draggedChild === this) {
-        this._draggedChild = null;
-      }
-
-      this.emit('dragend');
-
-      if (this.parent && this.parent._onChildDragStart) {
-        this.parent._onChildDragEnd(evt, this);
-      }
-    }
-  }, {
-    key: "destroy",
-    value: function destroy() {
-      if (this._destroyed) return;
-
-      if (this._reflowTimeout) {
-        cancelAnimationFrame(this._reflowTimeout);
-        this._reflowTimeout = null;
-      }
-
-      window.removeEventListener('mouseup', this._domEvtDragEnd);
-      window.removeEventListener('mouseleave', this._domEvtDragEnd);
-      window.removeEventListener('mousemove', this._domEvtDragMove);
-
-      _get(_getPrototypeOf(Panel.prototype), "destroy", this).call(this);
-    }
-  }, {
-    key: "collapsible",
-    get: function get() {
-      return this._collapsible;
-    },
-    set: function set(value) {
-      if (value === this._collapsible) return;
-      this._collapsible = value;
-
-      if (value) {
-        this.classAdd(src_class["b" /* COLLAPSIBLE */]);
-      } else {
-        this.classRemove(src_class["b" /* COLLAPSIBLE */]);
-      }
-
-      this._reflow();
-
-      if (this.collapsed) {
-        this.emit(value ? 'collapse' : 'expand');
-      }
-    }
-  }, {
-    key: "collapsed",
-    get: function get() {
-      return this._collapsed;
-    },
-    set: function set(value) {
-      if (this._collapsed === value) return;
-      this._collapsed = value;
-
-      this._reflow();
-
-      if (this.collapsible) {
-        this.emit(value ? 'collapse' : 'expand');
-      }
-    }
-  }, {
-    key: "sortable",
-    get: function get() {
-      return this._sortable;
-    },
-    set: function set(value) {
-      if (this._sortable === value) return;
-      this._sortable = value;
-
-      if (value) {
-        this._iconSort = new Label["a" /* default */]({
-          class: CLASS_PANEL_SORTABLE_ICON
-        });
-
-        this._iconSort.dom.addEventListener('mousedown', this._domEvtDragStart);
-
-        this.header.prepend(this._iconSort);
-      } else if (this._iconSort) {
-        this._iconSort.destroy();
-
-        this._iconSort = null;
-      }
-    }
-  }, {
-    key: "removable",
-    get: function get() {
-      return !!this._btnRemove;
-    },
-    set: function set(value) {
-      if (this.removable === value) return;
-
-      if (value) {
-        this._btnRemove = new Button["a" /* default */]({
-          icon: 'E289',
-          class: CLASS_PANEL_REMOVE
-        });
-
-        this._btnRemove.on('click', this._onClickRemove.bind(this));
-
-        this.header.append(this._btnRemove);
-      } else {
-        this._btnRemove.destroy();
-
-        this._btnRemove = null;
-      }
-    }
-  }, {
-    key: "collapseHorizontally",
-    get: function get() {
-      return this._collapseHorizontally;
-    },
-    set: function set(value) {
-      if (this._collapseHorizontally === value) return;
-      this._collapseHorizontally = value;
-
-      if (value) {
-        this.classAdd(CLASS_PANEL_HORIZONTAL);
-      } else {
-        this.classRemove(CLASS_PANEL_HORIZONTAL);
-      }
-
-      this._reflow();
-    }
-  }, {
-    key: "content",
-    get: function get() {
-      return this._containerContent;
-    }
-  }, {
-    key: "header",
-    get: function get() {
-      return this._containerHeader;
-    }
-  }, {
-    key: "headerText",
-    get: function get() {
-      return this._labelTitle.text;
-    },
-    set: function set(value) {
-      this._labelTitle.text = value;
-    }
-  }, {
-    key: "headerSize",
-    get: function get() {
-      return this._headerSize;
-    },
-    set: function set(value) {
-      this._headerSize = value;
-      var style = this._containerHeader.dom.style;
-      style.height = Math.max(0, value) + 'px';
-      style.lineHeight = style.height;
-
-      this._reflow();
-    }
-  }]);
-
-  return Panel;
-}(Container["a" /* default */]);
-
-
-/* harmony default export */ var components_Panel = __webpack_exports__["a"] = (Panel_Panel);
-
-/***/ }),
-/* 18 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// CONCATENATED MODULE: ./src/components/Progress/style.scss
-// extracted by mini-css-extract-plugin
-
-// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
-var Element = __webpack_require__(1);
-
-// EXTERNAL MODULE: ./src/components/Container/index.js + 1 modules
-var Container = __webpack_require__(2);
-
-// CONCATENATED MODULE: ./src/components/Progress/index.js
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-var CLASS_ROOT = 'pcui-progress';
-var CLASS_INNER = CLASS_ROOT + '-inner';
-/**
- * @name Progress
- * @classdesc Represents a bar that can highlight progress of an activity.
- * @property {number} value Gets / sets the value of the progress bar (between 0 and 100).
- */
-
-var Progress_Progress = /*#__PURE__*/function (_Container) {
-  _inherits(Progress, _Container);
-
-  var _super = _createSuper(Progress);
-
-  function Progress(args) {
-    var _this;
-
-    _classCallCheck(this, Progress);
-
-    if (!args) args = {};
-    _this = _super.call(this, args);
-
-    _this.class.add(CLASS_ROOT);
-
-    _this._inner = new Element["a" /* default */]();
-
-    _this.append(_this._inner);
-
-    _this._inner.class.add(CLASS_INNER);
-
-    if (args.value !== undefined) {
-      _this.value = args.value;
-    }
-
-    return _this;
-  }
-
-  _createClass(Progress, [{
-    key: "value",
-    set: function set(val) {
-      if (this._value === val) return;
-      this._value = val;
-      this._inner.width = "".concat(this._value, "%");
-      this.emit('change', val);
-    },
-    get: function get() {
-      return this._value;
-    }
-  }]);
-
-  return Progress;
-}(Container["a" /* default */]);
-
-/* harmony default export */ var components_Progress = __webpack_exports__["a"] = (Progress_Progress);
-
-/***/ }),
-/* 19 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// UNUSED EXPORTS: SliderInput
-
-// CONCATENATED MODULE: ./src/components/SliderInput/style.scss
-// extracted by mini-css-extract-plugin
-
-// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
-var Element = __webpack_require__(1);
-
-// EXTERNAL MODULE: ./src/components/NumericInput/index.js + 1 modules
-var NumericInput = __webpack_require__(8);
-
-// EXTERNAL MODULE: ./src/class.js
-var src_class = __webpack_require__(0);
-
-// CONCATENATED MODULE: ./src/components/SliderInput/index.js
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-
-var CLASS_SLIDER = 'pcui-slider';
-var CLASS_SLIDER_CONTAINER = CLASS_SLIDER + '-container';
-var CLASS_SLIDER_BAR = CLASS_SLIDER + '-bar';
-var CLASS_SLIDER_HANDLE = CLASS_SLIDER + '-handle';
-var CLASS_SLIDER_ACTIVE = CLASS_SLIDER + '-active'; // fields that are proxied between the slider and the numeric input
-
-var PROXY_FIELDS = ['allowNull', 'max', 'min', 'keyChange', 'placeholder', 'precision', 'renderChanges', 'step'];
-/**
- * @name SliderInput
- * @classdesc The SliderInput shows a pcui.NumericInput and a slider widget next to it. It acts as a proxy
- * of the NumericInput.
- * @property {number} min Gets / sets the minimum value that the numeric input field can take.
- * @property {number} max Gets / sets the maximum value that the numeric input field can take.
- * @property {number} sliderMin Gets / sets the minimum value that the slider field can take.
- * @property {number} sliderMax Gets / sets the maximum value that the slider field can take.
- * @property {number} pre Gets / sets the maximum number of decimals a value can take.
- * @property {number} step Gets / sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
- * @property {boolean} allowNull Gets / sets whether the value can be null. If not then it will be 0 instead of null.
- * @augments Element
- * @mixes IBindable
- * @mixes IFocusable
- */
-
-var SliderInput_SliderInput = /*#__PURE__*/function (_Element) {
-  _inherits(SliderInput, _Element);
-
-  var _super = _createSuper(SliderInput);
-
-  /**
-   * Creates a new SliderInput.
-   *
-   * @param {object} args - The arguments. Extends the pcui.NumericInput constructor arguments.
-   */
-  function SliderInput(args) {
-    var _this;
-
-    _classCallCheck(this, SliderInput);
-
-    args = Object.assign({}, args);
-    var inputArgs = {};
-    PROXY_FIELDS.forEach(function (field) {
-      inputArgs[field] = args[field];
-    });
-
-    if (inputArgs.precision === undefined) {
-      inputArgs.precision = 2;
-    } // binding should only go to the slider
-    // and the slider will propagate changes to the numeric input
-
-
-    delete inputArgs.binding;
-    _this = _super.call(this, args.dom ? args.dom : document.createElement('div'), args);
-    if (args.pre) _this.precision = args.pre;
-
-    _this.class.add(CLASS_SLIDER);
-
-    _this._combineHistory = false;
-    _this._numericInput = new NumericInput["a" /* default */](_objectSpread(_objectSpread({}, inputArgs), {}, {
-      hideSlider: true
-    })); // propagate change event
-
-    _this._numericInput.on('change', _this._onValueChange.bind(_assertThisInitialized(_this))); // propagate focus / blur events
-
-
-    _this._numericInput.on('focus', function () {
-      _this.emit('focus');
-    });
-
-    _this._numericInput.on('blur', function () {
-      _this.emit('blur');
-    });
-
-    _this._sliderMin = args.sliderMin !== undefined ? args.sliderMin : _this.min || 0;
-    _this._sliderMax = args.sliderMax !== undefined ? args.sliderMax : _this.max || 1;
-
-    _this.dom.appendChild(_this._numericInput.dom);
-
-    _this._numericInput.parent = _assertThisInitialized(_this);
-    _this._domSlider = document.createElement('div');
-
-    _this._domSlider.classList.add(CLASS_SLIDER_CONTAINER);
-
-    _this.dom.appendChild(_this._domSlider);
-
-    _this._domBar = document.createElement('div');
-
-    _this._domBar.classList.add(CLASS_SLIDER_BAR);
-
-    _this._domBar.ui = _assertThisInitialized(_this);
-
-    _this._domSlider.appendChild(_this._domBar);
-
-    _this._domHandle = document.createElement('div');
-    _this._domHandle.ui = _assertThisInitialized(_this);
-    _this._domHandle.tabIndex = 0;
-
-    _this._domHandle.classList.add(CLASS_SLIDER_HANDLE);
-
-    _this._domBar.appendChild(_this._domHandle);
-
-    _this._domMouseDown = _this._onMouseDown.bind(_assertThisInitialized(_this));
-    _this._domMouseMove = _this._onMouseMove.bind(_assertThisInitialized(_this));
-    _this._domMouseUp = _this._onMouseUp.bind(_assertThisInitialized(_this));
-    _this._domTouchStart = _this._onTouchStart.bind(_assertThisInitialized(_this));
-    _this._domTouchMove = _this._onTouchMove.bind(_assertThisInitialized(_this));
-    _this._domTouchEnd = _this._onTouchEnd.bind(_assertThisInitialized(_this));
-    _this._domKeyDown = _this._onKeyDown.bind(_assertThisInitialized(_this));
-    _this._touchId = null;
-
-    _this._domBar.addEventListener('mousedown', _this._domMouseDown);
-
-    _this._domBar.addEventListener('touchstart', _this._domTouchStart, {
-      passive: true
-    });
-
-    _this._domHandle.addEventListener('keydown', _this._domKeyDown);
-
-    if (args.value !== undefined) {
-      _this.value = args.value;
-    } // update the handle in case a 0 value has been
-    // passed through the constructor
-
-
-    if (_this.value === 0) {
-      _this._updateHandle(0);
-    }
-
-    return _this;
-  }
-
-  _createClass(SliderInput, [{
-    key: "_onMouseDown",
-    value: function _onMouseDown(evt) {
-      if (evt.button !== 0 || !this.enabled || this.readOnly) return;
-
-      this._onSlideStart(evt.pageX);
-    }
-  }, {
-    key: "_onMouseMove",
-    value: function _onMouseMove(evt) {
-      evt.stopPropagation();
-      evt.preventDefault();
-
-      this._onSlideMove(evt.pageX);
-    }
-  }, {
-    key: "_onMouseUp",
-    value: function _onMouseUp(evt) {
-      evt.stopPropagation();
-      evt.preventDefault();
-
-      this._onSlideEnd(evt.pageX);
-    }
-  }, {
-    key: "_onTouchStart",
-    value: function _onTouchStart(evt) {
-      if (!this.enabled || this.readOnly) return;
-
-      for (var i = 0; i < evt.changedTouches.length; i++) {
-        var touch = evt.changedTouches[i];
-        if (!touch.target.ui || touch.target.ui !== this) continue;
-        this._touchId = touch.identifier;
-
-        this._onSlideStart(touch.pageX);
-
-        break;
-      }
-    }
-  }, {
-    key: "_onTouchMove",
-    value: function _onTouchMove(evt) {
-      for (var i = 0; i < evt.changedTouches.length; i++) {
-        var touch = evt.changedTouches[i];
-        if (touch.identifier !== this._touchId) continue;
-        evt.stopPropagation();
-        evt.preventDefault();
-
-        this._onSlideMove(touch.pageX);
-
-        break;
-      }
-    }
-  }, {
-    key: "_onTouchEnd",
-    value: function _onTouchEnd(evt) {
-      for (var i = 0; i < evt.changedTouches.length; i++) {
-        var touch = evt.changedTouches[i];
-        if (touch.identifier !== this._touchId) continue;
-        evt.stopPropagation();
-        evt.preventDefault();
-
-        this._onSlideEnd(touch.pageX);
-
-        this._touchId = null;
-        break;
-      }
-    }
-  }, {
-    key: "_onKeyDown",
-    value: function _onKeyDown(evt) {
-      if (evt.keyCode === 27) {
-        this.blur();
-        return;
-      }
-
-      if (!this.enabled || this.readOnly) return; // move slider with left / right arrow keys
-
-      if (evt.keyCode !== 37 && evt.keyCode !== 39) return;
-      evt.stopPropagation();
-      evt.preventDefault();
-      var x = evt.keyCode === 37 ? -1 : 1;
-
-      if (evt.shiftKey) {
-        x *= 10;
-      }
-
-      this.value += x * this.step;
-    }
-  }, {
-    key: "_updateHandle",
-    value: function _updateHandle(value) {
-      var left = Math.max(0, Math.min(1, ((value || 0) - this._sliderMin) / (this._sliderMax - this._sliderMin))) * 100;
-      this._domHandle.style.left = left + '%';
-    }
-  }, {
-    key: "_onValueChange",
-    value: function _onValueChange(value) {
-      this._updateHandle(value);
-
-      this.emit('change', value);
-
-      if (this._binding) {
-        this._binding.setValue(value);
-      }
-    }
-  }, {
-    key: "_onSlideStart",
-    value: function _onSlideStart(pageX) {
-      this._domHandle.focus();
-
-      if (this._touchId === null) {
-        window.addEventListener('mousemove', this._domMouseMove);
-        window.addEventListener('mouseup', this._domMouseUp);
-      } else {
-        window.addEventListener('touchmove', this._domTouchMove);
-        window.addEventListener('touchend', this._domTouchEnd);
-      }
-
-      this.class.add(CLASS_SLIDER_ACTIVE);
-
-      this._onSlideMove(pageX);
-
-      if (this.binding) {
-        this._combineHistory = this.binding.historyCombine;
-        this.binding.historyCombine = true;
-      }
-    }
-  }, {
-    key: "_onSlideMove",
-    value: function _onSlideMove(pageX) {
-      var rect = this._domSlider.getBoundingClientRect();
-
-      var x = Math.max(0, Math.min(1, (pageX - rect.left) / rect.width));
-      var range = this._sliderMax - this._sliderMin;
-      var value = x * range + this._sliderMin;
-      value = parseFloat(value.toFixed(this.precision), 10);
-      this.value = value;
-    }
-  }, {
-    key: "_onSlideEnd",
-    value: function _onSlideEnd(pageX) {
-      this._onSlideMove(pageX);
-
-      this.class.remove(CLASS_SLIDER_ACTIVE);
-
-      if (this._touchId === null) {
-        window.removeEventListener('mousemove', this._domMouseMove);
-        window.removeEventListener('mouseup', this._domMouseUp);
-      } else {
-        window.removeEventListener('touchmove', this._domTouchMove);
-        window.removeEventListener('touchend', this._domTouchEnd);
-      }
-
-      if (this.binding) {
-        this.binding.historyCombine = this._combineHistory;
-      }
-    }
-  }, {
-    key: "focus",
-    value: function focus() {
-      this._numericInput.focus();
-    }
-  }, {
     key: "blur",
     value: function blur() {
-      this._domHandle.blur();
-
-      this._numericInput.blur();
-    }
-  }, {
-    key: "destroy",
-    value: function destroy() {
-      if (this._destroyed) return;
-
-      this._domBar.removeEventListener('mousedown', this._domMouseDown);
-
-      this._domBar.removeEventListener('touchstart', this._domTouchStart);
-
-      this._domHandle.removeEventListener('keydown', this._domKeyDown);
-
-      this.dom.removeEventListener('mouseup', this._domMouseUp);
-      this.dom.removeEventListener('mousemove', this._domMouseMove);
-      this.dom.removeEventListener('touchmove', this._domTouchMove);
-      this.dom.removeEventListener('touchend', this._domTouchEnd);
-
-      _get(_getPrototypeOf(SliderInput.prototype), "destroy", this).call(this);
-    }
-  }, {
-    key: "sliderMin",
-    get: function get() {
-      return this._sliderMin;
-    },
-    set: function set(value) {
-      if (this._sliderMin === value) return;
-      this._sliderMin = value;
-
-      this._updateHandle(this.value);
-    }
-  }, {
-    key: "sliderMax",
-    get: function get() {
-      return this._sliderMax;
-    },
-    set: function set(value) {
-      if (this._sliderMax === value) return;
-      this._sliderMax = value;
-
-      this._updateHandle(this.value);
-    }
-  }, {
-    key: "value",
-    get: function get() {
-      return this._numericInput.value;
-    },
-    set: function set(value) {
-      this._numericInput.value = value;
-
-      if (this._numericInput.class.contains(src_class["k" /* MULTIPLE_VALUES */])) {
-        this.class.add(src_class["k" /* MULTIPLE_VALUES */]);
-      } else {
-        this.class.remove(src_class["k" /* MULTIPLE_VALUES */]);
-      }
-    }
-    /* eslint accessor-pairs: 0 */
-
-  }, {
-    key: "values",
-    set: function set(values) {
-      this._numericInput.values = values;
-
-      if (this._numericInput.class.contains(src_class["k" /* MULTIPLE_VALUES */])) {
-        this.class.add(src_class["k" /* MULTIPLE_VALUES */]);
-      } else {
-        this.class.remove(src_class["k" /* MULTIPLE_VALUES */]);
-      }
+      throw new Error('Not implemented');
     }
   }]);
 
-  return SliderInput;
-}(Element["a" /* default */]);
+  return IFocusable;
+}();
+/**
+ * @event
+ * @name IFocusable#focus
+ * @description Fired when the element is focused
+ */
 
-SliderInput_SliderInput.PROXY_FIELDS = PROXY_FIELDS;
+/**
+ * @event
+ * @name IFocusable#blur
+ * @description Fired when the element is blurred (unfocused)
+ */
 
-/* harmony default export */ var components_SliderInput = __webpack_exports__["a"] = (SliderInput_SliderInput);
 
-/***/ }),
-/* 20 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* harmony default export */ var interfaces_IFocusable = (IFocusable);
+// CONCATENATED MODULE: ./src/interfaces/ICollapsible/index.js
+function ICollapsible_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-"use strict";
+/**
+ * @name ICollapsible
+ * @property {boolean} collapsible Gets / sets whether the Element is collapsible.
+ * @property {boolean} collapsed Gets / sets whether the Element should be collapsed.
+ * @classdesc Provides an interface to allow collapsing / expanding of an Element.
+ */
+var ICollapsible = function ICollapsible() {
+  ICollapsible_classCallCheck(this, ICollapsible);
+};
+/**
+ * @event
+ * @name ICollapsible#collapse
+ * @description Fired when the element gets collapsed
+ */
 
-// CONCATENATED MODULE: ./src/components/Spinner/style.scss
-// extracted by mini-css-extract-plugin
+/**
+ * @event
+ * @name ICollapsible#expand
+ * @description Fired when the element gets expanded
+ */
 
-// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+
+/* harmony default export */ var interfaces_ICollapsible = (ICollapsible);
+// CONCATENATED MODULE: ./src/interfaces/IGrid/index.js
+function IGrid_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * @name IGrid
+ * @property {boolean} grid Gets / sets whether the Element supports the grid layout.
+ * @classdesc Provides an interface for allowing support for the grid CSS layout
+ */
+var IGrid = function IGrid() {
+  IGrid_classCallCheck(this, IGrid);
+};
+
+/* harmony default export */ var interfaces_IGrid = (IGrid);
+// CONCATENATED MODULE: ./src/interfaces/IScrollable/index.js
+function IScrollable_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * @name IScrollable
+ * @classdesc Provides an interface for allowing scrolling on an Element.
+ * @property {boolean} scrollable - Gets / sets whether the Element should be scrollable.
+ */
+var IScrollable = function IScrollable() {
+  IScrollable_classCallCheck(this, IScrollable);
+};
+/**
+ * @event
+ * @name IScrollable#scroll
+ * @description Fired when the Element is scrolled.
+ * @param {Event} evt - The native scroll event.
+ */
+
+
+/* harmony default export */ var interfaces_IScrollable = (IScrollable);
+// CONCATENATED MODULE: ./src/interfaces/IResizable/index.js
+function IResizable_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * @name IResizable
+ * @classdesc Provides an interface for enabling resizing support for an Element
+ * @property {number} resizeMin - Gets / sets the minimum size the Element can take when resized in pixels.
+ * @property {number} resizeMax - Gets / sets the maximum size the Element can take when resized in pixels.
+ * @property {string} resizable - Gets / sets whether the Element is resizable and where the resize handle is located. Can
+ * be one of 'top', 'bottom', 'right', 'left'. Set to null to disable resizing.
+ */
+var IResizable = function IResizable() {
+  IResizable_classCallCheck(this, IResizable);
+};
+/**
+ * @event
+ * @name IResizable#resize
+ * @description Fired when the Element gets resized.
+ */
+
+
+/* harmony default export */ var interfaces_IResizable = (IResizable);
+// EXTERNAL MODULE: ./src/components/ArrayInput/index.js
+var ArrayInput = __webpack_require__(16);
+
+// EXTERNAL MODULE: ./src/components/BooleanInput/index.js
+var BooleanInput = __webpack_require__(17);
+
+// EXTERNAL MODULE: ./src/components/Button/index.js
+var Button = __webpack_require__(11);
+
+// EXTERNAL MODULE: ./src/components/Code/index.js
+var Code = __webpack_require__(18);
+
+// EXTERNAL MODULE: ./src/components/Container/index.js
+var Container = __webpack_require__(2);
+
+// EXTERNAL MODULE: ./src/components/ContextMenu/index.js
+var ContextMenu = __webpack_require__(15);
+
+// EXTERNAL MODULE: ./src/components/Divider/index.js
+var Divider = __webpack_require__(19);
+
+// EXTERNAL MODULE: ./src/components/Element/index.js
 var Element = __webpack_require__(1);
 
-// CONCATENATED MODULE: ./src/components/Spinner/index.js
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+// EXTERNAL MODULE: ./src/components/InfoBox/index.js
+var InfoBox = __webpack_require__(20);
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+// EXTERNAL MODULE: ./src/components/Label/index.js
+var Label = __webpack_require__(5);
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+// EXTERNAL MODULE: ./src/components/NumericInput/index.js
+var NumericInput = __webpack_require__(12);
 
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+// EXTERNAL MODULE: ./src/components/Overlay/index.js
+var Overlay = __webpack_require__(21);
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+// EXTERNAL MODULE: ./src/components/Panel/index.js
+var Panel = __webpack_require__(13);
 
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+// EXTERNAL MODULE: ./src/components/Progress/index.js
+var Progress = __webpack_require__(22);
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+// EXTERNAL MODULE: ./src/components/SelectInput/index.js
+var SelectInput = __webpack_require__(23);
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+// EXTERNAL MODULE: ./src/components/SliderInput/index.js
+var SliderInput = __webpack_require__(24);
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+// EXTERNAL MODULE: ./src/components/Spinner/index.js
+var Spinner = __webpack_require__(25);
 
+// EXTERNAL MODULE: ./src/components/TextAreaInput/index.js
+var TextAreaInput = __webpack_require__(26);
 
+// EXTERNAL MODULE: ./src/components/TextInput/index.js
+var TextInput = __webpack_require__(9);
 
-var CLASS_ROOT = 'pcui-spinner';
+// EXTERNAL MODULE: ./src/components/TreeView/index.js
+var TreeView = __webpack_require__(27);
 
-function createSmallThick(size, dom) {
-  var spinner = dom || document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  spinner.classList.add('spin');
-  spinner.setAttribute('width', size);
-  spinner.setAttribute('height', size);
-  spinner.setAttribute('viewBox', '0 0 14 14');
-  spinner.setAttribute('fill', 'none');
-  spinner.innerHTML = '<path d="M7 14C3.13871 14 0 10.8613 0 7C0 3.13871 3.13871 0 7 0C10.8613 0 14 3.13871 14 7C14 10.8613 10.8613 14 7 14ZM7 2.25806C4.38064 2.25806 2.25806 4.38064 2.25806 7C2.25806 9.61935 4.38064 11.7419 7 11.7419C9.61935 11.7419 11.7419 9.61935 11.7419 7C11.7419 4.38064 9.61935 2.25806 7 2.25806Z" fill="#773417"/><path class="pcui-spinner-highlight" d="M7 14V11.7419C9.61935 11.7419 11.7419 9.61935 11.7419 7H14C14 10.8613 10.8613 14 7 14Z" fill="#FF6600"/>';
-  return spinner;
-}
-/**
- * @name Spinner
- * @augments Element
- * @classdesc Represents a spinning icon
- */
+// EXTERNAL MODULE: ./src/components/TreeViewItem/index.js
+var TreeViewItem = __webpack_require__(6);
 
+// EXTERNAL MODULE: ./src/components/VectorInput/index.js
+var VectorInput = __webpack_require__(28);
 
-var Spinner = /*#__PURE__*/function (_Element) {
-  _inherits(Spinner, _Element);
+// EXTERNAL MODULE: ./src/scss/_pcui-hidden.scss
+var _pcui_hidden = __webpack_require__(75);
 
-  var _super = _createSuper(Spinner);
+// CONCATENATED MODULE: ./src/index.js
 
-  /**
-   * Creates a new spinner.
-   *
-   * @param {object} [args] - The arguments
-   * @param {number} [args.size=12] - The pixel size of the spinner
-   */
-  function Spinner(args) {
-    var _this;
 
-    _classCallCheck(this, Spinner);
 
-    args = Object.assign({
-      type: Spinner.TYPE_SMALL_THICK
-    }, args);
-    var dom = null;
 
-    if (args.type === Spinner.TYPE_SMALL_THICK) {
-      dom = createSmallThick(args.size || 12, args.dom);
-    }
 
-    _this = _super.call(this, dom, args);
 
-    _this.class.add(CLASS_ROOT);
 
-    return _this;
-  }
 
-  return Spinner;
-}(Element["a" /* default */]);
 
-Spinner.TYPE_SMALL_THICK = 'small-thick'; // add more types here
 
-/* harmony default export */ var components_Spinner = __webpack_exports__["a"] = (Spinner);
-
-/***/ }),
-/* 21 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// CONCATENATED MODULE: ./src/components/TextAreaInput/style.scss
-// extracted by mini-css-extract-plugin
-
-// EXTERNAL MODULE: ./src/components/TextInput/index.js + 1 modules
-var TextInput = __webpack_require__(6);
-
-// CONCATENATED MODULE: ./src/components/TextAreaInput/index.js
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-var CLASS_TEXT_AREA_INPUT = 'pcui-text-area-input';
-/**
- * @name TextAreaInput
- * @classdesc The TextAreaInput wraps a textarea element. It has the same interface as pcui.TextInput.
- * @augments TextInput
- */
-
-var TextAreaInput = /*#__PURE__*/function (_TextInput) {
-  _inherits(TextAreaInput, _TextInput);
-
-  var _super = _createSuper(TextAreaInput);
-
-  /**
-   * Creates a new TextAreaInput.
-   *
-   * @param {object} args - The arguments. Extends the pcui.TextInput constructor arguments.
-   */
-  function TextAreaInput(args) {
-    var _this;
-
-    _classCallCheck(this, TextAreaInput);
-
-    args = Object.assign({
-      input: document.createElement('textarea')
-    }, args);
-    _this = _super.call(this, args);
-
-    _this.class.add(CLASS_TEXT_AREA_INPUT);
-
-    return _this;
-  }
-
-  _createClass(TextAreaInput, [{
-    key: "_onInputKeyDown",
-    value: function _onInputKeyDown(evt) {
-      if (evt.keyCode === 27 && this.blurOnEscape || evt.keyCode === 13 && this.blurOnEnter && !evt.shiftKey) {
-        this._domInput.blur();
-      }
-
-      this.emit('keydown', evt);
-    }
-  }]);
-
-  return TextAreaInput;
-}(TextInput["a" /* default */]);
-
-/* harmony default export */ var components_TextAreaInput = __webpack_exports__["a"] = (TextAreaInput);
-
-/***/ }),
-/* 22 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_BooleanInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BooleanInput", function() { return _components_BooleanInput__WEBPACK_IMPORTED_MODULE_0__["a"]; });
-
-/* harmony import */ var _components_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Button", function() { return _components_Button__WEBPACK_IMPORTED_MODULE_1__["a"]; });
-
-/* harmony import */ var _components_Code__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(12);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Code", function() { return _components_Code__WEBPACK_IMPORTED_MODULE_2__["a"]; });
-
-/* harmony import */ var _components_Container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Container", function() { return _components_Container__WEBPACK_IMPORTED_MODULE_3__["a"]; });
-
-/* harmony import */ var _components_ContextMenu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ContextMenu", function() { return _components_ContextMenu__WEBPACK_IMPORTED_MODULE_4__["a"]; });
-
-/* harmony import */ var _components_Divider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(13);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Divider", function() { return _components_Divider__WEBPACK_IMPORTED_MODULE_5__["a"]; });
-
-/* harmony import */ var _components_Element__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(1);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Element", function() { return _components_Element__WEBPACK_IMPORTED_MODULE_6__["a"]; });
-
-/* harmony import */ var _components_InfoBox__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(14);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "InfoBox", function() { return _components_InfoBox__WEBPACK_IMPORTED_MODULE_7__["a"]; });
-
-/* harmony import */ var _components_Label__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(3);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Label", function() { return _components_Label__WEBPACK_IMPORTED_MODULE_8__["a"]; });
-
-/* harmony import */ var _components_NumericInput__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(8);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "NumericInput", function() { return _components_NumericInput__WEBPACK_IMPORTED_MODULE_9__["a"]; });
-
-/* harmony import */ var _components_Overlay__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(16);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Overlay", function() { return _components_Overlay__WEBPACK_IMPORTED_MODULE_10__["a"]; });
-
-/* harmony import */ var _components_Panel__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(17);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Panel", function() { return _components_Panel__WEBPACK_IMPORTED_MODULE_11__["a"]; });
-
-/* harmony import */ var _components_Progress__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(18);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Progress", function() { return _components_Progress__WEBPACK_IMPORTED_MODULE_12__["a"]; });
-
-/* harmony import */ var _components_SelectInput__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(10);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SelectInput", function() { return _components_SelectInput__WEBPACK_IMPORTED_MODULE_13__["a"]; });
-
-/* harmony import */ var _components_SliderInput__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(19);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SliderInput", function() { return _components_SliderInput__WEBPACK_IMPORTED_MODULE_14__["a"]; });
-
-/* harmony import */ var _components_Spinner__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(20);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Spinner", function() { return _components_Spinner__WEBPACK_IMPORTED_MODULE_15__["a"]; });
-
-/* harmony import */ var _components_TextAreaInput__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(21);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TextAreaInput", function() { return _components_TextAreaInput__WEBPACK_IMPORTED_MODULE_16__["a"]; });
-
-/* harmony import */ var _components_TextInput__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(6);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TextInput", function() { return _components_TextInput__WEBPACK_IMPORTED_MODULE_17__["a"]; });
-
-/* harmony import */ var _components_VectorInput__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(15);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "VectorInput", function() { return _components_VectorInput__WEBPACK_IMPORTED_MODULE_18__["a"]; });
-
-/* harmony import */ var _scss_pcui_hidden_scss__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(22);
 
 
 

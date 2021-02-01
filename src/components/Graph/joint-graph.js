@@ -11,6 +11,7 @@ class JointGraph {
 
     constructor(dom, config = {}) {
 
+        this._config = config;
         this._graph = new joint.dia.Graph({}, { cellNamespace: joint.shape });
 
         this._paper = new joint.dia.Paper({
@@ -20,6 +21,7 @@ class JointGraph {
             cellViewNamespace: joint.shapes,
             height: dom.offsetHeight,
             clickThreshold: 1,
+            restrictTranslate: true,
             background: {
                 color: '#20292B'
             },
@@ -79,7 +81,7 @@ class JointGraph {
             this._panPaper = false;
             this._translate.add(this._pan);
         });
-        document.addEventListener('mousemove', (e) => {
+        dom.addEventListener('mousemove', (e) => {
             if (this._panPaper) {
                 this._pan = this._mousePos.clone().sub(new Vec2(e.offsetX, e.offsetY));
                 this._mousePos = new Vec2(e.offsetX, e.offsetY);
@@ -119,7 +121,7 @@ class JointGraph {
     }
 
     _scaleToPoint(nextScale, x, y) {
-        if (nextScale >= 0.25 && nextScale <= 1.5) {
+        if (nextScale >= (this._config.minZoom || 0.25) && nextScale <= (this._config.maxZoom || 1.5)) {
             const currentScale = this._paper.scale().sx;
 
             const beta = currentScale / nextScale;

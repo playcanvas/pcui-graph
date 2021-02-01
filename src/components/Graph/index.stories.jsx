@@ -4,7 +4,7 @@ import { GRAPH_ACTIONS } from './index.js';
 
 import Component from './base-component';
 
-import './style-story.scss';
+// import './style-story.scss';
 
 var name = 'Graph';
 var config = {
@@ -66,6 +66,12 @@ var materialSchema = {
                     name: 'output',
                     type: MATERIAL_SCHEMA.EDGE.VEC_2
                 }
+            ],
+            attributes: [
+                {
+                    name: 'values',
+                    type: 'VEC_2_INPUT'
+                },
             ]
         },
         [MATERIAL_SCHEMA.NODE.MULTIPLY]: {
@@ -300,7 +306,10 @@ var materialData = {
             nodeType: MATERIAL_SCHEMA.NODE.VARIABLE_VEC_2,
             name: 'meshUV',
             posX: 100,
-            posY: 200
+            posY: 200,
+            attributes: {
+                name: 'tester'
+            }
         }
     },
     edges: {
@@ -402,5 +411,8 @@ setTimeout(() => {
     });
     document.querySelector('.pcui-graph').ui.on(GRAPH_ACTIONS.UPDATE_NODE_POSITION, (node) => {
         console.log(GRAPH_ACTIONS.UPDATE_NODE_POSITION, node);
+    });
+    document.querySelector('.pcui-graph').ui.on(GRAPH_ACTIONS.UPDATE_NODE_ATTRIBUTE, (node) => {
+        console.log(GRAPH_ACTIONS.UPDATE_NODE_ATTRIBUTE, node);
     });
 }, 500);
