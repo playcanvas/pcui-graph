@@ -5,6 +5,18 @@ import sourceMarkerDefaultImage from '../../assets/source-marker-default.png';
 import sourceMarkerActiveImage from '../../assets/source-marker-active.png';
 import sourceMarkerDeactiveImage from '../../assets/source-marker-deactive.png';
 
+joint.connectors.smoothInOut = function(sourcePoint, targetPoint, vertices, args) {
+    var p1 = sourcePoint.clone();
+    p1.offset(30, 0);
+
+    var p2 = targetPoint.clone();
+    p2.offset(-30, 0);
+
+    var path = new joint.g.Path(joint.g.Path.createSegment('M', sourcePoint));
+    path.appendSegment(joint.g.Path.createSegment('C', p1, p2, targetPoint));
+    return path;
+}
+
 class GraphViewEdge {
     constructor(graphView, paper, graph, graphSchema, edgeData, edgeSchema, onEdgeSelected) {
         this._graphView = graphView;
@@ -54,6 +66,8 @@ class GraphViewEdge {
         });
         if (edgeSchema.smooth) {
             link.set('connector', { name: 'smooth' });
+        } else if (edgeSchema.smoothInOut) {
+            link.set('connector', { name: 'smoothInOut' } );
         }
         if (edgeData && Number.isFinite(edgeData.outPort)) {
             link.attr('line/targetMarker', null);
