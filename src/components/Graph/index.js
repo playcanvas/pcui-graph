@@ -89,13 +89,18 @@ class Graph extends Element {
         Object.keys(this._graphData.get(`data.nodes`)).forEach(nodeKey => {
             var node = this._graphData.get(`data.nodes.${nodeKey}`);
             var nodeSchema = this._graphSchema.nodes[node.nodeType];
-            nodeSchema.attributes.forEach(attribute => {
-                if (!node.attributes[attribute.name] && attribute.defaultValue) {
-                    this._suppressGraphDataEvents = true;
-                    this._graphData.set(`data.nodes.${nodeKey}.attributes.${attribute.name}`, attribute.defaultValue);
-                    this._suppressGraphDataEvents = false;
+            if (nodeSchema.attributes) {
+                if (nodeSchema.attributes && !node.attributes) {
+                    node.attributes = {};
                 }
-            });
+                nodeSchema.attributes.forEach(attribute => {
+                    if (!node.attributes[attribute.name] && attribute.defaultValue) {
+                        this._suppressGraphDataEvents = true;
+                        this._graphData.set(`data.nodes.${nodeKey}.attributes.${attribute.name}`, attribute.defaultValue);
+                        this._suppressGraphDataEvents = false;
+                    }
+                });
+            }
             this.createNode(this._graphData.get(`data.nodes.${nodeKey}`), undefined, true);
         });
         Object.keys(this._graphData.get(`data.edges`)).forEach(edgeKey => {
@@ -218,6 +223,14 @@ class Graph extends Element {
     }
 
     onCreateEdge(edgeId, edge) {
+        if (Number.isFinite(edge.inPort)) {
+            Object.keys(this._graphData.get('data.edges')).forEach(edgeKey => {
+                var edgeToCompare = this._graphData.get(`data.edges.${edgeKey}`);
+                if (edgeToCompare.to === edge.to && edgeToCompare.inPort === edge.inPort) {
+                    this.deleteEdge(edgeKey);
+                }
+            });
+        }
         this.createEdge(edge, edgeId);
     }
 

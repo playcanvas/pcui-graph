@@ -49,7 +49,7 @@ class JointGraph {
                 var tPort = joint.V(magnetT.parentNode).attr('port');
                 if ((sPort.includes('in') && tPort.includes('in')) || (sPort.includes('out') && tPort.includes('out'))) return false;
                 if (sPort.includes('in') && joint.V(magnetS.children[1]).attr().visibility !== 'hidden') return false;
-                if (tPort.includes('in') && joint.V(magnetT.parentNode.children[1]).attr().visibility !== 'hidden') return false;
+                // if (tPort.includes('in') && joint.V(magnetT.parentNode.children[1]).attr().visibility !== 'hidden') return false;
                 if (cellViewS._portElementsCache[sPort].portContentElement.children()[0].attr().edgeType !== cellViewT._portElementsCache[tPort].portContentElement.children()[0].attr().edgeType) return false;
                 return true;
             },

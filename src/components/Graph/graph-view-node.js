@@ -37,7 +37,7 @@ class GraphViewNode {
         if (nodeSchema.outPorts || nodeSchema.inPorts) {
             labelName = nodeData.attributes && nodeData.attributes.name ? `${nodeSchema.name} (${nodeData.attributes.name})` : nodeSchema.name;
         } else {
-            labelName = nodeData.name;
+            labelName = nodeData.attributes && nodeData.attributes.name || nodeData.name;
         }
         var rect = new joint.shapes.html.Element({
             attrs: {
@@ -232,12 +232,6 @@ class GraphViewNode {
                 const label = new Label({ text: attribute.name, class: 'graph-node-label' });
                 let input;
                 let nodeValue;
-                var dimensionMap = {
-                    0: 'x',
-                    1: 'y',
-                    2: 'z',
-                    3: 'w'
-                };
                 switch (attribute.type) {
                     case 'TEXT_INPUT':
                         nodeValue = nodeData.attributes[attribute.name];
@@ -249,7 +243,7 @@ class GraphViewNode {
                         break;
                     case 'NUMERIC_INPUT':
                         nodeValue = nodeData.attributes[attribute.name];
-                        input = new NumericInput({ class: 'graph-node-input', hideSlider: true, value: nodeValue.x });
+                        input = new NumericInput({ class: 'graph-node-input', hideSlider: true, value: nodeValue && nodeValue.x ? nodeValue.x : nodeValue });
                         break;
                     case 'VEC_2_INPUT':
                         nodeValue = nodeData.attributes[attribute.name];
