@@ -276,7 +276,7 @@ class Graph extends Element {
         var prevPosY = node.posY;
         if (pos.x !== node.posX || pos.y !== node.posY) {
             node.posX = pos.x;
-            node.posY = pos.Y;
+            node.posY = pos.y;
             if (!this._config.passiveUIEvents) {
                 this._graphData.set(`data.nodes.${nodeId}`, node);
             } else {
