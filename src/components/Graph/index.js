@@ -288,6 +288,7 @@ class Graph extends Element {
 
     onNodeAttributeUpdated(nodeId, attribute, value) {
         var node = this._graphData.get(`data.nodes.${nodeId}`);
+        var prevAttributeValue = node.attributes[attribute.name];
         if (Array.isArray(value)) {
             var keyMap = ['x', 'y', 'z', 'w'];
             value.forEach((v, i) => {
@@ -298,6 +299,8 @@ class Graph extends Element {
         }
         if (!this._config.passiveUIEvents) {
             this._graphData.set(`data.nodes.${nodeId}`, node);
+        } else {
+            this.updateNodeAttribute(nodeId, attribute.name, prevAttributeValue);
         }
         this.dom.dispatchEvent(
             new CustomEvent(
