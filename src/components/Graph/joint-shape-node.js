@@ -61,7 +61,6 @@ const jointShapeElementView = (paper) => joint.dia.ElementView.extend({
         var bbox = this.model.getBBox();
         // Example of updating the HTML with a data stored in the cell model.
         this.div.setAttribute('style', `
-            pointer-events: none;
             position: absolute;
             width: ${bbox.width}px;
             height: ${bbox.height}px;

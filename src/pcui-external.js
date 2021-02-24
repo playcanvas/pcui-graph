@@ -91,7 +91,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 84);
+/******/ 	return __webpack_require__(__webpack_require__.s = 36);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -140,10 +140,17 @@ var FONT_BOLD = 'font-bold';
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
-/* harmony import */ var _binding_events__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(10);
+
+// CONCATENATED MODULE: ./src/components/Element/style.scss
+// extracted by mini-css-extract-plugin
+
+// EXTERNAL MODULE: ./src/class.js
+var src_class = __webpack_require__(0);
+
+// EXTERNAL MODULE: ./src/binding/events.js
+var events = __webpack_require__(8);
+
+// CONCATENATED MODULE: ./src/components/Element/index.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -286,7 +293,7 @@ var ELEMENT_REGISTRY = {};
  * @property {DOMTokenList} class Shortcut to pcui.Element.dom.classList.
  */
 
-var Element = /*#__PURE__*/function (_Events) {
+var Element_Element = /*#__PURE__*/function (_Events) {
   _inherits(Element, _Events);
 
   var _super = _createSuper(Element);
@@ -332,7 +339,7 @@ var Element = /*#__PURE__*/function (_Events) {
     _this._dom.classList.add(CLASS_ELEMENT); // add font regular class
 
 
-    _this._dom.classList.add(_class__WEBPACK_IMPORTED_MODULE_1__[/* FONT_REGULAR */ "j"]); // add user classes
+    _this._dom.classList.add(src_class["j" /* FONT_REGULAR */]); // add user classes
 
 
     if (args.class) {
@@ -416,10 +423,10 @@ var Element = /*#__PURE__*/function (_Events) {
     key: "flash",
     value: function flash() {
       if (this._flashTimeout) return;
-      this.classAdd(_class__WEBPACK_IMPORTED_MODULE_1__[/* FLASH */ "f"]);
+      this.classAdd(src_class["f" /* FLASH */]);
       this._flashTimeout = setTimeout(function () {
         this._flashTimeout = null;
-        this.classRemove(_class__WEBPACK_IMPORTED_MODULE_1__[/* FLASH */ "f"]);
+        this.classRemove(src_class["f" /* FLASH */]);
       }.bind(this), 200);
     }
   }, {
@@ -452,9 +459,9 @@ var Element = /*#__PURE__*/function (_Events) {
     key: "_onEnabledChange",
     value: function _onEnabledChange(enabled) {
       if (enabled) {
-        this.classRemove(_class__WEBPACK_IMPORTED_MODULE_1__[/* DISABLED */ "d"]);
+        this.classRemove(src_class["d" /* DISABLED */]);
       } else {
-        this.classAdd(_class__WEBPACK_IMPORTED_MODULE_1__[/* DISABLED */ "d"]);
+        this.classAdd(src_class["d" /* DISABLED */]);
       }
 
       this.emit(enabled ? 'enable' : 'disable');
@@ -506,9 +513,9 @@ var Element = /*#__PURE__*/function (_Events) {
     key: "_onReadOnlyChange",
     value: function _onReadOnlyChange(readOnly) {
       if (readOnly) {
-        this.classAdd(_class__WEBPACK_IMPORTED_MODULE_1__[/* READONLY */ "o"]);
+        this.classAdd(src_class["o" /* READONLY */]);
       } else {
-        this.classRemove(_class__WEBPACK_IMPORTED_MODULE_1__[/* READONLY */ "o"]);
+        this.classRemove(src_class["o" /* READONLY */]);
       }
 
       this.emit('readOnly', readOnly);
@@ -734,9 +741,9 @@ var Element = /*#__PURE__*/function (_Events) {
       this._hidden = value;
 
       if (value) {
-        this.classAdd(_class__WEBPACK_IMPORTED_MODULE_1__[/* HIDDEN */ "l"]);
+        this.classAdd(src_class["l" /* HIDDEN */]);
       } else {
-        this.classRemove(_class__WEBPACK_IMPORTED_MODULE_1__[/* HIDDEN */ "l"]);
+        this.classRemove(src_class["l" /* HIDDEN */]);
       }
 
       this.emit(value ? 'hide' : 'show');
@@ -772,9 +779,9 @@ var Element = /*#__PURE__*/function (_Events) {
       this._hasError = value;
 
       if (value) {
-        this.classAdd(_class__WEBPACK_IMPORTED_MODULE_1__[/* ERROR */ "e"]);
+        this.classAdd(src_class["e" /* ERROR */]);
       } else {
-        this.classRemove(_class__WEBPACK_IMPORTED_MODULE_1__[/* ERROR */ "e"]);
+        this.classRemove(src_class["e" /* ERROR */]);
       }
     }
   }, {
@@ -930,12 +937,12 @@ var Element = /*#__PURE__*/function (_Events) {
   }]);
 
   return Element;
-}(_binding_events__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]); // utility function to expose a CSS property
+}(events["a" /* default */]); // utility function to expose a CSS property
 // via an Element.prototype property
 
 
 function exposeCssProperty(name) {
-  Object.defineProperty(Element.prototype, name, {
+  Object.defineProperty(Element_Element.prototype, name, {
     get: function get() {
       return this.style[name];
     },
@@ -947,17 +954,24 @@ function exposeCssProperty(name) {
 
 
 SIMPLE_CSS_PROPERTIES.forEach(exposeCssProperty);
-/* harmony default export */ __webpack_exports__["a"] = (Element);
+/* harmony default export */ var components_Element = __webpack_exports__["a"] = (Element_Element);
 
 /***/ }),
 /* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(35);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
-/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);
+
+// CONCATENATED MODULE: ./src/components/Container/style.scss
+// extracted by mini-css-extract-plugin
+
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
+
+// EXTERNAL MODULE: ./src/class.js
+var src_class = __webpack_require__(0);
+
+// CONCATENATED MODULE: ./src/components/Container/index.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -989,7 +1003,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 var RESIZE_HANDLE_SIZE = 4;
 var VALID_RESIZABLE_VALUES = [null, 'top', 'right', 'bottom', 'left'];
-var CLASS_RESIZING = _class__WEBPACK_IMPORTED_MODULE_2__[/* RESIZABLE */ "p"] + '-resizing';
+var CLASS_RESIZING = src_class["p" /* RESIZABLE */] + '-resizing';
 var CLASS_RESIZABLE_HANDLE = 'pcui-resizable-handle';
 var CLASS_CONTAINER = 'pcui-container';
 var CLASS_DRAGGED = CLASS_CONTAINER + '-dragged';
@@ -1033,7 +1047,7 @@ var CLASS_DRAGGED_CHILD = CLASS_DRAGGED + '-child';
  * @mixes IResizable
  */
 
-var Container = /*#__PURE__*/function (_Element) {
+var Container_Container = /*#__PURE__*/function (_Element) {
   _inherits(Container, _Element);
 
   var _super = _createSuper(Container);
@@ -1674,9 +1688,9 @@ var Container = /*#__PURE__*/function (_Element) {
       this._flex = value;
 
       if (value) {
-        this.classAdd(_class__WEBPACK_IMPORTED_MODULE_2__[/* FLEX */ "g"]);
+        this.classAdd(src_class["g" /* FLEX */]);
       } else {
-        this.classRemove(_class__WEBPACK_IMPORTED_MODULE_2__[/* FLEX */ "g"]);
+        this.classRemove(src_class["g" /* FLEX */]);
       }
     }
   }, {
@@ -1689,9 +1703,9 @@ var Container = /*#__PURE__*/function (_Element) {
       this._grid = value;
 
       if (value) {
-        this.classAdd(_class__WEBPACK_IMPORTED_MODULE_2__[/* GRID */ "k"]);
+        this.classAdd(src_class["k" /* GRID */]);
       } else {
-        this.classRemove(_class__WEBPACK_IMPORTED_MODULE_2__[/* GRID */ "k"]);
+        this.classRemove(src_class["k" /* GRID */]);
       }
     }
   }, {
@@ -1704,9 +1718,9 @@ var Container = /*#__PURE__*/function (_Element) {
       this._scrollable = value;
 
       if (value) {
-        this.classAdd(_class__WEBPACK_IMPORTED_MODULE_2__[/* SCROLLABLE */ "q"]);
+        this.classAdd(src_class["q" /* SCROLLABLE */]);
       } else {
-        this.classRemove(_class__WEBPACK_IMPORTED_MODULE_2__[/* SCROLLABLE */ "q"]);
+        this.classRemove(src_class["q" /* SCROLLABLE */]);
       }
     }
   }, {
@@ -1724,7 +1738,7 @@ var Container = /*#__PURE__*/function (_Element) {
 
 
       if (this._resizable) {
-        this.classRemove("".concat(_class__WEBPACK_IMPORTED_MODULE_2__[/* RESIZABLE */ "p"], "-").concat(this._resizable));
+        this.classRemove("".concat(src_class["p" /* RESIZABLE */], "-").concat(this._resizable));
       }
 
       this._resizable = value;
@@ -1732,8 +1746,8 @@ var Container = /*#__PURE__*/function (_Element) {
 
       if (value) {
         // add resize class and create / append resize handle
-        this.classAdd(_class__WEBPACK_IMPORTED_MODULE_2__[/* RESIZABLE */ "p"]);
-        this.classAdd("".concat(_class__WEBPACK_IMPORTED_MODULE_2__[/* RESIZABLE */ "p"], "-").concat(value));
+        this.classAdd(src_class["p" /* RESIZABLE */]);
+        this.classAdd("".concat(src_class["p" /* RESIZABLE */], "-").concat(value));
 
         if (!this._domResizeHandle) {
           this._createResizeHandle();
@@ -1742,7 +1756,7 @@ var Container = /*#__PURE__*/function (_Element) {
         this._dom.appendChild(this._domResizeHandle);
       } else {
         // remove resize class and resize handle
-        this.classRemove(_class__WEBPACK_IMPORTED_MODULE_2__[/* RESIZABLE */ "p"]);
+        this.classRemove(src_class["p" /* RESIZABLE */]);
 
         if (this._domResizeHandle) {
           this._dom.removeChild(this._domResizeHandle);
@@ -1788,524 +1802,27 @@ var Container = /*#__PURE__*/function (_Element) {
   }]);
 
   return Container;
-}(_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
+}(Element["a" /* default */]);
 
-_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('container', Container);
-/* harmony default export */ __webpack_exports__["a"] = (Container);
+Element["a" /* default */].register('container', Container_Container);
+/* harmony default export */ var components_Container = __webpack_exports__["a"] = (Container_Container);
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-// eslint-disable-next-line func-names
-
-module.exports = function (useSourceMap) {
-  var list = []; // return the list of modules as css string
-
-  list.toString = function toString() {
-    return this.map(function (item) {
-      var content = cssWithMappingToString(item, useSourceMap);
-
-      if (item[2]) {
-        return "@media ".concat(item[2], " {").concat(content, "}");
-      }
-
-      return content;
-    }).join('');
-  }; // import a list of modules into the list
-  // eslint-disable-next-line func-names
-
-
-  list.i = function (modules, mediaQuery, dedupe) {
-    if (typeof modules === 'string') {
-      // eslint-disable-next-line no-param-reassign
-      modules = [[null, modules, '']];
-    }
-
-    var alreadyImportedModules = {};
-
-    if (dedupe) {
-      for (var i = 0; i < this.length; i++) {
-        // eslint-disable-next-line prefer-destructuring
-        var id = this[i][0];
-
-        if (id != null) {
-          alreadyImportedModules[id] = true;
-        }
-      }
-    }
-
-    for (var _i = 0; _i < modules.length; _i++) {
-      var item = [].concat(modules[_i]);
-
-      if (dedupe && alreadyImportedModules[item[0]]) {
-        // eslint-disable-next-line no-continue
-        continue;
-      }
-
-      if (mediaQuery) {
-        if (!item[2]) {
-          item[2] = mediaQuery;
-        } else {
-          item[2] = "".concat(mediaQuery, " and ").concat(item[2]);
-        }
-      }
-
-      list.push(item);
-    }
-  };
-
-  return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-  var content = item[1] || ''; // eslint-disable-next-line prefer-destructuring
-
-  var cssMapping = item[3];
-
-  if (!cssMapping) {
-    return content;
-  }
-
-  if (useSourceMap && typeof btoa === 'function') {
-    var sourceMapping = toComment(cssMapping);
-    var sourceURLs = cssMapping.sources.map(function (source) {
-      return "/*# sourceURL=".concat(cssMapping.sourceRoot || '').concat(source, " */");
-    });
-    return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-  }
-
-  return [content].join('\n');
-} // Adapted from convert-source-map (MIT)
-
-
-function toComment(sourceMap) {
-  // eslint-disable-next-line no-undef
-  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-  var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
-  return "/*# ".concat(data, " */");
-}
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-
-var stylesInDom = {};
-
-var	memoize = function (fn) {
-	var memo;
-
-	return function () {
-		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-		return memo;
-	};
-};
-
-var isOldIE = memoize(function () {
-	// Test for IE <= 9 as proposed by Browserhacks
-	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
-	// Tests for existence of standard globals is to allow style-loader
-	// to operate correctly into non-standard environments
-	// @see https://github.com/webpack-contrib/style-loader/issues/177
-	return window && document && document.all && !window.atob;
-});
-
-var getTarget = function (target, parent) {
-  if (parent){
-    return parent.querySelector(target);
-  }
-  return document.querySelector(target);
-};
-
-var getElement = (function (fn) {
-	var memo = {};
-
-	return function(target, parent) {
-                // If passing function in options, then use it for resolve "head" element.
-                // Useful for Shadow Root style i.e
-                // {
-                //   insertInto: function () { return document.querySelector("#foo").shadowRoot }
-                // }
-                if (typeof target === 'function') {
-                        return target();
-                }
-                if (typeof memo[target] === "undefined") {
-			var styleTarget = getTarget.call(this, target, parent);
-			// Special case to return head of iframe instead of iframe itself
-			if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
-				try {
-					// This will throw an exception if access to iframe is blocked
-					// due to cross-origin restrictions
-					styleTarget = styleTarget.contentDocument.head;
-				} catch(e) {
-					styleTarget = null;
-				}
-			}
-			memo[target] = styleTarget;
-		}
-		return memo[target]
-	};
-})();
-
-var singleton = null;
-var	singletonCounter = 0;
-var	stylesInsertedAtTop = [];
-
-var	fixUrls = __webpack_require__(32);
-
-module.exports = function(list, options) {
-	if (typeof DEBUG !== "undefined" && DEBUG) {
-		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-	}
-
-	options = options || {};
-
-	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
-
-	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-	// tags it will allow on a page
-	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
-
-	// By default, add <style> tags to the <head> element
-        if (!options.insertInto) options.insertInto = "head";
-
-	// By default, add <style> tags to the bottom of the target
-	if (!options.insertAt) options.insertAt = "bottom";
-
-	var styles = listToStyles(list, options);
-
-	addStylesToDom(styles, options);
-
-	return function update (newList) {
-		var mayRemove = [];
-
-		for (var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-
-			domStyle.refs--;
-			mayRemove.push(domStyle);
-		}
-
-		if(newList) {
-			var newStyles = listToStyles(newList, options);
-			addStylesToDom(newStyles, options);
-		}
-
-		for (var i = 0; i < mayRemove.length; i++) {
-			var domStyle = mayRemove[i];
-
-			if(domStyle.refs === 0) {
-				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
-
-				delete stylesInDom[domStyle.id];
-			}
-		}
-	};
-};
-
-function addStylesToDom (styles, options) {
-	for (var i = 0; i < styles.length; i++) {
-		var item = styles[i];
-		var domStyle = stylesInDom[item.id];
-
-		if(domStyle) {
-			domStyle.refs++;
-
-			for(var j = 0; j < domStyle.parts.length; j++) {
-				domStyle.parts[j](item.parts[j]);
-			}
-
-			for(; j < item.parts.length; j++) {
-				domStyle.parts.push(addStyle(item.parts[j], options));
-			}
-		} else {
-			var parts = [];
-
-			for(var j = 0; j < item.parts.length; j++) {
-				parts.push(addStyle(item.parts[j], options));
-			}
-
-			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-		}
-	}
-}
-
-function listToStyles (list, options) {
-	var styles = [];
-	var newStyles = {};
-
-	for (var i = 0; i < list.length; i++) {
-		var item = list[i];
-		var id = options.base ? item[0] + options.base : item[0];
-		var css = item[1];
-		var media = item[2];
-		var sourceMap = item[3];
-		var part = {css: css, media: media, sourceMap: sourceMap};
-
-		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
-		else newStyles[id].parts.push(part);
-	}
-
-	return styles;
-}
-
-function insertStyleElement (options, style) {
-	var target = getElement(options.insertInto)
-
-	if (!target) {
-		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
-	}
-
-	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
-
-	if (options.insertAt === "top") {
-		if (!lastStyleElementInsertedAtTop) {
-			target.insertBefore(style, target.firstChild);
-		} else if (lastStyleElementInsertedAtTop.nextSibling) {
-			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
-		} else {
-			target.appendChild(style);
-		}
-		stylesInsertedAtTop.push(style);
-	} else if (options.insertAt === "bottom") {
-		target.appendChild(style);
-	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
-		var nextSibling = getElement(options.insertAt.before, target);
-		target.insertBefore(style, nextSibling);
-	} else {
-		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
-	}
-}
-
-function removeStyleElement (style) {
-	if (style.parentNode === null) return false;
-	style.parentNode.removeChild(style);
-
-	var idx = stylesInsertedAtTop.indexOf(style);
-	if(idx >= 0) {
-		stylesInsertedAtTop.splice(idx, 1);
-	}
-}
-
-function createStyleElement (options) {
-	var style = document.createElement("style");
-
-	if(options.attrs.type === undefined) {
-		options.attrs.type = "text/css";
-	}
-
-	if(options.attrs.nonce === undefined) {
-		var nonce = getNonce();
-		if (nonce) {
-			options.attrs.nonce = nonce;
-		}
-	}
-
-	addAttrs(style, options.attrs);
-	insertStyleElement(options, style);
-
-	return style;
-}
-
-function createLinkElement (options) {
-	var link = document.createElement("link");
-
-	if(options.attrs.type === undefined) {
-		options.attrs.type = "text/css";
-	}
-	options.attrs.rel = "stylesheet";
-
-	addAttrs(link, options.attrs);
-	insertStyleElement(options, link);
-
-	return link;
-}
-
-function addAttrs (el, attrs) {
-	Object.keys(attrs).forEach(function (key) {
-		el.setAttribute(key, attrs[key]);
-	});
-}
-
-function getNonce() {
-	if (false) {}
-
-	return __webpack_require__.nc;
-}
-
-function addStyle (obj, options) {
-	var style, update, remove, result;
-
-	// If a transform function was defined, run it on the css
-	if (options.transform && obj.css) {
-	    result = typeof options.transform === 'function'
-		 ? options.transform(obj.css) 
-		 : options.transform.default(obj.css);
-
-	    if (result) {
-	    	// If transform returns a value, use that instead of the original css.
-	    	// This allows running runtime transformations on the css.
-	    	obj.css = result;
-	    } else {
-	    	// If the transform function returns a falsy value, don't add this css.
-	    	// This allows conditional loading of css
-	    	return function() {
-	    		// noop
-	    	};
-	    }
-	}
-
-	if (options.singleton) {
-		var styleIndex = singletonCounter++;
-
-		style = singleton || (singleton = createStyleElement(options));
-
-		update = applyToSingletonTag.bind(null, style, styleIndex, false);
-		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
-
-	} else if (
-		obj.sourceMap &&
-		typeof URL === "function" &&
-		typeof URL.createObjectURL === "function" &&
-		typeof URL.revokeObjectURL === "function" &&
-		typeof Blob === "function" &&
-		typeof btoa === "function"
-	) {
-		style = createLinkElement(options);
-		update = updateLink.bind(null, style, options);
-		remove = function () {
-			removeStyleElement(style);
-
-			if(style.href) URL.revokeObjectURL(style.href);
-		};
-	} else {
-		style = createStyleElement(options);
-		update = applyToTag.bind(null, style);
-		remove = function () {
-			removeStyleElement(style);
-		};
-	}
-
-	update(obj);
-
-	return function updateStyle (newObj) {
-		if (newObj) {
-			if (
-				newObj.css === obj.css &&
-				newObj.media === obj.media &&
-				newObj.sourceMap === obj.sourceMap
-			) {
-				return;
-			}
-
-			update(obj = newObj);
-		} else {
-			remove();
-		}
-	};
-}
-
-var replaceText = (function () {
-	var textStore = [];
-
-	return function (index, replacement) {
-		textStore[index] = replacement;
-
-		return textStore.filter(Boolean).join('\n');
-	};
-})();
-
-function applyToSingletonTag (style, index, remove, obj) {
-	var css = remove ? "" : obj.css;
-
-	if (style.styleSheet) {
-		style.styleSheet.cssText = replaceText(index, css);
-	} else {
-		var cssNode = document.createTextNode(css);
-		var childNodes = style.childNodes;
-
-		if (childNodes[index]) style.removeChild(childNodes[index]);
-
-		if (childNodes.length) {
-			style.insertBefore(cssNode, childNodes[index]);
-		} else {
-			style.appendChild(cssNode);
-		}
-	}
-}
-
-function applyToTag (style, obj) {
-	var css = obj.css;
-	var media = obj.media;
-
-	if(media) {
-		style.setAttribute("media", media)
-	}
-
-	if(style.styleSheet) {
-		style.styleSheet.cssText = css;
-	} else {
-		while(style.firstChild) {
-			style.removeChild(style.firstChild);
-		}
-
-		style.appendChild(document.createTextNode(css));
-	}
-}
-
-function updateLink (link, options, obj) {
-	var css = obj.css;
-	var sourceMap = obj.sourceMap;
-
-	/*
-		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
-		and there is no publicPath defined then lets turn convertToAbsoluteUrls
-		on by default.  Otherwise default to the convertToAbsoluteUrls option
-		directly
-	*/
-	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
-
-	if (options.convertToAbsoluteUrls || autoFixUrls) {
-		css = fixUrls(css);
-	}
-
-	if (sourceMap) {
-		// http://stackoverflow.com/a/26603875
-		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-	}
-
-	var blob = new Blob([css], { type: "text/css" });
-
-	var oldSrc = link.href;
-
-	link.href = URL.createObjectURL(blob);
-
-	if(oldSrc) URL.revokeObjectURL(oldSrc);
-}
-
-
-/***/ }),
-/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(39);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
+
+// CONCATENATED MODULE: ./src/components/Label/style.scss
+// extracted by mini-css-extract-plugin
+
+// EXTERNAL MODULE: ./src/class.js
+var src_class = __webpack_require__(0);
+
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
+
+// CONCATENATED MODULE: ./src/components/Label/index.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2342,7 +1859,7 @@ var CLASS_LABEL = 'pcui-label';
  * @mixes IBindable
  */
 
-var Label = /*#__PURE__*/function (_Element) {
+var Label_Label = /*#__PURE__*/function (_Element) {
   _inherits(Label, _Element);
 
   var _super = _createSuper(Label);
@@ -2369,7 +1886,7 @@ var Label = /*#__PURE__*/function (_Element) {
     _this.text = args.text || args.value || '';
 
     if (args.allowTextSelection) {
-      _this.class.add(_class__WEBPACK_IMPORTED_MODULE_1__[/* DEFAULT_MOUSEDOWN */ "c"]);
+      _this.class.add(src_class["c" /* DEFAULT_MOUSEDOWN */]);
     }
 
     if (args.nativeTooltip) {
@@ -2391,7 +1908,7 @@ var Label = /*#__PURE__*/function (_Element) {
   _createClass(Label, [{
     key: "_updateText",
     value: function _updateText(value) {
-      this.class.remove(_class__WEBPACK_IMPORTED_MODULE_1__[/* MULTIPLE_VALUES */ "m"]);
+      this.class.remove(src_class["m" /* MULTIPLE_VALUES */]);
       if (this._text === value) return false;
       this._text = value;
 
@@ -2446,7 +1963,7 @@ var Label = /*#__PURE__*/function (_Element) {
       if (different) {
         this._updateText('');
 
-        this.class.add(_class__WEBPACK_IMPORTED_MODULE_1__[/* MULTIPLE_VALUES */ "m"]);
+        this.class.add(src_class["m" /* MULTIPLE_VALUES */]);
       } else {
         this._updateText(values[0]);
       }
@@ -2466,19 +1983,211 @@ var Label = /*#__PURE__*/function (_Element) {
   }]);
 
   return Label;
-}(_Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]);
+}(Element["a" /* default */]);
 
-_Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].register('label', Label);
-/* harmony default export */ __webpack_exports__["a"] = (Label);
+Element["a" /* default */].register('label', Label_Label);
+/* harmony default export */ var components_Label = __webpack_exports__["a"] = (Label_Label);
 
 /***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export bytesToHuman */
+/* unused harmony export swapExtension */
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+var utils = {}; // utils.deepCopy
+
+utils.deepCopy = function deepCopy(data) {
+  if (data == null || _typeof(data) !== 'object') return data;
+
+  if (data instanceof Array) {
+    var arr = [];
+
+    for (var i = 0; i < data.length; i++) {
+      arr[i] = deepCopy(data[i]);
+    }
+
+    return arr;
+  }
+
+  var obj = {};
+
+  for (var key in data) {
+    if (data.hasOwnProperty(key)) obj[key] = deepCopy(data[key]);
+  }
+
+  return obj;
+};
+
+utils.isMobile = function () {
+  return /Android/i.test(navigator.userAgent) || /iPhone|iPad|iPod/i.test(navigator.userAgent);
+};
+/**
+ * @name utils.implements
+ * @description Adds properties and methods from the sourceClass
+ * to the targetClass but only if properties with the same name do not
+ * already exist in the targetClass.
+ * @param {object} targetClass - The target class.
+ * @param {object} sourceClass - The source class.
+ * @example utils.implements(pcui.Container, pcui.IContainer);
+ */
+
+
+utils.implements = function (targetClass, sourceClass) {
+  var properties = Object.getOwnPropertyDescriptors(sourceClass.prototype);
+
+  for (var key in properties) {
+    if (targetClass.prototype.hasOwnProperty(key)) {
+      delete properties[key];
+    }
+  }
+
+  Object.defineProperties(targetClass.prototype, properties);
+};
+/**
+ * @name utils.proxy
+ * @description Creates new properties on the target class that get / set
+ * the properties of the member.
+ * @param {object} targetClass - The target class
+ * @param {string} memberName - The name of the member of the target class that properties will be proxied to.
+ * @param {string[]} properties - A list of properties to be proxied.
+ * @example
+ * utils.proxy(pcui.SliderInput, '_numericInput', ['max', 'min', 'placeholder']);
+ */
+
+
+utils.proxy = function (targetClass, memberName, properties) {
+  properties.forEach(function (property) {
+    Object.defineProperty(targetClass.prototype, property, {
+      get: function get() {
+        return this[memberName][property];
+      },
+      set: function set(value) {
+        this[memberName][property] = value;
+      }
+    });
+  });
+}; // String.startsWith
+
+
+if (!String.prototype.startsWith) {
+  Object.defineProperty(String.prototype, 'startsWith', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: function value(str) {
+      var that = this;
+      var ceil = str.length;
+
+      for (var i = 0; i < ceil; i++) {
+        if (that[i] !== str[i]) return false;
+      }
+
+      return true;
+    }
+  });
+} // String.endsWith polyfill
+
+
+if (!String.prototype.endsWith) {
+  Object.defineProperty(String.prototype, 'endsWith', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: function value(str) {
+      var that = this;
+
+      for (var i = 0, ceil = str.length; i < ceil; i++) {
+        if (that[i + that.length - ceil] !== str[i]) return false;
+      }
+
+      return true;
+    }
+  });
+} // Appends query parameter to string (supposedly the string is a URL)
+// automatically figuring out if the separator should be ? or &.
+// Example: url.appendQuery('t=123').appendQuery('q=345');
+
+
+if (!String.prototype.appendQuery) {
+  Object.defineProperty(String.prototype, 'appendQuery', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: function value(queryParameter) {
+      var separator = this.indexOf('?') !== -1 ? '&' : '?';
+      return this + separator + queryParameter;
+    }
+  });
+}
+
+utils.arrayEquals = function (lhs, rhs) {
+  if (!lhs) return false;
+  if (!rhs) return false;
+  if (lhs.length !== rhs.length) return false;
+
+  for (var i = 0, l = lhs.length; i < l; i++) {
+    if (this[i] instanceof Array && rhs[i] instanceof Array) {
+      if (!this[i].equals(rhs[i])) return false;
+    } else if (this[i] !== rhs[i]) {
+      return false;
+    }
+  }
+
+  return true;
+}; // element.classList.add polyfill
+
+
+(function () {
+  var dummy = document.createElement('div'),
+      dtp = DOMTokenList.prototype,
+      add = dtp.add,
+      rem = dtp.remove;
+  dummy.classList.add('class1', 'class2'); // Older versions of the HTMLElement.classList spec didn't allow multiple
+  // arguments, easy to test for
+
+  if (!dummy.classList.contains('class2')) {
+    dtp.add = function () {
+      Array.prototype.forEach.call(arguments, add.bind(this));
+    };
+
+    dtp.remove = function () {
+      Array.prototype.forEach.call(arguments, rem.bind(this));
+    };
+  }
+})();
+
+var bytesToHuman = function bytesToHuman(bytes) {
+  if (isNaN(bytes) || bytes === 0) return '0 B';
+  var k = 1000;
+  var sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+  var i = Math.floor(Math.log(bytes) / Math.log(k));
+  return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
+}; // todo move this into proper library
+// replace the oldExtension in a path with the newExtension
+// return the new path
+// oldExtension and newExtension should have leading period
+
+var swapExtension = function swapExtension(path, oldExtension, newExtension) {
+  while (path.indexOf(oldExtension) >= 0) {
+    path = path.replace(oldExtension, newExtension);
+  }
+
+  return path;
+};
+/* harmony default export */ __webpack_exports__["a"] = (utils);
+
+/***/ }),
+/* 5 */,
 /* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
 /* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
-/* harmony import */ var _TextInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
+/* harmony import */ var _TextInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
 /* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(0);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -3060,202 +2769,17 @@ var TreeViewItem = /*#__PURE__*/function (_Container) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export bytesToHuman */
-/* unused harmony export swapExtension */
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-var utils = {}; // utils.deepCopy
+// CONCATENATED MODULE: ./src/components/TextInput/style.scss
+// extracted by mini-css-extract-plugin
 
-utils.deepCopy = function deepCopy(data) {
-  if (data == null || _typeof(data) !== 'object') return data;
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
 
-  if (data instanceof Array) {
-    var arr = [];
+// EXTERNAL MODULE: ./src/class.js
+var src_class = __webpack_require__(0);
 
-    for (var i = 0; i < data.length; i++) {
-      arr[i] = deepCopy(data[i]);
-    }
-
-    return arr;
-  }
-
-  var obj = {};
-
-  for (var key in data) {
-    if (data.hasOwnProperty(key)) obj[key] = deepCopy(data[key]);
-  }
-
-  return obj;
-};
-
-utils.isMobile = function () {
-  return /Android/i.test(navigator.userAgent) || /iPhone|iPad|iPod/i.test(navigator.userAgent);
-};
-/**
- * @name utils.implements
- * @description Adds properties and methods from the sourceClass
- * to the targetClass but only if properties with the same name do not
- * already exist in the targetClass.
- * @param {object} targetClass - The target class.
- * @param {object} sourceClass - The source class.
- * @example utils.implements(pcui.Container, pcui.IContainer);
- */
-
-
-utils.implements = function (targetClass, sourceClass) {
-  var properties = Object.getOwnPropertyDescriptors(sourceClass.prototype);
-
-  for (var key in properties) {
-    if (targetClass.prototype.hasOwnProperty(key)) {
-      delete properties[key];
-    }
-  }
-
-  Object.defineProperties(targetClass.prototype, properties);
-};
-/**
- * @name utils.proxy
- * @description Creates new properties on the target class that get / set
- * the properties of the member.
- * @param {object} targetClass - The target class
- * @param {string} memberName - The name of the member of the target class that properties will be proxied to.
- * @param {string[]} properties - A list of properties to be proxied.
- * @example
- * utils.proxy(pcui.SliderInput, '_numericInput', ['max', 'min', 'placeholder']);
- */
-
-
-utils.proxy = function (targetClass, memberName, properties) {
-  properties.forEach(function (property) {
-    Object.defineProperty(targetClass.prototype, property, {
-      get: function get() {
-        return this[memberName][property];
-      },
-      set: function set(value) {
-        this[memberName][property] = value;
-      }
-    });
-  });
-}; // String.startsWith
-
-
-if (!String.prototype.startsWith) {
-  Object.defineProperty(String.prototype, 'startsWith', {
-    enumerable: false,
-    configurable: false,
-    writable: false,
-    value: function value(str) {
-      var that = this;
-      var ceil = str.length;
-
-      for (var i = 0; i < ceil; i++) {
-        if (that[i] !== str[i]) return false;
-      }
-
-      return true;
-    }
-  });
-} // String.endsWith polyfill
-
-
-if (!String.prototype.endsWith) {
-  Object.defineProperty(String.prototype, 'endsWith', {
-    enumerable: false,
-    configurable: false,
-    writable: false,
-    value: function value(str) {
-      var that = this;
-
-      for (var i = 0, ceil = str.length; i < ceil; i++) {
-        if (that[i + that.length - ceil] !== str[i]) return false;
-      }
-
-      return true;
-    }
-  });
-} // Appends query parameter to string (supposedly the string is a URL)
-// automatically figuring out if the separator should be ? or &.
-// Example: url.appendQuery('t=123').appendQuery('q=345');
-
-
-if (!String.prototype.appendQuery) {
-  Object.defineProperty(String.prototype, 'appendQuery', {
-    enumerable: false,
-    configurable: false,
-    writable: false,
-    value: function value(queryParameter) {
-      var separator = this.indexOf('?') !== -1 ? '&' : '?';
-      return this + separator + queryParameter;
-    }
-  });
-}
-
-utils.arrayEquals = function (lhs, rhs) {
-  if (!lhs) return false;
-  if (!rhs) return false;
-  if (lhs.length !== rhs.length) return false;
-
-  for (var i = 0, l = lhs.length; i < l; i++) {
-    if (this[i] instanceof Array && rhs[i] instanceof Array) {
-      if (!this[i].equals(rhs[i])) return false;
-    } else if (this[i] !== rhs[i]) {
-      return false;
-    }
-  }
-
-  return true;
-}; // element.classList.add polyfill
-
-
-(function () {
-  var dummy = document.createElement('div'),
-      dtp = DOMTokenList.prototype,
-      add = dtp.add,
-      rem = dtp.remove;
-  dummy.classList.add('class1', 'class2'); // Older versions of the HTMLElement.classList spec didn't allow multiple
-  // arguments, easy to test for
-
-  if (!dummy.classList.contains('class2')) {
-    dtp.add = function () {
-      Array.prototype.forEach.call(arguments, add.bind(this));
-    };
-
-    dtp.remove = function () {
-      Array.prototype.forEach.call(arguments, rem.bind(this));
-    };
-  }
-})();
-
-var bytesToHuman = function bytesToHuman(bytes) {
-  if (isNaN(bytes) || bytes === 0) return '0 B';
-  var k = 1000;
-  var sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-  var i = Math.floor(Math.log(bytes) / Math.log(k));
-  return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
-}; // todo move this into proper library
-// replace the oldExtension in a path with the newExtension
-// return the new path
-// oldExtension and newExtension should have leading period
-
-var swapExtension = function swapExtension(path, oldExtension, newExtension) {
-  while (path.indexOf(oldExtension) >= 0) {
-    path = path.replace(oldExtension, newExtension);
-  }
-
-  return path;
-};
-/* harmony default export */ __webpack_exports__["a"] = (utils);
-
-/***/ }),
-/* 8 */,
-/* 9 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(45);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
-/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);
+// CONCATENATED MODULE: ./src/components/TextInput/index.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3302,7 +2826,7 @@ var CLASS_TEXT_INPUT = 'pcui-text-input';
  * If false then the input will be set in an error state and the value will not propagate to the binding.
  */
 
-var TextInput = /*#__PURE__*/function (_Element) {
+var TextInput_TextInput = /*#__PURE__*/function (_Element) {
   _inherits(TextInput, _Element);
 
   var _super = _createSuper(TextInput);
@@ -3409,13 +2933,13 @@ var TextInput = /*#__PURE__*/function (_Element) {
   }, {
     key: "_onInputFocus",
     value: function _onInputFocus(evt) {
-      this.class.add(_class__WEBPACK_IMPORTED_MODULE_2__[/* FOCUS */ "h"]);
+      this.class.add(src_class["h" /* FOCUS */]);
       this.emit('focus', evt);
     }
   }, {
     key: "_onInputBlur",
     value: function _onInputBlur(evt) {
-      this.class.remove(_class__WEBPACK_IMPORTED_MODULE_2__[/* FOCUS */ "h"]);
+      this.class.remove(src_class["h" /* FOCUS */]);
       this.emit('blur', evt);
     }
   }, {
@@ -3453,7 +2977,7 @@ var TextInput = /*#__PURE__*/function (_Element) {
   }, {
     key: "_updateValue",
     value: function _updateValue(value) {
-      this.class.remove(_class__WEBPACK_IMPORTED_MODULE_2__[/* MULTIPLE_VALUES */ "m"]);
+      this.class.remove(src_class["m" /* MULTIPLE_VALUES */]);
 
       if (value && _typeof(value) === 'object') {
         if (Array.isArray(value)) {
@@ -3562,7 +3086,7 @@ var TextInput = /*#__PURE__*/function (_Element) {
       if (different) {
         this._updateValue(null);
 
-        this.class.add(_class__WEBPACK_IMPORTED_MODULE_2__[/* MULTIPLE_VALUES */ "m"]);
+        this.class.add(src_class["m" /* MULTIPLE_VALUES */]);
       } else {
         this._updateValue(values[0]);
       }
@@ -3610,15 +3134,15 @@ var TextInput = /*#__PURE__*/function (_Element) {
   }]);
 
   return TextInput;
-}(_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
+}(Element["a" /* default */]);
 
-_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('string', TextInput, {
+Element["a" /* default */].register('string', TextInput_TextInput, {
   renderChanges: true
 });
-/* harmony default export */ __webpack_exports__["a"] = (TextInput);
+/* harmony default export */ var components_TextInput = __webpack_exports__["a"] = (TextInput_TextInput);
 
 /***/ }),
-/* 10 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3733,189 +3257,24 @@ EventHandle.prototype.on = function (name, fn) {
 /* harmony default export */ __webpack_exports__["a"] = (Events);
 
 /***/ }),
-/* 11 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(41);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+// CONCATENATED MODULE: ./src/components/NumericInput/style.scss
+// extracted by mini-css-extract-plugin
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+// EXTERNAL MODULE: ./src/components/TextInput/index.js + 1 modules
+var TextInput = __webpack_require__(7);
 
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+// EXTERNAL MODULE: ./src/class.js
+var src_class = __webpack_require__(0);
 
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-var CLASS_BUTTON = 'pcui-button';
-/**
- * @name Button
- * @classdesc Represents a button.
- * @augments Element
- * @property {string} [text=Click Me] Gets / sets the text of the button
- * @property {string} size Gets / sets the 'size' type of the button. Can be null or 'small'.
- * @property {string} [icon=E401] The CSS code for an icon for the button. e.g. E401 (notice we omit the '\' character).
- * @mixes IFocusable
- */
-
-var Button = /*#__PURE__*/function (_Element) {
-  _inherits(Button, _Element);
-
-  var _super = _createSuper(Button);
-
-  /**
-   * Creates a new Button.
-   *
-   * @param {object} args - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
-   * @param {boolean} [args.unsafe] - If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
-   */
-  function Button(args) {
-    var _this;
-
-    _classCallCheck(this, Button);
-
-    if (!args) args = {};
-    _this = _super.call(this, args.dom ? args.dom : document.createElement('button'), args);
-
-    _this.class.add(CLASS_BUTTON);
-
-    _this._unsafe = args.unsafe || false;
-    _this.text = args.text || '';
-    _this.size = args.size || null;
-    _this.icon = args.icon || '';
-    _this._domEventKeyDown = _this._onKeyDown.bind(_assertThisInitialized(_this));
-
-    _this.dom.addEventListener('keydown', _this._onKeyDown.bind(_assertThisInitialized(_this)));
-
-    return _this;
-  } // click on enter
-  // blur on escape
-
-
-  _createClass(Button, [{
-    key: "_onKeyDown",
-    value: function _onKeyDown(evt) {
-      if (evt.keyCode === 27) {
-        this.blur();
-      } else if (evt.keyCode === 13) {
-        this._onClick(evt);
-      }
-    }
-  }, {
-    key: "_onClick",
-    value: function _onClick(evt) {
-      this.blur();
-      if (this.readOnly) return;
-
-      _get(_getPrototypeOf(Button.prototype), "_onClick", this).call(this, evt);
-    }
-  }, {
-    key: "focus",
-    value: function focus() {
-      this.dom.focus();
-    }
-  }, {
-    key: "blur",
-    value: function blur() {
-      this.dom.blur();
-    }
-  }, {
-    key: "destroy",
-    value: function destroy() {
-      if (this._destroyed) return;
-      this.dom.removeEventListener('keydown', this._domEventKeyDown);
-
-      _get(_getPrototypeOf(Button.prototype), "destroy", this).call(this);
-    }
-  }, {
-    key: "text",
-    get: function get() {
-      return this._text;
-    },
-    set: function set(value) {
-      if (this._text === value) return;
-      this._text = value;
-
-      if (this._unsafe) {
-        this.dom.innerHTML = value;
-      } else {
-        this.dom.textContent = value;
-      }
-    }
-  }, {
-    key: "icon",
-    get: function get() {
-      return this._icon;
-    },
-    set: function set(value) {
-      if (this._icon === value | !value.match(/^E[0-9]{0,4}$/)) return;
-      this._icon = value;
-
-      if (value) {
-        // set data-icon attribute but first convert the value to a code point
-        this.dom.setAttribute('data-icon', String.fromCodePoint(parseInt(value, 16)));
-      } else {
-        this.dom.removeAttribute('data-icon');
-      }
-    }
-  }, {
-    key: "size",
-    get: function get() {
-      return this._size;
-    },
-    set: function set(value) {
-      if (this._size === value) return;
-
-      if (this._size) {
-        this.class.remove('pcui-' + this._size);
-        this._size = null;
-      }
-
-      this._size = value;
-
-      if (this._size) {
-        this.class.add('pcui-' + this._size);
-      }
-    }
-  }]);
-
-  return Button;
-}(_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
-
-_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('button', Button);
-/* harmony default export */ __webpack_exports__["a"] = (Button);
-
-/***/ }),
-/* 12 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(43);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
-/* harmony import */ var _TextInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
-/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(0);
+// CONCATENATED MODULE: ./src/components/NumericInput/index.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3962,7 +3321,7 @@ var REGEX_COMMA = /,/g;
  * @augments TextInput
  */
 
-var NumericInput = /*#__PURE__*/function (_TextInput) {
+var NumericInput_NumericInput = /*#__PURE__*/function (_TextInput) {
   _inherits(NumericInput, _TextInput);
 
   var _super = _createSuper(NumericInput);
@@ -4015,7 +3374,7 @@ var NumericInput = /*#__PURE__*/function (_TextInput) {
     _this._domEvtMouseWheel = null;
 
     if (!args.hideSlider) {
-      _this._sliderControl = new _Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]();
+      _this._sliderControl = new Element["a" /* default */]();
 
       _this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL);
 
@@ -4181,7 +3540,7 @@ var NumericInput = /*#__PURE__*/function (_TextInput) {
 
       this._oldValue = value;
       this._domInput.value = value;
-      this.class.remove(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
+      this.class.remove(src_class["m" /* MULTIPLE_VALUES */]);
 
       if (different) {
         this.emit('change', value);
@@ -4223,7 +3582,7 @@ var NumericInput = /*#__PURE__*/function (_TextInput) {
     set: function set(value) {
       value = this._normalizeValue(value);
 
-      var forceUpdate = this.class.contains(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]) && value === null && this._allowNull;
+      var forceUpdate = this.class.contains(src_class["m" /* MULTIPLE_VALUES */]) && value === null && this._allowNull;
 
       var changed = this._updateValue(value, forceUpdate);
 
@@ -4254,7 +3613,7 @@ var NumericInput = /*#__PURE__*/function (_TextInput) {
       if (different) {
         this._updateValue(null);
 
-        this.class.add(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
+        this.class.add(src_class["m" /* MULTIPLE_VALUES */]);
 
         if (this._sliderControl) {
           this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN);
@@ -4317,25 +3676,26 @@ var NumericInput = /*#__PURE__*/function (_TextInput) {
   }]);
 
   return NumericInput;
-}(_TextInput__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]);
+}(TextInput["a" /* default */]);
 
-_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('number', NumericInput, {
+Element["a" /* default */].register('number', NumericInput_NumericInput, {
   renderChanges: true
 });
-/* harmony default export */ __webpack_exports__["a"] = (NumericInput);
+/* harmony default export */ var components_NumericInput = __webpack_exports__["a"] = (NumericInput_NumericInput);
 
 /***/ }),
-/* 13 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(37);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
-/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
-/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5);
-/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(11);
+
+// CONCATENATED MODULE: ./src/components/Button/style.scss
+// extracted by mini-css-extract-plugin
+
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
+
+// CONCATENATED MODULE: ./src/components/Button/index.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4364,440 +3724,146 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
-
-
-
-var CLASS_PANEL = 'pcui-panel';
-var CLASS_PANEL_HEADER = CLASS_PANEL + '-header';
-var CLASS_PANEL_HEADER_TITLE = CLASS_PANEL_HEADER + '-title';
-var CLASS_PANEL_CONTENT = CLASS_PANEL + '-content';
-var CLASS_PANEL_HORIZONTAL = CLASS_PANEL + '-horizontal';
-var CLASS_PANEL_SORTABLE_ICON = CLASS_PANEL + '-sortable-icon';
-var CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove'; // TODO: document panelType
-
+var CLASS_BUTTON = 'pcui-button';
 /**
- * @event
- * @name Panel#collapse
- * @description Fired when the panel gets collapsed
+ * @name Button
+ * @classdesc Represents a button.
+ * @augments Element
+ * @property {string} [text=Click Me] Gets / sets the text of the button
+ * @property {string} size Gets / sets the 'size' type of the button. Can be null or 'small'.
+ * @property {string} [icon=E401] The CSS code for an icon for the button. e.g. E401 (notice we omit the '\' character).
+ * @mixes IFocusable
  */
 
-/**
- * @event
- * @name Panel#expand
- * @description Fired when the panel gets expanded
- */
+var Button = /*#__PURE__*/function (_Element) {
+  _inherits(Button, _Element);
 
-/**
- * @name Panel
- * @classdesc The Panel is a pcui.Container that itself contains a header container and a content container. The
- * respective pcui.Container functions work using the content container. One can also append elements to the header of the Panel.
- * @property {boolean} flex Gets / sets whether the container supports flex layout. Defaults to false. Cannot co-exist with grid.
- * @property {boolean} grid Gets / sets whether the container supports grid layout. Defaults to false. Cannot co-exist with flex.
- * @property {boolean} sortable Gets / sets whether the panel can be reordered
- * @property {boolean} collapseHorizontally Gets / sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to false.
- * @property {boolean} removable Gets / sets whether the panel can be removed
- * @property {number} headerSize=32 The height of the header in pixels. Defaults to 32.
- * @property {string} headerText The header text of the panel. Defaults to the empty string.
- * @property {Container} header Gets the header container.
- * @property {Container} content Gets the content container.
- * @augments Container
- * @mixes IContainer
- * @mixes IFlex
- * @mixes IGrid
- * @mixes ICollapsible
- * @mixes IScrollable
- * @mixes IResizable
- */
-
-var Panel = /*#__PURE__*/function (_Container) {
-  _inherits(Panel, _Container);
-
-  var _super = _createSuper(Panel);
+  var _super = _createSuper(Button);
 
   /**
-   * Creates a new Panel.
+   * Creates a new Button.
    *
-   * @param {object} args - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
+   * @param {object} args - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
+   * @param {boolean} [args.unsafe] - If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
    */
-  function Panel(args) {
+  function Button(args) {
     var _this;
 
-    _classCallCheck(this, Panel);
+    _classCallCheck(this, Button);
 
     if (!args) args = {};
-    var panelArgs = Object.assign({}, args);
-    panelArgs.flex = true;
-    delete panelArgs.grid;
-    delete panelArgs.flexDirection;
-    delete panelArgs.scrollable;
-    _this = _super.call(this, panelArgs);
+    _this = _super.call(this, args.dom ? args.dom : document.createElement('button'), args);
 
-    _this.class.add(CLASS_PANEL);
+    _this.class.add(CLASS_BUTTON);
 
-    if (args.panelType) {
-      _this.class.add(CLASS_PANEL + '-' + args.panelType);
-    } // do not call reflow on every update while
-    // we are initializing
+    _this._unsafe = args.unsafe || false;
+    _this.text = args.text || '';
+    _this.size = args.size || null;
+    _this.icon = args.icon || '';
+    _this._domEventKeyDown = _this._onKeyDown.bind(_assertThisInitialized(_this));
 
-
-    _this._suspendReflow = true; // initialize header container
-
-    _this._initializeHeader(args); // initialize content container
-
-
-    _this._initializeContent(args); // header size
-
-
-    _this.headerSize = args.headerSize !== undefined ? args.headerSize : 32;
-    _this._domEvtDragStart = _this._onDragStart.bind(_assertThisInitialized(_this));
-    _this._domEvtDragMove = _this._onDragMove.bind(_assertThisInitialized(_this));
-    _this._domEvtDragEnd = _this._onDragEnd.bind(_assertThisInitialized(_this)); // collapse related
-
-    _this._reflowTimeout = null;
-    _this._widthBeforeCollapse = null;
-    _this._heightBeforeCollapse = null;
-    _this.collapsible = args.collapsible || false;
-    _this.collapsed = args.collapsed || false;
-    _this.collapseHorizontally = args.collapseHorizontally || false;
-    _this._iconSort = null;
-    _this.sortable = args.sortable || false;
-    _this._btnRemove = null;
-    _this.removable = args.removable || false; // set the contents container to be the content DOM element
-    // from now on calling append functions on the panel will append themn
-    // elements to the contents container
-
-    _this.domContent = _this._containerContent.dom; // execute reflow now after all fields have been initialized
-
-    _this._suspendReflow = false;
-
-    _this._reflow();
+    _this.dom.addEventListener('keydown', _this._onKeyDown.bind(_assertThisInitialized(_this)));
 
     return _this;
-  }
-
-  _createClass(Panel, [{
-    key: "_initializeHeader",
-    value: function _initializeHeader(args) {
-      // header container
-      this._containerHeader = new _Container__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]({
-        flex: true,
-        flexDirection: 'row',
-        class: [CLASS_PANEL_HEADER, _class__WEBPACK_IMPORTED_MODULE_1__[/* FONT_BOLD */ "i"]]
-      }); // header title
-
-      this._labelTitle = new _Label__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"]({
-        text: args.headerText,
-        class: [CLASS_PANEL_HEADER_TITLE, _class__WEBPACK_IMPORTED_MODULE_1__[/* FONT_BOLD */ "i"]]
-      });
-
-      this._containerHeader.append(this._labelTitle); // use native click listener because the pcui.Element#click event is only fired
-      // if the element is enabled. However we still want to catch header click events in order
-      // to collapse them
+  } // click on enter
+  // blur on escape
 
 
-      this._containerHeader.dom.addEventListener('click', this._onHeaderClick.bind(this));
-
-      this.append(this._containerHeader);
-    }
-  }, {
-    key: "_onHeaderClick",
-    value: function _onHeaderClick(evt) {
-      if (!this._collapsible) return;
-      if (evt.target !== this.header.dom && evt.target !== this._labelTitle.dom) return; // toggle collapsed
-
-      this.collapsed = !this.collapsed;
-    }
-  }, {
-    key: "_onClickRemove",
-    value: function _onClickRemove(evt) {
-      evt.preventDefault();
-      evt.stopPropagation();
-      this.emit('click:remove');
-    }
-  }, {
-    key: "_initializeContent",
-    value: function _initializeContent(args) {
-      // containers container
-      this._containerContent = new _Container__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]({
-        class: CLASS_PANEL_CONTENT,
-        grid: args.grid,
-        flex: args.flex,
-        flexDirection: args.flexDirection,
-        scrollable: args.scrollable,
-        dom: args.container
-      });
-      this.append(this._containerContent);
-    } // Collapses or expands the panel as needed
-
-  }, {
-    key: "_reflow",
-    value: function _reflow() {
-      var _this2 = this;
-
-      if (this._suspendReflow) {
-        return;
-      }
-
-      if (this._reflowTimeout) {
-        cancelAnimationFrame(this._reflowTimeout);
-        this._reflowTimeout = null;
-      }
-
-      if (this.hidden || !this.collapsible) return;
-
-      if (this.collapsed && this.collapseHorizontally) {
-        this._containerHeader.style.top = -this.headerSize + 'px';
-      } else {
-        this._containerHeader.style.top = '';
-      } // we rely on the content width / height and we have to
-      // wait for 1 frame before we can get the final values back
-
-
-      this._reflowTimeout = requestAnimationFrame(function () {
-        _this2._reflowTimeout = null;
-
-        if (_this2.collapsed) {
-          // remember size before collapse
-          if (!_this2._widthBeforeCollapse) {
-            _this2._widthBeforeCollapse = _this2.style.width;
-          }
-
-          if (!_this2._heightBeforeCollapse) {
-            _this2._heightBeforeCollapse = _this2.style.height;
-          }
-
-          if (_this2._collapseHorizontally) {
-            _this2.height = '';
-            _this2.width = _this2.headerSize;
-          } else {
-            _this2.height = _this2.headerSize;
-          } // add collapsed class after getting the width and height
-          // because if we add it before then because of overflow:hidden
-          // we might get innacurate width/heights.
-
-
-          _this2.class.add(_class__WEBPACK_IMPORTED_MODULE_1__[/* COLLAPSED */ "a"]);
-        } else {
-          // remove collapsed class first and the restore width and height
-          // (opposite order of collapsing)
-          _this2.class.remove(_class__WEBPACK_IMPORTED_MODULE_1__[/* COLLAPSED */ "a"]);
-
-          if (_this2._collapseHorizontally) {
-            _this2.height = '';
-
-            if (_this2._widthBeforeCollapse !== null) {
-              _this2.width = _this2._widthBeforeCollapse;
-            }
-          } else {
-            if (_this2._heightBeforeCollapse !== null) {
-              _this2.height = _this2._heightBeforeCollapse;
-            }
-          } // reset before collapse vars
-
-
-          _this2._widthBeforeCollapse = null;
-          _this2._heightBeforeCollapse = null;
-        }
-      });
-    }
-  }, {
-    key: "_onDragStart",
-    value: function _onDragStart(evt) {
-      if (this.disabled || this.readOnly) return;
-      evt.stopPropagation();
-      evt.preventDefault();
-      window.addEventListener('mouseup', this._domEvtDragEnd);
-      window.addEventListener('mouseleave', this._domEvtDragEnd);
-      window.addEventListener('mousemove', this._domEvtDragMove);
-      this.emit('dragstart');
-
-      if (this.parent && this.parent._onChildDragStart) {
-        this.parent._onChildDragStart(evt, this);
+  _createClass(Button, [{
+    key: "_onKeyDown",
+    value: function _onKeyDown(evt) {
+      if (evt.keyCode === 27) {
+        this.blur();
+      } else if (evt.keyCode === 13) {
+        this._onClick(evt);
       }
     }
   }, {
-    key: "_onDragMove",
-    value: function _onDragMove(evt) {
-      this.emit('dragmove');
+    key: "_onClick",
+    value: function _onClick(evt) {
+      this.blur();
+      if (this.readOnly) return;
 
-      if (this.parent && this.parent._onChildDragStart) {
-        this.parent._onChildDragMove(evt, this);
-      }
+      _get(_getPrototypeOf(Button.prototype), "_onClick", this).call(this, evt);
     }
   }, {
-    key: "_onDragEnd",
-    value: function _onDragEnd(evt) {
-      window.removeEventListener('mouseup', this._domEvtDragEnd);
-      window.removeEventListener('mouseleave', this._domEvtDragEnd);
-      window.removeEventListener('mousemove', this._domEvtDragMove);
-
-      if (this._draggedChild === this) {
-        this._draggedChild = null;
-      }
-
-      this.emit('dragend');
-
-      if (this.parent && this.parent._onChildDragStart) {
-        this.parent._onChildDragEnd(evt, this);
-      }
+    key: "focus",
+    value: function focus() {
+      this.dom.focus();
+    }
+  }, {
+    key: "blur",
+    value: function blur() {
+      this.dom.blur();
     }
   }, {
     key: "destroy",
     value: function destroy() {
       if (this._destroyed) return;
+      this.dom.removeEventListener('keydown', this._domEventKeyDown);
 
-      if (this._reflowTimeout) {
-        cancelAnimationFrame(this._reflowTimeout);
-        this._reflowTimeout = null;
-      }
-
-      window.removeEventListener('mouseup', this._domEvtDragEnd);
-      window.removeEventListener('mouseleave', this._domEvtDragEnd);
-      window.removeEventListener('mousemove', this._domEvtDragMove);
-
-      _get(_getPrototypeOf(Panel.prototype), "destroy", this).call(this);
+      _get(_getPrototypeOf(Button.prototype), "destroy", this).call(this);
     }
   }, {
-    key: "collapsible",
+    key: "text",
     get: function get() {
-      return this._collapsible;
+      return this._text;
     },
     set: function set(value) {
-      if (value === this._collapsible) return;
-      this._collapsible = value;
+      if (this._text === value) return;
+      this._text = value;
 
-      if (value) {
-        this.classAdd(_class__WEBPACK_IMPORTED_MODULE_1__[/* COLLAPSIBLE */ "b"]);
+      if (this._unsafe) {
+        this.dom.innerHTML = value;
       } else {
-        this.classRemove(_class__WEBPACK_IMPORTED_MODULE_1__[/* COLLAPSIBLE */ "b"]);
-      }
-
-      this._reflow();
-
-      if (this.collapsed) {
-        this.emit(value ? 'collapse' : 'expand');
+        this.dom.textContent = value;
       }
     }
   }, {
-    key: "collapsed",
+    key: "icon",
     get: function get() {
-      return this._collapsed;
+      return this._icon;
     },
     set: function set(value) {
-      if (this._collapsed === value) return;
-      this._collapsed = value;
-
-      this._reflow();
-
-      if (this.collapsible) {
-        this.emit(value ? 'collapse' : 'expand');
-      }
-    }
-  }, {
-    key: "sortable",
-    get: function get() {
-      return this._sortable;
-    },
-    set: function set(value) {
-      if (this._sortable === value) return;
-      this._sortable = value;
+      if (this._icon === value | !value.match(/^E[0-9]{0,4}$/)) return;
+      this._icon = value;
 
       if (value) {
-        this._iconSort = new _Label__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"]({
-          class: CLASS_PANEL_SORTABLE_ICON
-        });
-
-        this._iconSort.dom.addEventListener('mousedown', this._domEvtDragStart);
-
-        this.header.prepend(this._iconSort);
-      } else if (this._iconSort) {
-        this._iconSort.destroy();
-
-        this._iconSort = null;
-      }
-    }
-  }, {
-    key: "removable",
-    get: function get() {
-      return !!this._btnRemove;
-    },
-    set: function set(value) {
-      if (this.removable === value) return;
-
-      if (value) {
-        this._btnRemove = new _Button__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"]({
-          icon: 'E289',
-          class: CLASS_PANEL_REMOVE
-        });
-
-        this._btnRemove.on('click', this._onClickRemove.bind(this));
-
-        this.header.append(this._btnRemove);
+        // set data-icon attribute but first convert the value to a code point
+        this.dom.setAttribute('data-icon', String.fromCodePoint(parseInt(value, 16)));
       } else {
-        this._btnRemove.destroy();
-
-        this._btnRemove = null;
+        this.dom.removeAttribute('data-icon');
       }
     }
   }, {
-    key: "collapseHorizontally",
+    key: "size",
     get: function get() {
-      return this._collapseHorizontally;
+      return this._size;
     },
     set: function set(value) {
-      if (this._collapseHorizontally === value) return;
-      this._collapseHorizontally = value;
+      if (this._size === value) return;
 
-      if (value) {
-        this.classAdd(CLASS_PANEL_HORIZONTAL);
-      } else {
-        this.classRemove(CLASS_PANEL_HORIZONTAL);
+      if (this._size) {
+        this.class.remove('pcui-' + this._size);
+        this._size = null;
       }
 
-      this._reflow();
-    }
-  }, {
-    key: "content",
-    get: function get() {
-      return this._containerContent;
-    }
-  }, {
-    key: "header",
-    get: function get() {
-      return this._containerHeader;
-    }
-  }, {
-    key: "headerText",
-    get: function get() {
-      return this._labelTitle.text;
-    },
-    set: function set(value) {
-      this._labelTitle.text = value;
-    }
-  }, {
-    key: "headerSize",
-    get: function get() {
-      return this._headerSize;
-    },
-    set: function set(value) {
-      this._headerSize = value;
-      var style = this._containerHeader.dom.style;
-      style.height = Math.max(0, value) + 'px';
-      style.lineHeight = style.height;
+      this._size = value;
 
-      this._reflow();
+      if (this._size) {
+        this.class.add('pcui-' + this._size);
+      }
     }
   }]);
 
-  return Panel;
-}(_Container__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]);
+  return Button;
+}(Element["a" /* default */]);
 
-_Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].register('panel', Panel);
-/* harmony default export */ __webpack_exports__["a"] = (Panel);
+Element["a" /* default */].register('button', Button);
+/* harmony default export */ var components_Button = __webpack_exports__["a"] = (Button);
 
 /***/ }),
-/* 14 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4997,15 +4063,509 @@ var searchItems = function searchItems(items, search, args) {
 };
 
 /***/ }),
-/* 15 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(53);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
-/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
+
+// CONCATENATED MODULE: ./src/components/Panel/style.scss
+// extracted by mini-css-extract-plugin
+
+// EXTERNAL MODULE: ./src/class.js
+var src_class = __webpack_require__(0);
+
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
+
+// EXTERNAL MODULE: ./src/components/Container/index.js + 1 modules
+var Container = __webpack_require__(2);
+
+// EXTERNAL MODULE: ./src/components/Label/index.js + 1 modules
+var Label = __webpack_require__(3);
+
+// EXTERNAL MODULE: ./src/components/Button/index.js + 1 modules
+var Button = __webpack_require__(10);
+
+// CONCATENATED MODULE: ./src/components/Panel/index.js
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+
+var CLASS_PANEL = 'pcui-panel';
+var CLASS_PANEL_HEADER = CLASS_PANEL + '-header';
+var CLASS_PANEL_HEADER_TITLE = CLASS_PANEL_HEADER + '-title';
+var CLASS_PANEL_CONTENT = CLASS_PANEL + '-content';
+var CLASS_PANEL_HORIZONTAL = CLASS_PANEL + '-horizontal';
+var CLASS_PANEL_SORTABLE_ICON = CLASS_PANEL + '-sortable-icon';
+var CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove'; // TODO: document panelType
+
+/**
+ * @event
+ * @name Panel#collapse
+ * @description Fired when the panel gets collapsed
+ */
+
+/**
+ * @event
+ * @name Panel#expand
+ * @description Fired when the panel gets expanded
+ */
+
+/**
+ * @name Panel
+ * @classdesc The Panel is a pcui.Container that itself contains a header container and a content container. The
+ * respective pcui.Container functions work using the content container. One can also append elements to the header of the Panel.
+ * @property {boolean} flex Gets / sets whether the container supports flex layout. Defaults to false. Cannot co-exist with grid.
+ * @property {boolean} grid Gets / sets whether the container supports grid layout. Defaults to false. Cannot co-exist with flex.
+ * @property {boolean} sortable Gets / sets whether the panel can be reordered
+ * @property {boolean} collapseHorizontally Gets / sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to false.
+ * @property {boolean} removable Gets / sets whether the panel can be removed
+ * @property {number} headerSize=32 The height of the header in pixels. Defaults to 32.
+ * @property {string} headerText The header text of the panel. Defaults to the empty string.
+ * @property {Container} header Gets the header container.
+ * @property {Container} content Gets the content container.
+ * @augments Container
+ * @mixes IContainer
+ * @mixes IFlex
+ * @mixes IGrid
+ * @mixes ICollapsible
+ * @mixes IScrollable
+ * @mixes IResizable
+ */
+
+var Panel_Panel = /*#__PURE__*/function (_Container) {
+  _inherits(Panel, _Container);
+
+  var _super = _createSuper(Panel);
+
+  /**
+   * Creates a new Panel.
+   *
+   * @param {object} args - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
+   */
+  function Panel(args) {
+    var _this;
+
+    _classCallCheck(this, Panel);
+
+    if (!args) args = {};
+    var panelArgs = Object.assign({}, args);
+    panelArgs.flex = true;
+    delete panelArgs.grid;
+    delete panelArgs.flexDirection;
+    delete panelArgs.scrollable;
+    _this = _super.call(this, panelArgs);
+
+    _this.class.add(CLASS_PANEL);
+
+    if (args.panelType) {
+      _this.class.add(CLASS_PANEL + '-' + args.panelType);
+    } // do not call reflow on every update while
+    // we are initializing
+
+
+    _this._suspendReflow = true; // initialize header container
+
+    _this._initializeHeader(args); // initialize content container
+
+
+    _this._initializeContent(args); // header size
+
+
+    _this.headerSize = args.headerSize !== undefined ? args.headerSize : 32;
+    _this._domEvtDragStart = _this._onDragStart.bind(_assertThisInitialized(_this));
+    _this._domEvtDragMove = _this._onDragMove.bind(_assertThisInitialized(_this));
+    _this._domEvtDragEnd = _this._onDragEnd.bind(_assertThisInitialized(_this)); // collapse related
+
+    _this._reflowTimeout = null;
+    _this._widthBeforeCollapse = null;
+    _this._heightBeforeCollapse = null;
+    _this.collapsible = args.collapsible || false;
+    _this.collapsed = args.collapsed || false;
+    _this.collapseHorizontally = args.collapseHorizontally || false;
+    _this._iconSort = null;
+    _this.sortable = args.sortable || false;
+    _this._btnRemove = null;
+    _this.removable = args.removable || false; // set the contents container to be the content DOM element
+    // from now on calling append functions on the panel will append themn
+    // elements to the contents container
+
+    _this.domContent = _this._containerContent.dom; // execute reflow now after all fields have been initialized
+
+    _this._suspendReflow = false;
+
+    _this._reflow();
+
+    return _this;
+  }
+
+  _createClass(Panel, [{
+    key: "_initializeHeader",
+    value: function _initializeHeader(args) {
+      // header container
+      this._containerHeader = new Container["a" /* default */]({
+        flex: true,
+        flexDirection: 'row',
+        class: [CLASS_PANEL_HEADER, src_class["i" /* FONT_BOLD */]]
+      }); // header title
+
+      this._labelTitle = new Label["a" /* default */]({
+        text: args.headerText,
+        class: [CLASS_PANEL_HEADER_TITLE, src_class["i" /* FONT_BOLD */]]
+      });
+
+      this._containerHeader.append(this._labelTitle); // use native click listener because the pcui.Element#click event is only fired
+      // if the element is enabled. However we still want to catch header click events in order
+      // to collapse them
+
+
+      this._containerHeader.dom.addEventListener('click', this._onHeaderClick.bind(this));
+
+      this.append(this._containerHeader);
+    }
+  }, {
+    key: "_onHeaderClick",
+    value: function _onHeaderClick(evt) {
+      if (!this._collapsible) return;
+      if (evt.target !== this.header.dom && evt.target !== this._labelTitle.dom) return; // toggle collapsed
+
+      this.collapsed = !this.collapsed;
+    }
+  }, {
+    key: "_onClickRemove",
+    value: function _onClickRemove(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+      this.emit('click:remove');
+    }
+  }, {
+    key: "_initializeContent",
+    value: function _initializeContent(args) {
+      // containers container
+      this._containerContent = new Container["a" /* default */]({
+        class: CLASS_PANEL_CONTENT,
+        grid: args.grid,
+        flex: args.flex,
+        flexDirection: args.flexDirection,
+        scrollable: args.scrollable,
+        dom: args.container
+      });
+      this.append(this._containerContent);
+    } // Collapses or expands the panel as needed
+
+  }, {
+    key: "_reflow",
+    value: function _reflow() {
+      var _this2 = this;
+
+      if (this._suspendReflow) {
+        return;
+      }
+
+      if (this._reflowTimeout) {
+        cancelAnimationFrame(this._reflowTimeout);
+        this._reflowTimeout = null;
+      }
+
+      if (this.hidden || !this.collapsible) return;
+
+      if (this.collapsed && this.collapseHorizontally) {
+        this._containerHeader.style.top = -this.headerSize + 'px';
+      } else {
+        this._containerHeader.style.top = '';
+      } // we rely on the content width / height and we have to
+      // wait for 1 frame before we can get the final values back
+
+
+      this._reflowTimeout = requestAnimationFrame(function () {
+        _this2._reflowTimeout = null;
+
+        if (_this2.collapsed) {
+          // remember size before collapse
+          if (!_this2._widthBeforeCollapse) {
+            _this2._widthBeforeCollapse = _this2.style.width;
+          }
+
+          if (!_this2._heightBeforeCollapse) {
+            _this2._heightBeforeCollapse = _this2.style.height;
+          }
+
+          if (_this2._collapseHorizontally) {
+            _this2.height = '';
+            _this2.width = _this2.headerSize;
+          } else {
+            _this2.height = _this2.headerSize;
+          } // add collapsed class after getting the width and height
+          // because if we add it before then because of overflow:hidden
+          // we might get innacurate width/heights.
+
+
+          _this2.class.add(src_class["a" /* COLLAPSED */]);
+        } else {
+          // remove collapsed class first and the restore width and height
+          // (opposite order of collapsing)
+          _this2.class.remove(src_class["a" /* COLLAPSED */]);
+
+          if (_this2._collapseHorizontally) {
+            _this2.height = '';
+
+            if (_this2._widthBeforeCollapse !== null) {
+              _this2.width = _this2._widthBeforeCollapse;
+            }
+          } else {
+            if (_this2._heightBeforeCollapse !== null) {
+              _this2.height = _this2._heightBeforeCollapse;
+            }
+          } // reset before collapse vars
+
+
+          _this2._widthBeforeCollapse = null;
+          _this2._heightBeforeCollapse = null;
+        }
+      });
+    }
+  }, {
+    key: "_onDragStart",
+    value: function _onDragStart(evt) {
+      if (this.disabled || this.readOnly) return;
+      evt.stopPropagation();
+      evt.preventDefault();
+      window.addEventListener('mouseup', this._domEvtDragEnd);
+      window.addEventListener('mouseleave', this._domEvtDragEnd);
+      window.addEventListener('mousemove', this._domEvtDragMove);
+      this.emit('dragstart');
+
+      if (this.parent && this.parent._onChildDragStart) {
+        this.parent._onChildDragStart(evt, this);
+      }
+    }
+  }, {
+    key: "_onDragMove",
+    value: function _onDragMove(evt) {
+      this.emit('dragmove');
+
+      if (this.parent && this.parent._onChildDragStart) {
+        this.parent._onChildDragMove(evt, this);
+      }
+    }
+  }, {
+    key: "_onDragEnd",
+    value: function _onDragEnd(evt) {
+      window.removeEventListener('mouseup', this._domEvtDragEnd);
+      window.removeEventListener('mouseleave', this._domEvtDragEnd);
+      window.removeEventListener('mousemove', this._domEvtDragMove);
+
+      if (this._draggedChild === this) {
+        this._draggedChild = null;
+      }
+
+      this.emit('dragend');
+
+      if (this.parent && this.parent._onChildDragStart) {
+        this.parent._onChildDragEnd(evt, this);
+      }
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      if (this._destroyed) return;
+
+      if (this._reflowTimeout) {
+        cancelAnimationFrame(this._reflowTimeout);
+        this._reflowTimeout = null;
+      }
+
+      window.removeEventListener('mouseup', this._domEvtDragEnd);
+      window.removeEventListener('mouseleave', this._domEvtDragEnd);
+      window.removeEventListener('mousemove', this._domEvtDragMove);
+
+      _get(_getPrototypeOf(Panel.prototype), "destroy", this).call(this);
+    }
+  }, {
+    key: "collapsible",
+    get: function get() {
+      return this._collapsible;
+    },
+    set: function set(value) {
+      if (value === this._collapsible) return;
+      this._collapsible = value;
+
+      if (value) {
+        this.classAdd(src_class["b" /* COLLAPSIBLE */]);
+      } else {
+        this.classRemove(src_class["b" /* COLLAPSIBLE */]);
+      }
+
+      this._reflow();
+
+      if (this.collapsed) {
+        this.emit(value ? 'collapse' : 'expand');
+      }
+    }
+  }, {
+    key: "collapsed",
+    get: function get() {
+      return this._collapsed;
+    },
+    set: function set(value) {
+      if (this._collapsed === value) return;
+      this._collapsed = value;
+
+      this._reflow();
+
+      if (this.collapsible) {
+        this.emit(value ? 'collapse' : 'expand');
+      }
+    }
+  }, {
+    key: "sortable",
+    get: function get() {
+      return this._sortable;
+    },
+    set: function set(value) {
+      if (this._sortable === value) return;
+      this._sortable = value;
+
+      if (value) {
+        this._iconSort = new Label["a" /* default */]({
+          class: CLASS_PANEL_SORTABLE_ICON
+        });
+
+        this._iconSort.dom.addEventListener('mousedown', this._domEvtDragStart);
+
+        this.header.prepend(this._iconSort);
+      } else if (this._iconSort) {
+        this._iconSort.destroy();
+
+        this._iconSort = null;
+      }
+    }
+  }, {
+    key: "removable",
+    get: function get() {
+      return !!this._btnRemove;
+    },
+    set: function set(value) {
+      if (this.removable === value) return;
+
+      if (value) {
+        this._btnRemove = new Button["a" /* default */]({
+          icon: 'E289',
+          class: CLASS_PANEL_REMOVE
+        });
+
+        this._btnRemove.on('click', this._onClickRemove.bind(this));
+
+        this.header.append(this._btnRemove);
+      } else {
+        this._btnRemove.destroy();
+
+        this._btnRemove = null;
+      }
+    }
+  }, {
+    key: "collapseHorizontally",
+    get: function get() {
+      return this._collapseHorizontally;
+    },
+    set: function set(value) {
+      if (this._collapseHorizontally === value) return;
+      this._collapseHorizontally = value;
+
+      if (value) {
+        this.classAdd(CLASS_PANEL_HORIZONTAL);
+      } else {
+        this.classRemove(CLASS_PANEL_HORIZONTAL);
+      }
+
+      this._reflow();
+    }
+  }, {
+    key: "content",
+    get: function get() {
+      return this._containerContent;
+    }
+  }, {
+    key: "header",
+    get: function get() {
+      return this._containerHeader;
+    }
+  }, {
+    key: "headerText",
+    get: function get() {
+      return this._labelTitle.text;
+    },
+    set: function set(value) {
+      this._labelTitle.text = value;
+    }
+  }, {
+    key: "headerSize",
+    get: function get() {
+      return this._headerSize;
+    },
+    set: function set(value) {
+      this._headerSize = value;
+      var style = this._containerHeader.dom.style;
+      style.height = Math.max(0, value) + 'px';
+      style.lineHeight = style.height;
+
+      this._reflow();
+    }
+  }]);
+
+  return Panel;
+}(Container["a" /* default */]);
+
+Element["a" /* default */].register('panel', Panel_Panel);
+/* harmony default export */ var components_Panel = __webpack_exports__["a"] = (Panel_Panel);
+
+/***/ }),
+/* 13 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// CONCATENATED MODULE: ./src/components/ContextMenu/style.scss
+// extracted by mini-css-extract-plugin
+
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
+
+// EXTERNAL MODULE: ./src/components/Label/index.js + 1 modules
+var Label = __webpack_require__(3);
+
+// EXTERNAL MODULE: ./src/components/Container/index.js + 1 modules
+var Container = __webpack_require__(2);
+
+// CONCATENATED MODULE: ./src/components/ContextMenu/index.js
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 
@@ -5022,7 +4582,7 @@ var CLASS_ContextMenu_parent_active = CLASS_ContextMenu_parent + '-active';
  * @classdesc Represents a context menu.
  */
 
-var ContextMenu =
+var ContextMenu_ContextMenu =
 /**
  * Creates a new ContextMenu.
  *
@@ -5037,7 +4597,7 @@ function ContextMenu(args) {
   _classCallCheck(this, ContextMenu);
 
   if (!args) args = {};
-  this._menu = new _Container__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]({
+  this._menu = new Container["a" /* default */]({
     dom: args.dom
   });
   this._menu.contextMenu = this;
@@ -5082,7 +4642,7 @@ function ContextMenu(args) {
 
   if (!args.items) return;
   args.items.forEach(function (menuItem, i) {
-    var menuItemElement = new _Container__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]();
+    var menuItemElement = new Container["a" /* default */]();
     menuItemElement.dom.setAttribute("style", "top: ".concat(i * 27.0, "px"));
 
     if (menuItem.onClick) {
@@ -5093,7 +4653,7 @@ function ContextMenu(args) {
       });
     }
 
-    var menuItemLabel = new _Label__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]({
+    var menuItemLabel = new Label["a" /* default */]({
       text: menuItem.text
     });
     menuItemElement.append(menuItemLabel);
@@ -5102,7 +4662,7 @@ function ContextMenu(args) {
 
     if (menuItem.items) {
       menuItem.items.forEach(function (childItem, j) {
-        var childMenuItemElement = new _Container__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]({
+        var childMenuItemElement = new Container["a" /* default */]({
           class: CLASS_ContextMenu_child
         });
         childMenuItemElement.dom.setAttribute("style", "top: ".concat(j * 27.0, "px; left: 150px;"));
@@ -5111,7 +4671,7 @@ function ContextMenu(args) {
           removeMenu();
           childItem.onClick(e);
         });
-        var childMenuItemLabel = new _Label__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]({
+        var childMenuItemLabel = new Label["a" /* default */]({
           text: childItem.text
         });
         childMenuItemElement.append(childMenuItemLabel);
@@ -5144,631 +4704,28 @@ function ContextMenu(args) {
   });
 };
 
-_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('contextmenu', ContextMenu);
-/* harmony default export */ __webpack_exports__["a"] = (ContextMenu);
+Element["a" /* default */].register('contextmenu', ContextMenu_ContextMenu);
+/* harmony default export */ var components_ContextMenu = __webpack_exports__["a"] = (ContextMenu_ContextMenu);
 
 /***/ }),
-/* 16 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _helpers_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(30);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
-/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
-/* harmony import */ var _Panel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(13);
-/* harmony import */ var _NumericInput__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(12);
-/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(11);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+// CONCATENATED MODULE: ./src/components/BooleanInput/style.scss
+// extracted by mini-css-extract-plugin
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+// CONCATENATED MODULE: ./src/components/BooleanInput/toggle-style.scss
+// extracted by mini-css-extract-plugin
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
 
-function set(target, property, value, receiver) { if (typeof Reflect !== "undefined" && Reflect.set) { set = Reflect.set; } else { set = function set(target, property, value, receiver) { var base = _superPropBase(target, property); var desc; if (base) { desc = Object.getOwnPropertyDescriptor(base, property); if (desc.set) { desc.set.call(receiver, value); return true; } else if (!desc.writable) { return false; } } desc = Object.getOwnPropertyDescriptor(receiver, property); if (desc) { if (!desc.writable) { return false; } desc.value = value; Object.defineProperty(receiver, property, desc); } else { _defineProperty(receiver, property, value); } return true; }; } return set(target, property, value, receiver); }
+// EXTERNAL MODULE: ./src/class.js
+var src_class = __webpack_require__(0);
 
-function _set(target, property, value, receiver, isStrict) { var s = set(target, property, value, receiver || target); if (!s && isStrict) { throw new Error('failed to set property'); } return value; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-
-
-
-
-var CLASS_ARRAY_INPUT = 'pcui-array-input';
-var CLASS_ARRAY_EMPTY = 'pcui-array-empty';
-var CLASS_ARRAY_SIZE = CLASS_ARRAY_INPUT + '-size';
-var CLASS_ARRAY_CONTAINER = CLASS_ARRAY_INPUT + '-items';
-var CLASS_ARRAY_ELEMENT = CLASS_ARRAY_INPUT + '-item';
-var CLASS_ARRAY_DELETE = CLASS_ARRAY_ELEMENT + '-delete';
-/**
- * @event
- * @name ArrayInput#linkElement
- * @param {Element} element - The array element
- * @param {number} index - The index of the array element
- * @param {string} path - The path linked
- * @description Fired when an array element is linked to observers
- */
-
-/**
- * @event
- * @name ArrayInput#unlinkElement
- * @param {Element} element - The array element
- * @param {number} index - The index of the array element
- * @description Fired when an array element is unlinked from observers
- */
-
-/**
- * @name ArrayInput
- * @classdesc Element that allows editing an array of values.
- * @property {boolean} renderChanges - If true the input will flash when changed.
- * @augments Element
- * @mixes IBindable
- * @mixes IFocusable
- */
-
-var ArrayInput = /*#__PURE__*/function (_Element) {
-  _inherits(ArrayInput, _Element);
-
-  var _super = _createSuper(ArrayInput);
-
-  /**
-   * Creates a new ArrayInput.
-   *
-   * @param {object} args - The arguments.
-   * @param {string} [args.type] - The type of values that the array can hold.
-   * @param {boolean} [args.fixedSize] - If true then editing the number of elements that the array has will not be allowed.
-   * @param {object} [args.elementArgs] - Arguments for each array Element.
-   */
-  function ArrayInput(args) {
-    var _this;
-
-    _classCallCheck(this, ArrayInput);
-
-    args = Object.assign({}, args); // remove binding because we want to set it later
-
-    var binding = args.binding;
-    delete args.binding;
-    var container = new _Container__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]({
-      dom: args.dom,
-      flex: true
-    });
-    _this = _super.call(this, container.dom, args);
-    _this._container = container;
-    _this._container.parent = _assertThisInitialized(_this);
-
-    _this.class.add(CLASS_ARRAY_INPUT, CLASS_ARRAY_EMPTY);
-
-    _this._usePanels = args.usePanels || false;
-    _this._fixedSize = !!args.fixedSize;
-    _this._inputSize = new _NumericInput__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"]({
-      class: [CLASS_ARRAY_SIZE],
-      placeholder: 'Array Size',
-      value: 0,
-      hideSlider: true,
-      step: 1,
-      precision: 0,
-      min: 0,
-      readOnly: _this._fixedSize
-    });
-
-    _this._inputSize.on('change', _this._onSizeChange.bind(_assertThisInitialized(_this)));
-
-    _this._inputSize.on('focus', _this._onFocus.bind(_assertThisInitialized(_this)));
-
-    _this._inputSize.on('blur', _this._onBlur.bind(_assertThisInitialized(_this)));
-
-    _this._suspendSizeChangeEvt = false;
-
-    _this._container.append(_this._inputSize);
-
-    _this._containerArray = new _Container__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]({
-      class: CLASS_ARRAY_CONTAINER,
-      hidden: true
-    });
-
-    _this._containerArray.on('append', function () {
-      _this._containerArray.hidden = false;
-    });
-
-    _this._containerArray.on('remove', function () {
-      _this._containerArray.hidden = _this._arrayElements.length == 0;
-    });
-
-    _this._container.append(_this._containerArray);
-
-    _this._suspendArrayElementEvts = false;
-    _this._arrayElementChangeTimeout = null;
-    _this._getDefaultFn = args.getDefaultFn || null;
-    var valueType = args.elementArgs && args.elementArgs.type || args.type;
-
-    if (!ArrayInput.DEFAULTS.hasOwnProperty(valueType)) {
-      valueType = 'string';
-    }
-
-    delete args.dom;
-    _this._valueType = valueType;
-    _this._elementType = args.type;
-    _this._elementArgs = args.elementArgs || args;
-    _this._arrayElements = []; // set binding now
-
-    _this.binding = binding;
-    _this._values = [];
-
-    if (args.value) {
-      _this.value = args.value;
-    }
-
-    _this.renderChanges = args.renderChanges || false;
-    return _this;
-  }
-
-  _createClass(ArrayInput, [{
-    key: "_onSizeChange",
-    value: function _onSizeChange(size) {
-      var _this2 = this;
-
-      // if size is explicitely 0 then add empty class
-      // size can also be null with multi-select so do not
-      // check just !size
-      if (size === 0) {
-        this.class.add(CLASS_ARRAY_EMPTY);
-      } else {
-        this.class.remove(CLASS_ARRAY_EMPTY);
-      }
-
-      if (size === null) return;
-      if (this._suspendSizeChangeEvt) return; // initialize default value for each new array element
-
-      var defaultValue;
-
-      var initDefaultValue = function initDefaultValue() {
-        if (_this2._getDefaultFn) {
-          defaultValue = _this2._getDefaultFn();
-        } else {
-          defaultValue = ArrayInput.DEFAULTS[_this2._valueType];
-
-          if (_this2._valueType === 'curveset') {
-            defaultValue = _helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].deepCopy(defaultValue);
-
-            if (Array.isArray(_this2._elementArgs.curves)) {
-              for (var i = 0; i < _this2._elementArgs.curves.length; i++) {
-                defaultValue.keys.push([0, 0]);
-              }
-            }
-          } else if (_this2._valueType === 'gradient') {
-            defaultValue = _helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].deepCopy(defaultValue);
-
-            if (_this2._elementArgs.channels) {
-              for (var _i = 0; _i < _this2._elementArgs.channels; _i++) {
-                defaultValue.keys.push([0, 1]);
-              }
-            }
-          }
-        }
-      }; // resize array
-
-
-      var values = this._values.map(function (array) {
-        if (!array) {
-          array = new Array(size);
-
-          for (var i = 0; i < size; i++) {
-            array[i] = _helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].deepCopy(ArrayInput.DEFAULTS[_this2._valueType]);
-            if (defaultValue === undefined) initDefaultValue();
-            array[i] = _helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].deepCopy(defaultValue);
-          }
-        } else if (array.length < size) {
-          var newArray = new Array(size - array.length);
-
-          for (var _i2 = 0; _i2 < newArray.length; _i2++) {
-            newArray[_i2] = _helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].deepCopy(ArrayInput.DEFAULTS[_this2._valueType]);
-            if (defaultValue === undefined) initDefaultValue();
-            newArray[_i2] = _helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].deepCopy(defaultValue);
-          }
-
-          array = array.concat(newArray);
-        } else {
-          var _newArray = new Array(size);
-
-          for (var _i3 = 0; _i3 < size; _i3++) {
-            _newArray[_i3] = _helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].deepCopy(array[_i3]);
-          }
-
-          array = _newArray;
-        }
-
-        return array;
-      });
-
-      if (!values.length) {
-        var array = new Array(size);
-
-        for (var i = 0; i < size; i++) {
-          array[i] = _helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].deepCopy(ArrayInput.DEFAULTS[this._valueType]);
-          if (defaultValue === undefined) initDefaultValue();
-          array[i] = _helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].deepCopy(defaultValue);
-        }
-
-        values.push(array);
-      }
-
-      this._updateValues(values, true);
-    }
-  }, {
-    key: "_onFocus",
-    value: function _onFocus() {
-      this.emit('focus');
-    }
-  }, {
-    key: "_onBlur",
-    value: function _onBlur() {
-      this.emit('blur');
-    }
-  }, {
-    key: "_createArrayElement",
-    value: function _createArrayElement() {
-      var _this3 = this;
-
-      var args = Object.assign({}, this._elementArgs);
-
-      if (args.binding) {
-        args.binding = args.binding.clone();
-      } else if (this._binding) {
-        args.binding = this._binding.clone();
-      } // set renderChanges after value is set
-      // to prevent flashing on initial value set
-
-
-      args.renderChanges = false;
-      var container;
-
-      if (this._usePanels) {
-        container = new _Panel__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"]({
-          headerText: "[".concat(this._arrayElements.length, "]"),
-          removable: !this._fixedSize,
-          collapsible: true,
-          class: [CLASS_ARRAY_ELEMENT, CLASS_ARRAY_ELEMENT + '-' + this._elementType]
-        });
-      } else {
-        container = new _Container__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]({
-          flex: true,
-          flexDirection: 'row',
-          alignItems: 'center',
-          class: [CLASS_ARRAY_ELEMENT, CLASS_ARRAY_ELEMENT + '-' + this._elementType]
-        });
-      }
-
-      if (this._elementType === 'json' && args.attributes) {
-        args.attributes = args.attributes.map(function (attr) {
-          if (!attr.path) return attr; // fix paths to include array element index
-
-          attr = Object.assign({}, attr);
-          var parts = attr.path.split('.');
-          parts.splice(parts.length - 1, 0, _this3._arrayElements.length);
-          attr.path = parts.join('.');
-          return attr;
-        });
-      }
-
-      var element = _Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].create(this._elementType, args);
-      container.append(element);
-      element.renderChanges = this.renderChanges;
-      var entry = {
-        container: container,
-        element: element
-      };
-
-      this._arrayElements.push(entry);
-
-      if (!this._usePanels) {
-        if (!this._fixedSize) {
-          var btnDelete = new _Button__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"]({
-            icon: 'E289',
-            size: 'small',
-            class: CLASS_ARRAY_DELETE,
-            tabIndex: -1 // skip buttons on tab
-
-          });
-          btnDelete.on('click', function () {
-            _this3._removeArrayElement(entry);
-          });
-          container.append(btnDelete);
-        }
-      } else {
-        container.on('click:remove', function () {
-          _this3._removeArrayElement(entry);
-        });
-      }
-
-      element.on('change', function (value) {
-        _this3._onArrayElementChange(entry, value);
-      });
-
-      this._containerArray.append(container);
-
-      return entry;
-    }
-  }, {
-    key: "_removeArrayElement",
-    value: function _removeArrayElement(entry) {
-      var index = this._arrayElements.indexOf(entry);
-
-      if (index === -1) return; // remove row from every array in values
-
-      var values = this._values.map(function (array) {
-        if (!array) return null;
-        array.splice(index, 1);
-        return array;
-      });
-
-      this._updateValues(values, true);
-    }
-  }, {
-    key: "_onArrayElementChange",
-    value: function _onArrayElementChange(entry, value) {
-      var _this4 = this;
-
-      if (this._suspendArrayElementEvts) return;
-
-      var index = this._arrayElements.indexOf(entry);
-
-      if (index === -1) return; // Set the value to the same row of every array in values.
-
-      this._values.forEach(function (array) {
-        if (array && array.length > index) {
-          array[index] = value;
-        }
-      }); // use a timeout here because when our values change they will
-      // first emit change events on each array element. However since the
-      // whole array changed we are going to fire a 'change' event later from
-      // our '_updateValues' function. We only want to emit a 'change' event
-      // here when only the array element changed value and not the whole array so
-      // wait a bit and fire the change event later otherwise the _updateValues function
-      // will cancel this timeout and fire a change event for the whole array instead
-
-
-      this._arrayElementChangeTimeout = setTimeout(function () {
-        _this4._arrayElementChangeTimeout = null;
-
-        _this4.emit('change', _this4.value);
-      });
-    }
-  }, {
-    key: "_linkArrayElement",
-    value: function _linkArrayElement(element, index) {
-      var observers = this._binding.observers;
-      var paths = this._binding.paths;
-      var useSinglePath = paths.length === 1 || observers.length !== paths.length;
-      element.unlink();
-      element.value = null;
-      this.emit('unlinkElement', element, index);
-      var path = useSinglePath ? paths[0] + ".".concat(index) : paths.map(function (path) {
-        return "".concat(path, ".").concat(index);
-      });
-      element.link(observers, path);
-      this.emit('linkElement', element, index, path);
-    }
-  }, {
-    key: "_updateValues",
-    value: function _updateValues(values, applyToBinding) {
-      this._values = values || [];
-      this._suspendArrayElementEvts = true;
-      this._suspendSizeChangeEvt = true; // apply values to the binding
-
-      if (applyToBinding && this._binding) {
-        this._binding.setValues(values);
-      } // each row of this array holds
-      // all the values for that row
-
-
-      var valuesPerRow = []; // holds the length of each array
-
-      var arrayLengths = [];
-      values.forEach(function (array) {
-        if (!array) return;
-        arrayLengths.push(array.length);
-        array.forEach(function (item, i) {
-          if (!valuesPerRow[i]) {
-            valuesPerRow[i] = [];
-          }
-
-          valuesPerRow[i].push(item);
-        });
-      });
-      var lastElementIndex = -1;
-
-      for (var i = 0; i < valuesPerRow.length; i++) {
-        // if the number of values on this row does not match
-        // the number of arrays then stop adding rows
-        if (valuesPerRow[i].length !== values.length) {
-          break;
-        } // create row if it doesn't exist
-
-
-        if (!this._arrayElements[i]) {
-          this._createArrayElement();
-        } // bind to observers for that row or just display the values
-
-
-        if (this._binding && this._binding.observers) {
-          this._linkArrayElement(this._arrayElements[i].element, i);
-        } else {
-          if (valuesPerRow[i].length > 1) {
-            this._arrayElements[i].element.values = valuesPerRow[i];
-          } else {
-            this._arrayElements[i].element.value = valuesPerRow[i][0];
-          }
-        }
-
-        lastElementIndex = i;
-      } // destory elements that are no longer in our values
-
-
-      for (var _i4 = this._arrayElements.length - 1; _i4 > lastElementIndex; _i4--) {
-        this._arrayElements[_i4].container.destroy();
-
-        this._arrayElements.splice(_i4, 1);
-      }
-
-      this._inputSize.values = arrayLengths;
-      this._suspendSizeChangeEvt = false;
-      this._suspendArrayElementEvts = false;
-
-      if (this._arrayElementChangeTimeout) {
-        clearTimeout(this._arrayElementChangeTimeout);
-        this._arrayElementChangeTimeout = null;
-      }
-
-      this.emit('change', this.value);
-    }
-  }, {
-    key: "focus",
-    value: function focus() {
-      this._inputSize.focus();
-    }
-  }, {
-    key: "blur",
-    value: function blur() {
-      this._inputSize.blur();
-    }
-    /**
-     * @name ArrayInput#forEachArrayElement
-     * @description Executes the specified function for each array element.
-     * @param {Function} fn - The function with signature (element, index) => bool to execute. If the function returns
-     * false then the iteration will early out.
-     */
-
-  }, {
-    key: "forEachArrayElement",
-    value: function forEachArrayElement(fn) {
-      this._containerArray.forEachChild(function (container, i) {
-        return fn(container.dom.firstChild.ui, i);
-      });
-    }
-  }, {
-    key: "destroy",
-    value: function destroy() {
-      if (this._destroyed) return;
-      this._arrayElements.length = 0;
-
-      _get(_getPrototypeOf(ArrayInput.prototype), "destroy", this).call(this);
-    }
-  }, {
-    key: "binding",
-    get: function get() {
-      return _get(_getPrototypeOf(ArrayInput.prototype), "binding", this);
-    } // override binding setter to create
-    // the same type of binding on each array element too
-    ,
-    set: function set(value) {
-      _set(_getPrototypeOf(ArrayInput.prototype), "binding", value, this, true);
-
-      this._arrayElements.forEach(function (entry) {
-        entry.element.binding = value ? value.clone() : null;
-      });
-    }
-  }, {
-    key: "value",
-    get: function get() {
-      // construct value from values of array elements
-      return this._arrayElements.map(function (entry) {
-        return entry.element.value;
-      });
-    },
-    set: function set(value) {
-      if (!Array.isArray(value)) {
-        value = [null];
-      }
-
-      var current = this.value || [];
-      if (_helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].arrayEquals(current, value)) return; // update values and binding
-
-      this._updateValues(new Array(this._values.length || 1).fill(value), true);
-    }
-    /* eslint accessor-pairs: 0 */
-
-  }, {
-    key: "values",
-    set: function set(values) {
-      if (_helpers_utils__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].arrayEquals(this._values, values)) return; // update values but do not update binding
-
-      this._updateValues(values, false);
-    }
-  }, {
-    key: "renderChanges",
-    get: function get() {
-      return this._renderChanges;
-    },
-    set: function set(value) {
-      this._renderChanges = value;
-
-      this._arrayElements.forEach(function (entry) {
-        entry.element.renderChanges = value;
-      });
-    }
-  }]);
-
-  return ArrayInput;
-}(_Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]);
-
-ArrayInput.DEFAULTS = {
-  boolean: false,
-  number: 0,
-  string: '',
-  vec2: [0, 0],
-  vec3: [0, 0, 0],
-  vec4: [0, 0, 0, 0]
-};
-
-for (var type in ArrayInput.DEFAULTS) {
-  _Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].register("array:".concat(type), ArrayInput, {
-    type: type,
-    renderChanges: true
-  });
-}
-
-_Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].register('array:select', ArrayInput, {
-  type: 'select',
-  renderChanges: true
-});
-/* harmony default export */ __webpack_exports__["a"] = (ArrayInput);
-
-/***/ }),
-/* 17 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(47);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _toggle_style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(49);
-/* harmony import */ var _toggle_style_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_toggle_style_scss__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
-/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(0);
+// CONCATENATED MODULE: ./src/components/BooleanInput/index.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5811,7 +4768,7 @@ var CLASS_BOOLEAN_INPUT_TOGGLE = CLASS_BOOLEAN_INPUT + '-toggle';
  * @mixes IFocusable
  */
 
-var BooleanInput = /*#__PURE__*/function (_Element) {
+var BooleanInput_BooleanInput = /*#__PURE__*/function (_Element) {
   _inherits(BooleanInput, _Element);
 
   var _super = _createSuper(BooleanInput);
@@ -5838,7 +4795,7 @@ var BooleanInput = /*#__PURE__*/function (_Element) {
       _this.class.add(CLASS_BOOLEAN_INPUT);
     }
 
-    _this.class.add(_class__WEBPACK_IMPORTED_MODULE_3__[/* NOT_FLEXIBLE */ "n"]);
+    _this.class.add(src_class["n" /* NOT_FLEXIBLE */]);
 
     _this._domEventKeyDown = _this._onKeyDown.bind(_assertThisInitialized(_this));
     _this._domEventFocus = _this._onFocus.bind(_assertThisInitialized(_this));
@@ -5902,7 +4859,7 @@ var BooleanInput = /*#__PURE__*/function (_Element) {
   }, {
     key: "_updateValue",
     value: function _updateValue(value) {
-      this.class.remove(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
+      this.class.remove(src_class["m" /* MULTIPLE_VALUES */]);
       if (value === this.value) return false;
       this._value = value;
 
@@ -5969,7 +4926,7 @@ var BooleanInput = /*#__PURE__*/function (_Element) {
       if (different) {
         this._updateValue(null);
 
-        this.class.add(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
+        this.class.add(src_class["m" /* MULTIPLE_VALUES */]);
       } else {
         this._updateValue(values[0]);
       }
@@ -5977,23 +4934,32 @@ var BooleanInput = /*#__PURE__*/function (_Element) {
   }]);
 
   return BooleanInput;
-}(_Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]);
+}(Element["a" /* default */]);
 
-_Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].register('boolean', BooleanInput, {
+Element["a" /* default */].register('boolean', BooleanInput_BooleanInput, {
   renderChanges: true
 });
-/* harmony default export */ __webpack_exports__["a"] = (BooleanInput);
+/* harmony default export */ var components_BooleanInput = __webpack_exports__["a"] = (BooleanInput_BooleanInput);
 
 /***/ }),
-/* 18 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(51);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
-/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
-/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5);
+
+// CONCATENATED MODULE: ./src/components/VectorInput/style.scss
+// extracted by mini-css-extract-plugin
+
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
+
+// EXTERNAL MODULE: ./src/components/NumericInput/index.js + 1 modules
+var NumericInput = __webpack_require__(9);
+
+// EXTERNAL MODULE: ./src/class.js
+var src_class = __webpack_require__(0);
+
+// CONCATENATED MODULE: ./src/components/VectorInput/index.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -6002,554 +4968,11 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function set(target, property, value, receiver) { if (typeof Reflect !== "undefined" && Reflect.set) { set = Reflect.set; } else { set = function set(target, property, value, receiver) { var base = _superPropBase(target, property); var desc; if (base) { desc = Object.getOwnPropertyDescriptor(base, property); if (desc.set) { desc.set.call(receiver, value); return true; } else if (!desc.writable) { return false; } } desc = Object.getOwnPropertyDescriptor(receiver, property); if (desc) { if (!desc.writable) { return false; } desc.value = value; Object.defineProperty(receiver, property, desc); } else { _defineProperty(receiver, property, value); } return true; }; } return set(target, property, value, receiver); }
 
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _set(target, property, value, receiver, isStrict) { var s = set(target, property, value, receiver || target); if (!s && isStrict) { throw new Error('failed to set property'); } return value; }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-
-var CLASS_ROOT = 'pcui-code';
-var CLASS_INNER = CLASS_ROOT + '-inner';
-/**
- * @name Code
- * @augments Container
- * @property {string} text The Text to display in the code block
- * @classdesc Represents a code block.
- */
-
-var Code = /*#__PURE__*/function (_Container) {
-  _inherits(Code, _Container);
-
-  var _super = _createSuper(Code);
-
-  /**
-   * Creates a new spinner.
-   *
-   * @param {object} [args] - The arguments
-   * @param {string} [args.text] - The text to display in the code block;
-   */
-  function Code(args) {
-    var _this;
-
-    _classCallCheck(this, Code);
-
-    if (!args) args = {};
-    _this = _super.call(this, args);
-
-    _this.class.add(CLASS_ROOT);
-
-    _this._inner = new _Label__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]();
-
-    _this.append(_this._inner);
-
-    _this._inner.class.add(CLASS_INNER);
-
-    if (args.text) {
-      _this.text = args.text;
-    }
-
-    return _this;
-  }
-
-  _createClass(Code, [{
-    key: "text",
-    set: function set(value) {
-      this._text = value;
-      this._inner.text = value;
-    },
-    get: function get() {
-      return this._text;
-    }
-  }]);
-
-  return Code;
-}(_Container__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]);
-
-_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('code', Code);
-/* harmony default export */ __webpack_exports__["a"] = (Code);
-
-/***/ }),
-/* 19 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(55);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-var CLASS_ROOT = 'pcui-divider';
-/**
- * @name Divider
- * @augments Element
- * @classdesc Represents a vertical division between two elements
- */
-
-var Divider = /*#__PURE__*/function (_Element) {
-  _inherits(Divider, _Element);
-
-  var _super = _createSuper(Divider);
-
-  function Divider(args) {
-    var _this;
-
-    _classCallCheck(this, Divider);
-
-    if (!args) args = {};
-    _this = _super.call(this, args.dom ? args.dom : document.createElement('div'), args);
-
-    _this.class.add(CLASS_ROOT);
-
-    return _this;
-  }
-
-  return Divider;
-}(_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
-
-_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('divider', Divider);
-/* harmony default export */ __webpack_exports__["a"] = (Divider);
-
-/***/ }),
-/* 20 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(57);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-var CLASS_INFOBOX = 'pcui-infobox';
-/**
- * @name InfoBox
- * @classdesc Represents an information box.
- * @augments Container
- * @property {string} icon The CSS code for an icon for the info box. e.g. E401 (notice we omit the '\' character).
- * @property {string} title Gets / sets the 'title' of the info box
- * @property {string} text Gets / sets the 'text' of the info box
- */
-
-var InfoBox = /*#__PURE__*/function (_Container) {
-  _inherits(InfoBox, _Container);
-
-  var _super = _createSuper(InfoBox);
-
-  /**
-   * Creates a new InfoBox.
-   *
-   * @param {object} args - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
-   * @param {boolean} [args.unsafe] - If true then the innerHTML property will be used to set the title/text. Otherwise textContent will be used instead.
-   */
-  function InfoBox(args) {
-    var _this;
-
-    _classCallCheck(this, InfoBox);
-
-    if (!args) args = {};
-    _this = _super.call(this, args);
-
-    _this.class.add(CLASS_INFOBOX);
-
-    _this._titleElement = new _Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]();
-    _this._textElement = new _Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]();
-
-    _this.append(_this._titleElement);
-
-    _this.append(_this._textElement);
-
-    _this._unsafe = args.unsafe || false;
-    _this.icon = args.icon || '';
-    _this.title = args.title || '';
-    _this.text = args.text || '';
-    return _this;
-  }
-
-  _createClass(InfoBox, [{
-    key: "icon",
-    get: function get() {
-      return this._icon;
-    },
-    set: function set(value) {
-      if (this._icon === value) return;
-      this._icon = value;
-
-      if (value) {
-        // set data-icon attribute but first convert the value to a code point
-        this.dom.setAttribute('data-icon', String.fromCodePoint(parseInt(value, 16)));
-      } else {
-        this.dom.removeAttribute('data-icon');
-      }
-    }
-  }, {
-    key: "title",
-    get: function get() {
-      return this._title;
-    },
-    set: function set(value) {
-      if (this._title === value) return;
-      this._title = value;
-
-      if (this._unsafe) {
-        this._titleElement.dom.innerHTML = value;
-      } else {
-        this._titleElement.dom.textContent = value;
-      }
-    }
-  }, {
-    key: "text",
-    get: function get() {
-      return this._text;
-    },
-    set: function set(value) {
-      if (this._text === value) return;
-      this._text = value;
-
-      if (this._unsafe) {
-        this._textElement.dom.innerHTML = value;
-      } else {
-        this._textElement.dom.textContent = value;
-      }
-    }
-  }]);
-
-  return InfoBox;
-}(_Container__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
-
-_Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].register('infobox', InfoBox);
-/* harmony default export */ __webpack_exports__["a"] = (InfoBox);
-
-/***/ }),
-/* 21 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(59);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
-/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-var CLASS_OVERLAY = 'pcui-overlay';
-var CLASS_OVERLAY_INNER = CLASS_OVERLAY + '-inner';
-var CLASS_OVERLAY_CLICKABLE = CLASS_OVERLAY + '-clickable';
-var CLASS_OVERLAY_TRANSPARENT = CLASS_OVERLAY + '-transparent';
-var CLASS_OVERLAY_CONTENT = CLASS_OVERLAY + '-content';
-/**
- * @name Overlay
- * @classdesc An overlay element.
- * @property {boolean} clickable Whether the overlay can be hidden by clicking on it.
- * @property {boolean} transparent Whether the overlay is transparent.
- * @augments Container
- */
-
-var Overlay = /*#__PURE__*/function (_Container) {
-  _inherits(Overlay, _Container);
-
-  var _super = _createSuper(Overlay);
-
-  /**
-   * Creates a new pcui.Overlay.
-   *
-   * @param {object} args - The arguments.
-   */
-  function Overlay(args) {
-    var _this;
-
-    _classCallCheck(this, Overlay);
-
-    if (!args) args = {};
-    _this = _super.call(this, args);
-
-    _this.class.add(CLASS_OVERLAY);
-
-    _this._domClickableOverlay = document.createElement('div');
-    _this._domClickableOverlay.ui = _assertThisInitialized(_this);
-    _this._domClickableOverlay.classList = CLASS_OVERLAY_INNER;
-
-    _this.dom.appendChild(_this._domClickableOverlay);
-
-    _this._domEventMouseDown = _this._onMouseDown.bind(_assertThisInitialized(_this));
-
-    _this._domClickableOverlay.addEventListener('mousedown', _this._domEventMouseDown);
-
-    _this.domContent = document.createElement('div');
-    _this.domContent.ui = _assertThisInitialized(_this);
-
-    _this.domContent.classList.add(CLASS_OVERLAY_CONTENT);
-
-    _this.dom.appendChild(_this.domContent);
-
-    _this.clickable = args.clickable || false;
-    _this.transparent = args.transparent || false;
-    return _this;
-  }
-
-  _createClass(Overlay, [{
-    key: "_onMouseDown",
-    value: function _onMouseDown(evt) {
-      var _this2 = this;
-
-      if (!this.clickable) return; // some field might be in focus
-
-      document.body.blur(); // wait till blur is done
-
-      requestAnimationFrame(function () {
-        _this2.hidden = true;
-      });
-      evt.preventDefault();
-    }
-    /**
-     * @name Overlay#position
-     * @description Position the overlay at specific x, y coordinates.
-     * @param {number} x - The x coordinate
-     * @param {number} y - The y coordinate
-     */
-
-  }, {
-    key: "position",
-    value: function position(x, y) {
-      var area = this._domClickableOverlay.getBoundingClientRect();
-
-      var rect = this.domContent.getBoundingClientRect();
-      x = Math.max(0, Math.min(area.width - rect.width, x));
-      y = Math.max(0, Math.min(area.height - rect.height, y));
-      this.domContent.style.position = 'absolute';
-      this.domContent.style.left = "".concat(x, "px");
-      this.domContent.style.top = "".concat(y, "px");
-    }
-  }, {
-    key: "destroy",
-    value: function destroy() {
-      if (this._destroyed) return;
-
-      this._domClickableOverlay.removeEventListener('mousedown', this._domEventMouseDown);
-
-      _get(_getPrototypeOf(Overlay.prototype), "destroy", this).call(this);
-    }
-  }, {
-    key: "clickable",
-    get: function get() {
-      return this.class.contains(CLASS_OVERLAY_CLICKABLE);
-    },
-    set: function set(value) {
-      if (value) {
-        this.class.add(CLASS_OVERLAY_CLICKABLE);
-      } else {
-        this.class.remove(CLASS_OVERLAY_CLICKABLE);
-      }
-    }
-  }, {
-    key: "transparent",
-    get: function get() {
-      return this.class.contains(CLASS_OVERLAY_TRANSPARENT);
-    },
-    set: function set(value) {
-      if (value) {
-        this.class.add(CLASS_OVERLAY_TRANSPARENT);
-      } else {
-        this.class.remove(CLASS_OVERLAY_TRANSPARENT);
-      }
-    }
-  }]);
-
-  return Overlay;
-}(_Container__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]);
-
-_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('overlay', Overlay);
-/* harmony default export */ __webpack_exports__["a"] = (Overlay);
-
-/***/ }),
-/* 22 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(61);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
-/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-var CLASS_ROOT = 'pcui-progress';
-var CLASS_INNER = CLASS_ROOT + '-inner';
-/**
- * @name Progress
- * @classdesc Represents a bar that can highlight progress of an activity.
- * @augments Container
- * @property {number} value Gets / sets the value of the progress bar (between 0 and 100).
- */
-
-var Progress = /*#__PURE__*/function (_Container) {
-  _inherits(Progress, _Container);
-
-  var _super = _createSuper(Progress);
-
-  function Progress(args) {
-    var _this;
-
-    _classCallCheck(this, Progress);
-
-    if (!args) args = {};
-    _this = _super.call(this, args);
-
-    _this.class.add(CLASS_ROOT);
-
-    _this._inner = new _Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]();
-
-    _this.append(_this._inner);
-
-    _this._inner.class.add(CLASS_INNER);
-
-    if (args.value !== undefined) {
-      _this.value = args.value;
-    }
-
-    return _this;
-  }
-
-  _createClass(Progress, [{
-    key: "value",
-    set: function set(val) {
-      if (this._value === val) return;
-      this._value = val;
-      this._inner.width = "".concat(this._value, "%");
-      this.emit('change', val);
-    },
-    get: function get() {
-      return this._value;
-    }
-  }]);
-
-  return Progress;
-}(_Container__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]);
-
-_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('progress', Progress);
-/* harmony default export */ __webpack_exports__["a"] = (Progress);
-
-/***/ }),
-/* 23 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
-/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
-/* harmony import */ var _TextInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9);
-/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(11);
-/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5);
-/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(0);
-/* harmony import */ var _helpers_search__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(14);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
 
@@ -6573,1047 +4996,214 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
-
-
-
-var CLASS_SELECT_INPUT = 'pcui-select-input';
-var CLASS_SELECT_INPUT_CONTAINER_VALUE = CLASS_SELECT_INPUT + '-container-value';
-var CLASS_MULTI_SELECT = CLASS_SELECT_INPUT + '-multi';
-var CLASS_ALLOW_INPUT = 'pcui-select-input-allow-input';
-var CLASS_VALUE = CLASS_SELECT_INPUT + '-value';
-var CLASS_ICON = CLASS_SELECT_INPUT + '-icon';
-var CLASS_INPUT = CLASS_SELECT_INPUT + '-textinput';
-var CLASS_LIST = CLASS_SELECT_INPUT + '-list';
-var CLASS_TAGS = CLASS_SELECT_INPUT + '-tags';
-var CLASS_TAGS_EMPTY = CLASS_SELECT_INPUT + '-tags-empty';
-var CLASS_TAG = CLASS_SELECT_INPUT + '-tag';
-var CLASS_TAG_NOT_EVERYWHERE = CLASS_SELECT_INPUT + '-tag-not-everywhere';
-var CLASS_SHADOW = CLASS_SELECT_INPUT + '-shadow';
-var CLASS_FIT_HEIGHT = CLASS_SELECT_INPUT + '-fit-height';
-var CLASS_SELECTED = 'pcui-selected';
-var CLASS_HIGHLIGHTED = CLASS_SELECT_INPUT + '-label-highlighted';
-var CLASS_CREATE_NEW = CLASS_SELECT_INPUT + '-create-new';
-var CLASS_OPEN = 'pcui-open';
-var DEFAULT_BOTTOM_OFFSET = 25;
+var CLASS_VECTOR_INPUT = 'pcui-vector-input';
 /**
- * @name SelectInput
- * @classdesc An input that allows selecting from a dropdown or entering tags.
- * @property {boolean} renderChanges If true then the input will flash when its value changes.
- * @property {string} placeholder The placeholder text to show next to the current value.
- * @property {boolean} multiSelect If true then the input value becomes an array allowing the selection of multiple options. Defaults to false.
- * @property {object[]} options The dropdown options of the input. Contains an array of objects with the following format {v: Any, t: String} where v is the value and t is the text of the option.
- * @property {Array} invalidOptions An array of values against which new values are checked before they are created. If a value is in the array it will not be created.
+ * @name VectorInput
+ * @classdesc A vector input
  * @augments Element
  * @mixes IBindable
  * @mixes IFocusable
  */
 
-var SelectInput = /*#__PURE__*/function (_Element) {
-  _inherits(SelectInput, _Element);
+var VectorInput_VectorInput = /*#__PURE__*/function (_Element) {
+  _inherits(VectorInput, _Element);
 
-  var _super = _createSuper(SelectInput);
+  var _super = _createSuper(VectorInput);
 
   /**
-   * Creates a new SelectInput.
+   * Creates a new pcui.VectorInput.
    *
-   * @param {object} args - The arguments. Extends the pcui.Element constructor arguments.
-   * @param {boolean} [args.allowNull] - If true then null is a valid input value. Defaults to false.
-   * @param {boolean} [args.allowInput] - If true then a text field is shown for the user to search for values or enter new ones. Defaults to false.
-   * @param {boolean} [args.allowCreate] - If true then the input allows creating new values from the text field. Only used when allowInput is true. Defaults to false.
-   * @param {Function} [args.createFn] - A function to be executed when the user selects to create a new value. The function takes the new value as a parameter.
-   * @param {string} [args.createLabelText] - The placeholder text to show when creating a new value. Used when allowInput and allowCreate are both true.
-   * @param {string} [args.type] - The type of each value. Can be one of 'string', 'number' or 'boolean'.
+   * @param {object} args - The arguments.
+   * @param {number} [args.dimensions=3] - The number of dimensions in the vector. Can be between 2 to 4. Defaults to 3.
+   * @param {number} [args.min] - The minimum value for each vector element.
+   * @param {number} [args.max] - The maximum value for each vector element.
+   * @param {number} [args.precision] - The decimal precision for each vector element.
+   * @param {number} [args.step] - The incremental step when using arrow keys for each vector element.
+   * @param {boolean} [args.renderChanges] - If true each vector element will flash on changes.
+   * @param {string[]|string} [args.placeholder] - The placeholder string for each vector element.
    */
-  function SelectInput(args) {
+  function VectorInput(args) {
     var _this;
 
-    _classCallCheck(this, SelectInput);
+    _classCallCheck(this, VectorInput);
 
-    if (!args) args = {}; // main container
+    args = Object.assign({}, args); // set binding after inputs have been created
 
-    var container = new _Container__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]({
-      dom: args.dom
-    });
-    _this = _super.call(this, container.dom, args);
-    _this._container = container;
-    _this._container.parent = _assertThisInitialized(_this);
+    var binding = args.binding;
+    delete args.binding;
+    _this = _super.call(this, args.dom ? args.dom : document.createElement('div'), args);
 
-    _this.class.add(CLASS_SELECT_INPUT);
+    _this.class.add(CLASS_VECTOR_INPUT);
 
-    _this._containerValue = new _Container__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]({
-      class: CLASS_SELECT_INPUT_CONTAINER_VALUE
-    });
+    var dimensions = Math.max(2, Math.min(4, args.dimensions || 3));
 
-    _this._container.append(_this._containerValue); // focus / hover shadow element
+    var onInputChange = _this._onInputChange.bind(_assertThisInitialized(_this));
+
+    _this._inputs = new Array(dimensions);
+
+    for (var i = 0; i < _this._inputs.length; i++) {
+      _this._inputs[i] = new NumericInput["a" /* default */]({
+        min: args.min,
+        max: args.max,
+        precision: args.precision,
+        step: args.step,
+        renderChanges: args.renderChanges,
+        placeholder: args.placeholder ? Array.isArray(args.placeholder) ? args.placeholder[i] : args.placeholder : null
+      });
+
+      _this._inputs[i].on('change', onInputChange);
+
+      _this._inputs[i].on('focus', function () {
+        _this.emit('focus');
+      });
+
+      _this._inputs[i].on('blur', function () {
+        _this.emit('blur');
+      });
+
+      _this.dom.appendChild(_this._inputs[i].dom);
+
+      _this._inputs[i].parent = _assertThisInitialized(_this);
+    } // set the binding after the inputs have been created
+    // because we rely on them in the overriden setter
 
 
-    _this._domShadow = document.createElement('div');
-
-    _this._domShadow.classList.add(CLASS_SHADOW);
-
-    _this._containerValue.append(_this._domShadow);
-
-    _this._allowInput = args.allowInput || false;
-
-    if (_this._allowInput) {
-      _this.class.add(CLASS_ALLOW_INPUT);
+    if (binding) {
+      _this.binding = binding;
     }
 
-    _this._allowCreate = args.allowCreate || false;
-    _this._createFn = args.createFn;
-    _this._createLabelText = args.createLabelText || null; // displays current value
-
-    _this._labelValue = new _Label__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"]({
-      class: CLASS_VALUE,
-      tabIndex: 0
-    });
-
-    _this._labelValue.on('click', _this._onValueClick.bind(_assertThisInitialized(_this)));
-
-    _this._containerValue.append(_this._labelValue);
-
-    _this._timeoutLabelValueTabIndex = null; // dropdown icon
-
-    _this._labelIcon = new _Label__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"]({
-      class: CLASS_ICON,
-      hidden: args.allowInput && args.multiSelect
-    });
-
-    _this._containerValue.append(_this._labelIcon); // input for searching or adding new entries
-
-
-    _this._input = new _TextInput__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]({
-      class: CLASS_INPUT,
-      blurOnEnter: false,
-      keyChange: true
-    });
-
-    _this._containerValue.append(_this._input);
-
-    _this._lastInputValue = '';
-    _this._suspendInputChange = false;
-
-    _this._input.on('change', _this._onInputChange.bind(_assertThisInitialized(_this)));
-
-    _this._input.on('keydown', _this._onInputKeyDown.bind(_assertThisInitialized(_this)));
-
-    _this._input.on('focus', _this._onFocus.bind(_assertThisInitialized(_this)));
-
-    _this._input.on('blur', _this._onBlur.bind(_assertThisInitialized(_this)));
-
-    if (args.placeholder) {
-      _this.placeholder = args.placeholder;
-    } // dropdown list
-
-
-    _this._containerOptions = new _Container__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]({
-      class: CLASS_LIST,
-      hidden: true
-    });
-
-    _this._containerValue.append(_this._containerOptions); // tags container
-
-
-    _this._containerTags = new _Container__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]({
-      class: CLASS_TAGS,
-      flex: true,
-      flexDirection: 'row',
-      hidden: true
-    });
-
-    _this._container.append(_this._containerTags);
-
-    if (args.multiSelect) {
-      _this.class.add(CLASS_MULTI_SELECT);
-
-      _this._containerTags.hidden = false;
-    } // events
-
-
-    _this._domEvtKeyDown = _this._onKeyDown.bind(_assertThisInitialized(_this));
-    _this._domEvtFocus = _this._onFocus.bind(_assertThisInitialized(_this));
-    _this._domEvtBlur = _this._onBlur.bind(_assertThisInitialized(_this));
-    _this._domEvtMouseDown = _this._onMouseDown.bind(_assertThisInitialized(_this));
-    _this._domEvtWindowMouseDown = _this._onWindowMouseDown.bind(_assertThisInitialized(_this));
-    _this._domEvtWheel = _this._onWheel.bind(_assertThisInitialized(_this));
-
-    _this._labelValue.dom.addEventListener('keydown', _this._domEvtKeyDown);
-
-    _this._labelValue.dom.addEventListener('focus', _this._domEvtFocus);
-
-    _this._labelValue.dom.addEventListener('blur', _this._domEvtBlur);
-
-    _this._labelValue.dom.addEventListener('mousedown', _this._domEvtMouseDown);
-
-    _this._containerOptions.dom.addEventListener('wheel', _this._domEvtWheel, {
-      passive: true
-    });
-
-    _this.on('hide', _this.close.bind(_assertThisInitialized(_this)));
-
-    _this._type = args.type || 'string';
-    _this._optionsIndex = {};
-    _this._labelsIndex = {};
-    _this._labelHighlighted = null;
-    _this.invalidOptions = args.invalidOptions;
-    _this.options = args.options || [];
-    _this._optionsFn = args.optionsFn;
-    _this._allowNull = args.allowNull || false;
-    _this._values = null;
+    _this._applyingChange = false;
 
     if (args.value !== undefined) {
       _this.value = args.value;
-    } else if (args.defaultValue) {
-      _this.value = args.defaultValue;
-    } else {
-      _this.value = null;
     }
-
-    _this.renderChanges = args.renderChanges || false;
-
-    _this.on('change', function () {
-      _this._updateInputFieldsVisibility();
-
-      if (_this.renderChanges && !_this.multiSelect) {
-        _this._labelValue.flash();
-      }
-    });
-
-    _this._updateInputFieldsVisibility(false);
 
     return _this;
   }
 
-  _createClass(SelectInput, [{
-    key: "_initializeCreateLabel",
-    value: function _initializeCreateLabel() {
-      var _this2 = this;
+  _createClass(VectorInput, [{
+    key: "_onInputChange",
+    value: function _onInputChange() {
+      if (this._applyingChange) return; // check if any of our inputs have the multiple_values class
+      // and if so inherit it for us as well
 
-      var container = new _Container__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]({
-        class: CLASS_CREATE_NEW,
-        flex: true,
-        flexDirection: 'row'
-      });
-      var label = new _Label__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"]({
-        text: this._input.value,
-        tabIndex: -1
-      });
-      container.append(label);
+      var showingMultipleValues = false;
 
-      var evtChange = this._input.on('change', function (value) {
-        // check if label is destroyed
-        // during change event
-        if (label.destroyed) return;
-        label.text = value;
-
-        if (_this2.invalidOptions && _this2.invalidOptions.indexOf(value) !== -1) {
-          if (!container.hidden) {
-            container.hidden = true;
-
-            _this2._resizeShadow();
-          }
-        } else {
-          if (container.hidden) {
-            container.hidden = false;
-
-            _this2._resizeShadow();
-          }
+      for (var i = 0; i < this._inputs.length; i++) {
+        if (this._inputs[i].class.contains(src_class["m" /* MULTIPLE_VALUES */])) {
+          showingMultipleValues = true;
+          break;
         }
-      });
-
-      container.on('click', function (e) {
-        e.stopPropagation();
-        var text = label.text;
-
-        _this2.focus();
-
-        _this2.close();
-
-        if (_this2._createFn) {
-          _this2._createFn(text);
-        } else if (text) {
-          _this2._onSelectValue(text);
-        }
-      });
-      label.on('destroy', function () {
-        evtChange.unbind();
-        evtChange = null;
-      });
-      var labelCreateText = new _Label__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"]({
-        text: this._createLabelText
-      });
-      container.append(labelCreateText);
-
-      this._containerOptions.append(container);
-    }
-  }, {
-    key: "_convertSingleValue",
-    value: function _convertSingleValue(value) {
-      if (value === null && this._allowNull) return value;
-
-      if (this._type === 'string') {
-        if (!value) {
-          value = '';
-        } else {
-          value = value.toString();
-        }
-      } else if (this._type === 'number') {
-        if (!value) {
-          value = 0;
-        } else {
-          value = parseInt(value, 10);
-        }
-      } else if (this._type === 'boolean') {
-        return !!value;
       }
 
-      return value;
-    }
-  }, {
-    key: "_convertValue",
-    value: function _convertValue(value) {
-      var _this3 = this;
-
-      if (value === null && this._allowNull) return value;
-
-      if (this.multiSelect) {
-        if (!Array.isArray(value)) return value;
-        return value.map(function (val) {
-          return _this3._convertSingleValue(val);
-        });
-      }
-
-      return this._convertSingleValue(value);
-    } // toggle dropdown list
-
-  }, {
-    key: "_onValueClick",
-    value: function _onValueClick() {
-      if (!this.enabled || this.readOnly) return;
-      this.toggle();
-    } // Update our value with the specified selected option
-
-  }, {
-    key: "_onSelectValue",
-    value: function _onSelectValue(value) {
-      value = this._convertSingleValue(value);
-
-      if (!this.multiSelect) {
-        this.value = value;
-        return;
-      }
-
-      if (this._values) {
-        var dirty = false;
-
-        this._values.forEach(function (arr) {
-          if (!arr) {
-            arr = [value];
-            dirty = true;
-          } else {
-            if (arr.indexOf(value) === -1) {
-              arr.push(value);
-              dirty = true;
-            }
-          }
-        });
-
-        if (dirty) {
-          this._onMultipleValuesChange(this._values);
-
-          this.emit('change', this.value);
-
-          if (this._binding) {
-            this._binding.addValues([value]);
-          }
-        }
+      if (showingMultipleValues) {
+        this.class.add(src_class["m" /* MULTIPLE_VALUES */]);
       } else {
-        if (!this._value || !Array.isArray(this._value)) {
-          this.value = [value];
-        } else {
-          if (this._value.indexOf(value) === -1) {
-            this._value.push(value);
-
-            this._addTag(value);
-
-            this.emit('change', this.value);
-
-            if (this._binding) {
-              this._binding.addValues([value]);
-            }
-          }
-        }
+        this.class.remove(src_class["m" /* MULTIPLE_VALUES */]);
       }
+
+      this.emit('change', this.value);
     }
   }, {
-    key: "_highlightLabel",
-    value: function _highlightLabel(label) {
-      if (this._labelHighlighted === label) return;
+    key: "_updateValue",
+    value: function _updateValue(value) {
+      this.class.remove(src_class["m" /* MULTIPLE_VALUES */]);
+      if (JSON.stringify(this.value) === JSON.stringify(value)) return false;
+      this._applyingChange = true;
 
-      if (this._labelHighlighted) {
-        this._labelHighlighted.class.remove(CLASS_HIGHLIGHTED);
-      }
+      for (var i = 0; i < this._inputs.length; i++) {
+        // disable binding for each individual input when we use
+        // the 'value' setter for the whole vector value. That is because
+        // we do not want the individual inputs to emit their own binding events
+        // since we are setting the whole vector value here
+        var binding = this._inputs[i].binding;
+        var applyingChange = false;
 
-      this._labelHighlighted = label;
-
-      if (this._labelHighlighted) {
-        this._labelHighlighted.class.add(CLASS_HIGHLIGHTED); // scroll into view if necessary
-
-
-        var labelTop = this._labelHighlighted.dom.offsetTop;
-        var scrollTop = this._containerOptions.dom.scrollTop;
-
-        if (labelTop < scrollTop) {
-          this._containerOptions.dom.scrollTop = labelTop;
-        } else if (labelTop + this._labelHighlighted.height > this._containerOptions.height + scrollTop) {
-          this._containerOptions.dom.scrollTop = labelTop + this._labelHighlighted.height - this._containerOptions.height;
+        if (binding) {
+          applyingChange = binding.applyingChange;
+          binding.applyingChange = true;
         }
-      }
-    } // when the value is changed show the correct title
 
-  }, {
-    key: "_onValueChange",
-    value: function _onValueChange(value) {
-      var _this4 = this;
+        this._inputs[i].value = value && value[i] !== undefined ? value[i] : null;
 
-      if (!this.multiSelect) {
-        this._labelValue.value = this._optionsIndex[value] || '';
-        value = '' + value;
-
-        for (var key in this._labelsIndex) {
-          if (key === value) {
-            this._labelsIndex[key].class.add(CLASS_SELECTED);
-          } else {
-            this._labelsIndex[key].class.remove(CLASS_SELECTED);
-          }
-        }
-      } else {
-        this._labelValue.value = '';
-
-        this._containerTags.clear();
-
-        this._containerTags.class.add(CLASS_TAGS_EMPTY);
-
-        if (value && Array.isArray(value)) {
-          value.forEach(function (val) {
-            _this4._addTag(val);
-
-            if (_this4._labelsIndex[val]) {
-              _this4._labelsIndex[val].class.add(CLASS_SELECTED);
-            }
-          });
-
-          for (var _key in this._labelsIndex) {
-            if (value.indexOf(this._convertSingleValue(_key)) !== -1) {
-              this._labelsIndex[_key].class.add(CLASS_SELECTED);
-            } else {
-              this._labelsIndex[_key].class.remove(CLASS_SELECTED);
-            }
-          }
-        }
-      }
-    }
-  }, {
-    key: "_onMultipleValuesChange",
-    value: function _onMultipleValuesChange(values) {
-      var _this5 = this;
-
-      this._labelValue.value = '';
-
-      this._containerTags.clear();
-
-      this._containerTags.class.add(CLASS_TAGS_EMPTY);
-
-      var tags = {};
-      var valueCounts = {};
-      values.forEach(function (arr) {
-        if (!arr) return;
-        arr.forEach(function (val) {
-          if (!tags[val]) {
-            tags[val] = _this5._addTag(val);
-            valueCounts[val] = 1;
-          } else {
-            valueCounts[val]++;
-          }
-        });
-      }); // add special class to tags that do not exist everywhere
-
-      for (var val in valueCounts) {
-        if (valueCounts[val] !== values.length) {
-          tags[val].class.add(CLASS_TAG_NOT_EVERYWHERE);
-
-          if (this._labelsIndex[val]) {
-            this._labelsIndex[val].class.remove(CLASS_SELECTED);
-          }
-        }
-      }
-    }
-  }, {
-    key: "_addTag",
-    value: function _addTag(value) {
-      var _this6 = this;
-
-      var container = new _Container__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]({
-        flex: true,
-        flexDirection: 'row',
-        class: CLASS_TAG
-      });
-      container.append(new _Label__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"]({
-        text: this._optionsIndex[value] || value
-      }));
-      var btnRemove = new _Button__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"]({
-        size: 'small',
-        icon: 'E132',
-        tabIndex: -1
-      });
-      container.append(btnRemove);
-      btnRemove.on('click', function () {
-        return _this6._removeTag(container, value);
-      });
-
-      this._containerTags.append(container);
-
-      this._containerTags.class.remove(CLASS_TAGS_EMPTY);
-
-      if (this._labelsIndex[value]) {
-        this._labelsIndex[value].class.add(CLASS_SELECTED);
-      }
-
-      container.value = value;
-      return container;
-    }
-  }, {
-    key: "_removeTag",
-    value: function _removeTag(tagElement, value) {
-      tagElement.destroy();
-
-      if (this._labelsIndex[value]) {
-        this._labelsIndex[value].class.remove(CLASS_SELECTED);
-      }
-
-      if (this._values) {
-        this._values.forEach(function (arr) {
-          if (!arr) return;
-          var idx = arr.indexOf(value);
-
-          if (idx !== -1) {
-            arr.splice(idx, 1);
-          }
-        });
-      } else if (this._value && Array.isArray(this._value)) {
-        var idx = this._value.indexOf(value);
-
-        if (idx !== -1) {
-          this._value.splice(idx, 1);
+        if (binding) {
+          binding.applyingChange = applyingChange;
         }
       }
 
       this.emit('change', this.value);
-
-      if (this._binding) {
-        this._binding.removeValues([value]);
-      }
+      this._applyingChange = false;
+      return true;
     }
   }, {
-    key: "_onInputChange",
-    value: function _onInputChange(value) {
-      if (this._suspendInputChange) return;
-      if (this._lastInputValue === value) return;
-      this.open();
-      this._lastInputValue = value;
+    key: "link",
+    value: function link(observers, paths) {
+      var _this2 = this;
 
-      this._filterOptions(value);
-    }
-  }, {
-    key: "_filterOptions",
-    value: function _filterOptions(filter) {
-      var _this7 = this;
+      _get(_getPrototypeOf(VectorInput.prototype), "link", this).call(this, observers, paths);
 
-      var searchIndex = {};
+      observers = Array.isArray(observers) ? observers : [observers];
+      paths = Array.isArray(paths) ? paths : [paths];
+      var useSinglePath = paths.length === 1 || observers.length !== paths.length;
 
-      if (filter) {
-        var searchOptions = this.options.map(function (option) {
-          return [option.t, option.v];
-        });
-        var searchResults = Object(_helpers_search__WEBPACK_IMPORTED_MODULE_7__[/* searchItems */ "a"])(searchOptions, filter);
-        searchResults.forEach(function (result) {
-          searchIndex[result] = true;
-        });
-      }
-
-      var highlighted = false;
-
-      this._containerOptions.forEachChild(function (label) {
-        label.hidden = !!filter && !searchIndex[label._optionValue] && !label.class.contains(CLASS_CREATE_NEW);
-
-        if (!highlighted && !label.hidden) {
-          _this7._highlightLabel(label);
-
-          highlighted = true;
-        }
-      });
-
-      this._resizeShadow();
-    }
-  }, {
-    key: "_onInputKeyDown",
-    value: function _onInputKeyDown(evt) {
-      if (evt.keyCode === 13 && this.enabled && !this.readOnly) {
-        evt.stopPropagation();
-        evt.preventDefault(); // on enter
-
-        var value;
-
-        if (this._labelHighlighted && this._labelHighlighted._optionValue !== undefined) {
-          value = this._labelHighlighted._optionValue;
-        } else {
-          value = this._input.value;
-        }
-
-        if (value !== undefined) {
-          this.focus();
-          this.close();
-
-          if (this._optionsIndex[value]) {
-            this._onSelectValue(value);
-          } else if (this._allowCreate) {
-            if (this._createFn) {
-              this._createFn(value);
-            } else {
-              this._onSelectValue(value);
-            }
-          }
-
-          return;
-        }
-      }
-
-      this._onKeyDown(evt);
-    }
-  }, {
-    key: "_onWindowMouseDown",
-    value: function _onWindowMouseDown(evt) {
-      if (this.dom.contains(evt.target)) return;
-      this.close();
-    }
-  }, {
-    key: "_onKeyDown",
-    value: function _onKeyDown(evt) {
-      // close options on ESC and blur
-      if (evt.keyCode === 27) {
-        this.close();
-        return;
-      } // handle tab
-
-
-      if (evt.keyCode === 9) {
-        this.close();
-        return;
-      }
-
-      if (!this.enabled || this.readOnly) return;
-
-      if (evt.keyCode === 13 && !this._allowInput) {
-        if (this._labelHighlighted && this._labelHighlighted._optionValue !== undefined) {
-          this._onSelectValue(this._labelHighlighted._optionValue);
-
-          this.close();
-        }
-
-        return;
-      }
-
-      if ([38, 40].indexOf(evt.keyCode) === -1) {
-        return;
-      }
-
-      evt.stopPropagation();
-      evt.preventDefault();
-
-      if ((this._allowInput || this.multiSelect) && this._containerOptions.hidden) {
-        this.open();
-        return;
-      }
-
-      if (this._containerOptions.hidden) {
-        if (!this._options.length) return;
-        var index = -1;
-
-        for (var i = 0; i < this._options.length; i++) {
-          if (this._options[i].v === this.value) {
-            index = i;
-            break;
-          }
-        }
-
-        if (evt.keyCode === 38) {
-          index--;
-        } else if (evt.keyCode === 40) {
-          index++;
-        }
-
-        if (index >= 0 && index < this._options.length) {
-          this._onSelectValue(this._options[index].v);
+      if (useSinglePath) {
+        for (var i = 0; i < this._inputs.length; i++) {
+          // link observers to path.i for each dimension
+          this._inputs[i].link(observers, paths[0] + ".".concat(i));
         }
       } else {
-        if (!this._containerOptions.dom.childNodes.length) return;
+        var _loop = function _loop(_i) {
+          // link observers to paths[i].i for each dimension
+          _this2._inputs[_i].link(observers, paths.map(function (path) {
+            return "".concat(path, ".").concat(_i);
+          }));
+        };
 
-        if (!this._labelHighlighted) {
-          this._highlightLabel(this._containerOptions.dom.childNodes[0].ui);
-        } else {
-          var highlightedLabelDom = this._labelHighlighted.dom;
-
-          do {
-            if (evt.keyCode === 38) {
-              highlightedLabelDom = highlightedLabelDom.previousSibling;
-            } else if (evt.keyCode === 40) {
-              highlightedLabelDom = highlightedLabelDom.nextSibling;
-            }
-          } while (highlightedLabelDom && highlightedLabelDom.ui.hidden);
-
-          if (highlightedLabelDom) {
-            this._highlightLabel(highlightedLabelDom.ui);
-          }
+        for (var _i = 0; _i < this._inputs.length; _i++) {
+          _loop(_i);
         }
-      }
-    }
-  }, {
-    key: "_resizeShadow",
-    value: function _resizeShadow() {
-      this._domShadow.style.height = this._containerValue.height + this._containerOptions.height + 'px';
-    }
-  }, {
-    key: "_onMouseDown",
-    value: function _onMouseDown() {
-      if (!this._allowInput) {
-        this.focus();
-      }
-    }
-  }, {
-    key: "_onFocus",
-    value: function _onFocus() {
-      this.class.add(_class__WEBPACK_IMPORTED_MODULE_6__[/* FOCUS */ "h"]);
-      this.emit('focus');
-
-      if (!this._input.hidden) {
-        this.open();
-      }
-    }
-  }, {
-    key: "_onBlur",
-    value: function _onBlur() {
-      this.class.remove(_class__WEBPACK_IMPORTED_MODULE_6__[/* FOCUS */ "h"]);
-      this.emit('blur');
-    }
-  }, {
-    key: "_onWheel",
-    value: function _onWheel(evt) {
-      // prevent scrolling on other stuff like the viewport
-      // when we are scrolling on the select input
-      evt.stopPropagation();
-    }
-  }, {
-    key: "_updateInputFieldsVisibility",
-    value: function _updateInputFieldsVisibility(focused) {
-      var _this8 = this;
-
-      var showInput = false;
-      var focusInput = false;
-
-      if (this._allowInput) {
-        if (focused) {
-          showInput = true;
-          focusInput = true;
-        } else {
-          showInput = this.multiSelect || !this._labelsIndex[this.value];
-        }
-      }
-
-      this._labelValue.hidden = showInput;
-      this._labelIcon.hidden = showInput;
-      this._input.hidden = !showInput;
-
-      if (focusInput) {
-        this._input.focus();
-      }
-
-      if (!this._labelValue.hidden) {
-        // prevent label from being focused
-        // right after input gets unfocused
-        this._labelValue.tabIndex = -1;
-
-        if (!this._timeoutLabelValueTabIndex) {
-          this._timeoutLabelValueTabIndex = requestAnimationFrame(function () {
-            _this8._timeoutLabelValueTabIndex = null;
-            _this8._labelValue.tabIndex = 0;
-          });
-        }
-      }
-    }
-  }, {
-    key: "focus",
-    value: function focus() {
-      if (this._input.hidden) {
-        this._labelValue.dom.focus();
-      } else {
-        this._input.focus();
-      }
-    }
-  }, {
-    key: "blur",
-    value: function blur() {
-      if (this._allowInput) {
-        this._input.blur();
-      } else {
-        this._labelValue.dom.blur();
-      }
-    }
-    /**
-     * @name SelectInput#open
-     * @description Opens the dropdown menu
-     */
-
-  }, {
-    key: "open",
-    value: function open() {
-      var _this9 = this;
-
-      if (!this._containerOptions.hidden || !this.enabled || this.readOnly) return;
-
-      this._updateInputFieldsVisibility(true); // auto-update options if necessary
-
-
-      if (this._optionsFn) {
-        this.options = this._optionsFn();
-      }
-
-      if (this._containerOptions.dom.childNodes.length === 0) return; // highlight label that displays current value
-
-      this._containerOptions.forEachChild(function (label) {
-        label.hidden = false;
-
-        if (label._optionValue === _this9.value) {
-          _this9._highlightLabel(label);
-        }
-      });
-
-      if (!this._labelHighlighted) {
-        this._highlightLabel(this._containerOptions.dom.childNodes[0].ui);
-      } // show options
-
-
-      this._containerOptions.hidden = false;
-      this.class.add(CLASS_OPEN); // register keydown on entire window
-
-      window.addEventListener('keydown', this._domEvtKeyDown); // register mousedown on entire window
-
-      window.addEventListener('mousedown', this._domEvtWindowMouseDown); // if the dropdown list goes below the window show it above the field
-
-      var startField = this._allowInput ? this._input.dom : this._labelValue.dom;
-      var rect = startField.getBoundingClientRect();
-      var fitHeight = rect.bottom + this._containerOptions.height + DEFAULT_BOTTOM_OFFSET >= window.innerHeight;
-
-      if (fitHeight && rect.top - this._containerOptions.height < 0) {
-        // if showing it above the field means that some of it will not be visible
-        // then show it below instead and adjust the max height to the maximum available space
-        fitHeight = false;
-        this._containerOptions.style.maxHeight = window.innerHeight - rect.bottom - DEFAULT_BOTTOM_OFFSET + 'px';
-      }
-
-      if (fitHeight) {
-        this.class.add(CLASS_FIT_HEIGHT);
-      } else {
-        this.class.remove(CLASS_FIT_HEIGHT);
-      } // resize the outer shadow to fit the element and the dropdown list
-      // we need this because the dropdown list is position: absolute
-
-
-      this._resizeShadow();
-    }
-    /**
-     * @name SelectInput#close
-     * @description Closes the dropdown menu
-     */
-
-  }, {
-    key: "close",
-    value: function close() {
-      // there is a potential bug here if the user has set a max height
-      // themselves then this will be overriden
-      this._containerOptions.style.maxHeight = '';
-
-      this._highlightLabel(null);
-
-      this._updateInputFieldsVisibility(false);
-
-      this._suspendInputChange = true;
-      this._input.value = '';
-      this._lastInputValue = '';
-      this._suspendInputChange = false;
-      if (this._containerOptions.hidden) return;
-      this._containerOptions.hidden = true;
-      this._domShadow.style.height = '';
-      this.class.remove(CLASS_OPEN);
-      window.removeEventListener('keydown', this._domEvtKeyDown);
-      window.removeEventListener('mousedown', this._domEvtWindowMouseDown);
-    }
-    /**
-     * @name SelectInput#toggle
-     * @description Toggles the dropdown menu
-     */
-
-  }, {
-    key: "toggle",
-    value: function toggle() {
-      if (this._containerOptions.hidden) {
-        this.open();
-      } else {
-        this.close();
       }
     }
   }, {
     key: "unlink",
     value: function unlink() {
-      _get(_getPrototypeOf(SelectInput.prototype), "unlink", this).call(this);
+      _get(_getPrototypeOf(VectorInput.prototype), "unlink", this).call(this);
 
-      if (!this._containerOptions.hidden) {
-        this.close();
+      for (var i = 0; i < this._inputs.length; i++) {
+        this._inputs[i].unlink();
       }
     }
   }, {
-    key: "destroy",
-    value: function destroy() {
-      if (this._destroyed) return;
-
-      this._labelValue.dom.removeEventListener('keydown', this._domEvtKeyDown);
-
-      this._labelValue.dom.removeEventListener('mousedown', this._domEvtMouseDown);
-
-      this._labelValue.dom.removeEventListener('focus', this._domEvtFocus);
-
-      this._labelValue.dom.removeEventListener('blur', this._domEvtBlur);
-
-      this._containerOptions.dom.removeEventListener('wheel', this._domEvtWheel);
-
-      window.removeEventListener('keydown', this._domEvtKeyDown);
-      window.removeEventListener('mousedown', this._domEvtWindowMouseDown);
-
-      if (this._timeoutLabelValueTabIndex) {
-        cancelAnimationFrame(this._timeoutLabelValueTabIndex);
-        this._timeoutLabelValueTabIndex = null;
-      }
-
-      _get(_getPrototypeOf(SelectInput.prototype), "destroy", this).call(this);
+    key: "focus",
+    value: function focus() {
+      this._inputs[0].focus();
     }
   }, {
-    key: "options",
-    get: function get() {
-      return this._options.slice();
-    },
-    set: function set(value) {
-      var _this10 = this;
-
-      if (this._options && this._options === value) return;
-
-      this._containerOptions.clear();
-
-      this._labelHighlighted = null;
-      this._optionsIndex = {};
-      this._labelsIndex = {};
-      this._options = value; // store each option value -> title pair in the optionsIndex
-
-      this._options.forEach(function (option) {
-        _this10._optionsIndex[option.v] = option.t;
-        if (option.v === '') return;
-        var label = new _Label__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"]({
-          text: option.t,
-          tabIndex: -1
-        });
-        label._optionValue = option.v; // store labels in an index too
-
-        _this10._labelsIndex[option.v] = label; // on clicking an option set it as the value and close the dropdown list
-
-        label.on('click', function (e) {
-          e.stopPropagation();
-
-          _this10._onSelectValue(option.v);
-
-          _this10.close();
-        });
-
-        _this10._containerOptions.append(label);
-      });
-
-      if (this._createLabelText) {
-        this._initializeCreateLabel();
+    key: "blur",
+    value: function blur() {
+      for (var i = 0; i < this._inputs.length; i++) {
+        this._inputs[i].blur();
       }
-
-      if (this.multiSelect && this._values) {
-        this._onMultipleValuesChange(this._values);
-      } else {
-        this._onValueChange(this.value);
-      }
-
-      if (this._lastInputValue) {
-        this._filterOptions(this._lastInputValue);
-      }
-    }
-  }, {
-    key: "invalidOptions",
-    get: function get() {
-      return this._invalidOptions;
-    },
-    set: function set(value) {
-      this._invalidOptions = value || null;
-    }
-  }, {
-    key: "multiSelect",
-    get: function get() {
-      return this.class.contains(CLASS_MULTI_SELECT);
     }
   }, {
     key: "value",
     get: function get() {
-      if (!this.multiSelect) {
-        return this._value;
-      } // if multi-select then construct an array
-      // value from the tags that are currently visible
+      var value = new Array(this._inputs.length);
 
-
-      var result = [];
-
-      this._containerTags.dom.childNodes.forEach(function (dom) {
-        result.push(dom.ui.value);
-      });
-
-      return result;
-    },
-    set: function set(value) {
-      this._values = null;
-      this._suspendInputChange = true;
-      this._input.value = '';
-      this._lastInputValue = '';
-      this._suspendInputChange = false;
-      this.class.remove(_class__WEBPACK_IMPORTED_MODULE_6__[/* MULTIPLE_VALUES */ "m"]);
-      value = this._convertValue(value);
-
-      if (this._value === value || this.multiSelect && this._value && this._value.equals(value)) {
-        // if the value is null because we are showing multiple values
-        // but someone wants to actually set the value of all observers to null
-        // then make sure we do not return early
-        if (value !== null || !this._allowNull || !this.class.contains(_class__WEBPACK_IMPORTED_MODULE_6__[/* MULTIPLE_VALUES */ "m"])) {
-          return;
-        }
+      for (var i = 0; i < this._inputs.length; i++) {
+        value[i] = this._inputs[i].value;
       }
 
-      this._value = value;
+      return value;
+    },
+    set: function set(value) {
+      if (!Array.isArray(value)) {
+        value = [];
+      }
 
-      this._onValueChange(value);
+      var changed = this._updateValue(value);
 
-      this.emit('change', value);
-
-      if (this._binding) {
+      if (changed && this._binding) {
         this._binding.setValue(value);
       }
     }
@@ -7622,80 +5212,104 @@ var SelectInput = /*#__PURE__*/function (_Element) {
   }, {
     key: "values",
     set: function set(values) {
-      values = values.map(this._convertValue.bind(this));
-      var different = false;
-      var value = values[0];
-      var multiSelect = this.multiSelect;
-      this._values = null;
+      // create an array for each dimension (e.g. one array for x one for y one for z)
+      values = this._inputs.map(function (_, i) {
+        return values.map(function (arr) {
+          return arr[i];
+        });
+      });
 
-      for (var i = 1; i < values.length; i++) {
-        if (values[i] !== value && (!multiSelect || !values[i] || !values[i].equals(value))) {
-          different = true;
-          break;
-        }
+      this._inputs.forEach(function (input, i) {
+        input.values = values[i];
+      });
+    } // override binding setter to set a binding clone to
+    // each input
+
+  }, {
+    key: "binding",
+    set: function set(value) {
+      _set(_getPrototypeOf(VectorInput.prototype), "binding", value, this, true);
+
+      for (var i = 0; i < this._inputs.length; i++) {
+        this._inputs[i].binding = value ? value.clone() : null;
       }
-
-      if (different) {
-        this._labelValue.values = values; // show all different tags
-
-        if (multiSelect) {
-          this._values = values;
-          this._value = null;
-
-          this._onMultipleValuesChange(this._values);
-
-          this.emit('change', this.value);
-        } else {
-          if (this._value !== null) {
-            this._value = null;
-            this.emit('change', null);
-          }
-        }
-
-        this.class.add(_class__WEBPACK_IMPORTED_MODULE_6__[/* MULTIPLE_VALUES */ "m"]);
-      } else {
-        this.value = values[0];
-      }
+    } // we have to override the getter too because
+    // we have overriden the setter
+    ,
+    get: function get() {
+      return _get(_getPrototypeOf(VectorInput.prototype), "binding", this);
     }
   }, {
     key: "placeholder",
     get: function get() {
-      return this._input.placeholder;
+      return this._inputs.map(function (input) {
+        return input.placeholder;
+      });
     },
     set: function set(value) {
-      this._input.placeholder = value;
+      for (var i = 0; i < this._inputs.length; i++) {
+        this._inputs[i].placeholder = value[i] || value || null;
+      }
+    }
+  }, {
+    key: "inputs",
+    get: function get() {
+      return this._inputs.slice();
     }
   }]);
 
-  return SelectInput;
-}(_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
+  return VectorInput;
+}(Element["a" /* default */]); // add proxied properties
 
-_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('select', SelectInput, {
+
+['min', 'max', 'precision', 'step', 'renderChanges'].forEach(function (property) {
+  Object.defineProperty(VectorInput_VectorInput.prototype, property, {
+    get: function get() {
+      return this._inputs[0][property];
+    },
+    set: function set(value) {
+      for (var i = 0; i < this._inputs.length; i++) {
+        this._inputs[i][property] = value;
+      }
+    }
+  });
+});
+Element["a" /* default */].register('vec2', VectorInput_VectorInput, {
+  dimensions: 2,
   renderChanges: true
 });
-_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('multiselect', SelectInput, {
-  multiSelect: true,
+Element["a" /* default */].register('vec3', VectorInput_VectorInput, {
+  dimensions: 3,
   renderChanges: true
 });
-_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('tags', SelectInput, {
-  allowInput: true,
-  allowCreate: true,
-  multiSelect: true,
+Element["a" /* default */].register('vec4', VectorInput_VectorInput, {
+  dimensions: 4,
   renderChanges: true
 });
-/* harmony default export */ __webpack_exports__["a"] = (SelectInput);
+/* harmony default export */ var components_VectorInput = __webpack_exports__["a"] = (VectorInput_VectorInput);
 
 /***/ }),
-/* 24 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(65);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
-/* harmony import */ var _NumericInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(12);
-/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(0);
-/* harmony import */ var _helpers_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7);
+
+// CONCATENATED MODULE: ./src/components/SliderInput/style.scss
+// extracted by mini-css-extract-plugin
+
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
+
+// EXTERNAL MODULE: ./src/components/NumericInput/index.js + 1 modules
+var NumericInput = __webpack_require__(9);
+
+// EXTERNAL MODULE: ./src/class.js
+var src_class = __webpack_require__(0);
+
+// EXTERNAL MODULE: ./src/helpers/utils.js
+var utils = __webpack_require__(4);
+
+// CONCATENATED MODULE: ./src/components/SliderInput/index.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -7757,7 +5371,7 @@ var PROXY_FIELDS = ['allowNull', 'max', 'min', 'keyChange', 'placeholder', 'prec
  * @mixes IFocusable
  */
 
-var SliderInput = /*#__PURE__*/function (_Element) {
+var SliderInput_SliderInput = /*#__PURE__*/function (_Element) {
   _inherits(SliderInput, _Element);
 
   var _super = _createSuper(SliderInput);
@@ -7792,7 +5406,7 @@ var SliderInput = /*#__PURE__*/function (_Element) {
 
     _this._historyCombine = false;
     _this._historyPostfix = null;
-    _this._numericInput = new _NumericInput__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"](_objectSpread(_objectSpread({}, inputArgs), {}, {
+    _this._numericInput = new NumericInput["a" /* default */](_objectSpread(_objectSpread({}, inputArgs), {}, {
       hideSlider: true
     })); // propagate change event
 
@@ -8124,10 +5738,10 @@ var SliderInput = /*#__PURE__*/function (_Element) {
     set: function set(value) {
       this._numericInput.value = value;
 
-      if (this._numericInput.class.contains(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"])) {
-        this.class.add(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
+      if (this._numericInput.class.contains(src_class["m" /* MULTIPLE_VALUES */])) {
+        this.class.add(src_class["m" /* MULTIPLE_VALUES */]);
       } else {
-        this.class.remove(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
+        this.class.remove(src_class["m" /* MULTIPLE_VALUES */]);
       }
     }
     /* eslint accessor-pairs: 0 */
@@ -8137,31 +5751,2310 @@ var SliderInput = /*#__PURE__*/function (_Element) {
     set: function set(values) {
       this._numericInput.values = values;
 
-      if (this._numericInput.class.contains(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"])) {
-        this.class.add(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
+      if (this._numericInput.class.contains(src_class["m" /* MULTIPLE_VALUES */])) {
+        this.class.add(src_class["m" /* MULTIPLE_VALUES */]);
       } else {
-        this.class.remove(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
+        this.class.remove(src_class["m" /* MULTIPLE_VALUES */]);
       }
     }
   }]);
 
   return SliderInput;
-}(_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
+}(Element["a" /* default */]);
 
-_helpers_utils__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"].proxy(SliderInput, '_numericInput', PROXY_FIELDS);
-_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('slider', SliderInput, {
+utils["a" /* default */].proxy(SliderInput_SliderInput, '_numericInput', PROXY_FIELDS);
+Element["a" /* default */].register('slider', SliderInput_SliderInput, {
   renderChanges: true
 });
-/* harmony default export */ __webpack_exports__["a"] = (SliderInput);
+/* harmony default export */ var components_SliderInput = __webpack_exports__["a"] = (SliderInput_SliderInput);
 
 /***/ }),
-/* 25 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(67);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+
+// EXTERNAL MODULE: ./src/helpers/utils.js
+var utils = __webpack_require__(4);
+
+// CONCATENATED MODULE: ./src/components/ArrayInput/style.scss
+// extracted by mini-css-extract-plugin
+
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
+
+// EXTERNAL MODULE: ./src/components/Container/index.js + 1 modules
+var Container = __webpack_require__(2);
+
+// EXTERNAL MODULE: ./src/components/Panel/index.js + 1 modules
+var Panel = __webpack_require__(12);
+
+// EXTERNAL MODULE: ./src/components/NumericInput/index.js + 1 modules
+var NumericInput = __webpack_require__(9);
+
+// EXTERNAL MODULE: ./src/components/Button/index.js + 1 modules
+var Button = __webpack_require__(10);
+
+// CONCATENATED MODULE: ./src/components/ArrayInput/index.js
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function ArrayInput_set(target, property, value, receiver) { if (typeof Reflect !== "undefined" && Reflect.set) { ArrayInput_set = Reflect.set; } else { ArrayInput_set = function set(target, property, value, receiver) { var base = _superPropBase(target, property); var desc; if (base) { desc = Object.getOwnPropertyDescriptor(base, property); if (desc.set) { desc.set.call(receiver, value); return true; } else if (!desc.writable) { return false; } } desc = Object.getOwnPropertyDescriptor(receiver, property); if (desc) { if (!desc.writable) { return false; } desc.value = value; Object.defineProperty(receiver, property, desc); } else { _defineProperty(receiver, property, value); } return true; }; } return ArrayInput_set(target, property, value, receiver); }
+
+function _set(target, property, value, receiver, isStrict) { var s = ArrayInput_set(target, property, value, receiver || target); if (!s && isStrict) { throw new Error('failed to set property'); } return value; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+
+
+var CLASS_ARRAY_INPUT = 'pcui-array-input';
+var CLASS_ARRAY_EMPTY = 'pcui-array-empty';
+var CLASS_ARRAY_SIZE = CLASS_ARRAY_INPUT + '-size';
+var CLASS_ARRAY_CONTAINER = CLASS_ARRAY_INPUT + '-items';
+var CLASS_ARRAY_ELEMENT = CLASS_ARRAY_INPUT + '-item';
+var CLASS_ARRAY_DELETE = CLASS_ARRAY_ELEMENT + '-delete';
+/**
+ * @event
+ * @name ArrayInput#linkElement
+ * @param {Element} element - The array element
+ * @param {number} index - The index of the array element
+ * @param {string} path - The path linked
+ * @description Fired when an array element is linked to observers
+ */
+
+/**
+ * @event
+ * @name ArrayInput#unlinkElement
+ * @param {Element} element - The array element
+ * @param {number} index - The index of the array element
+ * @description Fired when an array element is unlinked from observers
+ */
+
+/**
+ * @name ArrayInput
+ * @classdesc Element that allows editing an array of values.
+ * @property {boolean} renderChanges - If true the input will flash when changed.
+ * @augments Element
+ * @mixes IBindable
+ * @mixes IFocusable
+ */
+
+var ArrayInput_ArrayInput = /*#__PURE__*/function (_Element) {
+  _inherits(ArrayInput, _Element);
+
+  var _super = _createSuper(ArrayInput);
+
+  /**
+   * Creates a new ArrayInput.
+   *
+   * @param {object} args - The arguments.
+   * @param {string} [args.type] - The type of values that the array can hold.
+   * @param {boolean} [args.fixedSize] - If true then editing the number of elements that the array has will not be allowed.
+   * @param {object} [args.elementArgs] - Arguments for each array Element.
+   */
+  function ArrayInput(args) {
+    var _this;
+
+    _classCallCheck(this, ArrayInput);
+
+    args = Object.assign({}, args); // remove binding because we want to set it later
+
+    var binding = args.binding;
+    delete args.binding;
+    var container = new Container["a" /* default */]({
+      dom: args.dom,
+      flex: true
+    });
+    _this = _super.call(this, container.dom, args);
+    _this._container = container;
+    _this._container.parent = _assertThisInitialized(_this);
+
+    _this.class.add(CLASS_ARRAY_INPUT, CLASS_ARRAY_EMPTY);
+
+    _this._usePanels = args.usePanels || false;
+    _this._fixedSize = !!args.fixedSize;
+    _this._inputSize = new NumericInput["a" /* default */]({
+      class: [CLASS_ARRAY_SIZE],
+      placeholder: 'Array Size',
+      value: 0,
+      hideSlider: true,
+      step: 1,
+      precision: 0,
+      min: 0,
+      readOnly: _this._fixedSize
+    });
+
+    _this._inputSize.on('change', _this._onSizeChange.bind(_assertThisInitialized(_this)));
+
+    _this._inputSize.on('focus', _this._onFocus.bind(_assertThisInitialized(_this)));
+
+    _this._inputSize.on('blur', _this._onBlur.bind(_assertThisInitialized(_this)));
+
+    _this._suspendSizeChangeEvt = false;
+
+    _this._container.append(_this._inputSize);
+
+    _this._containerArray = new Container["a" /* default */]({
+      class: CLASS_ARRAY_CONTAINER,
+      hidden: true
+    });
+
+    _this._containerArray.on('append', function () {
+      _this._containerArray.hidden = false;
+    });
+
+    _this._containerArray.on('remove', function () {
+      _this._containerArray.hidden = _this._arrayElements.length == 0;
+    });
+
+    _this._container.append(_this._containerArray);
+
+    _this._suspendArrayElementEvts = false;
+    _this._arrayElementChangeTimeout = null;
+    _this._getDefaultFn = args.getDefaultFn || null;
+    var valueType = args.elementArgs && args.elementArgs.type || args.type;
+
+    if (!ArrayInput.DEFAULTS.hasOwnProperty(valueType)) {
+      valueType = 'string';
+    }
+
+    delete args.dom;
+    _this._valueType = valueType;
+    _this._elementType = args.type;
+    _this._elementArgs = args.elementArgs || args;
+    _this._arrayElements = []; // set binding now
+
+    _this.binding = binding;
+    _this._values = [];
+
+    if (args.value) {
+      _this.value = args.value;
+    }
+
+    _this.renderChanges = args.renderChanges || false;
+    return _this;
+  }
+
+  _createClass(ArrayInput, [{
+    key: "_onSizeChange",
+    value: function _onSizeChange(size) {
+      var _this2 = this;
+
+      // if size is explicitely 0 then add empty class
+      // size can also be null with multi-select so do not
+      // check just !size
+      if (size === 0) {
+        this.class.add(CLASS_ARRAY_EMPTY);
+      } else {
+        this.class.remove(CLASS_ARRAY_EMPTY);
+      }
+
+      if (size === null) return;
+      if (this._suspendSizeChangeEvt) return; // initialize default value for each new array element
+
+      var defaultValue;
+
+      var initDefaultValue = function initDefaultValue() {
+        if (_this2._getDefaultFn) {
+          defaultValue = _this2._getDefaultFn();
+        } else {
+          defaultValue = ArrayInput.DEFAULTS[_this2._valueType];
+
+          if (_this2._valueType === 'curveset') {
+            defaultValue = utils["a" /* default */].deepCopy(defaultValue);
+
+            if (Array.isArray(_this2._elementArgs.curves)) {
+              for (var i = 0; i < _this2._elementArgs.curves.length; i++) {
+                defaultValue.keys.push([0, 0]);
+              }
+            }
+          } else if (_this2._valueType === 'gradient') {
+            defaultValue = utils["a" /* default */].deepCopy(defaultValue);
+
+            if (_this2._elementArgs.channels) {
+              for (var _i = 0; _i < _this2._elementArgs.channels; _i++) {
+                defaultValue.keys.push([0, 1]);
+              }
+            }
+          }
+        }
+      }; // resize array
+
+
+      var values = this._values.map(function (array) {
+        if (!array) {
+          array = new Array(size);
+
+          for (var i = 0; i < size; i++) {
+            array[i] = utils["a" /* default */].deepCopy(ArrayInput.DEFAULTS[_this2._valueType]);
+            if (defaultValue === undefined) initDefaultValue();
+            array[i] = utils["a" /* default */].deepCopy(defaultValue);
+          }
+        } else if (array.length < size) {
+          var newArray = new Array(size - array.length);
+
+          for (var _i2 = 0; _i2 < newArray.length; _i2++) {
+            newArray[_i2] = utils["a" /* default */].deepCopy(ArrayInput.DEFAULTS[_this2._valueType]);
+            if (defaultValue === undefined) initDefaultValue();
+            newArray[_i2] = utils["a" /* default */].deepCopy(defaultValue);
+          }
+
+          array = array.concat(newArray);
+        } else {
+          var _newArray = new Array(size);
+
+          for (var _i3 = 0; _i3 < size; _i3++) {
+            _newArray[_i3] = utils["a" /* default */].deepCopy(array[_i3]);
+          }
+
+          array = _newArray;
+        }
+
+        return array;
+      });
+
+      if (!values.length) {
+        var array = new Array(size);
+
+        for (var i = 0; i < size; i++) {
+          array[i] = utils["a" /* default */].deepCopy(ArrayInput.DEFAULTS[this._valueType]);
+          if (defaultValue === undefined) initDefaultValue();
+          array[i] = utils["a" /* default */].deepCopy(defaultValue);
+        }
+
+        values.push(array);
+      }
+
+      this._updateValues(values, true);
+    }
+  }, {
+    key: "_onFocus",
+    value: function _onFocus() {
+      this.emit('focus');
+    }
+  }, {
+    key: "_onBlur",
+    value: function _onBlur() {
+      this.emit('blur');
+    }
+  }, {
+    key: "_createArrayElement",
+    value: function _createArrayElement() {
+      var _this3 = this;
+
+      var args = Object.assign({}, this._elementArgs);
+
+      if (args.binding) {
+        args.binding = args.binding.clone();
+      } else if (this._binding) {
+        args.binding = this._binding.clone();
+      } // set renderChanges after value is set
+      // to prevent flashing on initial value set
+
+
+      args.renderChanges = false;
+      var container;
+
+      if (this._usePanels) {
+        container = new Panel["a" /* default */]({
+          headerText: "[".concat(this._arrayElements.length, "]"),
+          removable: !this._fixedSize,
+          collapsible: true,
+          class: [CLASS_ARRAY_ELEMENT, CLASS_ARRAY_ELEMENT + '-' + this._elementType]
+        });
+      } else {
+        container = new Container["a" /* default */]({
+          flex: true,
+          flexDirection: 'row',
+          alignItems: 'center',
+          class: [CLASS_ARRAY_ELEMENT, CLASS_ARRAY_ELEMENT + '-' + this._elementType]
+        });
+      }
+
+      if (this._elementType === 'json' && args.attributes) {
+        args.attributes = args.attributes.map(function (attr) {
+          if (!attr.path) return attr; // fix paths to include array element index
+
+          attr = Object.assign({}, attr);
+          var parts = attr.path.split('.');
+          parts.splice(parts.length - 1, 0, _this3._arrayElements.length);
+          attr.path = parts.join('.');
+          return attr;
+        });
+      }
+
+      var element = Element["a" /* default */].create(this._elementType, args);
+      container.append(element);
+      element.renderChanges = this.renderChanges;
+      var entry = {
+        container: container,
+        element: element
+      };
+
+      this._arrayElements.push(entry);
+
+      if (!this._usePanels) {
+        if (!this._fixedSize) {
+          var btnDelete = new Button["a" /* default */]({
+            icon: 'E289',
+            size: 'small',
+            class: CLASS_ARRAY_DELETE,
+            tabIndex: -1 // skip buttons on tab
+
+          });
+          btnDelete.on('click', function () {
+            _this3._removeArrayElement(entry);
+          });
+          container.append(btnDelete);
+        }
+      } else {
+        container.on('click:remove', function () {
+          _this3._removeArrayElement(entry);
+        });
+      }
+
+      element.on('change', function (value) {
+        _this3._onArrayElementChange(entry, value);
+      });
+
+      this._containerArray.append(container);
+
+      return entry;
+    }
+  }, {
+    key: "_removeArrayElement",
+    value: function _removeArrayElement(entry) {
+      var index = this._arrayElements.indexOf(entry);
+
+      if (index === -1) return; // remove row from every array in values
+
+      var values = this._values.map(function (array) {
+        if (!array) return null;
+        array.splice(index, 1);
+        return array;
+      });
+
+      this._updateValues(values, true);
+    }
+  }, {
+    key: "_onArrayElementChange",
+    value: function _onArrayElementChange(entry, value) {
+      var _this4 = this;
+
+      if (this._suspendArrayElementEvts) return;
+
+      var index = this._arrayElements.indexOf(entry);
+
+      if (index === -1) return; // Set the value to the same row of every array in values.
+
+      this._values.forEach(function (array) {
+        if (array && array.length > index) {
+          array[index] = value;
+        }
+      }); // use a timeout here because when our values change they will
+      // first emit change events on each array element. However since the
+      // whole array changed we are going to fire a 'change' event later from
+      // our '_updateValues' function. We only want to emit a 'change' event
+      // here when only the array element changed value and not the whole array so
+      // wait a bit and fire the change event later otherwise the _updateValues function
+      // will cancel this timeout and fire a change event for the whole array instead
+
+
+      this._arrayElementChangeTimeout = setTimeout(function () {
+        _this4._arrayElementChangeTimeout = null;
+
+        _this4.emit('change', _this4.value);
+      });
+    }
+  }, {
+    key: "_linkArrayElement",
+    value: function _linkArrayElement(element, index) {
+      var observers = this._binding.observers;
+      var paths = this._binding.paths;
+      var useSinglePath = paths.length === 1 || observers.length !== paths.length;
+      element.unlink();
+      element.value = null;
+      this.emit('unlinkElement', element, index);
+      var path = useSinglePath ? paths[0] + ".".concat(index) : paths.map(function (path) {
+        return "".concat(path, ".").concat(index);
+      });
+      element.link(observers, path);
+      this.emit('linkElement', element, index, path);
+    }
+  }, {
+    key: "_updateValues",
+    value: function _updateValues(values, applyToBinding) {
+      this._values = values || [];
+      this._suspendArrayElementEvts = true;
+      this._suspendSizeChangeEvt = true; // apply values to the binding
+
+      if (applyToBinding && this._binding) {
+        this._binding.setValues(values);
+      } // each row of this array holds
+      // all the values for that row
+
+
+      var valuesPerRow = []; // holds the length of each array
+
+      var arrayLengths = [];
+      values.forEach(function (array) {
+        if (!array) return;
+        arrayLengths.push(array.length);
+        array.forEach(function (item, i) {
+          if (!valuesPerRow[i]) {
+            valuesPerRow[i] = [];
+          }
+
+          valuesPerRow[i].push(item);
+        });
+      });
+      var lastElementIndex = -1;
+
+      for (var i = 0; i < valuesPerRow.length; i++) {
+        // if the number of values on this row does not match
+        // the number of arrays then stop adding rows
+        if (valuesPerRow[i].length !== values.length) {
+          break;
+        } // create row if it doesn't exist
+
+
+        if (!this._arrayElements[i]) {
+          this._createArrayElement();
+        } // bind to observers for that row or just display the values
+
+
+        if (this._binding && this._binding.observers) {
+          this._linkArrayElement(this._arrayElements[i].element, i);
+        } else {
+          if (valuesPerRow[i].length > 1) {
+            this._arrayElements[i].element.values = valuesPerRow[i];
+          } else {
+            this._arrayElements[i].element.value = valuesPerRow[i][0];
+          }
+        }
+
+        lastElementIndex = i;
+      } // destory elements that are no longer in our values
+
+
+      for (var _i4 = this._arrayElements.length - 1; _i4 > lastElementIndex; _i4--) {
+        this._arrayElements[_i4].container.destroy();
+
+        this._arrayElements.splice(_i4, 1);
+      }
+
+      this._inputSize.values = arrayLengths;
+      this._suspendSizeChangeEvt = false;
+      this._suspendArrayElementEvts = false;
+
+      if (this._arrayElementChangeTimeout) {
+        clearTimeout(this._arrayElementChangeTimeout);
+        this._arrayElementChangeTimeout = null;
+      }
+
+      this.emit('change', this.value);
+    }
+  }, {
+    key: "focus",
+    value: function focus() {
+      this._inputSize.focus();
+    }
+  }, {
+    key: "blur",
+    value: function blur() {
+      this._inputSize.blur();
+    }
+    /**
+     * @name ArrayInput#forEachArrayElement
+     * @description Executes the specified function for each array element.
+     * @param {Function} fn - The function with signature (element, index) => bool to execute. If the function returns
+     * false then the iteration will early out.
+     */
+
+  }, {
+    key: "forEachArrayElement",
+    value: function forEachArrayElement(fn) {
+      this._containerArray.forEachChild(function (container, i) {
+        return fn(container.dom.firstChild.ui, i);
+      });
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      if (this._destroyed) return;
+      this._arrayElements.length = 0;
+
+      _get(_getPrototypeOf(ArrayInput.prototype), "destroy", this).call(this);
+    }
+  }, {
+    key: "binding",
+    get: function get() {
+      return _get(_getPrototypeOf(ArrayInput.prototype), "binding", this);
+    } // override binding setter to create
+    // the same type of binding on each array element too
+    ,
+    set: function set(value) {
+      _set(_getPrototypeOf(ArrayInput.prototype), "binding", value, this, true);
+
+      this._arrayElements.forEach(function (entry) {
+        entry.element.binding = value ? value.clone() : null;
+      });
+    }
+  }, {
+    key: "value",
+    get: function get() {
+      // construct value from values of array elements
+      return this._arrayElements.map(function (entry) {
+        return entry.element.value;
+      });
+    },
+    set: function set(value) {
+      if (!Array.isArray(value)) {
+        value = [null];
+      }
+
+      var current = this.value || [];
+      if (utils["a" /* default */].arrayEquals(current, value)) return; // update values and binding
+
+      this._updateValues(new Array(this._values.length || 1).fill(value), true);
+    }
+    /* eslint accessor-pairs: 0 */
+
+  }, {
+    key: "values",
+    set: function set(values) {
+      if (utils["a" /* default */].arrayEquals(this._values, values)) return; // update values but do not update binding
+
+      this._updateValues(values, false);
+    }
+  }, {
+    key: "renderChanges",
+    get: function get() {
+      return this._renderChanges;
+    },
+    set: function set(value) {
+      this._renderChanges = value;
+
+      this._arrayElements.forEach(function (entry) {
+        entry.element.renderChanges = value;
+      });
+    }
+  }]);
+
+  return ArrayInput;
+}(Element["a" /* default */]);
+
+ArrayInput_ArrayInput.DEFAULTS = {
+  boolean: false,
+  number: 0,
+  string: '',
+  vec2: [0, 0],
+  vec3: [0, 0, 0],
+  vec4: [0, 0, 0, 0]
+};
+
+for (var type in ArrayInput_ArrayInput.DEFAULTS) {
+  Element["a" /* default */].register("array:".concat(type), ArrayInput_ArrayInput, {
+    type: type,
+    renderChanges: true
+  });
+}
+
+Element["a" /* default */].register('array:select', ArrayInput_ArrayInput, {
+  type: 'select',
+  renderChanges: true
+});
+/* harmony default export */ var components_ArrayInput = __webpack_exports__["a"] = (ArrayInput_ArrayInput);
+
+/***/ }),
+/* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// CONCATENATED MODULE: ./src/components/Divider/style.scss
+// extracted by mini-css-extract-plugin
+
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
+
+// CONCATENATED MODULE: ./src/components/Divider/index.js
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var CLASS_ROOT = 'pcui-divider';
+/**
+ * @name Divider
+ * @augments Element
+ * @classdesc Represents a vertical division between two elements
+ */
+
+var Divider = /*#__PURE__*/function (_Element) {
+  _inherits(Divider, _Element);
+
+  var _super = _createSuper(Divider);
+
+  function Divider(args) {
+    var _this;
+
+    _classCallCheck(this, Divider);
+
+    if (!args) args = {};
+    _this = _super.call(this, args.dom ? args.dom : document.createElement('div'), args);
+
+    _this.class.add(CLASS_ROOT);
+
+    return _this;
+  }
+
+  return Divider;
+}(Element["a" /* default */]);
+
+Element["a" /* default */].register('divider', Divider);
+/* harmony default export */ var components_Divider = __webpack_exports__["a"] = (Divider);
+
+/***/ }),
+/* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// CONCATENATED MODULE: ./src/components/InfoBox/style.scss
+// extracted by mini-css-extract-plugin
+
+// EXTERNAL MODULE: ./src/components/Container/index.js + 1 modules
+var Container = __webpack_require__(2);
+
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
+
+// CONCATENATED MODULE: ./src/components/InfoBox/index.js
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var CLASS_INFOBOX = 'pcui-infobox';
+/**
+ * @name InfoBox
+ * @classdesc Represents an information box.
+ * @augments Container
+ * @property {string} icon The CSS code for an icon for the info box. e.g. E401 (notice we omit the '\' character).
+ * @property {string} title Gets / sets the 'title' of the info box
+ * @property {string} text Gets / sets the 'text' of the info box
+ */
+
+var InfoBox_InfoBox = /*#__PURE__*/function (_Container) {
+  _inherits(InfoBox, _Container);
+
+  var _super = _createSuper(InfoBox);
+
+  /**
+   * Creates a new InfoBox.
+   *
+   * @param {object} args - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
+   * @param {boolean} [args.unsafe] - If true then the innerHTML property will be used to set the title/text. Otherwise textContent will be used instead.
+   */
+  function InfoBox(args) {
+    var _this;
+
+    _classCallCheck(this, InfoBox);
+
+    if (!args) args = {};
+    _this = _super.call(this, args);
+
+    _this.class.add(CLASS_INFOBOX);
+
+    _this._titleElement = new Element["a" /* default */]();
+    _this._textElement = new Element["a" /* default */]();
+
+    _this.append(_this._titleElement);
+
+    _this.append(_this._textElement);
+
+    _this._unsafe = args.unsafe || false;
+    _this.icon = args.icon || '';
+    _this.title = args.title || '';
+    _this.text = args.text || '';
+    return _this;
+  }
+
+  _createClass(InfoBox, [{
+    key: "icon",
+    get: function get() {
+      return this._icon;
+    },
+    set: function set(value) {
+      if (this._icon === value) return;
+      this._icon = value;
+
+      if (value) {
+        // set data-icon attribute but first convert the value to a code point
+        this.dom.setAttribute('data-icon', String.fromCodePoint(parseInt(value, 16)));
+      } else {
+        this.dom.removeAttribute('data-icon');
+      }
+    }
+  }, {
+    key: "title",
+    get: function get() {
+      return this._title;
+    },
+    set: function set(value) {
+      if (this._title === value) return;
+      this._title = value;
+
+      if (this._unsafe) {
+        this._titleElement.dom.innerHTML = value;
+      } else {
+        this._titleElement.dom.textContent = value;
+      }
+    }
+  }, {
+    key: "text",
+    get: function get() {
+      return this._text;
+    },
+    set: function set(value) {
+      if (this._text === value) return;
+      this._text = value;
+
+      if (this._unsafe) {
+        this._textElement.dom.innerHTML = value;
+      } else {
+        this._textElement.dom.textContent = value;
+      }
+    }
+  }]);
+
+  return InfoBox;
+}(Container["a" /* default */]);
+
+Element["a" /* default */].register('infobox', InfoBox_InfoBox);
+/* harmony default export */ var components_InfoBox = __webpack_exports__["a"] = (InfoBox_InfoBox);
+
+/***/ }),
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// CONCATENATED MODULE: ./src/components/Overlay/style.scss
+// extracted by mini-css-extract-plugin
+
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
+
+// EXTERNAL MODULE: ./src/components/Container/index.js + 1 modules
+var Container = __webpack_require__(2);
+
+// CONCATENATED MODULE: ./src/components/Overlay/index.js
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var CLASS_OVERLAY = 'pcui-overlay';
+var CLASS_OVERLAY_INNER = CLASS_OVERLAY + '-inner';
+var CLASS_OVERLAY_CLICKABLE = CLASS_OVERLAY + '-clickable';
+var CLASS_OVERLAY_TRANSPARENT = CLASS_OVERLAY + '-transparent';
+var CLASS_OVERLAY_CONTENT = CLASS_OVERLAY + '-content';
+/**
+ * @name Overlay
+ * @classdesc An overlay element.
+ * @property {boolean} clickable Whether the overlay can be hidden by clicking on it.
+ * @property {boolean} transparent Whether the overlay is transparent.
+ * @augments Container
+ */
+
+var Overlay = /*#__PURE__*/function (_Container) {
+  _inherits(Overlay, _Container);
+
+  var _super = _createSuper(Overlay);
+
+  /**
+   * Creates a new pcui.Overlay.
+   *
+   * @param {object} args - The arguments.
+   */
+  function Overlay(args) {
+    var _this;
+
+    _classCallCheck(this, Overlay);
+
+    if (!args) args = {};
+    _this = _super.call(this, args);
+
+    _this.class.add(CLASS_OVERLAY);
+
+    _this._domClickableOverlay = document.createElement('div');
+    _this._domClickableOverlay.ui = _assertThisInitialized(_this);
+    _this._domClickableOverlay.classList = CLASS_OVERLAY_INNER;
+
+    _this.dom.appendChild(_this._domClickableOverlay);
+
+    _this._domEventMouseDown = _this._onMouseDown.bind(_assertThisInitialized(_this));
+
+    _this._domClickableOverlay.addEventListener('mousedown', _this._domEventMouseDown);
+
+    _this.domContent = document.createElement('div');
+    _this.domContent.ui = _assertThisInitialized(_this);
+
+    _this.domContent.classList.add(CLASS_OVERLAY_CONTENT);
+
+    _this.dom.appendChild(_this.domContent);
+
+    _this.clickable = args.clickable || false;
+    _this.transparent = args.transparent || false;
+    return _this;
+  }
+
+  _createClass(Overlay, [{
+    key: "_onMouseDown",
+    value: function _onMouseDown(evt) {
+      var _this2 = this;
+
+      if (!this.clickable) return; // some field might be in focus
+
+      document.body.blur(); // wait till blur is done
+
+      requestAnimationFrame(function () {
+        _this2.hidden = true;
+      });
+      evt.preventDefault();
+    }
+    /**
+     * @name Overlay#position
+     * @description Position the overlay at specific x, y coordinates.
+     * @param {number} x - The x coordinate
+     * @param {number} y - The y coordinate
+     */
+
+  }, {
+    key: "position",
+    value: function position(x, y) {
+      var area = this._domClickableOverlay.getBoundingClientRect();
+
+      var rect = this.domContent.getBoundingClientRect();
+      x = Math.max(0, Math.min(area.width - rect.width, x));
+      y = Math.max(0, Math.min(area.height - rect.height, y));
+      this.domContent.style.position = 'absolute';
+      this.domContent.style.left = "".concat(x, "px");
+      this.domContent.style.top = "".concat(y, "px");
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      if (this._destroyed) return;
+
+      this._domClickableOverlay.removeEventListener('mousedown', this._domEventMouseDown);
+
+      _get(_getPrototypeOf(Overlay.prototype), "destroy", this).call(this);
+    }
+  }, {
+    key: "clickable",
+    get: function get() {
+      return this.class.contains(CLASS_OVERLAY_CLICKABLE);
+    },
+    set: function set(value) {
+      if (value) {
+        this.class.add(CLASS_OVERLAY_CLICKABLE);
+      } else {
+        this.class.remove(CLASS_OVERLAY_CLICKABLE);
+      }
+    }
+  }, {
+    key: "transparent",
+    get: function get() {
+      return this.class.contains(CLASS_OVERLAY_TRANSPARENT);
+    },
+    set: function set(value) {
+      if (value) {
+        this.class.add(CLASS_OVERLAY_TRANSPARENT);
+      } else {
+        this.class.remove(CLASS_OVERLAY_TRANSPARENT);
+      }
+    }
+  }]);
+
+  return Overlay;
+}(Container["a" /* default */]);
+
+Element["a" /* default */].register('overlay', Overlay);
+/* harmony default export */ var components_Overlay = __webpack_exports__["a"] = (Overlay);
+
+/***/ }),
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// CONCATENATED MODULE: ./src/components/Progress/style.scss
+// extracted by mini-css-extract-plugin
+
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
+
+// EXTERNAL MODULE: ./src/components/Container/index.js + 1 modules
+var Container = __webpack_require__(2);
+
+// CONCATENATED MODULE: ./src/components/Progress/index.js
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var CLASS_ROOT = 'pcui-progress';
+var CLASS_INNER = CLASS_ROOT + '-inner';
+/**
+ * @name Progress
+ * @classdesc Represents a bar that can highlight progress of an activity.
+ * @augments Container
+ * @property {number} value Gets / sets the value of the progress bar (between 0 and 100).
+ */
+
+var Progress_Progress = /*#__PURE__*/function (_Container) {
+  _inherits(Progress, _Container);
+
+  var _super = _createSuper(Progress);
+
+  function Progress(args) {
+    var _this;
+
+    _classCallCheck(this, Progress);
+
+    if (!args) args = {};
+    _this = _super.call(this, args);
+
+    _this.class.add(CLASS_ROOT);
+
+    _this._inner = new Element["a" /* default */]();
+
+    _this.append(_this._inner);
+
+    _this._inner.class.add(CLASS_INNER);
+
+    if (args.value !== undefined) {
+      _this.value = args.value;
+    }
+
+    return _this;
+  }
+
+  _createClass(Progress, [{
+    key: "value",
+    set: function set(val) {
+      if (this._value === val) return;
+      this._value = val;
+      this._inner.width = "".concat(this._value, "%");
+      this.emit('change', val);
+    },
+    get: function get() {
+      return this._value;
+    }
+  }]);
+
+  return Progress;
+}(Container["a" /* default */]);
+
+Element["a" /* default */].register('progress', Progress_Progress);
+/* harmony default export */ var components_Progress = __webpack_exports__["a"] = (Progress_Progress);
+
+/***/ }),
+/* 22 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// CONCATENATED MODULE: ./src/components/SelectInput/style.scss
+// extracted by mini-css-extract-plugin
+
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
+
+// EXTERNAL MODULE: ./src/components/Container/index.js + 1 modules
+var Container = __webpack_require__(2);
+
+// EXTERNAL MODULE: ./src/components/TextInput/index.js + 1 modules
+var TextInput = __webpack_require__(7);
+
+// EXTERNAL MODULE: ./src/components/Button/index.js + 1 modules
+var Button = __webpack_require__(10);
+
+// EXTERNAL MODULE: ./src/components/Label/index.js + 1 modules
+var Label = __webpack_require__(3);
+
+// EXTERNAL MODULE: ./src/class.js
+var src_class = __webpack_require__(0);
+
+// EXTERNAL MODULE: ./src/helpers/search.js
+var search = __webpack_require__(11);
+
+// CONCATENATED MODULE: ./src/components/SelectInput/index.js
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+
+
+
+var CLASS_SELECT_INPUT = 'pcui-select-input';
+var CLASS_SELECT_INPUT_CONTAINER_VALUE = CLASS_SELECT_INPUT + '-container-value';
+var CLASS_MULTI_SELECT = CLASS_SELECT_INPUT + '-multi';
+var CLASS_ALLOW_INPUT = 'pcui-select-input-allow-input';
+var CLASS_VALUE = CLASS_SELECT_INPUT + '-value';
+var CLASS_ICON = CLASS_SELECT_INPUT + '-icon';
+var CLASS_INPUT = CLASS_SELECT_INPUT + '-textinput';
+var CLASS_LIST = CLASS_SELECT_INPUT + '-list';
+var CLASS_TAGS = CLASS_SELECT_INPUT + '-tags';
+var CLASS_TAGS_EMPTY = CLASS_SELECT_INPUT + '-tags-empty';
+var CLASS_TAG = CLASS_SELECT_INPUT + '-tag';
+var CLASS_TAG_NOT_EVERYWHERE = CLASS_SELECT_INPUT + '-tag-not-everywhere';
+var CLASS_SHADOW = CLASS_SELECT_INPUT + '-shadow';
+var CLASS_FIT_HEIGHT = CLASS_SELECT_INPUT + '-fit-height';
+var CLASS_SELECTED = 'pcui-selected';
+var CLASS_HIGHLIGHTED = CLASS_SELECT_INPUT + '-label-highlighted';
+var CLASS_CREATE_NEW = CLASS_SELECT_INPUT + '-create-new';
+var CLASS_OPEN = 'pcui-open';
+var DEFAULT_BOTTOM_OFFSET = 25;
+/**
+ * @name SelectInput
+ * @classdesc An input that allows selecting from a dropdown or entering tags.
+ * @property {boolean} renderChanges If true then the input will flash when its value changes.
+ * @property {string} placeholder The placeholder text to show next to the current value.
+ * @property {boolean} multiSelect If true then the input value becomes an array allowing the selection of multiple options. Defaults to false.
+ * @property {object[]} options The dropdown options of the input. Contains an array of objects with the following format {v: Any, t: String} where v is the value and t is the text of the option.
+ * @property {Array} invalidOptions An array of values against which new values are checked before they are created. If a value is in the array it will not be created.
+ * @augments Element
+ * @mixes IBindable
+ * @mixes IFocusable
+ */
+
+var SelectInput_SelectInput = /*#__PURE__*/function (_Element) {
+  _inherits(SelectInput, _Element);
+
+  var _super = _createSuper(SelectInput);
+
+  /**
+   * Creates a new SelectInput.
+   *
+   * @param {object} args - The arguments. Extends the pcui.Element constructor arguments.
+   * @param {boolean} [args.allowNull] - If true then null is a valid input value. Defaults to false.
+   * @param {boolean} [args.allowInput] - If true then a text field is shown for the user to search for values or enter new ones. Defaults to false.
+   * @param {boolean} [args.allowCreate] - If true then the input allows creating new values from the text field. Only used when allowInput is true. Defaults to false.
+   * @param {Function} [args.createFn] - A function to be executed when the user selects to create a new value. The function takes the new value as a parameter.
+   * @param {string} [args.createLabelText] - The placeholder text to show when creating a new value. Used when allowInput and allowCreate are both true.
+   * @param {string} [args.type] - The type of each value. Can be one of 'string', 'number' or 'boolean'.
+   */
+  function SelectInput(args) {
+    var _this;
+
+    _classCallCheck(this, SelectInput);
+
+    if (!args) args = {}; // main container
+
+    var container = new Container["a" /* default */]({
+      dom: args.dom
+    });
+    _this = _super.call(this, container.dom, args);
+    _this._container = container;
+    _this._container.parent = _assertThisInitialized(_this);
+
+    _this.class.add(CLASS_SELECT_INPUT);
+
+    _this._containerValue = new Container["a" /* default */]({
+      class: CLASS_SELECT_INPUT_CONTAINER_VALUE
+    });
+
+    _this._container.append(_this._containerValue); // focus / hover shadow element
+
+
+    _this._domShadow = document.createElement('div');
+
+    _this._domShadow.classList.add(CLASS_SHADOW);
+
+    _this._containerValue.append(_this._domShadow);
+
+    _this._allowInput = args.allowInput || false;
+
+    if (_this._allowInput) {
+      _this.class.add(CLASS_ALLOW_INPUT);
+    }
+
+    _this._allowCreate = args.allowCreate || false;
+    _this._createFn = args.createFn;
+    _this._createLabelText = args.createLabelText || null; // displays current value
+
+    _this._labelValue = new Label["a" /* default */]({
+      class: CLASS_VALUE,
+      tabIndex: 0
+    });
+
+    _this._labelValue.on('click', _this._onValueClick.bind(_assertThisInitialized(_this)));
+
+    _this._containerValue.append(_this._labelValue);
+
+    _this._timeoutLabelValueTabIndex = null; // dropdown icon
+
+    _this._labelIcon = new Label["a" /* default */]({
+      class: CLASS_ICON,
+      hidden: args.allowInput && args.multiSelect
+    });
+
+    _this._containerValue.append(_this._labelIcon); // input for searching or adding new entries
+
+
+    _this._input = new TextInput["a" /* default */]({
+      class: CLASS_INPUT,
+      blurOnEnter: false,
+      keyChange: true
+    });
+
+    _this._containerValue.append(_this._input);
+
+    _this._lastInputValue = '';
+    _this._suspendInputChange = false;
+
+    _this._input.on('change', _this._onInputChange.bind(_assertThisInitialized(_this)));
+
+    _this._input.on('keydown', _this._onInputKeyDown.bind(_assertThisInitialized(_this)));
+
+    _this._input.on('focus', _this._onFocus.bind(_assertThisInitialized(_this)));
+
+    _this._input.on('blur', _this._onBlur.bind(_assertThisInitialized(_this)));
+
+    if (args.placeholder) {
+      _this.placeholder = args.placeholder;
+    } // dropdown list
+
+
+    _this._containerOptions = new Container["a" /* default */]({
+      class: CLASS_LIST,
+      hidden: true
+    });
+
+    _this._containerValue.append(_this._containerOptions); // tags container
+
+
+    _this._containerTags = new Container["a" /* default */]({
+      class: CLASS_TAGS,
+      flex: true,
+      flexDirection: 'row',
+      hidden: true
+    });
+
+    _this._container.append(_this._containerTags);
+
+    if (args.multiSelect) {
+      _this.class.add(CLASS_MULTI_SELECT);
+
+      _this._containerTags.hidden = false;
+    } // events
+
+
+    _this._domEvtKeyDown = _this._onKeyDown.bind(_assertThisInitialized(_this));
+    _this._domEvtFocus = _this._onFocus.bind(_assertThisInitialized(_this));
+    _this._domEvtBlur = _this._onBlur.bind(_assertThisInitialized(_this));
+    _this._domEvtMouseDown = _this._onMouseDown.bind(_assertThisInitialized(_this));
+    _this._domEvtWindowMouseDown = _this._onWindowMouseDown.bind(_assertThisInitialized(_this));
+    _this._domEvtWheel = _this._onWheel.bind(_assertThisInitialized(_this));
+
+    _this._labelValue.dom.addEventListener('keydown', _this._domEvtKeyDown);
+
+    _this._labelValue.dom.addEventListener('focus', _this._domEvtFocus);
+
+    _this._labelValue.dom.addEventListener('blur', _this._domEvtBlur);
+
+    _this._labelValue.dom.addEventListener('mousedown', _this._domEvtMouseDown);
+
+    _this._containerOptions.dom.addEventListener('wheel', _this._domEvtWheel, {
+      passive: true
+    });
+
+    _this.on('hide', _this.close.bind(_assertThisInitialized(_this)));
+
+    _this._type = args.type || 'string';
+    _this._optionsIndex = {};
+    _this._labelsIndex = {};
+    _this._labelHighlighted = null;
+    _this.invalidOptions = args.invalidOptions;
+    _this.options = args.options || [];
+    _this._optionsFn = args.optionsFn;
+    _this._allowNull = args.allowNull || false;
+    _this._values = null;
+
+    if (args.value !== undefined) {
+      _this.value = args.value;
+    } else if (args.defaultValue) {
+      _this.value = args.defaultValue;
+    } else {
+      _this.value = null;
+    }
+
+    _this.renderChanges = args.renderChanges || false;
+
+    _this.on('change', function () {
+      _this._updateInputFieldsVisibility();
+
+      if (_this.renderChanges && !_this.multiSelect) {
+        _this._labelValue.flash();
+      }
+    });
+
+    _this._updateInputFieldsVisibility(false);
+
+    return _this;
+  }
+
+  _createClass(SelectInput, [{
+    key: "_initializeCreateLabel",
+    value: function _initializeCreateLabel() {
+      var _this2 = this;
+
+      var container = new Container["a" /* default */]({
+        class: CLASS_CREATE_NEW,
+        flex: true,
+        flexDirection: 'row'
+      });
+      var label = new Label["a" /* default */]({
+        text: this._input.value,
+        tabIndex: -1
+      });
+      container.append(label);
+
+      var evtChange = this._input.on('change', function (value) {
+        // check if label is destroyed
+        // during change event
+        if (label.destroyed) return;
+        label.text = value;
+
+        if (_this2.invalidOptions && _this2.invalidOptions.indexOf(value) !== -1) {
+          if (!container.hidden) {
+            container.hidden = true;
+
+            _this2._resizeShadow();
+          }
+        } else {
+          if (container.hidden) {
+            container.hidden = false;
+
+            _this2._resizeShadow();
+          }
+        }
+      });
+
+      container.on('click', function (e) {
+        e.stopPropagation();
+        var text = label.text;
+
+        _this2.focus();
+
+        _this2.close();
+
+        if (_this2._createFn) {
+          _this2._createFn(text);
+        } else if (text) {
+          _this2._onSelectValue(text);
+        }
+      });
+      label.on('destroy', function () {
+        evtChange.unbind();
+        evtChange = null;
+      });
+      var labelCreateText = new Label["a" /* default */]({
+        text: this._createLabelText
+      });
+      container.append(labelCreateText);
+
+      this._containerOptions.append(container);
+    }
+  }, {
+    key: "_convertSingleValue",
+    value: function _convertSingleValue(value) {
+      if (value === null && this._allowNull) return value;
+
+      if (this._type === 'string') {
+        if (!value) {
+          value = '';
+        } else {
+          value = value.toString();
+        }
+      } else if (this._type === 'number') {
+        if (!value) {
+          value = 0;
+        } else {
+          value = parseInt(value, 10);
+        }
+      } else if (this._type === 'boolean') {
+        return !!value;
+      }
+
+      return value;
+    }
+  }, {
+    key: "_convertValue",
+    value: function _convertValue(value) {
+      var _this3 = this;
+
+      if (value === null && this._allowNull) return value;
+
+      if (this.multiSelect) {
+        if (!Array.isArray(value)) return value;
+        return value.map(function (val) {
+          return _this3._convertSingleValue(val);
+        });
+      }
+
+      return this._convertSingleValue(value);
+    } // toggle dropdown list
+
+  }, {
+    key: "_onValueClick",
+    value: function _onValueClick() {
+      if (!this.enabled || this.readOnly) return;
+      this.toggle();
+    } // Update our value with the specified selected option
+
+  }, {
+    key: "_onSelectValue",
+    value: function _onSelectValue(value) {
+      value = this._convertSingleValue(value);
+
+      if (!this.multiSelect) {
+        this.value = value;
+        return;
+      }
+
+      if (this._values) {
+        var dirty = false;
+
+        this._values.forEach(function (arr) {
+          if (!arr) {
+            arr = [value];
+            dirty = true;
+          } else {
+            if (arr.indexOf(value) === -1) {
+              arr.push(value);
+              dirty = true;
+            }
+          }
+        });
+
+        if (dirty) {
+          this._onMultipleValuesChange(this._values);
+
+          this.emit('change', this.value);
+
+          if (this._binding) {
+            this._binding.addValues([value]);
+          }
+        }
+      } else {
+        if (!this._value || !Array.isArray(this._value)) {
+          this.value = [value];
+        } else {
+          if (this._value.indexOf(value) === -1) {
+            this._value.push(value);
+
+            this._addTag(value);
+
+            this.emit('change', this.value);
+
+            if (this._binding) {
+              this._binding.addValues([value]);
+            }
+          }
+        }
+      }
+    }
+  }, {
+    key: "_highlightLabel",
+    value: function _highlightLabel(label) {
+      if (this._labelHighlighted === label) return;
+
+      if (this._labelHighlighted) {
+        this._labelHighlighted.class.remove(CLASS_HIGHLIGHTED);
+      }
+
+      this._labelHighlighted = label;
+
+      if (this._labelHighlighted) {
+        this._labelHighlighted.class.add(CLASS_HIGHLIGHTED); // scroll into view if necessary
+
+
+        var labelTop = this._labelHighlighted.dom.offsetTop;
+        var scrollTop = this._containerOptions.dom.scrollTop;
+
+        if (labelTop < scrollTop) {
+          this._containerOptions.dom.scrollTop = labelTop;
+        } else if (labelTop + this._labelHighlighted.height > this._containerOptions.height + scrollTop) {
+          this._containerOptions.dom.scrollTop = labelTop + this._labelHighlighted.height - this._containerOptions.height;
+        }
+      }
+    } // when the value is changed show the correct title
+
+  }, {
+    key: "_onValueChange",
+    value: function _onValueChange(value) {
+      var _this4 = this;
+
+      if (!this.multiSelect) {
+        this._labelValue.value = this._optionsIndex[value] || '';
+        value = '' + value;
+
+        for (var key in this._labelsIndex) {
+          if (key === value) {
+            this._labelsIndex[key].class.add(CLASS_SELECTED);
+          } else {
+            this._labelsIndex[key].class.remove(CLASS_SELECTED);
+          }
+        }
+      } else {
+        this._labelValue.value = '';
+
+        this._containerTags.clear();
+
+        this._containerTags.class.add(CLASS_TAGS_EMPTY);
+
+        if (value && Array.isArray(value)) {
+          value.forEach(function (val) {
+            _this4._addTag(val);
+
+            if (_this4._labelsIndex[val]) {
+              _this4._labelsIndex[val].class.add(CLASS_SELECTED);
+            }
+          });
+
+          for (var _key in this._labelsIndex) {
+            if (value.indexOf(this._convertSingleValue(_key)) !== -1) {
+              this._labelsIndex[_key].class.add(CLASS_SELECTED);
+            } else {
+              this._labelsIndex[_key].class.remove(CLASS_SELECTED);
+            }
+          }
+        }
+      }
+    }
+  }, {
+    key: "_onMultipleValuesChange",
+    value: function _onMultipleValuesChange(values) {
+      var _this5 = this;
+
+      this._labelValue.value = '';
+
+      this._containerTags.clear();
+
+      this._containerTags.class.add(CLASS_TAGS_EMPTY);
+
+      var tags = {};
+      var valueCounts = {};
+      values.forEach(function (arr) {
+        if (!arr) return;
+        arr.forEach(function (val) {
+          if (!tags[val]) {
+            tags[val] = _this5._addTag(val);
+            valueCounts[val] = 1;
+          } else {
+            valueCounts[val]++;
+          }
+        });
+      }); // add special class to tags that do not exist everywhere
+
+      for (var val in valueCounts) {
+        if (valueCounts[val] !== values.length) {
+          tags[val].class.add(CLASS_TAG_NOT_EVERYWHERE);
+
+          if (this._labelsIndex[val]) {
+            this._labelsIndex[val].class.remove(CLASS_SELECTED);
+          }
+        }
+      }
+    }
+  }, {
+    key: "_addTag",
+    value: function _addTag(value) {
+      var _this6 = this;
+
+      var container = new Container["a" /* default */]({
+        flex: true,
+        flexDirection: 'row',
+        class: CLASS_TAG
+      });
+      container.append(new Label["a" /* default */]({
+        text: this._optionsIndex[value] || value
+      }));
+      var btnRemove = new Button["a" /* default */]({
+        size: 'small',
+        icon: 'E132',
+        tabIndex: -1
+      });
+      container.append(btnRemove);
+      btnRemove.on('click', function () {
+        return _this6._removeTag(container, value);
+      });
+
+      this._containerTags.append(container);
+
+      this._containerTags.class.remove(CLASS_TAGS_EMPTY);
+
+      if (this._labelsIndex[value]) {
+        this._labelsIndex[value].class.add(CLASS_SELECTED);
+      }
+
+      container.value = value;
+      return container;
+    }
+  }, {
+    key: "_removeTag",
+    value: function _removeTag(tagElement, value) {
+      tagElement.destroy();
+
+      if (this._labelsIndex[value]) {
+        this._labelsIndex[value].class.remove(CLASS_SELECTED);
+      }
+
+      if (this._values) {
+        this._values.forEach(function (arr) {
+          if (!arr) return;
+          var idx = arr.indexOf(value);
+
+          if (idx !== -1) {
+            arr.splice(idx, 1);
+          }
+        });
+      } else if (this._value && Array.isArray(this._value)) {
+        var idx = this._value.indexOf(value);
+
+        if (idx !== -1) {
+          this._value.splice(idx, 1);
+        }
+      }
+
+      this.emit('change', this.value);
+
+      if (this._binding) {
+        this._binding.removeValues([value]);
+      }
+    }
+  }, {
+    key: "_onInputChange",
+    value: function _onInputChange(value) {
+      if (this._suspendInputChange) return;
+      if (this._lastInputValue === value) return;
+      this.open();
+      this._lastInputValue = value;
+
+      this._filterOptions(value);
+    }
+  }, {
+    key: "_filterOptions",
+    value: function _filterOptions(filter) {
+      var _this7 = this;
+
+      var searchIndex = {};
+
+      if (filter) {
+        var searchOptions = this.options.map(function (option) {
+          return [option.t, option.v];
+        });
+        var searchResults = Object(search["a" /* searchItems */])(searchOptions, filter);
+        searchResults.forEach(function (result) {
+          searchIndex[result] = true;
+        });
+      }
+
+      var highlighted = false;
+
+      this._containerOptions.forEachChild(function (label) {
+        label.hidden = !!filter && !searchIndex[label._optionValue] && !label.class.contains(CLASS_CREATE_NEW);
+
+        if (!highlighted && !label.hidden) {
+          _this7._highlightLabel(label);
+
+          highlighted = true;
+        }
+      });
+
+      this._resizeShadow();
+    }
+  }, {
+    key: "_onInputKeyDown",
+    value: function _onInputKeyDown(evt) {
+      if (evt.keyCode === 13 && this.enabled && !this.readOnly) {
+        evt.stopPropagation();
+        evt.preventDefault(); // on enter
+
+        var value;
+
+        if (this._labelHighlighted && this._labelHighlighted._optionValue !== undefined) {
+          value = this._labelHighlighted._optionValue;
+        } else {
+          value = this._input.value;
+        }
+
+        if (value !== undefined) {
+          this.focus();
+          this.close();
+
+          if (this._optionsIndex[value]) {
+            this._onSelectValue(value);
+          } else if (this._allowCreate) {
+            if (this._createFn) {
+              this._createFn(value);
+            } else {
+              this._onSelectValue(value);
+            }
+          }
+
+          return;
+        }
+      }
+
+      this._onKeyDown(evt);
+    }
+  }, {
+    key: "_onWindowMouseDown",
+    value: function _onWindowMouseDown(evt) {
+      if (this.dom.contains(evt.target)) return;
+      this.close();
+    }
+  }, {
+    key: "_onKeyDown",
+    value: function _onKeyDown(evt) {
+      // close options on ESC and blur
+      if (evt.keyCode === 27) {
+        this.close();
+        return;
+      } // handle tab
+
+
+      if (evt.keyCode === 9) {
+        this.close();
+        return;
+      }
+
+      if (!this.enabled || this.readOnly) return;
+
+      if (evt.keyCode === 13 && !this._allowInput) {
+        if (this._labelHighlighted && this._labelHighlighted._optionValue !== undefined) {
+          this._onSelectValue(this._labelHighlighted._optionValue);
+
+          this.close();
+        }
+
+        return;
+      }
+
+      if ([38, 40].indexOf(evt.keyCode) === -1) {
+        return;
+      }
+
+      evt.stopPropagation();
+      evt.preventDefault();
+
+      if ((this._allowInput || this.multiSelect) && this._containerOptions.hidden) {
+        this.open();
+        return;
+      }
+
+      if (this._containerOptions.hidden) {
+        if (!this._options.length) return;
+        var index = -1;
+
+        for (var i = 0; i < this._options.length; i++) {
+          if (this._options[i].v === this.value) {
+            index = i;
+            break;
+          }
+        }
+
+        if (evt.keyCode === 38) {
+          index--;
+        } else if (evt.keyCode === 40) {
+          index++;
+        }
+
+        if (index >= 0 && index < this._options.length) {
+          this._onSelectValue(this._options[index].v);
+        }
+      } else {
+        if (!this._containerOptions.dom.childNodes.length) return;
+
+        if (!this._labelHighlighted) {
+          this._highlightLabel(this._containerOptions.dom.childNodes[0].ui);
+        } else {
+          var highlightedLabelDom = this._labelHighlighted.dom;
+
+          do {
+            if (evt.keyCode === 38) {
+              highlightedLabelDom = highlightedLabelDom.previousSibling;
+            } else if (evt.keyCode === 40) {
+              highlightedLabelDom = highlightedLabelDom.nextSibling;
+            }
+          } while (highlightedLabelDom && highlightedLabelDom.ui.hidden);
+
+          if (highlightedLabelDom) {
+            this._highlightLabel(highlightedLabelDom.ui);
+          }
+        }
+      }
+    }
+  }, {
+    key: "_resizeShadow",
+    value: function _resizeShadow() {
+      this._domShadow.style.height = this._containerValue.height + this._containerOptions.height + 'px';
+    }
+  }, {
+    key: "_onMouseDown",
+    value: function _onMouseDown() {
+      if (!this._allowInput) {
+        this.focus();
+      }
+    }
+  }, {
+    key: "_onFocus",
+    value: function _onFocus() {
+      this.class.add(src_class["h" /* FOCUS */]);
+      this.emit('focus');
+
+      if (!this._input.hidden) {
+        this.open();
+      }
+    }
+  }, {
+    key: "_onBlur",
+    value: function _onBlur() {
+      this.class.remove(src_class["h" /* FOCUS */]);
+      this.emit('blur');
+    }
+  }, {
+    key: "_onWheel",
+    value: function _onWheel(evt) {
+      // prevent scrolling on other stuff like the viewport
+      // when we are scrolling on the select input
+      evt.stopPropagation();
+    }
+  }, {
+    key: "_updateInputFieldsVisibility",
+    value: function _updateInputFieldsVisibility(focused) {
+      var _this8 = this;
+
+      var showInput = false;
+      var focusInput = false;
+
+      if (this._allowInput) {
+        if (focused) {
+          showInput = true;
+          focusInput = true;
+        } else {
+          showInput = this.multiSelect || !this._labelsIndex[this.value];
+        }
+      }
+
+      this._labelValue.hidden = showInput;
+      this._labelIcon.hidden = showInput;
+      this._input.hidden = !showInput;
+
+      if (focusInput) {
+        this._input.focus();
+      }
+
+      if (!this._labelValue.hidden) {
+        // prevent label from being focused
+        // right after input gets unfocused
+        this._labelValue.tabIndex = -1;
+
+        if (!this._timeoutLabelValueTabIndex) {
+          this._timeoutLabelValueTabIndex = requestAnimationFrame(function () {
+            _this8._timeoutLabelValueTabIndex = null;
+            _this8._labelValue.tabIndex = 0;
+          });
+        }
+      }
+    }
+  }, {
+    key: "focus",
+    value: function focus() {
+      if (this._input.hidden) {
+        this._labelValue.dom.focus();
+      } else {
+        this._input.focus();
+      }
+    }
+  }, {
+    key: "blur",
+    value: function blur() {
+      if (this._allowInput) {
+        this._input.blur();
+      } else {
+        this._labelValue.dom.blur();
+      }
+    }
+    /**
+     * @name SelectInput#open
+     * @description Opens the dropdown menu
+     */
+
+  }, {
+    key: "open",
+    value: function open() {
+      var _this9 = this;
+
+      if (!this._containerOptions.hidden || !this.enabled || this.readOnly) return;
+
+      this._updateInputFieldsVisibility(true); // auto-update options if necessary
+
+
+      if (this._optionsFn) {
+        this.options = this._optionsFn();
+      }
+
+      if (this._containerOptions.dom.childNodes.length === 0) return; // highlight label that displays current value
+
+      this._containerOptions.forEachChild(function (label) {
+        label.hidden = false;
+
+        if (label._optionValue === _this9.value) {
+          _this9._highlightLabel(label);
+        }
+      });
+
+      if (!this._labelHighlighted) {
+        this._highlightLabel(this._containerOptions.dom.childNodes[0].ui);
+      } // show options
+
+
+      this._containerOptions.hidden = false;
+      this.class.add(CLASS_OPEN); // register keydown on entire window
+
+      window.addEventListener('keydown', this._domEvtKeyDown); // register mousedown on entire window
+
+      window.addEventListener('mousedown', this._domEvtWindowMouseDown); // if the dropdown list goes below the window show it above the field
+
+      var startField = this._allowInput ? this._input.dom : this._labelValue.dom;
+      var rect = startField.getBoundingClientRect();
+      var fitHeight = rect.bottom + this._containerOptions.height + DEFAULT_BOTTOM_OFFSET >= window.innerHeight;
+
+      if (fitHeight && rect.top - this._containerOptions.height < 0) {
+        // if showing it above the field means that some of it will not be visible
+        // then show it below instead and adjust the max height to the maximum available space
+        fitHeight = false;
+        this._containerOptions.style.maxHeight = window.innerHeight - rect.bottom - DEFAULT_BOTTOM_OFFSET + 'px';
+      }
+
+      if (fitHeight) {
+        this.class.add(CLASS_FIT_HEIGHT);
+      } else {
+        this.class.remove(CLASS_FIT_HEIGHT);
+      } // resize the outer shadow to fit the element and the dropdown list
+      // we need this because the dropdown list is position: absolute
+
+
+      this._resizeShadow();
+    }
+    /**
+     * @name SelectInput#close
+     * @description Closes the dropdown menu
+     */
+
+  }, {
+    key: "close",
+    value: function close() {
+      // there is a potential bug here if the user has set a max height
+      // themselves then this will be overriden
+      this._containerOptions.style.maxHeight = '';
+
+      this._highlightLabel(null);
+
+      this._updateInputFieldsVisibility(false);
+
+      this._suspendInputChange = true;
+      this._input.value = '';
+      this._lastInputValue = '';
+      this._suspendInputChange = false;
+      if (this._containerOptions.hidden) return;
+      this._containerOptions.hidden = true;
+      this._domShadow.style.height = '';
+      this.class.remove(CLASS_OPEN);
+      window.removeEventListener('keydown', this._domEvtKeyDown);
+      window.removeEventListener('mousedown', this._domEvtWindowMouseDown);
+    }
+    /**
+     * @name SelectInput#toggle
+     * @description Toggles the dropdown menu
+     */
+
+  }, {
+    key: "toggle",
+    value: function toggle() {
+      if (this._containerOptions.hidden) {
+        this.open();
+      } else {
+        this.close();
+      }
+    }
+  }, {
+    key: "unlink",
+    value: function unlink() {
+      _get(_getPrototypeOf(SelectInput.prototype), "unlink", this).call(this);
+
+      if (!this._containerOptions.hidden) {
+        this.close();
+      }
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      if (this._destroyed) return;
+
+      this._labelValue.dom.removeEventListener('keydown', this._domEvtKeyDown);
+
+      this._labelValue.dom.removeEventListener('mousedown', this._domEvtMouseDown);
+
+      this._labelValue.dom.removeEventListener('focus', this._domEvtFocus);
+
+      this._labelValue.dom.removeEventListener('blur', this._domEvtBlur);
+
+      this._containerOptions.dom.removeEventListener('wheel', this._domEvtWheel);
+
+      window.removeEventListener('keydown', this._domEvtKeyDown);
+      window.removeEventListener('mousedown', this._domEvtWindowMouseDown);
+
+      if (this._timeoutLabelValueTabIndex) {
+        cancelAnimationFrame(this._timeoutLabelValueTabIndex);
+        this._timeoutLabelValueTabIndex = null;
+      }
+
+      _get(_getPrototypeOf(SelectInput.prototype), "destroy", this).call(this);
+    }
+  }, {
+    key: "options",
+    get: function get() {
+      return this._options.slice();
+    },
+    set: function set(value) {
+      var _this10 = this;
+
+      if (this._options && this._options === value) return;
+
+      this._containerOptions.clear();
+
+      this._labelHighlighted = null;
+      this._optionsIndex = {};
+      this._labelsIndex = {};
+      this._options = value; // store each option value -> title pair in the optionsIndex
+
+      this._options.forEach(function (option) {
+        _this10._optionsIndex[option.v] = option.t;
+        if (option.v === '') return;
+        var label = new Label["a" /* default */]({
+          text: option.t,
+          tabIndex: -1
+        });
+        label._optionValue = option.v; // store labels in an index too
+
+        _this10._labelsIndex[option.v] = label; // on clicking an option set it as the value and close the dropdown list
+
+        label.on('click', function (e) {
+          e.stopPropagation();
+
+          _this10._onSelectValue(option.v);
+
+          _this10.close();
+        });
+
+        _this10._containerOptions.append(label);
+      });
+
+      if (this._createLabelText) {
+        this._initializeCreateLabel();
+      }
+
+      if (this.multiSelect && this._values) {
+        this._onMultipleValuesChange(this._values);
+      } else {
+        this._onValueChange(this.value);
+      }
+
+      if (this._lastInputValue) {
+        this._filterOptions(this._lastInputValue);
+      }
+    }
+  }, {
+    key: "invalidOptions",
+    get: function get() {
+      return this._invalidOptions;
+    },
+    set: function set(value) {
+      this._invalidOptions = value || null;
+    }
+  }, {
+    key: "multiSelect",
+    get: function get() {
+      return this.class.contains(CLASS_MULTI_SELECT);
+    }
+  }, {
+    key: "value",
+    get: function get() {
+      if (!this.multiSelect) {
+        return this._value;
+      } // if multi-select then construct an array
+      // value from the tags that are currently visible
+
+
+      var result = [];
+
+      this._containerTags.dom.childNodes.forEach(function (dom) {
+        result.push(dom.ui.value);
+      });
+
+      return result;
+    },
+    set: function set(value) {
+      this._values = null;
+      this._suspendInputChange = true;
+      this._input.value = '';
+      this._lastInputValue = '';
+      this._suspendInputChange = false;
+      this.class.remove(src_class["m" /* MULTIPLE_VALUES */]);
+      value = this._convertValue(value);
+
+      if (this._value === value || this.multiSelect && this._value && this._value.equals(value)) {
+        // if the value is null because we are showing multiple values
+        // but someone wants to actually set the value of all observers to null
+        // then make sure we do not return early
+        if (value !== null || !this._allowNull || !this.class.contains(src_class["m" /* MULTIPLE_VALUES */])) {
+          return;
+        }
+      }
+
+      this._value = value;
+
+      this._onValueChange(value);
+
+      this.emit('change', value);
+
+      if (this._binding) {
+        this._binding.setValue(value);
+      }
+    }
+    /* eslint accessor-pairs: 0 */
+
+  }, {
+    key: "values",
+    set: function set(values) {
+      values = values.map(this._convertValue.bind(this));
+      var different = false;
+      var value = values[0];
+      var multiSelect = this.multiSelect;
+      this._values = null;
+
+      for (var i = 1; i < values.length; i++) {
+        if (values[i] !== value && (!multiSelect || !values[i] || !values[i].equals(value))) {
+          different = true;
+          break;
+        }
+      }
+
+      if (different) {
+        this._labelValue.values = values; // show all different tags
+
+        if (multiSelect) {
+          this._values = values;
+          this._value = null;
+
+          this._onMultipleValuesChange(this._values);
+
+          this.emit('change', this.value);
+        } else {
+          if (this._value !== null) {
+            this._value = null;
+            this.emit('change', null);
+          }
+        }
+
+        this.class.add(src_class["m" /* MULTIPLE_VALUES */]);
+      } else {
+        this.value = values[0];
+      }
+    }
+  }, {
+    key: "placeholder",
+    get: function get() {
+      return this._input.placeholder;
+    },
+    set: function set(value) {
+      this._input.placeholder = value;
+    }
+  }]);
+
+  return SelectInput;
+}(Element["a" /* default */]);
+
+Element["a" /* default */].register('select', SelectInput_SelectInput, {
+  renderChanges: true
+});
+Element["a" /* default */].register('multiselect', SelectInput_SelectInput, {
+  multiSelect: true,
+  renderChanges: true
+});
+Element["a" /* default */].register('tags', SelectInput_SelectInput, {
+  allowInput: true,
+  allowCreate: true,
+  multiSelect: true,
+  renderChanges: true
+});
+/* harmony default export */ var components_SelectInput = __webpack_exports__["a"] = (SelectInput_SelectInput);
+
+/***/ }),
+/* 23 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// CONCATENATED MODULE: ./src/components/Spinner/style.scss
+// extracted by mini-css-extract-plugin
+
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
+
+// CONCATENATED MODULE: ./src/components/Spinner/index.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -8234,21 +8127,28 @@ var Spinner = /*#__PURE__*/function (_Element) {
   }
 
   return Spinner;
-}(_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
+}(Element["a" /* default */]);
 
 Spinner.TYPE_SMALL_THICK = 'small-thick'; // add more types here
 
-/* harmony default export */ __webpack_exports__["a"] = (Spinner);
+/* harmony default export */ var components_Spinner = __webpack_exports__["a"] = (Spinner);
 
 /***/ }),
-/* 26 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(69);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
-/* harmony import */ var _TextInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
+
+// CONCATENATED MODULE: ./src/components/TextAreaInput/style.scss
+// extracted by mini-css-extract-plugin
+
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
+
+// EXTERNAL MODULE: ./src/components/TextInput/index.js + 1 modules
+var TextInput = __webpack_require__(7);
+
+// CONCATENATED MODULE: ./src/components/TextAreaInput/index.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -8347,24 +8247,35 @@ var TextAreaInput = /*#__PURE__*/function (_TextInput) {
   }]);
 
   return TextAreaInput;
-}(_TextInput__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]);
+}(TextInput["a" /* default */]);
 
-_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('text', TextAreaInput, {
+Element["a" /* default */].register('text', TextAreaInput, {
   renderChanges: true
 });
-/* harmony default export */ __webpack_exports__["a"] = (TextAreaInput);
+/* harmony default export */ var components_TextAreaInput = __webpack_exports__["a"] = (TextAreaInput);
 
 /***/ }),
-/* 27 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(71);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
-/* harmony import */ var _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6);
-/* harmony import */ var _helpers_search__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(14);
+
+// CONCATENATED MODULE: ./src/components/TreeView/style.scss
+// extracted by mini-css-extract-plugin
+
+// EXTERNAL MODULE: ./src/components/Container/index.js + 1 modules
+var Container = __webpack_require__(2);
+
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
+
+// EXTERNAL MODULE: ./src/components/TreeViewItem/index.js
+var TreeViewItem = __webpack_require__(6);
+
+// EXTERNAL MODULE: ./src/helpers/search.js
+var search = __webpack_require__(11);
+
+// CONCATENATED MODULE: ./src/components/TreeView/index.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -8459,7 +8370,7 @@ var DRAG_AREA_AFTER = 'after';
  * @property {TreeViewItem[]} selected Gets the selected TreeViewItems.
  */
 
-var TreeView = /*#__PURE__*/function (_Container) {
+var TreeView_TreeView = /*#__PURE__*/function (_Container) {
   _inherits(TreeView, _Container);
 
   var _super = _createSuper(TreeView);
@@ -8492,7 +8403,7 @@ var TreeView = /*#__PURE__*/function (_Container) {
     _this._dragArea = DRAG_AREA_INSIDE;
     _this._dragScroll = 0;
     _this._dragScrollInterval = null;
-    _this._dragHandle = new _Element__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"](document.createElement('div'), {
+    _this._dragHandle = new Element["a" /* default */](document.createElement('div'), {
       class: CLASS_DRAGGED_HANDLE
     });
 
@@ -8547,13 +8458,13 @@ var TreeView = /*#__PURE__*/function (_Container) {
       var sibling = currentItem.nextSibling;
       if (sibling) return sibling;
       var parent = currentItem.parent;
-      if (!(parent instanceof _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])) return null;
+      if (!(parent instanceof TreeViewItem["a" /* default */])) return null;
       var parentSibling = parent.nextSibling;
 
       while (!parentSibling) {
         parent = parent.parent;
 
-        if (!(parent instanceof _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])) {
+        if (!(parent instanceof TreeViewItem["a" /* default */])) {
           break;
         }
 
@@ -8602,7 +8513,7 @@ var TreeView = /*#__PURE__*/function (_Container) {
       }
 
       var parent = currentItem.parent;
-      if (!(parent instanceof _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])) return null;
+      if (!(parent instanceof TreeViewItem["a" /* default */])) return null;
       return parent;
     }
     /**
@@ -8677,14 +8588,14 @@ var TreeView = /*#__PURE__*/function (_Container) {
     value: function _onAppendChild(element) {
       _get(_getPrototypeOf(TreeView.prototype), "_onAppendChild", this).call(this, element);
 
-      if (element instanceof _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]) {
+      if (element instanceof TreeViewItem["a" /* default */]) {
         this._onAppendTreeViewItem(element);
       }
     }
   }, {
     key: "_onRemoveChild",
     value: function _onRemoveChild(element) {
-      if (element instanceof _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]) {
+      if (element instanceof TreeViewItem["a" /* default */]) {
         this._onRemoveTreeViewItem(element);
       }
 
@@ -8705,7 +8616,7 @@ var TreeView = /*#__PURE__*/function (_Container) {
 
 
       element.forEachChild(function (child) {
-        if (child instanceof _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]) {
+        if (child instanceof TreeViewItem["a" /* default */]) {
           _this2._onAppendTreeViewItem(child);
         }
       });
@@ -8718,7 +8629,7 @@ var TreeView = /*#__PURE__*/function (_Container) {
       element.selected = false; // do the same for all children of the element
 
       element.forEachChild(function (child) {
-        if (child instanceof _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]) {
+        if (child instanceof TreeViewItem["a" /* default */]) {
           _this3._onRemoveTreeViewItem(child);
         }
       });
@@ -8812,7 +8723,7 @@ var TreeView = /*#__PURE__*/function (_Container) {
     key: "_traverseDepthFirst",
     value: function _traverseDepthFirst(fn) {
       function traverse(item) {
-        if (!item || !(item instanceof _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])) return;
+        if (!item || !(item instanceof TreeViewItem["a" /* default */])) return;
         fn(item);
 
         if (item.numChildren) {
@@ -8862,7 +8773,7 @@ var TreeView = /*#__PURE__*/function (_Container) {
           var depth = 0;
           var isChild = false;
 
-          while (parent && parent instanceof _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]) {
+          while (parent && parent instanceof TreeViewItem["a" /* default */]) {
             // if parent is already in dragged items then skip
             // depth calculation for this item
             if (this._selectedItems.indexOf(parent) !== -1) {
@@ -9242,7 +9153,7 @@ var TreeView = /*#__PURE__*/function (_Container) {
     value: function _searchItems(searchArr, filter) {
       var _this5 = this;
 
-      var results = Object(_helpers_search__WEBPACK_IMPORTED_MODULE_4__[/* searchItems */ "a"])(searchArr, filter);
+      var results = Object(search["a" /* searchItems */])(searchArr, filter);
       if (!results.length) return;
       results.forEach(function (item) {
         _this5._filterResults.push(item);
@@ -9324,7 +9235,7 @@ var TreeView = /*#__PURE__*/function (_Container) {
         if (!dom) continue;
         var ui = dom.ui;
 
-        if (ui instanceof _TreeViewItem__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]) {
+        if (ui instanceof TreeViewItem["a" /* default */]) {
           ui.destroy();
         }
       }
@@ -9447,20 +9358,29 @@ var TreeView = /*#__PURE__*/function (_Container) {
   }]);
 
   return TreeView;
-}(_Container__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]);
+}(Container["a" /* default */]);
 
-/* harmony default export */ __webpack_exports__["a"] = (TreeView);
+/* harmony default export */ var components_TreeView = __webpack_exports__["a"] = (TreeView_TreeView);
 
 /***/ }),
-/* 28 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(73);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
-/* harmony import */ var _NumericInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(12);
-/* harmony import */ var _class__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(0);
+
+// CONCATENATED MODULE: ./src/components/Code/style.scss
+// extracted by mini-css-extract-plugin
+
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
+
+// EXTERNAL MODULE: ./src/components/Container/index.js + 1 modules
+var Container = __webpack_require__(2);
+
+// EXTERNAL MODULE: ./src/components/Label/index.js + 1 modules
+var Label = __webpack_require__(3);
+
+// CONCATENATED MODULE: ./src/components/Code/index.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9468,16 +9388,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function set(target, property, value, receiver) { if (typeof Reflect !== "undefined" && Reflect.set) { set = Reflect.set; } else { set = function set(target, property, value, receiver) { var base = _superPropBase(target, property); var desc; if (base) { desc = Object.getOwnPropertyDescriptor(base, property); if (desc.set) { desc.set.call(receiver, value); return true; } else if (!desc.writable) { return false; } } desc = Object.getOwnPropertyDescriptor(receiver, property); if (desc) { if (!desc.writable) { return false; } desc.value = value; Object.defineProperty(receiver, property, desc); } else { _defineProperty(receiver, property, value); } return true; }; } return set(target, property, value, receiver); }
-
-function _set(target, property, value, receiver, isStrict) { var s = set(target, property, value, receiver || target); if (!s && isStrict) { throw new Error('failed to set property'); } return value; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -9497,300 +9407,68 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var CLASS_VECTOR_INPUT = 'pcui-vector-input';
+var CLASS_ROOT = 'pcui-code';
+var CLASS_INNER = CLASS_ROOT + '-inner';
 /**
- * @name VectorInput
- * @classdesc A vector input
- * @augments Element
- * @mixes IBindable
- * @mixes IFocusable
+ * @name Code
+ * @augments Container
+ * @property {string} text The Text to display in the code block
+ * @classdesc Represents a code block.
  */
 
-var VectorInput = /*#__PURE__*/function (_Element) {
-  _inherits(VectorInput, _Element);
+var Code_Code = /*#__PURE__*/function (_Container) {
+  _inherits(Code, _Container);
 
-  var _super = _createSuper(VectorInput);
+  var _super = _createSuper(Code);
 
   /**
-   * Creates a new pcui.VectorInput.
+   * Creates a new spinner.
    *
-   * @param {object} args - The arguments.
-   * @param {number} [args.dimensions=3] - The number of dimensions in the vector. Can be between 2 to 4. Defaults to 3.
-   * @param {number} [args.min] - The minimum value for each vector element.
-   * @param {number} [args.max] - The maximum value for each vector element.
-   * @param {number} [args.precision] - The decimal precision for each vector element.
-   * @param {number} [args.step] - The incremental step when using arrow keys for each vector element.
-   * @param {boolean} [args.renderChanges] - If true each vector element will flash on changes.
-   * @param {string[]|string} [args.placeholder] - The placeholder string for each vector element.
+   * @param {object} [args] - The arguments
+   * @param {string} [args.text] - The text to display in the code block;
    */
-  function VectorInput(args) {
+  function Code(args) {
     var _this;
 
-    _classCallCheck(this, VectorInput);
+    _classCallCheck(this, Code);
 
-    args = Object.assign({}, args); // set binding after inputs have been created
+    if (!args) args = {};
+    _this = _super.call(this, args);
 
-    var binding = args.binding;
-    delete args.binding;
-    _this = _super.call(this, args.dom ? args.dom : document.createElement('div'), args);
+    _this.class.add(CLASS_ROOT);
 
-    _this.class.add(CLASS_VECTOR_INPUT);
+    _this._inner = new Label["a" /* default */]();
 
-    var dimensions = Math.max(2, Math.min(4, args.dimensions || 3));
+    _this.append(_this._inner);
 
-    var onInputChange = _this._onInputChange.bind(_assertThisInitialized(_this));
+    _this._inner.class.add(CLASS_INNER);
 
-    _this._inputs = new Array(dimensions);
-
-    for (var i = 0; i < _this._inputs.length; i++) {
-      _this._inputs[i] = new _NumericInput__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"]({
-        min: args.min,
-        max: args.max,
-        precision: args.precision,
-        step: args.step,
-        renderChanges: args.renderChanges,
-        placeholder: args.placeholder ? Array.isArray(args.placeholder) ? args.placeholder[i] : args.placeholder : null
-      });
-
-      _this._inputs[i].on('change', onInputChange);
-
-      _this._inputs[i].on('focus', function () {
-        _this.emit('focus');
-      });
-
-      _this._inputs[i].on('blur', function () {
-        _this.emit('blur');
-      });
-
-      _this.dom.appendChild(_this._inputs[i].dom);
-
-      _this._inputs[i].parent = _assertThisInitialized(_this);
-    } // set the binding after the inputs have been created
-    // because we rely on them in the overriden setter
-
-
-    if (binding) {
-      _this.binding = binding;
-    }
-
-    _this._applyingChange = false;
-
-    if (args.value !== undefined) {
-      _this.value = args.value;
+    if (args.text) {
+      _this.text = args.text;
     }
 
     return _this;
   }
 
-  _createClass(VectorInput, [{
-    key: "_onInputChange",
-    value: function _onInputChange() {
-      if (this._applyingChange) return; // check if any of our inputs have the multiple_values class
-      // and if so inherit it for us as well
-
-      var showingMultipleValues = false;
-
-      for (var i = 0; i < this._inputs.length; i++) {
-        if (this._inputs[i].class.contains(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"])) {
-          showingMultipleValues = true;
-          break;
-        }
-      }
-
-      if (showingMultipleValues) {
-        this.class.add(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
-      } else {
-        this.class.remove(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
-      }
-
-      this.emit('change', this.value);
-    }
-  }, {
-    key: "_updateValue",
-    value: function _updateValue(value) {
-      this.class.remove(_class__WEBPACK_IMPORTED_MODULE_3__[/* MULTIPLE_VALUES */ "m"]);
-      if (JSON.stringify(this.value) === JSON.stringify(value)) return false;
-      this._applyingChange = true;
-
-      for (var i = 0; i < this._inputs.length; i++) {
-        // disable binding for each individual input when we use
-        // the 'value' setter for the whole vector value. That is because
-        // we do not want the individual inputs to emit their own binding events
-        // since we are setting the whole vector value here
-        var binding = this._inputs[i].binding;
-        var applyingChange = false;
-
-        if (binding) {
-          applyingChange = binding.applyingChange;
-          binding.applyingChange = true;
-        }
-
-        this._inputs[i].value = value && value[i] !== undefined ? value[i] : null;
-
-        if (binding) {
-          binding.applyingChange = applyingChange;
-        }
-      }
-
-      this.emit('change', this.value);
-      this._applyingChange = false;
-      return true;
-    }
-  }, {
-    key: "link",
-    value: function link(observers, paths) {
-      var _this2 = this;
-
-      _get(_getPrototypeOf(VectorInput.prototype), "link", this).call(this, observers, paths);
-
-      observers = Array.isArray(observers) ? observers : [observers];
-      paths = Array.isArray(paths) ? paths : [paths];
-      var useSinglePath = paths.length === 1 || observers.length !== paths.length;
-
-      if (useSinglePath) {
-        for (var i = 0; i < this._inputs.length; i++) {
-          // link observers to path.i for each dimension
-          this._inputs[i].link(observers, paths[0] + ".".concat(i));
-        }
-      } else {
-        var _loop = function _loop(_i) {
-          // link observers to paths[i].i for each dimension
-          _this2._inputs[_i].link(observers, paths.map(function (path) {
-            return "".concat(path, ".").concat(_i);
-          }));
-        };
-
-        for (var _i = 0; _i < this._inputs.length; _i++) {
-          _loop(_i);
-        }
-      }
-    }
-  }, {
-    key: "unlink",
-    value: function unlink() {
-      _get(_getPrototypeOf(VectorInput.prototype), "unlink", this).call(this);
-
-      for (var i = 0; i < this._inputs.length; i++) {
-        this._inputs[i].unlink();
-      }
-    }
-  }, {
-    key: "focus",
-    value: function focus() {
-      this._inputs[0].focus();
-    }
-  }, {
-    key: "blur",
-    value: function blur() {
-      for (var i = 0; i < this._inputs.length; i++) {
-        this._inputs[i].blur();
-      }
-    }
-  }, {
-    key: "value",
-    get: function get() {
-      var value = new Array(this._inputs.length);
-
-      for (var i = 0; i < this._inputs.length; i++) {
-        value[i] = this._inputs[i].value;
-      }
-
-      return value;
+  _createClass(Code, [{
+    key: "text",
+    set: function set(value) {
+      this._text = value;
+      this._inner.text = value;
     },
-    set: function set(value) {
-      if (!Array.isArray(value)) {
-        value = [];
-      }
-
-      var changed = this._updateValue(value);
-
-      if (changed && this._binding) {
-        this._binding.setValue(value);
-      }
-    }
-    /* eslint accessor-pairs: 0 */
-
-  }, {
-    key: "values",
-    set: function set(values) {
-      // create an array for each dimension (e.g. one array for x one for y one for z)
-      values = this._inputs.map(function (_, i) {
-        return values.map(function (arr) {
-          return arr[i];
-        });
-      });
-
-      this._inputs.forEach(function (input, i) {
-        input.values = values[i];
-      });
-    } // override binding setter to set a binding clone to
-    // each input
-
-  }, {
-    key: "binding",
-    set: function set(value) {
-      _set(_getPrototypeOf(VectorInput.prototype), "binding", value, this, true);
-
-      for (var i = 0; i < this._inputs.length; i++) {
-        this._inputs[i].binding = value ? value.clone() : null;
-      }
-    } // we have to override the getter too because
-    // we have overriden the setter
-    ,
     get: function get() {
-      return _get(_getPrototypeOf(VectorInput.prototype), "binding", this);
-    }
-  }, {
-    key: "placeholder",
-    get: function get() {
-      return this._inputs.map(function (input) {
-        return input.placeholder;
-      });
-    },
-    set: function set(value) {
-      for (var i = 0; i < this._inputs.length; i++) {
-        this._inputs[i].placeholder = value[i] || value || null;
-      }
-    }
-  }, {
-    key: "inputs",
-    get: function get() {
-      return this._inputs.slice();
+      return this._text;
     }
   }]);
 
-  return VectorInput;
-}(_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]); // add proxied properties
+  return Code;
+}(Container["a" /* default */]);
 
-
-['min', 'max', 'precision', 'step', 'renderChanges'].forEach(function (property) {
-  Object.defineProperty(VectorInput.prototype, property, {
-    get: function get() {
-      return this._inputs[0][property];
-    },
-    set: function set(value) {
-      for (var i = 0; i < this._inputs.length; i++) {
-        this._inputs[i][property] = value;
-      }
-    }
-  });
-});
-_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('vec2', VectorInput, {
-  dimensions: 2,
-  renderChanges: true
-});
-_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('vec3', VectorInput, {
-  dimensions: 3,
-  renderChanges: true
-});
-_Element__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].register('vec4', VectorInput, {
-  dimensions: 4,
-  renderChanges: true
-});
-/* harmony default export */ __webpack_exports__["a"] = (VectorInput);
+Element["a" /* default */].register('code', Code_Code);
+/* harmony default export */ var components_Code = __webpack_exports__["a"] = (Code_Code);
 
 /***/ }),
-/* 29 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9813,980 +9491,25 @@ var IBindable = function IBindable() {
  */
 
 
-/* harmony default export */ __webpack_exports__["a"] = (IBindable);
+/* unused harmony default export */ var _unused_webpack_default_export = (IBindable);
 
 /***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 28 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-
-var content = __webpack_require__(31);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-array-input{margin:6px;min-width:0}.pcui-array-input>.pcui-numeric-input{margin:0 0 6px 0}.pcui-array-input.pcui-array-empty>.pcui-numeric-input{margin:0}.pcui-array-input-item>*{margin-top:1px;margin-bottom:1px}.pcui-array-input-item>*:first-child:not(.pcui-not-flexible){flex-grow:1;flex-shrink:0}.pcui-array-input-item>.pcui-button{margin-left:-3px;margin-right:0;background-color:transparent;border:0}.pcui-array-input-item-asset>.pcui-button{margin-top:36px}.pcui-array-input.pcui-readonly .pcui-array-input-item-delete{display:none}\n", ""]);
-// Exports
-module.exports = exports;
+"use strict";
+// extracted by mini-css-extract-plugin
 
 
 /***/ }),
-/* 32 */
-/***/ (function(module, exports) {
-
-/**
- * When source maps are enabled, `style-loader` uses a link element with a data-uri to
- * embed the css on the page. This breaks all relative urls because now they are relative to a
- * bundle instead of the current page.
- *
- * One solution is to only use full urls, but that may be impossible.
- *
- * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
- *
- * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
- *
- */
-module.exports = function (css) {
-  // get current location
-  var location = typeof window !== "undefined" && window.location;
-
-  if (!location) {
-    throw new Error("fixUrls requires window.location");
-  } // blank or null?
-
-
-  if (!css || typeof css !== "string") {
-    return css;
-  }
-
-  var baseUrl = location.protocol + "//" + location.host;
-  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/"); // convert each url(...)
-
-  /*
-  This regular expression is just a way to recursively match brackets within
-  a string.
-  	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
-     (  = Start a capturing group
-       (?:  = Start a non-capturing group
-           [^)(]  = Match anything that isn't a parentheses
-           |  = OR
-           \(  = Match a start parentheses
-               (?:  = Start another non-capturing groups
-                   [^)(]+  = Match anything that isn't a parentheses
-                   |  = OR
-                   \(  = Match a start parentheses
-                       [^)(]*  = Match anything that isn't a parentheses
-                   \)  = Match a end parentheses
-               )  = End Group
-               *\) = Match anything and then a close parens
-           )  = Close non-capturing group
-           *  = Match anything
-        )  = Close capturing group
-   \)  = Match a close parens
-  	 /gi  = Get all matches, not the first.  Be case insensitive.
-   */
-
-  var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function (fullMatch, origUrl) {
-    // strip quotes (if they exist)
-    var unquotedOrigUrl = origUrl.trim().replace(/^"(.*)"$/, function (o, $1) {
-      return $1;
-    }).replace(/^'(.*)'$/, function (o, $1) {
-      return $1;
-    }); // already a full url? no change
-
-    if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/|\s*$)/i.test(unquotedOrigUrl)) {
-      return fullMatch;
-    } // convert the url to a full url
-
-
-    var newUrl;
-
-    if (unquotedOrigUrl.indexOf("//") === 0) {
-      //TODO: should we add protocol?
-      newUrl = unquotedOrigUrl;
-    } else if (unquotedOrigUrl.indexOf("/") === 0) {
-      // path should be relative to the base url
-      newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
-    } else {
-      // path should be relative to current directory
-      newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
-    } // send back the fixed url(...)
-
-
-    return "url(" + JSON.stringify(newUrl) + ")";
-  }); // send back the fixed css
-
-  return fixedCss;
-};
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(34);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular,.pcui-element{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}@-webkit-keyframes pcui-flash-animation{from{outline-color:#f60}to{outline-color:rgba(255,102,0,0)}}@keyframes pcui-flash-animation{from{outline-color:#f60}to{outline-color:rgba(255,102,0,0)}}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-element{border:0 solid #232e30}.pcui-element.flash{outline:1px solid #f60;-webkit-animation:pcui-flash-animation 200ms ease-in-out forwards;animation:pcui-flash-animation 200ms ease-in-out forwards}.pcui-element:focus{outline:none}.pcui-element::-moz-focus-inner{border:0}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(36);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
 /* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-container{position:relative;min-width:0;min-height:0}.pcui-container.pcui-resizable>.pcui-resizable-handle{position:absolute;z-index:1;opacity:0;background-color:transparent}.pcui-container.pcui-resizable>.pcui-resizable-handle:hover{opacity:1}.pcui-container.pcui-resizable.pcui-resizable-resizing>.pcui-resizable-handle{opacity:1}.pcui-container.pcui-resizable.pcui-resizable-left>.pcui-resizable-handle,.pcui-container.pcui-resizable.pcui-resizable-right>.pcui-resizable-handle{top:0;bottom:0;width:1px;height:auto;cursor:ew-resize}.pcui-container.pcui-resizable.pcui-resizable-left>.pcui-resizable-handle{left:0;border-left:3px solid #20292b}.pcui-container.pcui-resizable.pcui-resizable-right>.pcui-resizable-handle{right:0;border-right:3px solid #20292b}.pcui-container.pcui-resizable.pcui-resizable-top>.pcui-resizable-handle,.pcui-container.pcui-resizable.pcui-resizable-bottom>.pcui-resizable-handle{left:0;right:0;width:auto;height:1px;cursor:ns-resize}.pcui-container.pcui-resizable.pcui-resizable-top>.pcui-resizable-handle{top:0;border-top:3px solid #20292b}.pcui-container.pcui-resizable.pcui-resizable-bottom>.pcui-resizable-handle{bottom:0;border-bottom:3px solid #20292b}.pcui-container-dragged{outline:2px solid #fff;box-sizing:border-box;opacity:0.7;z-index:1}.pcui-container-dragged-child{outline:1px dotted #f60;box-sizing:border-box}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(38);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon,.pcui-panel.pcui-collapsible>.pcui-panel-header:before,.pcui-panel-header,.pcui-panel-header-title{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon,.pcui-panel.pcui-collapsible>.pcui-panel-header:before{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex,.pcui-panel-header>.pcui-panel-sortable-icon{flex-direction:column}.pcui-flex:not(.pcui-hidden),.pcui-panel-header>.pcui-panel-sortable-icon:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-panel{background-color:#364346}.pcui-panel-header{background-color:#293538;color:#fff;font-size:12px;white-space:nowrap;padding-left:10px;flex-shrink:0;align-items:center}.pcui-panel-header-title{overflow:hidden;text-overflow:ellipsis;flex:1;color:inherit;font-size:inherit;white-space:inherit;margin:0 auto 0 0}.pcui-panel-content{flex:1}.pcui-panel.pcui-collapsible{transition:height 100ms, width 100ms}.pcui-panel.pcui-collapsible>.pcui-panel-header{cursor:pointer}.pcui-panel.pcui-collapsible>.pcui-panel-header:before{left:0;content:'\\E179';font-size:14px;margin-right:10px;text-align:center;color:#f60}.pcui-panel.pcui-collapsible>.pcui-panel-header:hover{color:#fff}.pcui-panel.pcui-collapsible>.pcui-panel-header:hover:before{color:#fff}.pcui-panel.pcui-collapsible.pcui-panel-normal>.pcui-panel-header:before{content:'\\E183';font-weight:200}.pcui-panel.pcui-collapsible>.pcui-panel-content{transition:visibility 100ms}.pcui-panel.pcui-collapsible.pcui-collapsed{overflow:hidden}.pcui-panel.pcui-collapsible.pcui-collapsed>.pcui-panel-content{visibility:hidden}.pcui-panel.pcui-collapsible.pcui-collapsed>.pcui-panel-header:before{content:'\\E180'}.pcui-panel.pcui-collapsible.pcui-collapsed.pcui-panel-normal>.pcui-panel-header:before{content:'\\E184'}.pcui-panel.pcui-collapsible.pcui-collapsed.pcui-panel-horizontal>.pcui-panel-header{width:2048px;-webkit-transform:rotate(90deg);-moz-transform:rotate(90deg);-ms-transform:rotate(90deg);-o-transform:rotate(90deg);transform:rotate(90deg);-webkit-transform-origin:0% 100%;-moz-transform-origin:0% 100%;-ms-transform-origin:0% 100%;-o-transform-origin:0% 100%;transform-origin:0% 100%}.pcui-panel.pcui-collapsible.pcui-collapsed.pcui-panel-horizontal>.pcui-panel-header:before{content:'\\E177'}.pcui-panel.pcui-collapsible.pcui-collapsed.pcui-panel-horizontal.pcui-panel-normal>.pcui-panel-header:before{content:'\\E181'}.pcui-panel.pcui-collapsible.pcui-collapsed.pcui-panel-horizontal>.pcui-panel-content{transition:none}.pcui-panel.pcui-resizable.pcui-collapsible.pcui-collapsed>.pcui-resizable-handle{display:none}.pcui-panel.pcui-resizable.pcui-resizable-resizing{transition:none}.pcui-panel.pcui-resizable.pcui-resizable-resizing>.pcui-panel-content{transition:none}.pcui-panel-header>.pcui-panel-sortable-icon{color:#5b7073;transition:color 100ms;flex-direction:row;align-items:center;margin:0 10px 0 0;height:100%}.pcui-panel-header>.pcui-panel-sortable-icon:before{content:' ';border-left:1px solid #364346;margin-right:10px;height:calc(100% - 14px);flex-shrink:0}.pcui-panel-header>.pcui-panel-sortable-icon:after{content:'.. .. ..';white-space:normal;width:12px;line-height:5px;overflow:hidden;height:24px;font-size:22px;letter-spacing:1px;flex-shrink:0}.pcui-panel:not(.pcui-disabled):not(.pcui-readonly)>.pcui-panel-header>.pcui-panel-sortable-icon:hover{color:#fff;cursor:move}.pcui-panel:not(.pcui-collapsible)>.pcui-panel-header>.pcui-panel-sortable-icon:before{display:none}.pcui-panel-remove{align-self:flex-end;order:100}.pcui-panel-remove:before{line-height:30px}.pcui-panel.pcui-readonly .pcui-panel-remove{display:none}.pcui-panel-header>.pcui-button{flex-shrink:0;margin:1px;background-color:transparent;border:0}.pcui-panel.pcui-disabled>.pcui-panel-header{background-color:#303d40;color:#999}.pcui-subpanel{box-sizing:border-box;margin:6px;border:1px solid #293538;border-radius:2px;background-color:#2c393c;color:#b1b8ba;font-size:12px}.pcui-subpanel .pcui-button{background-color:#364346;border-color:#293538}.pcui-subpanel .pcui-button:not(.pcui-disabled):not(.pcui-readonly):hover,.pcui-subpanel .pcui-button:not(.pcui-disabled):not(.pcui-readonly):focus{background-color:#364346}.pcui-subpanel .pcui-button:not(.pcui-disabled):not(.pcui-readonly):active{background-color:#2c393c}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(40);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont,.pcui-label.pcui-multiple-values:before{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect,.pcui-label.pcui-selectable:hover{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-label{display:inline-block;box-sizing:border-box;margin:6px;vertical-align:middle;transition:opacity 100ms;color:#b1b8ba;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;user-select:none}.pcui-label.pcui-default-mousedown{user-select:initial}.pcui-label.pcui-multiple-values{position:relative;color:transparent}.pcui-label.pcui-multiple-values:before{content:'...';color:#b1b8ba;white-space:nowrap;font-size:12px}.pcui-label.pcui-error{color:#d34141}.pcui-label.pcui-selectable:hover{color:#f60;text-decoration:underline}.pcui-label[placeholder]{position:relative}.pcui-label[placeholder]:after{content:attr(placeholder);position:absolute;top:0;right:0;padding:0 8px;color:#999;pointer-events:none}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(42);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon,.pcui-button[data-icon]:before{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon,.pcui-button[data-icon]:before{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect,.pcui-button{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-button{font-family:inherit;display:inline-block;border:1px solid #20292b;border-radius:2px;box-sizing:border-box;background-color:#2c393c;color:#b1b8ba;padding:0 8px;margin:6px;height:28px;line-height:28px;max-height:100%;vertical-align:middle;font-size:12px;font-weight:600;text-align:center;white-space:nowrap;cursor:pointer;transition:color 100ms, opacity 100ms, box-shadow 100ms;overflow:hidden;text-overflow:ellipsis}.pcui-button[data-icon]:before{content:attr(data-icon);font-weight:100;font-size:inherit;margin-right:6px;vertical-align:middle}.pcui-button[data-icon]:empty:before{margin-right:0}.pcui-button:not(.pcui-disabled):not(.pcui-readonly):hover,.pcui-button:not(.pcui-disabled):not(.pcui-readonly):focus{color:#fff;background-color:#2c393c;box-shadow:0 0 2px 1px rgba(255,102,0,0.3)}.pcui-button:not(.pcui-disabled):not(.pcui-readonly):active{background-color:#20292b;box-shadow:none}.pcui-button.pcui-readonly{opacity:.7;cursor:default}.pcui-button.pcui-disabled{opacity:.4;cursor:default}.pcui-button.pcui-small{height:24px;line-height:24px;font-size:10px}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(44);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 44 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-numeric-input-slider-control{display:none;position:absolute;width:10px;height:10px;right:3px;border:2px solid #20292b;background-color:#293538;border-radius:100px;z-index:9999;transform:translateY(-50%);top:50%;cursor:ew-resize}.pcui-numeric-input-slider-control:after{content:'\\E408';font-size:15px;font-family:'pc-icon';position:absolute;left:-5px;top:-5px;transform:rotateZ(90deg)}.pcui-numeric-input-slider-control:hover{opacity:50%;color:#b1b8ba}.pcui-numeric-input-slider-control-active{opacity:100% !important;color:#7f7 !important}.pcui-numeric-input-slider-control-hidden{display:none !important}.pcui-numeric-input:hover .pcui-numeric-input-slider-control{display:block}.pcui-numeric-input.pcui-disabled:hover .pcui-numeric-input-slider-control{display:none}.pcui-numeric-input.pcui-disabled .pcui-numeric-input-slider-control,.pcui-numeric-input.pcui-readonly .pcui-numeric-input-slider-control{display:none}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 45 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(46);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont,.pcui-text-input>input,.pcui-text-input.pcui-multiple-values:before{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-text-input{display:inline-block;border:1px solid #293538;border-radius:2px;box-sizing:border-box;margin:6px;min-height:24px;height:24px;background-color:#2c393c;vertical-align:top;transition:color 100ms, background-color 100ms, box-shadow 100ms;position:relative;color:#b1b8ba}.pcui-text-input>input{height:100%;width:calc(100% - 16px);padding:0 6px;line-height:1;color:inherit;background:transparent;border:none;outline:none;box-shadow:none}.pcui-text-input:before{color:inherit}.pcui-text-input.pcui-multiple-values:before{position:absolute;padding:0 8px;content:'...';white-space:nowrap;top:5px;font-size:12px}.pcui-text-input:not(.pcui-disabled):not(.pcui-readonly):hover{background-color:#293538;color:#fff}.pcui-text-input:not(.pcui-disabled):not(.pcui-readonly):not(.pcui-error):hover{box-shadow:0 0 2px 1px rgba(255,102,0,0.3)}.pcui-text-input:not(.pcui-disabled):not(.pcui-readonly).pcui-focus{background-color:#20292b;box-shadow:0 0 0 1px rgba(255,102,0,0.3)}.pcui-text-input.pcui-focus:after,.pcui-text-input.pcui-focus:before,.pcui-text-input:hover:after,.pcui-text-input:hover:before{display:none}.pcui-text-input.pcui-readonly{background-color:rgba(44,57,60,0.7);border-color:transparent}.pcui-text-input.pcui-disabled{color:#5b7073}.pcui-text-input.pcui-error{color:#b1b8ba;box-shadow:0 0 0 1px #d34141}.pcui-text-input[placeholder]{position:relative}.pcui-text-input[placeholder]:after{content:attr(placeholder);background-color:#2c393c;position:absolute;top:0;right:0;padding:0 8px;line-height:22px;font-size:10px;font-weight:600;white-space:nowrap;color:#829193;pointer-events:none}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(48);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon,.pcui-boolean-input.pcui-boolean-input-ticked:after{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon,.pcui-boolean-input.pcui-boolean-input-ticked:after{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-boolean-input{display:inline-block;position:relative;box-sizing:border-box;background-color:#2c393c;color:#fff;width:14px;height:14px;line-height:1;overflow:hidden;margin:6px;transition:opacity 100ms, background-color 100ms, box-shadow 100ms}.pcui-boolean-input:focus{outline:none}.pcui-boolean-input.pcui-boolean-input-ticked{background-color:#b1b8ba}.pcui-boolean-input.pcui-boolean-input-ticked:after{content:'\\E372';color:#20292b;background-color:inherit;font-size:19px;display:block;margin-top:-2px;margin-left:-2px}.pcui-boolean-input:not(.pcui-disabled):not(.pcui-readonly):hover,.pcui-boolean-input:not(.pcui-disabled):not(.pcui-readonly):focus{cursor:pointer;background-color:#293538;box-shadow:0 0 2px 1px rgba(255,102,0,0.3)}.pcui-boolean-input:not(.pcui-disabled):not(.pcui-readonly).pcui-boolean-input-ticked:hover,.pcui-boolean-input:not(.pcui-disabled):not(.pcui-readonly).pcui-boolean-input-ticked:focus{background-color:#b1b8ba}.pcui-boolean-input.pcui-disabled{opacity:.4}.pcui-boolean-input.pcui-multiple-values:after{position:absolute;font-size:17px;font-weight:bold;color:#b1b8ba;left:4px;top:-3px;content:'-'}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 49 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(50);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-boolean-input-toggle{display:inline-block;position:relative;width:30px;height:16px;border-radius:8px;flex-shrink:0;border:1px solid #293538;box-sizing:border-box;background-color:#364346;color:#fff;line-height:1;overflow:hidden;margin:6px;transition:opacity 100ms, background-color 100ms, box-shadow 100ms}.pcui-boolean-input-toggle:focus{outline:none}.pcui-boolean-input-toggle:after{content:'\\00a0';position:absolute;top:1px;left:1px;width:12px;height:12px;border-radius:6px;background-color:#5b7073;transition:left 100ms ease, background-color 100ms ease}.pcui-boolean-input-toggle.pcui-boolean-input-ticked{border-color:#293538}.pcui-boolean-input-toggle.pcui-boolean-input-ticked:after{left:15px;background-color:#69b875}.pcui-boolean-input-toggle:not(.pcui-disabled):not(.pcui-readonly):hover,.pcui-boolean-input-toggle:not(.pcui-disabled):not(.pcui-readonly):focus{cursor:pointer;border-color:#20292b;background-color:#20292b;box-shadow:0 0 2px 1px rgba(255,102,0,0.3)}.pcui-boolean-input-toggle:not(.pcui-disabled):not(.pcui-readonly):hover:after,.pcui-boolean-input-toggle:not(.pcui-disabled):not(.pcui-readonly):focus:after{background-color:#d34141}.pcui-boolean-input-toggle:not(.pcui-disabled):not(.pcui-readonly).pcui-boolean-input-ticked:hover,.pcui-boolean-input-toggle:not(.pcui-disabled):not(.pcui-readonly).pcui-boolean-input-ticked:focus{border-color:#20292b;background-color:#20292b}.pcui-boolean-input-toggle:not(.pcui-disabled):not(.pcui-readonly).pcui-boolean-input-ticked:after{background-color:#7f7}.pcui-boolean-input-toggle.pcui-readonly{opacity:.7}.pcui-boolean-input-toggle.pcui-disabled{opacity:.4}.pcui-boolean-input-toggle.pcui-multiple-values:after{left:8px;background-color:rgba(155,161,163,0.25)}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(52);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-code{background:#20292b;overflow:auto}.pcui-code .pcui-code-inner{color:#f60;font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:10px;white-space:pre}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(54);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 54 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-contextmenu{box-sizing:border-box;border:1px solid #293538;border-radius:2px;background-color:#2c393c;color:#b1b8ba;font-size:12px;font-weight:400;display:none;position:fixed;z-index:9999}.pcui-contextmenu-active{display:block}.pcui-contextmenu div{background-color:#2c393c;width:150px;position:absolute}.pcui-contextmenu div:before{content:\"\";position:absolute;top:0;bottom:0;left:0;right:0;z-index:-1;box-shadow:0 0 8px rgba(0,0,0,0.5)}.pcui-contextmenu-parent{cursor:auto !important}.pcui-contextmenu-parent div{display:none}.pcui-contextmenu-parent:hover div{display:block}.pcui-contextmenu-parent-active div{display:block}.pcui-contextmenu{div-font-weight:bold}.pcui-contextmenu div:hover{background-color:#364346;cursor:pointer}.pcui-contextmenu div.pcui-contextmenu-parent:after{content:'\\E160';font-family:'pc-icon';font-size:14px;text-align:center;background-color:transparent;color:#9ba1a3;line-height:14px;position:absolute;right:4px;top:50%;transform:translateY(-50%)}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(56);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 56 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-divider{height:1px;background-color:#2c393c;margin:6px 0}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 57 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(58);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 58 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon,.pcui-infobox[data-icon]:not(.pcui-hidden):before{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon,.pcui-infobox[data-icon]:not(.pcui-hidden):before{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-infobox{box-sizing:border-box;margin:6px;padding:12px;border:1px solid #293538;border-radius:2px;background-color:#2c393c;color:#b1b8ba;font-size:12px}.pcui-infobox :first-child{color:#fff;margin-bottom:2px}.pcui-infobox[data-icon]:not(.pcui-hidden){display:grid;grid:auto-flow / min-content 1fr}.pcui-infobox[data-icon]:not(.pcui-hidden):before{content:attr(data-icon);font-weight:100;font-size:16px;margin-right:12px;vertical-align:middle;grid-column:1;grid-row:1 / 3}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 59 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(60);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 60 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect,.pcui-overlay-inner{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex,.pcui-overlay{flex-direction:column}.pcui-flex:not(.pcui-hidden),.pcui-overlay:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-overlay{position:absolute;width:auto;height:auto;top:0;right:0;bottom:0;left:0;z-index:101;transition:opacity 100ms, visibility 100ms;justify-content:center;align-items:center;position:absolute}.pcui-overlay-inner{position:absolute;width:auto;height:auto;top:0;right:0;bottom:0;left:0;background-color:rgba(32,41,43,0.7)}.pcui-overlay-clickable>.pcui-overlay-inner{cursor:pointer}.pcui-overlay-transparent>.pcui-overlay-inner{background-color:transparent}.pcui-overlay-content{background-color:#364346;transition:width 100ms, height 100ms, margin-left 100ms, margin-top 100ms;box-shadow:7px 7px 7px rgba(0,0,0,0.15)}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 61 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(62);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 62 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-progress{height:4px;background-color:#20292b;transition:opacity 100ms;width:100%}.pcui-progress .pcui-progress-inner{width:0%;height:inherit;background:#f60;background:-webkit-gradient(left top, right bottom, color-stop(0%, #f60), color-stop(25%, #f60), color-stop(26%, #a84300), color-stop(50%, #a84300), color-stop(51%, #f60), color-stop(75%, #f60), color-stop(76%, #a84300), color-stop(100%, #a84300));background:-webkit-linear-gradient(-45deg, #f60 0%, #f60 25%, #a84300 26%, #a84300 50%, #f60 51%, #f60 75%, #a84300 76%, #a84300 100%);background:-moz-linear-gradient(-45deg, #f60 0%, #f60 25%, #a84300 26%, #a84300 50%, #f60 51%, #f60 75%, #a84300 76%, #a84300 100%);background:-ms-linear-gradient(-45deg, #f60 0%, #f60 25%, #a84300 26%, #a84300 50%, #f60 51%, #f60 75%, #a84300 76%, #a84300 100%);background:-o-linear-gradient(-45deg, #f60 0%, #f60 25%, #a84300 26%, #a84300 50%, #f60 51%, #f60 75%, #a84300 76%, #a84300 100%);background:linear-gradient(135deg, #f60 0%, #f60 25%, #a84300 26%, #a84300 50%, #f60 51%, #f60 75%, #a84300 76%, #a84300 100%);background-position:0px 0px;background-size:24px 24px;background-repeat:repeat;-webkit-animation:pcui-progress-background 1000ms linear infinite;animation:pcui-progress-background 1000ms linear infinite}.pcui-progress.pcui-error .pcui-progress-inner{background:#f60;background:-webkit-gradient(left top, right bottom, color-stop(0%, #f77), color-stop(25%, #f77), color-stop(26%, #ff2020), color-stop(50%, #ff2020), color-stop(51%, #f77), color-stop(75%, #f77), color-stop(76%, #ff2020), color-stop(100%, #ff2020));background:-webkit-linear-gradient(-45deg, #f77 0%, #f77 25%, #ff2020 26%, #ff2020 50%, #f77 51%, #f77 75%, #ff2020 76%, #ff2020 100%);background:-moz-linear-gradient(-45deg, #f77 0%, #f77 25%, #ff2020 26%, #ff2020 50%, #f77 51%, #f77 75%, #ff2020 76%, #ff2020 100%);background:-ms-linear-gradient(-45deg, #f77 0%, #f77 25%, #ff2020 26%, #ff2020 50%, #f77 51%, #f77 75%, #ff2020 76%, #ff2020 100%);background:-o-linear-gradient(-45deg, #f77 0%, #f77 25%, #ff2020 26%, #ff2020 50%, #f77 51%, #f77 75%, #ff2020 76%, #ff2020 100%);background:linear-gradient(135deg, #f77 0%, #f77 25%, #ff2020 26%, #ff2020 50%, #f77 51%, #f77 75%, #ff2020 76%, #ff2020 100%);background-position:0px 0px;background-size:24px 24px;background-repeat:repeat;-webkit-animation:none;animation:none}@-webkit-keyframes pcui-progress-background{from{background-position:0px 0}to{background-position:24px 0}}@keyframes pcui-progress-background{from{background-position:0px 0}to{background-position:24px 0}}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 63 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(64);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 64 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon,.pcui-select-input-icon:after,.pcui-select-input-list .pcui-label.pcui-selected:after,.pcui-select-input-create-new>.pcui-label:last-child:before{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon,.pcui-select-input-icon:after,.pcui-select-input-list .pcui-label.pcui-selected:after,.pcui-select-input-create-new>.pcui-label:last-child:before{font-family:'pc-icon'}.fixedFont,.pcui-select-input-value,.pcui-select-input-list .pcui-label,.pcui-select-input-tag>.pcui-label{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex,.pcui-select-input,.pcui-select-input-container-value{flex-direction:column}.pcui-flex:not(.pcui-hidden),.pcui-select-input:not(.pcui-hidden),.pcui-select-input-container-value:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-select-input{box-sizing:border-box;margin:6px;border-radius:2px;min-width:0}.pcui-select-input-container-value{background-color:#2c393c;transition:box-shadow 100ms, opacity 100ms}.pcui-select-input-shadow{position:absolute;width:100%;height:100%;transition:box-shadow 100ms;border-radius:2px;pointer-events:none;z-index:1}.pcui-select-input-value{margin:0;padding:0 24px 0 8px;height:24px;line-height:24px;font-size:12px;transition:background-color 100ms, color 100ms}.pcui-select-input-value:not(.pcui-hidden){display:block}.pcui-select-input-textinput{margin:0}.pcui-select-input-textinput:not(.pcui-disabled):not(.pcui-readonly):not(.pcui-error).pcui-focus,.pcui-select-input-textinput:not(.pcui-disabled):not(.pcui-readonly):not(.pcui-error):hover{box-shadow:none}.pcui-select-input-icon{position:absolute;right:6px;color:#5b7073;pointer-events:none;transition:color 100ms;margin:0;height:24px;line-height:24px}.pcui-select-input-icon:after{content:'\\E159';vertical-align:middle}.pcui-select-input.pcui-open .pcui-select-input-shadow{box-shadow:0 0 2px 1px rgba(255,102,0,0.3)}.pcui-select-input.pcui-open .pcui-select-input-value{color:#fff;background-color:#20292b}.pcui-select-input.pcui-open .pcui-select-input-icon:after{color:#fff;content:'\\E157'}.pcui-select-input-list{position:absolute;z-index:1;top:100%;width:100%;max-height:200px;overflow-y:auto;background-color:#293538}.pcui-select-input-list .pcui-label{font-size:12px;height:22px;line-height:22px;padding:0 24px 0 6px;margin:0;transition:background-color 100ms, color 100ms}.pcui-select-input-list .pcui-label:not(.pcui-hidden){display:block}.pcui-select-input-list .pcui-label.pcui-selected{color:#fff}.pcui-select-input-list .pcui-label.pcui-selected:after{content:'\\E133';color:#5b7073;position:absolute;right:6px}.pcui-select-input-fit-height .pcui-select-input-list{top:initial;bottom:100%}.pcui-select-input-fit-height .pcui-select-input-shadow{top:initial;bottom:0}.pcui-select-input-tags:not(.pcui-select-input-tags-empty){margin-top:1px;flex-wrap:wrap}.pcui-select-input-tag{background-color:#293538;align-items:center;border-radius:2px;border:1px solid #232e30;margin-right:2px;margin-top:2px;min-width:0;height:18px}.pcui-select-input-tag>*{margin:0;background-color:transparent;border:0}.pcui-select-input-tag>.pcui-label{padding:0 5px 0 8px}.pcui-select-input-tag>.pcui-button{padding:0 5px;height:18px;line-height:18px;flex-shrink:0}.pcui-select-input-tag>.pcui-button:not(.pcui-disabled):not(.pcui-readonly):hover{box-shadow:none;color:#d34141}.pcui-select-input-tag-not-everywhere>.pcui-label{opacity:0.5}.pcui-select-input-tag-not-everywhere>.pcui-label:before{content:'*';margin-right:5px}.pcui-select-input:not(.pcui-disabled):not(.pcui-readonly) .pcui-select-input-container-value:hover .pcui-select-input-shadow{box-shadow:0 0 2px 1px rgba(255,102,0,0.3)}.pcui-select-input:not(.pcui-disabled):not(.pcui-readonly) .pcui-select-input-container-value:hover .pcui-select-input-icon{color:#9ba1a3}.pcui-select-input:not(.pcui-disabled):not(.pcui-readonly).pcui-focus .pcui-select-input-shadow{box-shadow:0 0 2px 1px rgba(255,102,0,0.3)}.pcui-select-input:not(.pcui-disabled):not(.pcui-readonly).pcui-focus .pcui-select-input-icon{color:#9ba1a3}.pcui-select-input:not(.pcui-disabled):not(.pcui-readonly) .pcui-select-input-value:hover{color:#fff;background-color:#20292b;cursor:pointer}.pcui-select-input:not(.pcui-disabled):not(.pcui-readonly) .pcui-select-input-list>*:hover,.pcui-select-input:not(.pcui-disabled):not(.pcui-readonly) .pcui-select-input-list>.pcui-select-input-label-highlighted{background-color:#20292b;color:#fff;cursor:pointer}.pcui-select-input-create-new>.pcui-label{padding-right:6px}.pcui-select-input-create-new>.pcui-label:last-child{flex-shrink:0;margin-left:auto}.pcui-select-input-create-new>.pcui-label:last-child:before{content:'\\E120';margin-right:6px}.pcui-select-input.pcui-disabled{opacity:.4}.pcui-select-input.pcui-readonly .pcui-select-input-icon{display:none}.pcui-select-input.pcui-readonly.pcui-select-input-multi .pcui-select-input-container-value{display:none}.pcui-select-input.pcui-readonly.pcui-select-input-multi .pcui-select-input-tag>.pcui-button{display:none}.pcui-select-input.pcui-readonly.pcui-select-input-allow-input:not(.pcui-select-input-multi){opacity:.7}.pcui-select-input.pcui-readonly.pcui-select-input-allow-input:not(.pcui-select-input-multi) .pcui-select-input-textinput:after{display:none}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 65 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(66);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 66 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect,.pcui-slider{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-slider{display:inline-flex;height:24px;margin:6px;align-items:center}.pcui-slider>.pcui-numeric-input{flex:1;margin-left:0}.pcui-slider-container{flex:3}.pcui-slider-bar{position:relative;width:calc(100% - 18px);height:4px;margin:9px 8px;background-color:#2c393c;border:1px solid #293538}.pcui-slider-handle{position:absolute;top:-7px;left:0;margin-left:-9px;width:8px;height:16px;background-color:#5b7073;border:1px solid #293538;transition:left 100ms ease}.pcui-slider-handle:hover,.pcui-slider-handle:focus{outline:none}.pcui-slider-active{cursor:ew-resize}.pcui-slider-active .pcui-slider-bar{border-color:#20292b;background-color:#20292b}.pcui-slider-active .pcui-slider-handle{border-color:#20292b;background-color:#fff;transition:none}.pcui-slider:not(.pcui-disabled):not(.pcui-readonly):hover{cursor:pointer}.pcui-slider:not(.pcui-disabled):not(.pcui-readonly) .pcui-slider-handle:focus,.pcui-slider:not(.pcui-disabled):not(.pcui-readonly) .pcui-slider-handle:hover{cursor:ew-resize;outline:none;border-color:#20292b;background-color:#fff}.pcui-slider.pcui-readonly .pcui-numeric-input{flex:1}.pcui-slider.pcui-readonly .pcui-slider-bar{display:none}.pcui-slider.pcui-multiple-values .pcui-slider-handle{display:none}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 67 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(68);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 68 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-spinner{display:inline-block;margin:6px;vertical-align:middle}.pcui-spinner>path{animation-name:animation-spin;animation-duration:750ms;animation-iteration-count:infinite;animation-timing-function:linear;transform-origin:center}.pcui-spinner.pcui-error>path{animation:none;fill:#ff2020}.pcui-spinner.pcui-error>path.pcui-spinner-highlight{fill:#f77}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 69 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(70);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 70 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont,.pcui-text-area-input>textarea{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-text-area-input{min-height:48px;height:auto}.pcui-text-area-input>textarea{resize:none;height:100%;width:calc(100% - 16px);padding:0 8px;line-height:22px;color:inherit;background:transparent;border:none;outline:none;box-shadow:none;min-height:44px;min-width:172px}.pcui-text-area-input.pcui-text-area-input-resizable-none>textarea{resize:none}.pcui-text-area-input.pcui-text-area-input-resizable-both>textarea{resize:both}.pcui-text-area-input.pcui-text-area-input-resizable-horizontal>textarea{resize:horizontal}.pcui-text-area-input.pcui-text-area-input-resizable-vertical>textarea{resize:vertical}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 71 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(72);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 72 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon,.pcui-treeview-item-icon:after,.pcui-treeview-item:not(.pcui-treeview-item-empty)>.pcui-treeview-item-contents:before{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon,.pcui-treeview-item-icon:after,.pcui-treeview-item:not(.pcui-treeview-item-empty)>.pcui-treeview-item-contents:before{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect,.pcui-treeview{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-treeview{min-width:max-content}.pcui-treeview-item{position:relative;padding-left:24px}.pcui-treeview-item:before{content:'\\00a0';position:absolute;background-color:#313e41;width:2px;left:14px;top:-12px;bottom:12px}.pcui-treeview-item:last-child:before{height:25px;bottom:auto}.pcui-treeview-item.pcui-disabled>.pcui-treeview-item-contents>.pcui-treeview-item-text{opacity:.4}.pcui-treeview-item-contents{position:relative;color:#b1b8ba;margin-left:3px;border:1px solid transparent;align-items:center;height:24px;box-sizing:border-box}.pcui-treeview-item-contents:hover{cursor:pointer;color:#fff;background-color:#2c393c}.pcui-treeview-item-contents:hover>.pcui-treeview-item-icon{color:#fff}.pcui-treeview-item-icon{color:#5b7073;margin:0 2px 0 0;flex-shrink:0}.pcui-treeview-item-icon:before{content:'\\00a0';position:absolute;background-color:#313e41;left:-12px;top:10px;width:24px;height:2px}.pcui-treeview-item-icon:after{content:'\\E360';display:inline-block;vertical-align:sub;width:22px;height:22px;position:relative;z-index:1;text-align:center}.pcui-treeview-item-text{margin:0;flex-shrink:0;position:relative;z-index:1;transition:opacity 100ms;padding-right:8px;color:inherit}.pcui-treeview-item-contents.pcui-treeview-item-selected{background-color:#20292b;color:#fff}.pcui-treeview-item-contents.pcui-treeview-item-selected>.pcui-treeview-item-icon{color:#fff}.pcui-treeview-item:not(.pcui-treeview-item-empty)>.pcui-treeview-item-contents:before{content:'\\E120';position:absolute;font-size:10px;font-weight:bold;text-align:center;color:#b1b8ba;background-color:#2c393c;top:0;left:-24px;width:16px;height:16px;line-height:16px;margin:3px;cursor:pointer;z-index:1}.pcui-treeview-item:not(.pcui-treeview-item-empty).pcui-treeview-item-open>.pcui-treeview-item-contents:before{content:'\\E121'}.pcui-treeview>.pcui-treeview-item{padding-left:0}.pcui-treeview>.pcui-treeview-item:before{content:none}.pcui-treeview>.pcui-treeview-item>.pcui-treeview-item-contents{margin-left:0}.pcui-treeview>.pcui-treeview-item>.pcui-treeview-item-contents>.pcui-treeview-item-icon:before{content:none}.pcui-treeview>.pcui-treeview-item>.pcui-treeview-item-contents>.pcui-treeview-item-icon:after{margin-left:0}.pcui-treeview>.pcui-treeview-item>.pcui-treeview-item{padding-left:21px}.pcui-treeview>.pcui-treeview-item>.pcui-treeview-item:before{left:11px}.pcui-treeview:not(.pcui-treeview-filtering)>.pcui-treeview-item .pcui-treeview-item:not(.pcui-treeview-item-open):not(.pcui-treeview-item-empty)>.pcui-treeview-item{display:none}.pcui-treeview-item-dragged>.pcui-treeview-item-contents{background-color:rgba(44,57,60,0.5);color:#fff}.pcui-treeview-drag-handle{position:fixed;width:32px;height:20px;top:0;bottom:0;z-index:4;margin-top:-1px;margin-left:-1px}.pcui-treeview-drag-handle.before{border-top:4px solid #f60;padding-right:8px;height:24px}.pcui-treeview-drag-handle.inside{border:4px solid #f60}.pcui-treeview-drag-handle.after{border-bottom:4px solid #f60;padding-right:8px;height:24px}.pcui-treeview-item-contents:after{content:' ';display:block;clear:both}.pcui-treeview-item.pcui-treeview-item-rename>.pcui-treeview-item-contents>.pcui-treeview-item-text{display:none}.pcui-treeview-item.pcui-treeview-item-rename>.pcui-treeview-item-contents>.pcui-text-input{margin:0;flex-grow:1;box-shadow:none !important;border:0;background-color:transparent}.pcui-treeview-item.pcui-treeview-item-rename>.pcui-treeview-item-contents>.pcui-text-input>input{font-family:inherit;font-size:14px;padding:0}.pcui-treeview.pcui-treeview-filtering .pcui-treeview-item{padding-left:0}.pcui-treeview.pcui-treeview-filtering .pcui-treeview-item::before{display:none}.pcui-treeview.pcui-treeview-filtering .pcui-treeview-item:not(.pcui-treeview-filtering-result)>.pcui-treeview-item-contents{display:none}.pcui-treeview.pcui-treeview-filtering .pcui-treeview-item-contents{margin-left:0}.pcui-treeview-filtering-result .pcui-treeview-item-contents:before,.pcui-treeview-filtering-result .pcui-treeview-item-icon:before{display:none}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 73 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(74);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 74 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex,.pcui-vector-input{flex-direction:column}.pcui-flex:not(.pcui-hidden),.pcui-vector-input:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-vector-input{flex-direction:row;align-items:center}.pcui-vector-input>.pcui-numeric-input{flex:1;margin:6px 3px}.pcui-vector-input>.pcui-numeric-input:first-child{margin-left:0}.pcui-vector-input>.pcui-numeric-input:last-child{margin-right:0}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 75 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(76);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(4)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-/* 76 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, "@font-face{font-family:'pc-icon';src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot\");src:url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.eot?#iefix\") format(\"embedded-opentype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff2\") format(\"woff2\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.woff\") format(\"woff\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.ttf\") format(\"truetype\"),url(\"https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/fonts/PlayIcons-Regular.svg\") format(\"svg\");font-weight:normal;font-style:normal}.font-smooth,.font-icon{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}.font-thin{font-weight:100;font-style:normal}.font-light{font-weight:200;font-style:normal}.font-regular{font-weight:normal;font-style:normal}.font-bold{font-weight:bold;font-style:normal}.font-icon{font-family:'pc-icon'}.fixedFont{font-family:inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;font-weight:normal;font-size:12px}.noSelect{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pcui-flex{flex-direction:column}.pcui-flex:not(.pcui-hidden){display:-webkit-flex;display:flex}.pcui-grid{display:-ms-grid;display:grid}.pcui-scrollable{overflow:auto}.pcui-hidden{display:none}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 77 */,
-/* 78 */,
-/* 79 */,
-/* 80 */,
-/* 81 */,
-/* 82 */,
-/* 83 */,
-/* 84 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10794,38 +9517,17 @@ module.exports = exports;
 __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
-__webpack_require__.d(__webpack_exports__, "IBindable", function() { return /* reexport */ IBindable["a" /* default */]; });
-__webpack_require__.d(__webpack_exports__, "IFocusable", function() { return /* reexport */ interfaces_IFocusable; });
-__webpack_require__.d(__webpack_exports__, "ICollapsible", function() { return /* reexport */ interfaces_ICollapsible; });
-__webpack_require__.d(__webpack_exports__, "IScrollable", function() { return /* reexport */ interfaces_IScrollable; });
-__webpack_require__.d(__webpack_exports__, "IResizable", function() { return /* reexport */ interfaces_IResizable; });
-__webpack_require__.d(__webpack_exports__, "IFlex", function() { return /* reexport */ interfaces_IFocusable; });
-__webpack_require__.d(__webpack_exports__, "IGrid", function() { return /* reexport */ interfaces_IGrid; });
-__webpack_require__.d(__webpack_exports__, "ArrayInput", function() { return /* reexport */ ArrayInput["a" /* default */]; });
 __webpack_require__.d(__webpack_exports__, "BooleanInput", function() { return /* reexport */ BooleanInput["a" /* default */]; });
-__webpack_require__.d(__webpack_exports__, "Button", function() { return /* reexport */ Button["a" /* default */]; });
-__webpack_require__.d(__webpack_exports__, "Code", function() { return /* reexport */ Code["a" /* default */]; });
 __webpack_require__.d(__webpack_exports__, "Container", function() { return /* reexport */ Container["a" /* default */]; });
 __webpack_require__.d(__webpack_exports__, "ContextMenu", function() { return /* reexport */ ContextMenu["a" /* default */]; });
-__webpack_require__.d(__webpack_exports__, "Divider", function() { return /* reexport */ Divider["a" /* default */]; });
 __webpack_require__.d(__webpack_exports__, "Element", function() { return /* reexport */ Element["a" /* default */]; });
-__webpack_require__.d(__webpack_exports__, "InfoBox", function() { return /* reexport */ InfoBox["a" /* default */]; });
 __webpack_require__.d(__webpack_exports__, "Label", function() { return /* reexport */ Label["a" /* default */]; });
 __webpack_require__.d(__webpack_exports__, "NumericInput", function() { return /* reexport */ NumericInput["a" /* default */]; });
-__webpack_require__.d(__webpack_exports__, "Overlay", function() { return /* reexport */ Overlay["a" /* default */]; });
-__webpack_require__.d(__webpack_exports__, "Panel", function() { return /* reexport */ Panel["a" /* default */]; });
-__webpack_require__.d(__webpack_exports__, "Progress", function() { return /* reexport */ Progress["a" /* default */]; });
-__webpack_require__.d(__webpack_exports__, "SelectInput", function() { return /* reexport */ SelectInput["a" /* default */]; });
-__webpack_require__.d(__webpack_exports__, "SliderInput", function() { return /* reexport */ SliderInput["a" /* default */]; });
-__webpack_require__.d(__webpack_exports__, "Spinner", function() { return /* reexport */ Spinner["a" /* default */]; });
-__webpack_require__.d(__webpack_exports__, "TextAreaInput", function() { return /* reexport */ TextAreaInput["a" /* default */]; });
 __webpack_require__.d(__webpack_exports__, "TextInput", function() { return /* reexport */ TextInput["a" /* default */]; });
-__webpack_require__.d(__webpack_exports__, "TreeView", function() { return /* reexport */ TreeView["a" /* default */]; });
-__webpack_require__.d(__webpack_exports__, "TreeViewItem", function() { return /* reexport */ TreeViewItem["a" /* default */]; });
 __webpack_require__.d(__webpack_exports__, "VectorInput", function() { return /* reexport */ VectorInput["a" /* default */]; });
 
 // EXTERNAL MODULE: ./src/interfaces/IBindable/index.js
-var IBindable = __webpack_require__(29);
+var IBindable = __webpack_require__(27);
 
 // CONCATENATED MODULE: ./src/interfaces/IFocusable/index.js
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10960,74 +9662,74 @@ var IResizable = function IResizable() {
 
 
 /* harmony default export */ var interfaces_IResizable = (IResizable);
-// EXTERNAL MODULE: ./src/components/ArrayInput/index.js
-var ArrayInput = __webpack_require__(16);
+// EXTERNAL MODULE: ./src/components/ArrayInput/index.js + 1 modules
+var ArrayInput = __webpack_require__(17);
 
-// EXTERNAL MODULE: ./src/components/BooleanInput/index.js
-var BooleanInput = __webpack_require__(17);
+// EXTERNAL MODULE: ./src/components/BooleanInput/index.js + 2 modules
+var BooleanInput = __webpack_require__(14);
 
-// EXTERNAL MODULE: ./src/components/Button/index.js
-var Button = __webpack_require__(11);
+// EXTERNAL MODULE: ./src/components/Button/index.js + 1 modules
+var Button = __webpack_require__(10);
 
-// EXTERNAL MODULE: ./src/components/Code/index.js
-var Code = __webpack_require__(18);
+// EXTERNAL MODULE: ./src/components/Code/index.js + 1 modules
+var Code = __webpack_require__(26);
 
-// EXTERNAL MODULE: ./src/components/Container/index.js
+// EXTERNAL MODULE: ./src/components/Container/index.js + 1 modules
 var Container = __webpack_require__(2);
 
-// EXTERNAL MODULE: ./src/components/ContextMenu/index.js
-var ContextMenu = __webpack_require__(15);
+// EXTERNAL MODULE: ./src/components/ContextMenu/index.js + 1 modules
+var ContextMenu = __webpack_require__(13);
 
-// EXTERNAL MODULE: ./src/components/Divider/index.js
-var Divider = __webpack_require__(19);
+// EXTERNAL MODULE: ./src/components/Divider/index.js + 1 modules
+var Divider = __webpack_require__(18);
 
-// EXTERNAL MODULE: ./src/components/Element/index.js
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
 var Element = __webpack_require__(1);
 
-// EXTERNAL MODULE: ./src/components/InfoBox/index.js
-var InfoBox = __webpack_require__(20);
+// EXTERNAL MODULE: ./src/components/InfoBox/index.js + 1 modules
+var InfoBox = __webpack_require__(19);
 
-// EXTERNAL MODULE: ./src/components/Label/index.js
-var Label = __webpack_require__(5);
+// EXTERNAL MODULE: ./src/components/Label/index.js + 1 modules
+var Label = __webpack_require__(3);
 
-// EXTERNAL MODULE: ./src/components/NumericInput/index.js
-var NumericInput = __webpack_require__(12);
+// EXTERNAL MODULE: ./src/components/NumericInput/index.js + 1 modules
+var NumericInput = __webpack_require__(9);
 
-// EXTERNAL MODULE: ./src/components/Overlay/index.js
-var Overlay = __webpack_require__(21);
+// EXTERNAL MODULE: ./src/components/Overlay/index.js + 1 modules
+var Overlay = __webpack_require__(20);
 
-// EXTERNAL MODULE: ./src/components/Panel/index.js
-var Panel = __webpack_require__(13);
+// EXTERNAL MODULE: ./src/components/Panel/index.js + 1 modules
+var Panel = __webpack_require__(12);
 
-// EXTERNAL MODULE: ./src/components/Progress/index.js
-var Progress = __webpack_require__(22);
+// EXTERNAL MODULE: ./src/components/Progress/index.js + 1 modules
+var Progress = __webpack_require__(21);
 
-// EXTERNAL MODULE: ./src/components/SelectInput/index.js
-var SelectInput = __webpack_require__(23);
+// EXTERNAL MODULE: ./src/components/SelectInput/index.js + 1 modules
+var SelectInput = __webpack_require__(22);
 
-// EXTERNAL MODULE: ./src/components/SliderInput/index.js
-var SliderInput = __webpack_require__(24);
+// EXTERNAL MODULE: ./src/components/SliderInput/index.js + 1 modules
+var SliderInput = __webpack_require__(16);
 
-// EXTERNAL MODULE: ./src/components/Spinner/index.js
-var Spinner = __webpack_require__(25);
+// EXTERNAL MODULE: ./src/components/Spinner/index.js + 1 modules
+var Spinner = __webpack_require__(23);
 
-// EXTERNAL MODULE: ./src/components/TextAreaInput/index.js
-var TextAreaInput = __webpack_require__(26);
+// EXTERNAL MODULE: ./src/components/TextAreaInput/index.js + 1 modules
+var TextAreaInput = __webpack_require__(24);
 
-// EXTERNAL MODULE: ./src/components/TextInput/index.js
-var TextInput = __webpack_require__(9);
+// EXTERNAL MODULE: ./src/components/TextInput/index.js + 1 modules
+var TextInput = __webpack_require__(7);
 
-// EXTERNAL MODULE: ./src/components/TreeView/index.js
-var TreeView = __webpack_require__(27);
+// EXTERNAL MODULE: ./src/components/TreeView/index.js + 1 modules
+var TreeView = __webpack_require__(25);
 
 // EXTERNAL MODULE: ./src/components/TreeViewItem/index.js
 var TreeViewItem = __webpack_require__(6);
 
-// EXTERNAL MODULE: ./src/components/VectorInput/index.js
-var VectorInput = __webpack_require__(28);
+// EXTERNAL MODULE: ./src/components/VectorInput/index.js + 1 modules
+var VectorInput = __webpack_require__(15);
 
 // EXTERNAL MODULE: ./src/scss/_pcui-hidden.scss
-var _pcui_hidden = __webpack_require__(75);
+var _pcui_hidden = __webpack_require__(28);
 
 // CONCATENATED MODULE: ./src/index.js
 

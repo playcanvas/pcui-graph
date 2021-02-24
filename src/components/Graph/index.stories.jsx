@@ -66,12 +66,6 @@ var materialSchema = {
                     name: 'output',
                     type: MATERIAL_SCHEMA.EDGE.VEC_2
                 }
-            ],
-            attributes: [
-                {
-                    name: 'values',
-                    type: 'VEC_2_INPUT'
-                },
             ]
         },
         [MATERIAL_SCHEMA.NODE.MULTIPLY]: {
@@ -100,7 +94,12 @@ var materialSchema = {
             name: 'Add',
             fill: 'rgb(54, 67, 70, 0.8)',
             stroke: '#20292b',
-            contextMenuItems: [],
+            contextMenuItems: [
+                {
+                    text: 'Delete node',
+                    action: GRAPH_ACTIONS.DELETE_NODE
+                }
+            ],
             inPorts: [
                 {
                     name: 'left',
@@ -122,7 +121,12 @@ var materialSchema = {
             name: 'Sine',
             fill: 'rgb(54, 67, 70, 0.8)',
             stroke: '#20292b',
-            contextMenuItems: [],
+            contextMenuItems: [
+                {
+                    text: 'Delete node',
+                    action: GRAPH_ACTIONS.DELETE_NODE
+                }
+            ],
             inPorts: [
                 {
                     name: 'input',
@@ -387,7 +391,7 @@ var materialContextMenuItems = [
 
 
 export const Material = (args) => { 
-    return <Component graphSchema={materialSchema} graphData={materialData} contextMenuItems={materialContextMenuItems}/>;
+    return <Component graphSchema={materialSchema} graphData={materialData} contextMenuItems={materialContextMenuItems} config={{ passiveUIEvents: true }} />;
 };
 
 document.querySelector('#root').setAttribute('style', 'position: fixed; width: 100%; height: 100%');
@@ -414,5 +418,11 @@ setTimeout(() => {
     });
     document.querySelector('.pcui-graph').ui.on(GRAPH_ACTIONS.UPDATE_NODE_ATTRIBUTE, (node) => {
         console.log(GRAPH_ACTIONS.UPDATE_NODE_ATTRIBUTE, node);
+    });
+    document.querySelector('.pcui-graph').ui.on(GRAPH_ACTIONS.UPDATE_TRANSLATE, (data) => {
+        console.log(GRAPH_ACTIONS.UPDATE_TRANSLATE, data);
+    });
+    document.querySelector('.pcui-graph').ui.on(GRAPH_ACTIONS.UPDATE_SCALE, (data) => {
+        console.log(GRAPH_ACTIONS.UPDATE_SCALE, data);
     });
 }, 500);

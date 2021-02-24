@@ -35,7 +35,7 @@ class GraphViewNode {
 
         var labelName;
         if (nodeSchema.outPorts || nodeSchema.inPorts) {
-            labelName = nodeData.attributes && nodeData.attributes.name ? `${nodeSchema.name} (${nodeData.attributes.name})` : nodeSchema.name;
+            labelName = nodeData.attributes && nodeData.attributes.name ? `${nodeData.attributes.name} (${nodeSchema.name})` : nodeSchema.name;
         } else {
             labelName = nodeData.attributes && nodeData.attributes.name || nodeData.name;
         }
@@ -223,10 +223,9 @@ class GraphViewNode {
                 }
             }));
         }
-        this._graph.addCell(rect);
 
+        var containers = [];
         if (nodeSchema.attributes) {
-            const nodeDiv = document.querySelector(`#nodediv_${rect.id}`);
             nodeSchema.attributes.forEach((attribute, i) => {
                 const container = new Container({ class: 'graph-node-container' });
                 const label = new Label({ text: attribute.name, class: 'graph-node-label' });
@@ -276,26 +275,42 @@ class GraphViewNode {
                         input.inputs.forEach(i => i._sliderControl.dom.remove());
                         break;
                 }
+                input.enabled = !this._graphView._config.readOnly;
                 input.dom.setAttribute('id', `input_${attribute.name}`);
                 container.dom.setAttribute('style', `margin-top: ${i === 0 ? 33 + portHeight : 5}px; margin-bottom: 5px;`);
                 container.append(label);
                 container.append(input);
-                nodeDiv.appendChild(container.dom);
+                containers.push(container);
             });
         }
 
-        this._paper.findViewByModel(rect).on('element:pointerdown', () => {
-            if (this._hasLinked) {
-                this._hasLinked = false;
-                return;
-            }
-            onNodeSelected(this.nodeData);
-        });
+        var onCellMountedToDom = () => {
+            var nodeDiv = document.querySelector(`#nodediv_${rect.id}`);
+            containers.forEach(container => {
+                nodeDiv.appendChild(container.dom);
+            });
+            this._paper.findViewByModel(rect).on('element:pointerdown', () => {
+                if (this._hasLinked) {
+                    this._hasLinked = false;
+                    return;
+                }
+                onNodeSelected(this.nodeData);
+            });
+        };
+
+        if (this._graphView._batchingCells) {
+            this._graphView._cells.push(rect);
+            this._graphView._cellMountedFunctions.push(onCellMountedToDom);
+        } else {
+            this._graph.addCell(rect);
+            onCellMountedToDom();
+        }
 
         this.model = rect;
     }
 
     addContextMenu(items) {
+        if (this._graphView._config.readOnly) return;
         var nodeView = this._paper.findViewByModel(this.model);
         var contextMenu = document.createElement('div');
         this._paper.el.appendChild(contextMenu);
@@ -307,11 +322,21 @@ class GraphViewNode {
         });
     }
 
+
+    mapVectorToArray(v) {
+        var arr = [];
+        if (v.x) arr.push(v.x);
+        if (v.y) arr.push(v.y);
+        if (v.z) arr.push(v.z);
+        if (v.w) arr.push(v.w);
+        return arr;
+    }
+
     updateAttribute(attribute, value) {
         if (attribute === 'name') {
             var labelName;
             if (this.nodeSchema.outPorts || this.nodeSchema.inPorts) {
-                labelName = `${this.nodeSchema.name} (${value})`;
+                labelName = `${value} (${this.nodeSchema.name})`;
             } else {
                 labelName = value;
             }
@@ -319,8 +344,14 @@ class GraphViewNode {
         }
         const attributeElement = document.querySelector(`#nodediv_${this.model.id}`).querySelector(`#input_${attribute}`);
         if (attributeElement) {
-            attributeElement.ui.value = value;
+            attributeElement.ui.suspendEvents = true;
+            if (Number.isFinite(value.x)) {
+                attributeElement.ui.value = this.mapVectorToArray(value);
+            } else {
+                attributeElement.ui.value = value;
+            }
             attributeElement.ui.error = false;
+            attributeElement.ui.suspendEvents = false;
         }
     }
 

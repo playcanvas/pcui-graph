@@ -89,8 +89,16 @@
     font-size: 10px;
 }
 
+.graph-node-div {
+    pointer-events: none;
+}
+
 .graph-node-input {
     pointer-events: all;
+}
+
+.graph-node-input-no-pointer-events {
+    pointer-events: none;
 }
 
 .graph-node-container {
@@ -99,6 +107,7 @@
     height: 28px;
     display: flex;
     align-items: center;
+    pointer-events: inherit;
 }
 
 .graph-node-container:first-child {
@@ -110,4 +119,12 @@
     min-width: 50px;
     font-size: 12px;
     margin-left: 13px;
+}
+
+.port-inner-body {
+    pointer-events: none;
+}
+
+.pcui-contextmenu-parent, .pcui-contextmenu-child {
+    height: 27px;
 }

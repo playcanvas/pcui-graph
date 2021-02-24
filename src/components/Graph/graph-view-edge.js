@@ -1,11 +1,11 @@
-import { ContextMenu } from '../../pcui';
+import { ContextMenu } from '../../pcui-external';
 import * as joint from 'jointjs';
 
 import sourceMarkerDefaultImage from '../../assets/source-marker-default.png';
 import sourceMarkerActiveImage from '../../assets/source-marker-active.png';
 import sourceMarkerDeactiveImage from '../../assets/source-marker-deactive.png';
 
-joint.connectors.smoothInOut = function(sourcePoint, targetPoint, vertices, args) {
+joint.connectors.smoothInOut = function (sourcePoint, targetPoint, vertices, args) {
     var p1 = sourcePoint.clone();
     p1.offset(30, 0);
 
@@ -15,7 +15,7 @@ joint.connectors.smoothInOut = function(sourcePoint, targetPoint, vertices, args
     var path = new joint.g.Path(joint.g.Path.createSegment('M', sourcePoint));
     path.appendSegment(joint.g.Path.createSegment('C', p1, p2, targetPoint));
     return path;
-}
+};
 
 class GraphViewEdge {
     constructor(graphView, paper, graph, graphSchema, edgeData, edgeSchema, onEdgeSelected) {
@@ -46,12 +46,23 @@ class GraphViewEdge {
         } else {
             link.target(targetNode.model);
         }
-        this._graph.addCell(link);
-        link.toBack();
 
-        this._paper.findViewByModel(link).on('cell:pointerdown', function () {
-            onEdgeSelected(edgeData);
-        });
+        var onCellMountedToDom = () => {
+            this._paper.findViewByModel(link).on('cell:pointerdown', function () {
+                onEdgeSelected(edgeData);
+            });
+            if (edgeData && Number.isFinite(edgeData.inPort)) {
+                this._graphView.updatePortStatesForEdge(link, true);
+            }
+            link.toBack();
+        };
+        if (this._graphView._batchingCells) {
+            this._graphView._cells.push(link);
+            this._graphView._cellMountedFunctions.push(onCellMountedToDom);
+        } else {
+            this._graph.addCell(link);
+            onCellMountedToDom();
+        }
 
         this.model = link;
     }
@@ -95,6 +106,7 @@ class GraphViewEdge {
     }
 
     addContextMenu(items) {
+        if (this._graphView._config.readOnly) return;
         var edgeCell = this._paper.findViewByModel(this.model);
         if (!edgeCell) return;
         var contextMenu = document.createElement('div');

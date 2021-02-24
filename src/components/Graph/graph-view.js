@@ -29,16 +29,21 @@ class GraphView extends JointGraph {
         this._graphSchema = graphSchema;
         this._graphData = graphData;
 
+        this._config = config;
+
         this._nodes = {};
         this._edges = {};
+
+        this._cells = [];
+        this._cellMountedFunctions = [];
 
         joint.shapes.html = {};
         joint.shapes.html.Element = jointShapeElement();
         joint.shapes.html.ElementView = jointShapeElementView(this._paper);
 
-        this._graph.on('add', (cell) => this.updateNodePort(cell, true));
-        this._graph.on('remove', (cell) => this.updateNodePort(cell, false));
-        this._graph.on('change:target', (cell) => this.updateNodePort(cell, true));
+        // this._graph.on('add', (cell) => this.updatePortStatesForEdge(cell, true));
+        this._graph.on('remove', (cell) => this.updatePortStatesForEdge(cell, false));
+        this._graph.on('change:target', (cell) => this.updatePortStatesForEdge(cell, true));
 
         this._paper.on('cell:mousewheel', () => {
             parent.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.UPDATE_SCALE, { detail: { scale: this._paper.scale().sx } } ));
@@ -130,7 +135,27 @@ class GraphView extends JointGraph {
         });
     }
 
-    updateNodePort(cell, connected) {
+    batchCells() {
+        this._batchingCells = true;
+    }
+
+    isBatchingCells() {
+        return this._batchingCells;
+    }
+
+    addCellMountedFunction(f) {
+        this._cellMountedFunctions.push(f);
+    }
+
+    applyBatchedCells() {
+        this._batchingCells = false;
+        this._graph.addCells(this._cells);
+        this._cellMountedFunctions.forEach(f => f());
+        this._cells = [];
+        this._cellMountedFunctions = [];
+    }
+
+    updatePortStatesForEdge(cell, connected) {
         var source = cell.get('source');
         var target = cell.get('target');
         if (source && source.port && target && target.port) {
@@ -160,15 +185,24 @@ class GraphView extends JointGraph {
     addCanvasContextMenu(items) {
         this._viewContextMenu = document.createElement('div');
         this._paper.el.appendChild(this._viewContextMenu);
-        new ContextMenu({
+        var contextMenu = new ContextMenu({
             dom: this._viewContextMenu,
             items: items
         });
+        window.contextMenu = contextMenu;
+        return contextMenu._contextMenuEvent;
     }
 
     addNodeContextMenu(id, items) {
-        var node = this.getNode(id);
-        node.addContextMenu(items);
+        var addNodeContextMenuFunction = () => {
+            var node = this.getNode(id);
+            node.addContextMenu(items);
+        };
+        if (this._batchingCells) {
+            this._cellMountedFunctions.push(addNodeContextMenuFunction);
+        } else {
+            addNodeContextMenuFunction();
+        }
     }
 
     addEdgeContextMenu(id, items) {
@@ -219,8 +253,15 @@ class GraphView extends JointGraph {
     }
 
     addNodeEvent(id, event, callback, attribute) {
-        var node = this.getNode(id);
-        node.addEvent(event, callback, attribute);
+        var addNodeEventFunction = () => {
+            var node = this.getNode(id);
+            node.addEvent(event, callback, attribute);
+        };
+        if (this._batchingCells) {
+            this._cellMountedFunctions.push(addNodeEventFunction);
+        } else {
+            addNodeEventFunction();
+        }
     }
 
     getEdge(id) {
@@ -275,7 +316,20 @@ class GraphView extends JointGraph {
         delete this._edges[id];
     }
 
+    disableInputEvents() {
+        document.querySelectorAll('.graph-node-input').forEach(input => {
+            input.classList.add('graph-node-input-no-pointer-events');
+        });
+    }
+
+    enableInputEvents() {
+        document.querySelectorAll('.graph-node-input').forEach(input => {
+            input.classList.remove('graph-node-input-no-pointer-events');
+        });
+    }
+
     addUnconnectedEdge(nodeId, edgeType, edgeSchema, validateEdge, onEdgeConnected) {
+        this.disableInputEvents();
         const link = GraphViewEdge.createLink(edgeSchema);
         link.source(this.getNode(nodeId).model);
         link.target(this.getNode(nodeId).model);
@@ -303,11 +357,13 @@ class GraphView extends JointGraph {
             this._graph.removeCells(link);
             document.removeEventListener('mousemove', mouseMoveEvent);
             this._paper.off('cell:pointerdown', cellPointerDownEvent);
+            this.enableInputEvents();
         };
         var mouseDownEvent = () => {
             this._paper.off('cell:pointerdown', cellPointerDownEvent);
             document.removeEventListener('mousemove', mouseMoveEvent);
             this._graph.removeCells(link);
+            this.enableInputEvents();
         };
 
         document.addEventListener('mousemove', mouseMoveEvent);
