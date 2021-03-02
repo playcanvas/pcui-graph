@@ -3,8 +3,9 @@ import { Observer } from '../../pcui-binding-external';
 import { diff } from 'json-diff';
 import { deepCopyFunction } from './util';
 import GraphView from './graph-view';
+import { Vec2 } from 'playcanvas';
 import './style.scss';
-import './style-story.scss';
+// import './style-story.scss';
 
 
 export var GRAPH_ACTIONS = {
@@ -28,10 +29,23 @@ var defaultConfig = {
 };
 
 class SelectedItem {
-    constructor(graph, type, id) {
+    constructor(graph, type, id, edgeId) {
         this._graph = graph;
         this._type = type;
         this._id = id;
+        this._edgeId = edgeId;
+    }
+
+    get type() {
+        return this._type;
+    }
+
+    get id() {
+        return this._id;
+    }
+
+    get edgeId() {
+        return this._edgeId;
     }
 
     selectItem() {
@@ -166,26 +180,35 @@ class Graph extends Element {
         this.view.addCanvasContextMenu(viewContextMenuItems);
     }
 
-    selectNode(node) {
+    get selectedItem() {
+        return this._selectedItem;
+    }
+
+    selectNode(node, suppressEvents) {
+        const prevItem = this._selectedItem;
         this.deselectItem();
-        this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.SELECT_NODE, { detail: node }));
+        if (!suppressEvents) this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.SELECT_NODE, { detail: { node, prevItem } }));
         this._selectedItem = new SelectedItem(this, 'NODE', node.id);
         this._selectedItem.selectItem();
     }
 
-    selectEdge(edge) {
+    selectEdge(edge, edgeId, suppressEvents) {
+        const prevItem = this._selectedItem;
         this.deselectItem();
-        this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.SELECT_EDGE, { detail: { edge } }));
-        this._selectedItem = new SelectedItem(this, 'EDGE', `${edge.from}-${edge.to}`);
+        if (!suppressEvents) this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.SELECT_EDGE, { detail: { edge, edgeId, prevItem } }));
+        this._selectedItem = new SelectedItem(this, 'EDGE', `${edge.from}-${edge.to}`, edgeId);
         this._selectedItem.selectItem();
     }
 
-    deselectItem() {
+    deselectItem(suppressEvents) {
         if (this._selectedItem) {
-            this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.DESELECT_ITEM, { detail: {
-                type: this._selectedItem._type,
-                id: this._selectedItem._id
-            } }));
+            if (!suppressEvents) {
+                this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.DESELECT_ITEM, { detail: {
+                    type: this._selectedItem._type,
+                    id: this._selectedItem._id,
+                    edgeId: this._selectedItem._edgeId
+                } }));
+            }
             this._selectedItem.deselectItem();
             this._selectedItem = null;
         }
@@ -199,7 +222,7 @@ class Graph extends Element {
     createEdge(edge, edgeId, suppressEvents) {
         var edgeSchema = this._graphSchema.edges[edge.edgeType];
         this.view.addEdge(edge, edgeSchema, (edge) => {
-            this.selectEdge(edge);
+            this.selectEdge(edge, edgeId);
         });
         var contextMenuItems = deepCopyFunction(edgeSchema.contextMenuItems).map(item => {
             if (item.action === GRAPH_ACTIONS.DELETE_EDGE) {
@@ -248,7 +271,7 @@ class Graph extends Element {
         }
         this.createEdge(edge, edgeId);
         this.suppressNodeSelect = true;
-        this.selectEdge(edge);
+        this.selectEdge(edge, edgeId);
     }
 
     _createUnconnectedEdgeForNode(node, edgeType) {
@@ -276,7 +299,7 @@ class Graph extends Element {
         if (this.suppressNodeSelect) {
             this.suppressNodeSelect = false;
         } else {
-            this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.SELECT_NODE, { detail: node }));
+            this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.SELECT_NODE, { detail: { node, prevItem: this._selectedItem } }));
             if (this._selectedItem) {
                 this._selectedItem.deselectItem();
             }
@@ -289,7 +312,7 @@ class Graph extends Element {
         var node = this._graphData.get(`data.nodes.${nodeId}`);
         var prevPosX = node.posX;
         var prevPosY = node.posY;
-        if (pos.x !== node.posX || pos.y !== node.posY) {
+        if (new Vec2(pos.x, pos.y).sub(new Vec2(node.posX, node.posY)).length() > 5) {
             node.posX = pos.x;
             node.posY = pos.y;
             if (!this._config.passiveUIEvents) {
@@ -404,6 +427,7 @@ class Graph extends Element {
 
     deleteNode(nodeId, suppressEvents, passiveUIEvents) {
         if (!this._graphData.get(`data.nodes.${nodeId}`)) return;
+        if (this._selectedItem && this._selectedItem._id === nodeId) this.deselectItem();
         if (!passiveUIEvents) this.view.removeNode(nodeId);
         const node = this._graphData.get(`data.nodes.${nodeId}`);
         if (!passiveUIEvents) this._graphData.unset(`data.nodes.${nodeId}`);
@@ -442,9 +466,9 @@ class Graph extends Element {
             var edgeSchema = this._graphSchema.edges[edge.edgeType];
             if ([edge.from, edge.to].includes(from) && [edge.from, edge.to].includes(to)) {
                 this.view.addEdge(edge, edgeSchema, (edge) => {
-                    this.selectEdge(edge);
+                    this.selectEdge(edge, edgeKey);
                 });
-                this.selectEdge(edge);
+                this.selectEdge(edge, edgeKey);
             }
         });
     }

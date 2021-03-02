@@ -230,22 +230,18 @@ class GraphViewNode {
                 const container = new Container({ class: 'graph-node-container' });
                 const label = new Label({ text: attribute.name, class: 'graph-node-label' });
                 let input;
-                let nodeValue;
+                const nodeValue = nodeData.attributes ? nodeData.attributes[attribute.name] : nodeData[attribute.name];
                 switch (attribute.type) {
                     case 'TEXT_INPUT':
-                        nodeValue = nodeData.attributes[attribute.name];
                         input = new TextInput({ class: 'graph-node-input', value: nodeValue });
                         break;
                     case 'BOOLEAN_INPUT':
-                        nodeValue = nodeData.attributes[attribute.name];
                         input = new BooleanInput({ class: 'graph-node-input', value: nodeValue });
                         break;
                     case 'NUMERIC_INPUT':
-                        nodeValue = nodeData.attributes[attribute.name];
                         input = new NumericInput({ class: 'graph-node-input', hideSlider: true, value: nodeValue && nodeValue.x ? nodeValue.x : nodeValue });
                         break;
                     case 'VEC_2_INPUT':
-                        nodeValue = nodeData.attributes[attribute.name];
                         input = new VectorInput({ dimensions: 2, class: 'graph-node-input', hideSlider: true, value: [
                             nodeValue.x,
                             nodeValue.y
@@ -254,7 +250,6 @@ class GraphViewNode {
                         input.inputs.forEach(i => i._sliderControl.dom.remove());
                         break;
                     case 'VEC_3_INPUT':
-                        nodeValue = nodeData.attributes[attribute.name];
                         input = new VectorInput({ dimensions: 3, class: 'graph-node-input', hideSlider: true, value: [
                             nodeValue.x,
                             nodeValue.y,
@@ -264,7 +259,6 @@ class GraphViewNode {
                         input.inputs.forEach(i => i._sliderControl.dom.remove());
                         break;
                     case 'VEC_4_INPUT':
-                        nodeValue = nodeData.attributes[attribute.name];
                         input = new VectorInput({ dimensions: 4, class: 'graph-node-input', hideSlider: true, value: [
                             nodeValue.x,
                             nodeValue.y,
@@ -370,7 +364,8 @@ class GraphViewNode {
         switch (event) {
             case 'updatePosition': {
                 nodeView.on('element:pointerup', () => {
-                    callback(this.nodeData.id, this._graphView.getWindowToGraphPosition(nodeView.el.getBoundingClientRect()));
+                    var newPos = this._graphView.getWindowToGraphPosition(nodeView.el.getBoundingClientRect());
+                    callback(this.nodeData.id, newPos);
                 });
                 break;
             }
