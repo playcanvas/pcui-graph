@@ -21,7 +21,7 @@ class JointGraph {
             cellViewNamespace: joint.shapes,
             height: dom.offsetHeight,
             clickThreshold: 1,
-            restrictTranslate: true,
+            restrictTranslate: this._config.restrictTranslate,
             background: {
                 color: '#20292B'
             },

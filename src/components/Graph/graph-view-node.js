@@ -13,11 +13,6 @@ class GraphViewNode {
         this.nodeSchema = nodeSchema;
         this.state = GraphViewNode.STATES.DEFAULT;
 
-        if (domEvent) {
-            var pos = this._graphView.getWindowToGraphPosition(new Vec2(domEvent.clientX, domEvent.clientY));
-            nodeData.posX = pos.x;
-            nodeData.posY = pos.y;
-        }
         var rectHeight = 28;
         var portHeight = 0;
         var attributeHeight = 0;
@@ -230,7 +225,22 @@ class GraphViewNode {
                 const container = new Container({ class: 'graph-node-container' });
                 const label = new Label({ text: attribute.name, class: 'graph-node-label' });
                 let input;
-                const nodeValue = nodeData.attributes ? nodeData.attributes[attribute.name] : nodeData[attribute.name];
+                let nodeValue;
+                if (nodeData.attributes) {
+                    if (nodeData.attributes[attribute.name]) {
+                        nodeValue = nodeData.attributes[attribute.name];
+                    } else {
+                        Object.keys(nodeData.attributes).forEach(k => {
+                            const a = nodeData.attributes[k];
+                            if (a.name === attribute.name) {
+                                nodeValue = a.defaultValue;
+                            }
+                        });
+                    }
+                }
+                if (!nodeValue) {
+                    nodeValue = nodeData[attribute.name];
+                }
                 switch (attribute.type) {
                     case 'TEXT_INPUT':
                         input = new TextInput({ class: 'graph-node-input', value: nodeValue });

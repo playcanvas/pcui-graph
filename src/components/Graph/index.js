@@ -3,9 +3,8 @@ import { Observer } from '../../pcui-binding-external';
 import { diff } from 'json-diff';
 import { deepCopyFunction } from './util';
 import GraphView from './graph-view';
-import { Vec2 } from 'playcanvas';
 import './style.scss';
-// import './style-story.scss';
+import './style-story.scss';
 
 
 export var GRAPH_ACTIONS = {
@@ -25,7 +24,8 @@ export var GRAPH_ACTIONS = {
 var defaultConfig = {
     edgeHoverEffect: true,
     passiveUIEvents: false,
-    readOnly: false
+    readOnly: false,
+    restrictTranslate: false
 };
 
 class SelectedItem {
@@ -157,10 +157,21 @@ class Graph extends Element {
                                 }
                             });
                         }
+                        let element = e.target;
+                        while (!element.classList.contains('pcui-contextmenu')) {
+                            element = element.parentElement;
+                        }
+                        var pos = {
+                            x: Number(element.style.left.replace('px', '')),
+                            y: Number(element.style.top.replace('px', ''))
+                        };
+                        pos = this.getWindowToGraphPosition(pos);
+                        node.posX = pos.x;
+                        node.posY = pos.y;
                         if (this._config.passiveUIEvents) {
                             this.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.ADD_NODE, { detail: node }));
                         } else {
-                            this.createNode(node, e);
+                            this.createNode(node);
                             this._graphData.set(`data.nodes.${node.id}`, node);
                             this.selectNode(node);
                         }
@@ -312,7 +323,7 @@ class Graph extends Element {
         var node = this._graphData.get(`data.nodes.${nodeId}`);
         var prevPosX = node.posX;
         var prevPosY = node.posY;
-        if (new Vec2(pos.x, pos.y).sub(new Vec2(node.posX, node.posY)).length() > 5) {
+        if (pos.x !== node.posX || pos.y !== node.posY) {
             node.posX = pos.x;
             node.posY = pos.y;
             if (!this._config.passiveUIEvents) {
@@ -324,27 +335,34 @@ class Graph extends Element {
         }
     }
 
-    onNodeAttributeUpdated(nodeId, attribute, value) {
+    _onNodeAttributeUpdated(nodeId, attribute, value) {
         var node = this._graphData.get(`data.nodes.${nodeId}`);
-        if (value === node.attributes[attribute.name]) return;
         var prevAttributeValue;
-        if (Number.isFinite(node.attributes[attribute.name].x)) {
-            prevAttributeValue = { ...node.attributes[attribute.name] };
+        let attributeKey = node.attributes[attribute.name] ? attribute.name : undefined;
+        if (!attributeKey) {
+            Object.keys(node.attributes).forEach(k => {
+                const item = node.attributes[k];
+                if (item.name === attribute.name) attributeKey = k;
+            });
+        }
+        if (Number.isFinite(node.attributes[attributeKey].x)) {
+            prevAttributeValue = { ...node.attributes[attributeKey] };
         } else {
-            prevAttributeValue = node.attributes[attribute.name];
+            prevAttributeValue = node.attributes[attributeKey];
         }
         if (Array.isArray(value)) {
             var keyMap = ['x', 'y', 'z', 'w'];
             value.forEach((v, i) => {
-                node.attributes[attribute.name][keyMap[i]] = v;
+                node.attributes[attributeKey][keyMap[i]] = v;
             });
         } else {
-            node.attributes[attribute.name] = value;
+            node.attributes[attributeKey] = value;
         }
-        if (!this._config.passiveUIEvents) {
-            this._graphData.set(`data.nodes.${nodeId}`, node);
-        } else {
+        if (JSON.stringify(node.attributes[attributeKey]) === JSON.stringify(prevAttributeValue)) return;
+        if (this._config.passiveUIEvents) {
             this.updateNodeAttribute(nodeId, attribute.name, prevAttributeValue);
+        } else {
+            this._graphData.set(`data.nodes.${nodeId}`, node);
         }
         this.dom.dispatchEvent(
             new CustomEvent(
@@ -352,7 +370,8 @@ class Graph extends Element {
                 {
                     detail: {
                         node: node,
-                        attribute: attribute.name
+                        attribute: attribute.name,
+                        attributeKey: attributeKey
                     }
                 }
             )
@@ -396,7 +415,7 @@ class Graph extends Element {
                 this.view.addNodeEvent(
                     node.id,
                     `updateAttribute`,
-                    this.onNodeAttributeUpdated.bind(this),
+                    this._onNodeAttributeUpdated.bind(this),
                     attribute
                 );
             });
@@ -414,7 +433,7 @@ class Graph extends Element {
 
     updateNodeAttribute(nodeId, attribute, value) {
         if (!this._graphData.get(`data.nodes.${nodeId}`)) return;
-        this._graphData.set(`data.nodes.${nodeId}.${attribute}`, value);
+        this._graphData.set(`data.nodes.${nodeId}.attributes.${attribute}`, value);
         this.view.updateNodeAttribute(nodeId, attribute, value);
     }
 
@@ -490,6 +509,14 @@ class Graph extends Element {
 
     getGraphScale() {
         return this.view.getGraphScale();
+    }
+
+    getWindowToGraphPosition(pos) {
+        return this.view.getWindowToGraphPosition(pos);
+    }
+
+    getGraphPosition(pos) {
+        return this.view.getGraphPosition(pos);
     }
 
     on(eventName, callback) {
