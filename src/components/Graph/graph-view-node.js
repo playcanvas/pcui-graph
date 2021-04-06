@@ -329,10 +329,10 @@ class GraphViewNode {
 
     mapVectorToArray(v) {
         var arr = [];
-        if (v.x) arr.push(v.x);
-        if (v.y) arr.push(v.y);
-        if (v.z) arr.push(v.z);
-        if (v.w) arr.push(v.w);
+        if (Number.isFinite(v.x)) arr.push(v.x);
+        if (Number.isFinite(v.y)) arr.push(v.y);
+        if (Number.isFinite(v.z)) arr.push(v.z);
+        if (Number.isFinite(v.w)) arr.push(v.w);
         return arr;
     }
 

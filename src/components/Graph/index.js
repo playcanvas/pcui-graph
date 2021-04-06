@@ -25,7 +25,8 @@ var defaultConfig = {
     edgeHoverEffect: true,
     passiveUIEvents: false,
     readOnly: false,
-    restrictTranslate: false
+    restrictTranslate: false,
+    incrementNodeNames: false
 };
 
 class SelectedItem {
@@ -140,12 +141,12 @@ class Graph extends Element {
                             ...item,
                             id: Number(`${Date.now()}${Math.floor(Math.random() * 10000)}`)
                         };
+                        if (item.attributes) {
+                            node.attributes = { ...item.attributes };
+                        }
                         delete node.action;
                         delete node.text;
                         delete node.onClick;
-                        if (node.name) {
-                            node.name = `${node.name} ${Object.keys(this._graphData.get('data.nodes')).length}`;
-                        }
                         var nodeSchema = this._graphSchema.nodes[node.nodeType];
                         if (nodeSchema.attributes && !node.attributes) {
                             node.attributes = {};
@@ -156,6 +157,9 @@ class Graph extends Element {
                                     node.attributes[attribute.name] = attribute.defaultValue;
                                 }
                             });
+                        }
+                        if (this._config.incrementNodeNames && node.attributes.name) {
+                            node.attributes.name = `${node.attributes.name} ${Object.keys(this._graphData.get('data.nodes')).length}`;
                         }
                         let element = e.target;
                         while (!element.classList.contains('pcui-contextmenu')) {
@@ -355,6 +359,8 @@ class Graph extends Element {
             value.forEach((v, i) => {
                 node.attributes[attributeKey][keyMap[i]] = v;
             });
+        } else if (Object.keys(prevAttributeValue).includes('x') && Number.isFinite(value)) {
+            node.attributes[attributeKey].x = value;
         } else {
             node.attributes[attributeKey] = value;
         }
