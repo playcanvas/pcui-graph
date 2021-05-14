@@ -169,7 +169,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -994,7 +994,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -1841,7 +1841,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -1993,198 +1993,6 @@ Element["a" /* default */].register('label', Label_Label);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export bytesToHuman */
-/* unused harmony export swapExtension */
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-var utils = {}; // utils.deepCopy
-
-utils.deepCopy = function deepCopy(data) {
-  if (data == null || _typeof(data) !== 'object') return data;
-
-  if (data instanceof Array) {
-    var arr = [];
-
-    for (var i = 0; i < data.length; i++) {
-      arr[i] = deepCopy(data[i]);
-    }
-
-    return arr;
-  }
-
-  var obj = {};
-
-  for (var key in data) {
-    if (data.hasOwnProperty(key)) obj[key] = deepCopy(data[key]);
-  }
-
-  return obj;
-};
-
-utils.isMobile = function () {
-  return /Android/i.test(navigator.userAgent) || /iPhone|iPad|iPod/i.test(navigator.userAgent);
-};
-/**
- * @name utils.implements
- * @description Adds properties and methods from the sourceClass
- * to the targetClass but only if properties with the same name do not
- * already exist in the targetClass.
- * @param {object} targetClass - The target class.
- * @param {object} sourceClass - The source class.
- * @example utils.implements(pcui.Container, pcui.IContainer);
- */
-
-
-utils.implements = function (targetClass, sourceClass) {
-  var properties = Object.getOwnPropertyDescriptors(sourceClass.prototype);
-
-  for (var key in properties) {
-    if (targetClass.prototype.hasOwnProperty(key)) {
-      delete properties[key];
-    }
-  }
-
-  Object.defineProperties(targetClass.prototype, properties);
-};
-/**
- * @name utils.proxy
- * @description Creates new properties on the target class that get / set
- * the properties of the member.
- * @param {object} targetClass - The target class
- * @param {string} memberName - The name of the member of the target class that properties will be proxied to.
- * @param {string[]} properties - A list of properties to be proxied.
- * @example
- * utils.proxy(pcui.SliderInput, '_numericInput', ['max', 'min', 'placeholder']);
- */
-
-
-utils.proxy = function (targetClass, memberName, properties) {
-  properties.forEach(function (property) {
-    Object.defineProperty(targetClass.prototype, property, {
-      get: function get() {
-        return this[memberName][property];
-      },
-      set: function set(value) {
-        this[memberName][property] = value;
-      }
-    });
-  });
-}; // String.startsWith
-
-
-if (!String.prototype.startsWith) {
-  Object.defineProperty(String.prototype, 'startsWith', {
-    enumerable: false,
-    configurable: false,
-    writable: false,
-    value: function value(str) {
-      var that = this;
-      var ceil = str.length;
-
-      for (var i = 0; i < ceil; i++) {
-        if (that[i] !== str[i]) return false;
-      }
-
-      return true;
-    }
-  });
-} // String.endsWith polyfill
-
-
-if (!String.prototype.endsWith) {
-  Object.defineProperty(String.prototype, 'endsWith', {
-    enumerable: false,
-    configurable: false,
-    writable: false,
-    value: function value(str) {
-      var that = this;
-
-      for (var i = 0, ceil = str.length; i < ceil; i++) {
-        if (that[i + that.length - ceil] !== str[i]) return false;
-      }
-
-      return true;
-    }
-  });
-} // Appends query parameter to string (supposedly the string is a URL)
-// automatically figuring out if the separator should be ? or &.
-// Example: url.appendQuery('t=123').appendQuery('q=345');
-
-
-if (!String.prototype.appendQuery) {
-  Object.defineProperty(String.prototype, 'appendQuery', {
-    enumerable: false,
-    configurable: false,
-    writable: false,
-    value: function value(queryParameter) {
-      var separator = this.indexOf('?') !== -1 ? '&' : '?';
-      return this + separator + queryParameter;
-    }
-  });
-}
-
-utils.arrayEquals = function (lhs, rhs) {
-  if (!lhs) return false;
-  if (!rhs) return false;
-  if (lhs.length !== rhs.length) return false;
-
-  for (var i = 0, l = lhs.length; i < l; i++) {
-    if (this[i] instanceof Array && rhs[i] instanceof Array) {
-      if (!this[i].equals(rhs[i])) return false;
-    } else if (this[i] !== rhs[i]) {
-      return false;
-    }
-  }
-
-  return true;
-}; // element.classList.add polyfill
-
-
-(function () {
-  var dummy = document.createElement('div'),
-      dtp = DOMTokenList.prototype,
-      add = dtp.add,
-      rem = dtp.remove;
-  dummy.classList.add('class1', 'class2'); // Older versions of the HTMLElement.classList spec didn't allow multiple
-  // arguments, easy to test for
-
-  if (!dummy.classList.contains('class2')) {
-    dtp.add = function () {
-      Array.prototype.forEach.call(arguments, add.bind(this));
-    };
-
-    dtp.remove = function () {
-      Array.prototype.forEach.call(arguments, rem.bind(this));
-    };
-  }
-})();
-
-var bytesToHuman = function bytesToHuman(bytes) {
-  if (isNaN(bytes) || bytes === 0) return '0 B';
-  var k = 1000;
-  var sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-  var i = Math.floor(Math.log(bytes) / Math.log(k));
-  return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
-}; // todo move this into proper library
-// replace the oldExtension in a path with the newExtension
-// return the new path
-// oldExtension and newExtension should have leading period
-
-var swapExtension = function swapExtension(path, oldExtension, newExtension) {
-  while (path.indexOf(oldExtension) >= 0) {
-    path = path.replace(oldExtension, newExtension);
-  }
-
-  return path;
-};
-/* harmony default export */ __webpack_exports__["a"] = (utils);
-
-/***/ }),
-/* 5 */,
-/* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
 /* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 /* harmony import */ var _TextInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
@@ -2211,7 +2019,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -2765,6 +2573,198 @@ var TreeViewItem = /*#__PURE__*/function (_Container) {
 /* harmony default export */ __webpack_exports__["a"] = (TreeViewItem);
 
 /***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export bytesToHuman */
+/* unused harmony export swapExtension */
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+var utils = {}; // utils.deepCopy
+
+utils.deepCopy = function deepCopy(data) {
+  if (data == null || _typeof(data) !== 'object') return data;
+
+  if (data instanceof Array) {
+    var arr = [];
+
+    for (var i = 0; i < data.length; i++) {
+      arr[i] = deepCopy(data[i]);
+    }
+
+    return arr;
+  }
+
+  var obj = {};
+
+  for (var key in data) {
+    if (data.hasOwnProperty(key)) obj[key] = deepCopy(data[key]);
+  }
+
+  return obj;
+};
+
+utils.isMobile = function () {
+  return /Android/i.test(navigator.userAgent) || /iPhone|iPad|iPod/i.test(navigator.userAgent);
+};
+/**
+ * @name utils.implements
+ * @description Adds properties and methods from the sourceClass
+ * to the targetClass but only if properties with the same name do not
+ * already exist in the targetClass.
+ * @param {object} targetClass - The target class.
+ * @param {object} sourceClass - The source class.
+ * @example utils.implements(pcui.Container, pcui.IContainer);
+ */
+
+
+utils.implements = function (targetClass, sourceClass) {
+  var properties = Object.getOwnPropertyDescriptors(sourceClass.prototype);
+
+  for (var key in properties) {
+    if (targetClass.prototype.hasOwnProperty(key)) {
+      delete properties[key];
+    }
+  }
+
+  Object.defineProperties(targetClass.prototype, properties);
+};
+/**
+ * @name utils.proxy
+ * @description Creates new properties on the target class that get / set
+ * the properties of the member.
+ * @param {object} targetClass - The target class
+ * @param {string} memberName - The name of the member of the target class that properties will be proxied to.
+ * @param {string[]} properties - A list of properties to be proxied.
+ * @example
+ * utils.proxy(pcui.SliderInput, '_numericInput', ['max', 'min', 'placeholder']);
+ */
+
+
+utils.proxy = function (targetClass, memberName, properties) {
+  properties.forEach(function (property) {
+    Object.defineProperty(targetClass.prototype, property, {
+      get: function get() {
+        return this[memberName][property];
+      },
+      set: function set(value) {
+        this[memberName][property] = value;
+      }
+    });
+  });
+}; // String.startsWith
+
+
+if (!String.prototype.startsWith) {
+  Object.defineProperty(String.prototype, 'startsWith', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: function value(str) {
+      var that = this;
+      var ceil = str.length;
+
+      for (var i = 0; i < ceil; i++) {
+        if (that[i] !== str[i]) return false;
+      }
+
+      return true;
+    }
+  });
+} // String.endsWith polyfill
+
+
+if (!String.prototype.endsWith) {
+  Object.defineProperty(String.prototype, 'endsWith', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: function value(str) {
+      var that = this;
+
+      for (var i = 0, ceil = str.length; i < ceil; i++) {
+        if (that[i + that.length - ceil] !== str[i]) return false;
+      }
+
+      return true;
+    }
+  });
+} // Appends query parameter to string (supposedly the string is a URL)
+// automatically figuring out if the separator should be ? or &.
+// Example: url.appendQuery('t=123').appendQuery('q=345');
+
+
+if (!String.prototype.appendQuery) {
+  Object.defineProperty(String.prototype, 'appendQuery', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: function value(queryParameter) {
+      var separator = this.indexOf('?') !== -1 ? '&' : '?';
+      return this + separator + queryParameter;
+    }
+  });
+}
+
+utils.arrayEquals = function (lhs, rhs) {
+  if (!lhs) return false;
+  if (!rhs) return false;
+  if (lhs.length !== rhs.length) return false;
+
+  for (var i = 0, l = lhs.length; i < l; i++) {
+    if (this[i] instanceof Array && rhs[i] instanceof Array) {
+      if (!this[i].equals(rhs[i])) return false;
+    } else if (this[i] !== rhs[i]) {
+      return false;
+    }
+  }
+
+  return true;
+}; // element.classList.add polyfill
+
+
+(function () {
+  var dummy = document.createElement('div'),
+      dtp = DOMTokenList.prototype,
+      add = dtp.add,
+      rem = dtp.remove;
+  dummy.classList.add('class1', 'class2'); // Older versions of the HTMLElement.classList spec didn't allow multiple
+  // arguments, easy to test for
+
+  if (!dummy.classList.contains('class2')) {
+    dtp.add = function () {
+      Array.prototype.forEach.call(arguments, add.bind(this));
+    };
+
+    dtp.remove = function () {
+      Array.prototype.forEach.call(arguments, rem.bind(this));
+    };
+  }
+})();
+
+var bytesToHuman = function bytesToHuman(bytes) {
+  if (isNaN(bytes) || bytes === 0) return '0 B';
+  var k = 1000;
+  var sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+  var i = Math.floor(Math.log(bytes) / Math.log(k));
+  return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
+}; // todo move this into proper library
+// replace the oldExtension in a path with the newExtension
+// return the new path
+// oldExtension and newExtension should have leading period
+
+var swapExtension = function swapExtension(path, oldExtension, newExtension) {
+  while (path.indexOf(oldExtension) >= 0) {
+    path = path.replace(oldExtension, newExtension);
+  }
+
+  return path;
+};
+/* harmony default export */ __webpack_exports__["a"] = (utils);
+
+/***/ }),
+/* 6 */,
 /* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2802,7 +2802,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -3262,6 +3262,185 @@ EventHandle.prototype.on = function (name, fn) {
 
 "use strict";
 
+// CONCATENATED MODULE: ./src/components/Button/style.scss
+// extracted by mini-css-extract-plugin
+
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
+
+// CONCATENATED MODULE: ./src/components/Button/index.js
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var CLASS_BUTTON = 'pcui-button';
+/**
+ * @name Button
+ * @classdesc Represents a button.
+ * @augments Element
+ * @property {string} [text=Click Me] Gets / sets the text of the button
+ * @property {string} size Gets / sets the 'size' type of the button. Can be null or 'small'.
+ * @property {string} [icon=E401] The CSS code for an icon for the button. e.g. E401 (notice we omit the '\' character).
+ * @mixes IFocusable
+ */
+
+var Button = /*#__PURE__*/function (_Element) {
+  _inherits(Button, _Element);
+
+  var _super = _createSuper(Button);
+
+  /**
+   * Creates a new Button.
+   *
+   * @param {object} args - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
+   * @param {boolean} [args.unsafe] - If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
+   */
+  function Button(args) {
+    var _this;
+
+    _classCallCheck(this, Button);
+
+    if (!args) args = {};
+    _this = _super.call(this, args.dom ? args.dom : document.createElement('button'), args);
+
+    _this.class.add(CLASS_BUTTON);
+
+    _this._unsafe = args.unsafe || false;
+    _this.text = args.text || '';
+    _this.size = args.size || null;
+    _this.icon = args.icon || '';
+    _this._domEventKeyDown = _this._onKeyDown.bind(_assertThisInitialized(_this));
+
+    _this.dom.addEventListener('keydown', _this._onKeyDown.bind(_assertThisInitialized(_this)));
+
+    return _this;
+  } // click on enter
+  // blur on escape
+
+
+  _createClass(Button, [{
+    key: "_onKeyDown",
+    value: function _onKeyDown(evt) {
+      if (evt.keyCode === 27) {
+        this.blur();
+      } else if (evt.keyCode === 13) {
+        this._onClick(evt);
+      }
+    }
+  }, {
+    key: "_onClick",
+    value: function _onClick(evt) {
+      this.blur();
+      if (this.readOnly) return;
+
+      _get(_getPrototypeOf(Button.prototype), "_onClick", this).call(this, evt);
+    }
+  }, {
+    key: "focus",
+    value: function focus() {
+      this.dom.focus();
+    }
+  }, {
+    key: "blur",
+    value: function blur() {
+      this.dom.blur();
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      if (this._destroyed) return;
+      this.dom.removeEventListener('keydown', this._domEventKeyDown);
+
+      _get(_getPrototypeOf(Button.prototype), "destroy", this).call(this);
+    }
+  }, {
+    key: "text",
+    get: function get() {
+      return this._text;
+    },
+    set: function set(value) {
+      if (this._text === value) return;
+      this._text = value;
+
+      if (this._unsafe) {
+        this.dom.innerHTML = value;
+      } else {
+        this.dom.textContent = value;
+      }
+    }
+  }, {
+    key: "icon",
+    get: function get() {
+      return this._icon;
+    },
+    set: function set(value) {
+      if (this._icon === value | !value.match(/^E[0-9]{0,4}$/)) return;
+      this._icon = value;
+
+      if (value) {
+        // set data-icon attribute but first convert the value to a code point
+        this.dom.setAttribute('data-icon', String.fromCodePoint(parseInt(value, 16)));
+      } else {
+        this.dom.removeAttribute('data-icon');
+      }
+    }
+  }, {
+    key: "size",
+    get: function get() {
+      return this._size;
+    },
+    set: function set(value) {
+      if (this._size === value) return;
+
+      if (this._size) {
+        this.class.remove('pcui-' + this._size);
+        this._size = null;
+      }
+
+      this._size = value;
+
+      if (this._size) {
+        this.class.add('pcui-' + this._size);
+      }
+    }
+  }]);
+
+  return Button;
+}(Element["a" /* default */]);
+
+Element["a" /* default */].register('button', Button);
+/* harmony default export */ var components_Button = __webpack_exports__["a"] = (Button);
+
+/***/ }),
+/* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
 // CONCATENATED MODULE: ./src/components/NumericInput/style.scss
 // extracted by mini-css-extract-plugin
 
@@ -3297,7 +3476,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -3549,30 +3728,6 @@ var NumericInput_NumericInput = /*#__PURE__*/function (_TextInput) {
       return different;
     }
   }, {
-    key: "destroy",
-    value: function destroy() {
-      if (this.destroyed) return;
-
-      if (this._domEvtSliderMouseDown) {
-        this._sliderControl.dom.removeEventListener('mousedown', this._domEvtSliderMouseDown);
-
-        this._sliderControl.dom.removeEventListener('mouseup', this._domEvtSliderMouseUp);
-      }
-
-      if (this._domEvtMouseWheel) {
-        this._sliderControl.dom.removeEventListener("mousemove", this._domEvtMouseWheel, false);
-
-        this._sliderControl.dom.removeEventListener("wheel", this._domEvtMouseWheel, false);
-      }
-
-      if (this._domEvtPointerLock) {
-        document.removeEventListener('pointerlockchange', this._domEvtPointerLock, false);
-        document.removeEventListener('mozpointerlockchange', this._domEvtPointerLock, false);
-      }
-
-      _get(_getPrototypeOf(NumericInput.prototype), "destroy", this).call(this);
-    }
-  }, {
     key: "value",
     get: function get() {
       var val = _get(_getPrototypeOf(NumericInput.prototype), "value", this);
@@ -3673,6 +3828,30 @@ var NumericInput_NumericInput = /*#__PURE__*/function (_TextInput) {
     set: function set(value) {
       this._step = value;
     }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      if (this.destroyed) return;
+
+      if (this._domEvtSliderMouseDown) {
+        this._sliderControl.dom.removeEventListener('mousedown', this._domEvtSliderMouseDown);
+
+        this._sliderControl.dom.removeEventListener('mouseup', this._domEvtSliderMouseUp);
+      }
+
+      if (this._domEvtMouseWheel) {
+        this._sliderControl.dom.removeEventListener("mousemove", this._domEvtMouseWheel, false);
+
+        this._sliderControl.dom.removeEventListener("wheel", this._domEvtMouseWheel, false);
+      }
+
+      if (this._domEvtPointerLock) {
+        document.removeEventListener('pointerlockchange', this._domEvtPointerLock, false);
+        document.removeEventListener('mozpointerlockchange', this._domEvtPointerLock, false);
+      }
+
+      _get(_getPrototypeOf(NumericInput.prototype), "destroy", this).call(this);
+    }
   }]);
 
   return NumericInput;
@@ -3684,386 +3863,7 @@ Element["a" /* default */].register('number', NumericInput_NumericInput, {
 /* harmony default export */ var components_NumericInput = __webpack_exports__["a"] = (NumericInput_NumericInput);
 
 /***/ }),
-/* 10 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// CONCATENATED MODULE: ./src/components/Button/style.scss
-// extracted by mini-css-extract-plugin
-
-// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
-var Element = __webpack_require__(1);
-
-// CONCATENATED MODULE: ./src/components/Button/index.js
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-var CLASS_BUTTON = 'pcui-button';
-/**
- * @name Button
- * @classdesc Represents a button.
- * @augments Element
- * @property {string} [text=Click Me] Gets / sets the text of the button
- * @property {string} size Gets / sets the 'size' type of the button. Can be null or 'small'.
- * @property {string} [icon=E401] The CSS code for an icon for the button. e.g. E401 (notice we omit the '\' character).
- * @mixes IFocusable
- */
-
-var Button = /*#__PURE__*/function (_Element) {
-  _inherits(Button, _Element);
-
-  var _super = _createSuper(Button);
-
-  /**
-   * Creates a new Button.
-   *
-   * @param {object} args - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
-   * @param {boolean} [args.unsafe] - If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
-   */
-  function Button(args) {
-    var _this;
-
-    _classCallCheck(this, Button);
-
-    if (!args) args = {};
-    _this = _super.call(this, args.dom ? args.dom : document.createElement('button'), args);
-
-    _this.class.add(CLASS_BUTTON);
-
-    _this._unsafe = args.unsafe || false;
-    _this.text = args.text || '';
-    _this.size = args.size || null;
-    _this.icon = args.icon || '';
-    _this._domEventKeyDown = _this._onKeyDown.bind(_assertThisInitialized(_this));
-
-    _this.dom.addEventListener('keydown', _this._onKeyDown.bind(_assertThisInitialized(_this)));
-
-    return _this;
-  } // click on enter
-  // blur on escape
-
-
-  _createClass(Button, [{
-    key: "_onKeyDown",
-    value: function _onKeyDown(evt) {
-      if (evt.keyCode === 27) {
-        this.blur();
-      } else if (evt.keyCode === 13) {
-        this._onClick(evt);
-      }
-    }
-  }, {
-    key: "_onClick",
-    value: function _onClick(evt) {
-      this.blur();
-      if (this.readOnly) return;
-
-      _get(_getPrototypeOf(Button.prototype), "_onClick", this).call(this, evt);
-    }
-  }, {
-    key: "focus",
-    value: function focus() {
-      this.dom.focus();
-    }
-  }, {
-    key: "blur",
-    value: function blur() {
-      this.dom.blur();
-    }
-  }, {
-    key: "destroy",
-    value: function destroy() {
-      if (this._destroyed) return;
-      this.dom.removeEventListener('keydown', this._domEventKeyDown);
-
-      _get(_getPrototypeOf(Button.prototype), "destroy", this).call(this);
-    }
-  }, {
-    key: "text",
-    get: function get() {
-      return this._text;
-    },
-    set: function set(value) {
-      if (this._text === value) return;
-      this._text = value;
-
-      if (this._unsafe) {
-        this.dom.innerHTML = value;
-      } else {
-        this.dom.textContent = value;
-      }
-    }
-  }, {
-    key: "icon",
-    get: function get() {
-      return this._icon;
-    },
-    set: function set(value) {
-      if (this._icon === value | !value.match(/^E[0-9]{0,4}$/)) return;
-      this._icon = value;
-
-      if (value) {
-        // set data-icon attribute but first convert the value to a code point
-        this.dom.setAttribute('data-icon', String.fromCodePoint(parseInt(value, 16)));
-      } else {
-        this.dom.removeAttribute('data-icon');
-      }
-    }
-  }, {
-    key: "size",
-    get: function get() {
-      return this._size;
-    },
-    set: function set(value) {
-      if (this._size === value) return;
-
-      if (this._size) {
-        this.class.remove('pcui-' + this._size);
-        this._size = null;
-      }
-
-      this._size = value;
-
-      if (this._size) {
-        this.class.add('pcui-' + this._size);
-      }
-    }
-  }]);
-
-  return Button;
-}(Element["a" /* default */]);
-
-Element["a" /* default */].register('button', Button);
-/* harmony default export */ var components_Button = __webpack_exports__["a"] = (Button);
-
-/***/ }),
 /* 11 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export searchStringEditDistance */
-/* unused harmony export searchCharsContains */
-/* unused harmony export searchStringTokenize */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return searchItems; });
-// calculate, how many string `a`
-// requires edits, to become string `b`
-var searchStringEditDistance = function searchStringEditDistance(a, b) {
-  // Levenshtein distance
-  // https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#JavaScript
-  if (a.length === 0) return b.length;
-  if (b.length === 0) return a.length;
-  if (a === b) return 0;
-  var i, j;
-  var matrix = [];
-
-  for (i = 0; i <= b.length; i++) {
-    matrix[i] = [i];
-  }
-
-  for (j = 0; j <= a.length; j++) {
-    matrix[0][j] = j;
-  }
-
-  for (i = 1; i <= b.length; i++) {
-    for (j = 1; j <= a.length; j++) {
-      if (b.charAt(i - 1) === a.charAt(j - 1)) {
-        matrix[i][j] = matrix[i - 1][j - 1];
-      } else {
-        matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, Math.min(matrix[i][j - 1] + 1, matrix[i - 1][j] + 1));
-      }
-    }
-  }
-
-  return matrix[b.length][a.length];
-}; // calculate, how many characters string `b`
-// contains of a string `a`
-
-var searchCharsContains = function searchCharsContains(a, b) {
-  if (a === b) return a.length;
-  var contains = 0;
-  var ind = {};
-  var i;
-
-  for (i = 0; i < b.length; i++) {
-    ind[b.charAt(i)] = true;
-  }
-
-  for (i = 0; i < a.length; i++) {
-    if (ind[a.charAt(i)]) contains++;
-  }
-
-  return contains;
-}; // tokenize string into array of tokens
-
-var searchStringTokenize = function searchStringTokenize(name) {
-  var tokens = []; // camelCase
-  // upperCASE123
-
-  var string = name.replace(/([^A-Z])([A-Z][^A-Z])/g, '$1 $2').replace(/([A-Z0-9]{2,})/g, ' $1'); // space notation
-  // dash-notation
-  // underscore_notation
-
-  var parts = string.split(/(\s|\-|_)/g); // filter valid tokens
-
-  for (var i = 0; i < parts.length; i++) {
-    parts[i] = parts[i].toLowerCase().trim();
-    if (parts[i] && parts[i] !== '-' && parts[i] !== '_') tokens.push(parts[i]);
-  }
-
-  return tokens;
-};
-
-var _searchItems = function _searchItems(items, search, args) {
-  var results = [];
-
-  for (var i = 0; i < items.length; i++) {
-    var item = items[i]; // direct hit
-
-    if (item.subFull !== Infinity) {
-      results.push(item);
-      if (item.edits === Infinity) item.edits = 0;
-      if (item.sub === Infinity) item.sub = item.subFull;
-      continue;
-    } else if (item.name === search || item.name.indexOf(search) === 0) {
-      results.push(item);
-      if (item.edits === Infinity) item.edits = 0;
-      if (item.sub === Infinity) item.sub = 0;
-      continue;
-    } // check if name contains enough of search characters
-
-
-    var contains = searchCharsContains(search, item.name);
-    if (contains / search.length < args.containsCharsTolerance) continue;
-    var editsCandidate = Infinity;
-    var subCandidate = Infinity; // for each token
-
-    for (var t = 0; t < item.tokens.length; t++) {
-      // direct token match
-      if (item.tokens[t] === search) {
-        editsCandidate = 0;
-        subCandidate = t;
-        break;
-      }
-
-      var edits = searchStringEditDistance(search, item.tokens[t]);
-
-      if ((subCandidate === Infinity || edits < editsCandidate) && item.tokens[t].indexOf(search) !== -1) {
-        // search is a substring of a token
-        subCandidate = t;
-        editsCandidate = edits;
-        continue;
-      } else if (subCandidate === Infinity && edits < editsCandidate) {
-        // new edits candidate, not a substring of a token
-        if (edits / Math.max(search.length, item.tokens[t].length) <= args.editsDistanceTolerance) {
-          // check if edits tolerance is satisfied
-          editsCandidate = edits;
-        }
-      }
-    } // no match candidate
-
-
-    if (editsCandidate === Infinity) continue; // add new result
-
-    results.push(item);
-    item.edits = item.edits === Infinity ? editsCandidate : item.edits + editsCandidate;
-    item.sub = item.sub === Infinity ? subCandidate : item.sub + subCandidate;
-  }
-
-  return results;
-}; // perform search through items
-// items is an array with arrays of two values
-// where first value is a string to be searched by
-// and second value is an object to be found
-//
-// [
-//     [ 'camera', {object} ],
-//     [ 'New Entity', {object} ],
-//     [ 'Sun', {object} ]
-// ]
-//
-
-
-var searchItems = function searchItems(items, search, args) {
-  var i;
-  search = (search || '').toLowerCase().trim();
-  if (!search) return [];
-  var searchTokens = searchStringTokenize(search);
-  if (!searchTokens.length) return [];
-  args = args || {};
-  args.containsCharsTolerance = args.containsCharsTolerance || 0.5;
-  args.editsDistanceTolerance = args.editsDistanceTolerance || 0.5;
-  var records = [];
-
-  for (i = 0; i < items.length; i++) {
-    var subInd = items[i][0].toLowerCase().trim().indexOf(search);
-    records.push({
-      name: items[i][0],
-      item: items[i][1],
-      tokens: searchStringTokenize(items[i][0]),
-      edits: Infinity,
-      subFull: subInd !== -1 ? subInd : Infinity,
-      sub: Infinity
-    });
-  } // search each token
-
-
-  for (i = 0; i < searchTokens.length; i++) {
-    records = _searchItems(records, searchTokens[i], args);
-  } // sort result first by substring? then by edits number
-
-
-  records.sort(function (a, b) {
-    if (a.subFull !== b.subFull) {
-      return a.subFull - b.subFull;
-    } else if (a.sub !== b.sub) {
-      return a.sub - b.sub;
-    } else if (a.edits !== b.edits) {
-      return a.edits - b.edits;
-    }
-
-    return a.name.length - b.name.length;
-  }); // return only items without match information
-
-  for (i = 0; i < records.length; i++) {
-    records[i] = records[i].item;
-  } // limit number of results
-
-
-  if (args.hasOwnProperty('limitResults') && records.length > args.limitResults) {
-    records = records.slice(0, args.limitResults);
-  }
-
-  return records;
-};
-
-/***/ }),
-/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4084,7 +3884,7 @@ var Container = __webpack_require__(2);
 var Label = __webpack_require__(3);
 
 // EXTERNAL MODULE: ./src/components/Button/index.js + 1 modules
-var Button = __webpack_require__(10);
+var Button = __webpack_require__(9);
 
 // CONCATENATED MODULE: ./src/components/Panel/index.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -4109,7 +3909,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -4548,6 +4348,206 @@ Element["a" /* default */].register('panel', Panel_Panel);
 /* harmony default export */ var components_Panel = __webpack_exports__["a"] = (Panel_Panel);
 
 /***/ }),
+/* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export searchStringEditDistance */
+/* unused harmony export searchCharsContains */
+/* unused harmony export searchStringTokenize */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return searchItems; });
+// calculate, how many string `a`
+// requires edits, to become string `b`
+var searchStringEditDistance = function searchStringEditDistance(a, b) {
+  // Levenshtein distance
+  // https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#JavaScript
+  if (a.length === 0) return b.length;
+  if (b.length === 0) return a.length;
+  if (a === b) return 0;
+  var i, j;
+  var matrix = [];
+
+  for (i = 0; i <= b.length; i++) {
+    matrix[i] = [i];
+  }
+
+  for (j = 0; j <= a.length; j++) {
+    matrix[0][j] = j;
+  }
+
+  for (i = 1; i <= b.length; i++) {
+    for (j = 1; j <= a.length; j++) {
+      if (b.charAt(i - 1) === a.charAt(j - 1)) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, Math.min(matrix[i][j - 1] + 1, matrix[i - 1][j] + 1));
+      }
+    }
+  }
+
+  return matrix[b.length][a.length];
+}; // calculate, how many characters string `b`
+// contains of a string `a`
+
+var searchCharsContains = function searchCharsContains(a, b) {
+  if (a === b) return a.length;
+  var contains = 0;
+  var ind = {};
+  var i;
+
+  for (i = 0; i < b.length; i++) {
+    ind[b.charAt(i)] = true;
+  }
+
+  for (i = 0; i < a.length; i++) {
+    if (ind[a.charAt(i)]) contains++;
+  }
+
+  return contains;
+}; // tokenize string into array of tokens
+
+var searchStringTokenize = function searchStringTokenize(name) {
+  var tokens = []; // camelCase
+  // upperCASE123
+
+  var string = name.replace(/([^A-Z])([A-Z][^A-Z])/g, '$1 $2').replace(/([A-Z0-9]{2,})/g, ' $1'); // space notation
+  // dash-notation
+  // underscore_notation
+
+  var parts = string.split(/(\s|\-|_)/g); // filter valid tokens
+
+  for (var i = 0; i < parts.length; i++) {
+    parts[i] = parts[i].toLowerCase().trim();
+    if (parts[i] && parts[i] !== '-' && parts[i] !== '_') tokens.push(parts[i]);
+  }
+
+  return tokens;
+};
+
+var _searchItems = function _searchItems(items, search, args) {
+  var results = [];
+
+  for (var i = 0; i < items.length; i++) {
+    var item = items[i]; // direct hit
+
+    if (item.subFull !== Infinity) {
+      results.push(item);
+      if (item.edits === Infinity) item.edits = 0;
+      if (item.sub === Infinity) item.sub = item.subFull;
+      continue;
+    } else if (item.name === search || item.name.indexOf(search) === 0) {
+      results.push(item);
+      if (item.edits === Infinity) item.edits = 0;
+      if (item.sub === Infinity) item.sub = 0;
+      continue;
+    } // check if name contains enough of search characters
+
+
+    var contains = searchCharsContains(search, item.name);
+    if (contains / search.length < args.containsCharsTolerance) continue;
+    var editsCandidate = Infinity;
+    var subCandidate = Infinity; // for each token
+
+    for (var t = 0; t < item.tokens.length; t++) {
+      // direct token match
+      if (item.tokens[t] === search) {
+        editsCandidate = 0;
+        subCandidate = t;
+        break;
+      }
+
+      var edits = searchStringEditDistance(search, item.tokens[t]);
+
+      if ((subCandidate === Infinity || edits < editsCandidate) && item.tokens[t].indexOf(search) !== -1) {
+        // search is a substring of a token
+        subCandidate = t;
+        editsCandidate = edits;
+        continue;
+      } else if (subCandidate === Infinity && edits < editsCandidate) {
+        // new edits candidate, not a substring of a token
+        if (edits / Math.max(search.length, item.tokens[t].length) <= args.editsDistanceTolerance) {
+          // check if edits tolerance is satisfied
+          editsCandidate = edits;
+        }
+      }
+    } // no match candidate
+
+
+    if (editsCandidate === Infinity) continue; // add new result
+
+    results.push(item);
+    item.edits = item.edits === Infinity ? editsCandidate : item.edits + editsCandidate;
+    item.sub = item.sub === Infinity ? subCandidate : item.sub + subCandidate;
+  }
+
+  return results;
+}; // perform search through items
+// items is an array with arrays of two values
+// where first value is a string to be searched by
+// and second value is an object to be found
+//
+// [
+//     [ 'camera', {object} ],
+//     [ 'New Entity', {object} ],
+//     [ 'Sun', {object} ]
+// ]
+//
+
+
+var searchItems = function searchItems(items, search, args) {
+  var i;
+  search = (search || '').toLowerCase().trim();
+  if (!search) return [];
+  var searchTokens = searchStringTokenize(search);
+  if (!searchTokens.length) return [];
+  args = args || {};
+  args.containsCharsTolerance = args.containsCharsTolerance || 0.5;
+  args.editsDistanceTolerance = args.editsDistanceTolerance || 0.5;
+  var records = [];
+
+  for (i = 0; i < items.length; i++) {
+    var subInd = items[i][0].toLowerCase().trim().indexOf(search);
+    records.push({
+      name: items[i][0],
+      item: items[i][1],
+      tokens: searchStringTokenize(items[i][0]),
+      edits: Infinity,
+      subFull: subInd !== -1 ? subInd : Infinity,
+      sub: Infinity
+    });
+  } // search each token
+
+
+  for (i = 0; i < searchTokens.length; i++) {
+    records = _searchItems(records, searchTokens[i], args);
+  } // sort result first by substring? then by edits number
+
+
+  records.sort(function (a, b) {
+    if (a.subFull !== b.subFull) {
+      return a.subFull - b.subFull;
+    } else if (a.sub !== b.sub) {
+      return a.sub - b.sub;
+    } else if (a.edits !== b.edits) {
+      return a.edits - b.edits;
+    }
+
+    return a.name.length - b.name.length;
+  }); // return only items without match information
+
+  for (i = 0; i < records.length; i++) {
+    records[i] = records[i].item;
+  } // limit number of results
+
+
+  if (args.hasOwnProperty('limitResults') && records.length > args.limitResults) {
+    records = records.slice(0, args.limitResults);
+  }
+
+  return records;
+};
+
+/***/ }),
 /* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -4669,7 +4669,7 @@ function ContextMenu(args) {
         childMenuItemElement.on('click', function (e) {
           e.stopPropagation();
           removeMenu();
-          childItem.onClick(e);
+          childItem.onClick();
         });
         var childMenuItemLabel = new Label["a" /* default */]({
           text: childItem.text
@@ -4681,12 +4681,12 @@ function ContextMenu(args) {
     }
 
     menuItemElement.dom.addEventListener('mouseover', function (e) {
+      // if (!e.fromElement.classList.contains('pcui-contextmenu-parent')) return;
       _this._menu.forEachChild(function (node) {
         return node.class.remove(CLASS_ContextMenu_parent_active);
       });
 
       menuItemElement.class.add(CLASS_ContextMenu_parent_active);
-      if (!e.fromElement.classList.contains('pcui-contextmenu-parent')) return;
       var maxMenuHeight = menuItem.items ? menuItem.items.length * 27.0 : 0.0;
       var maxMenuWidth = 150.0;
       var left = e.clientX + maxMenuWidth > window.innerWidth ? -maxMenuWidth + 2.0 : maxMenuWidth;
@@ -4748,7 +4748,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -4947,353 +4947,6 @@ Element["a" /* default */].register('boolean', BooleanInput_BooleanInput, {
 
 "use strict";
 
-// CONCATENATED MODULE: ./src/components/VectorInput/style.scss
-// extracted by mini-css-extract-plugin
-
-// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
-var Element = __webpack_require__(1);
-
-// EXTERNAL MODULE: ./src/components/NumericInput/index.js + 1 modules
-var NumericInput = __webpack_require__(9);
-
-// EXTERNAL MODULE: ./src/class.js
-var src_class = __webpack_require__(0);
-
-// CONCATENATED MODULE: ./src/components/VectorInput/index.js
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function set(target, property, value, receiver) { if (typeof Reflect !== "undefined" && Reflect.set) { set = Reflect.set; } else { set = function set(target, property, value, receiver) { var base = _superPropBase(target, property); var desc; if (base) { desc = Object.getOwnPropertyDescriptor(base, property); if (desc.set) { desc.set.call(receiver, value); return true; } else if (!desc.writable) { return false; } } desc = Object.getOwnPropertyDescriptor(receiver, property); if (desc) { if (!desc.writable) { return false; } desc.value = value; Object.defineProperty(receiver, property, desc); } else { _defineProperty(receiver, property, value); } return true; }; } return set(target, property, value, receiver); }
-
-function _set(target, property, value, receiver, isStrict) { var s = set(target, property, value, receiver || target); if (!s && isStrict) { throw new Error('failed to set property'); } return value; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-
-var CLASS_VECTOR_INPUT = 'pcui-vector-input';
-/**
- * @name VectorInput
- * @classdesc A vector input
- * @augments Element
- * @mixes IBindable
- * @mixes IFocusable
- */
-
-var VectorInput_VectorInput = /*#__PURE__*/function (_Element) {
-  _inherits(VectorInput, _Element);
-
-  var _super = _createSuper(VectorInput);
-
-  /**
-   * Creates a new pcui.VectorInput.
-   *
-   * @param {object} args - The arguments.
-   * @param {number} [args.dimensions=3] - The number of dimensions in the vector. Can be between 2 to 4. Defaults to 3.
-   * @param {number} [args.min] - The minimum value for each vector element.
-   * @param {number} [args.max] - The maximum value for each vector element.
-   * @param {number} [args.precision] - The decimal precision for each vector element.
-   * @param {number} [args.step] - The incremental step when using arrow keys for each vector element.
-   * @param {boolean} [args.renderChanges] - If true each vector element will flash on changes.
-   * @param {string[]|string} [args.placeholder] - The placeholder string for each vector element.
-   */
-  function VectorInput(args) {
-    var _this;
-
-    _classCallCheck(this, VectorInput);
-
-    args = Object.assign({}, args); // set binding after inputs have been created
-
-    var binding = args.binding;
-    delete args.binding;
-    _this = _super.call(this, args.dom ? args.dom : document.createElement('div'), args);
-
-    _this.class.add(CLASS_VECTOR_INPUT);
-
-    var dimensions = Math.max(2, Math.min(4, args.dimensions || 3));
-
-    var onInputChange = _this._onInputChange.bind(_assertThisInitialized(_this));
-
-    _this._inputs = new Array(dimensions);
-
-    for (var i = 0; i < _this._inputs.length; i++) {
-      _this._inputs[i] = new NumericInput["a" /* default */]({
-        min: args.min,
-        max: args.max,
-        precision: args.precision,
-        step: args.step,
-        renderChanges: args.renderChanges,
-        placeholder: args.placeholder ? Array.isArray(args.placeholder) ? args.placeholder[i] : args.placeholder : null
-      });
-
-      _this._inputs[i].on('change', onInputChange);
-
-      _this._inputs[i].on('focus', function () {
-        _this.emit('focus');
-      });
-
-      _this._inputs[i].on('blur', function () {
-        _this.emit('blur');
-      });
-
-      _this.dom.appendChild(_this._inputs[i].dom);
-
-      _this._inputs[i].parent = _assertThisInitialized(_this);
-    } // set the binding after the inputs have been created
-    // because we rely on them in the overriden setter
-
-
-    if (binding) {
-      _this.binding = binding;
-    }
-
-    _this._applyingChange = false;
-
-    if (args.value !== undefined) {
-      _this.value = args.value;
-    }
-
-    return _this;
-  }
-
-  _createClass(VectorInput, [{
-    key: "_onInputChange",
-    value: function _onInputChange() {
-      if (this._applyingChange) return; // check if any of our inputs have the multiple_values class
-      // and if so inherit it for us as well
-
-      var showingMultipleValues = false;
-
-      for (var i = 0; i < this._inputs.length; i++) {
-        if (this._inputs[i].class.contains(src_class["m" /* MULTIPLE_VALUES */])) {
-          showingMultipleValues = true;
-          break;
-        }
-      }
-
-      if (showingMultipleValues) {
-        this.class.add(src_class["m" /* MULTIPLE_VALUES */]);
-      } else {
-        this.class.remove(src_class["m" /* MULTIPLE_VALUES */]);
-      }
-
-      this.emit('change', this.value);
-    }
-  }, {
-    key: "_updateValue",
-    value: function _updateValue(value) {
-      this.class.remove(src_class["m" /* MULTIPLE_VALUES */]);
-      if (JSON.stringify(this.value) === JSON.stringify(value)) return false;
-      this._applyingChange = true;
-
-      for (var i = 0; i < this._inputs.length; i++) {
-        // disable binding for each individual input when we use
-        // the 'value' setter for the whole vector value. That is because
-        // we do not want the individual inputs to emit their own binding events
-        // since we are setting the whole vector value here
-        var binding = this._inputs[i].binding;
-        var applyingChange = false;
-
-        if (binding) {
-          applyingChange = binding.applyingChange;
-          binding.applyingChange = true;
-        }
-
-        this._inputs[i].value = value && value[i] !== undefined ? value[i] : null;
-
-        if (binding) {
-          binding.applyingChange = applyingChange;
-        }
-      }
-
-      this.emit('change', this.value);
-      this._applyingChange = false;
-      return true;
-    }
-  }, {
-    key: "link",
-    value: function link(observers, paths) {
-      var _this2 = this;
-
-      _get(_getPrototypeOf(VectorInput.prototype), "link", this).call(this, observers, paths);
-
-      observers = Array.isArray(observers) ? observers : [observers];
-      paths = Array.isArray(paths) ? paths : [paths];
-      var useSinglePath = paths.length === 1 || observers.length !== paths.length;
-
-      if (useSinglePath) {
-        for (var i = 0; i < this._inputs.length; i++) {
-          // link observers to path.i for each dimension
-          this._inputs[i].link(observers, paths[0] + ".".concat(i));
-        }
-      } else {
-        var _loop = function _loop(_i) {
-          // link observers to paths[i].i for each dimension
-          _this2._inputs[_i].link(observers, paths.map(function (path) {
-            return "".concat(path, ".").concat(_i);
-          }));
-        };
-
-        for (var _i = 0; _i < this._inputs.length; _i++) {
-          _loop(_i);
-        }
-      }
-    }
-  }, {
-    key: "unlink",
-    value: function unlink() {
-      _get(_getPrototypeOf(VectorInput.prototype), "unlink", this).call(this);
-
-      for (var i = 0; i < this._inputs.length; i++) {
-        this._inputs[i].unlink();
-      }
-    }
-  }, {
-    key: "focus",
-    value: function focus() {
-      this._inputs[0].focus();
-    }
-  }, {
-    key: "blur",
-    value: function blur() {
-      for (var i = 0; i < this._inputs.length; i++) {
-        this._inputs[i].blur();
-      }
-    }
-  }, {
-    key: "value",
-    get: function get() {
-      var value = new Array(this._inputs.length);
-
-      for (var i = 0; i < this._inputs.length; i++) {
-        value[i] = this._inputs[i].value;
-      }
-
-      return value;
-    },
-    set: function set(value) {
-      if (!Array.isArray(value)) {
-        value = [];
-      }
-
-      var changed = this._updateValue(value);
-
-      if (changed && this._binding) {
-        this._binding.setValue(value);
-      }
-    }
-    /* eslint accessor-pairs: 0 */
-
-  }, {
-    key: "values",
-    set: function set(values) {
-      // create an array for each dimension (e.g. one array for x one for y one for z)
-      values = this._inputs.map(function (_, i) {
-        return values.map(function (arr) {
-          return arr[i];
-        });
-      });
-
-      this._inputs.forEach(function (input, i) {
-        input.values = values[i];
-      });
-    } // override binding setter to set a binding clone to
-    // each input
-
-  }, {
-    key: "binding",
-    set: function set(value) {
-      _set(_getPrototypeOf(VectorInput.prototype), "binding", value, this, true);
-
-      for (var i = 0; i < this._inputs.length; i++) {
-        this._inputs[i].binding = value ? value.clone() : null;
-      }
-    } // we have to override the getter too because
-    // we have overriden the setter
-    ,
-    get: function get() {
-      return _get(_getPrototypeOf(VectorInput.prototype), "binding", this);
-    }
-  }, {
-    key: "placeholder",
-    get: function get() {
-      return this._inputs.map(function (input) {
-        return input.placeholder;
-      });
-    },
-    set: function set(value) {
-      for (var i = 0; i < this._inputs.length; i++) {
-        this._inputs[i].placeholder = value[i] || value || null;
-      }
-    }
-  }, {
-    key: "inputs",
-    get: function get() {
-      return this._inputs.slice();
-    }
-  }]);
-
-  return VectorInput;
-}(Element["a" /* default */]); // add proxied properties
-
-
-['min', 'max', 'precision', 'step', 'renderChanges'].forEach(function (property) {
-  Object.defineProperty(VectorInput_VectorInput.prototype, property, {
-    get: function get() {
-      return this._inputs[0][property];
-    },
-    set: function set(value) {
-      for (var i = 0; i < this._inputs.length; i++) {
-        this._inputs[i][property] = value;
-      }
-    }
-  });
-});
-Element["a" /* default */].register('vec2', VectorInput_VectorInput, {
-  dimensions: 2,
-  renderChanges: true
-});
-Element["a" /* default */].register('vec3', VectorInput_VectorInput, {
-  dimensions: 3,
-  renderChanges: true
-});
-Element["a" /* default */].register('vec4', VectorInput_VectorInput, {
-  dimensions: 4,
-  renderChanges: true
-});
-/* harmony default export */ var components_VectorInput = __webpack_exports__["a"] = (VectorInput_VectorInput);
-
-/***/ }),
-/* 16 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
 // CONCATENATED MODULE: ./src/components/SliderInput/style.scss
 // extracted by mini-css-extract-plugin
 
@@ -5301,18 +4954,18 @@ Element["a" /* default */].register('vec4', VectorInput_VectorInput, {
 var Element = __webpack_require__(1);
 
 // EXTERNAL MODULE: ./src/components/NumericInput/index.js + 1 modules
-var NumericInput = __webpack_require__(9);
+var NumericInput = __webpack_require__(10);
 
 // EXTERNAL MODULE: ./src/class.js
 var src_class = __webpack_require__(0);
 
 // EXTERNAL MODULE: ./src/helpers/utils.js
-var utils = __webpack_require__(4);
+var utils = __webpack_require__(5);
 
 // CONCATENATED MODULE: ./src/components/SliderInput/index.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -5338,7 +4991,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -5769,13 +5422,13 @@ Element["a" /* default */].register('slider', SliderInput_SliderInput, {
 /* harmony default export */ var components_SliderInput = __webpack_exports__["a"] = (SliderInput_SliderInput);
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 
 // EXTERNAL MODULE: ./src/helpers/utils.js
-var utils = __webpack_require__(4);
+var utils = __webpack_require__(5);
 
 // CONCATENATED MODULE: ./src/components/ArrayInput/style.scss
 // extracted by mini-css-extract-plugin
@@ -5787,13 +5440,13 @@ var Element = __webpack_require__(1);
 var Container = __webpack_require__(2);
 
 // EXTERNAL MODULE: ./src/components/Panel/index.js + 1 modules
-var Panel = __webpack_require__(12);
+var Panel = __webpack_require__(11);
 
 // EXTERNAL MODULE: ./src/components/NumericInput/index.js + 1 modules
-var NumericInput = __webpack_require__(9);
+var NumericInput = __webpack_require__(10);
 
 // EXTERNAL MODULE: ./src/components/Button/index.js + 1 modules
-var Button = __webpack_require__(10);
+var Button = __webpack_require__(9);
 
 // CONCATENATED MODULE: ./src/components/ArrayInput/index.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -5824,7 +5477,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -6395,7 +6048,7 @@ Element["a" /* default */].register('array:select', ArrayInput_ArrayInput, {
 /* harmony default export */ var components_ArrayInput = __webpack_exports__["a"] = (ArrayInput_ArrayInput);
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6421,7 +6074,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -6459,7 +6112,7 @@ Element["a" /* default */].register('divider', Divider);
 /* harmony default export */ var components_Divider = __webpack_exports__["a"] = (Divider);
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6492,7 +6145,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -6599,7 +6252,7 @@ Element["a" /* default */].register('infobox', InfoBox_InfoBox);
 /* harmony default export */ var components_InfoBox = __webpack_exports__["a"] = (InfoBox_InfoBox);
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6636,7 +6289,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -6773,7 +6426,7 @@ Element["a" /* default */].register('overlay', Overlay);
 /* harmony default export */ var components_Overlay = __webpack_exports__["a"] = (Overlay);
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6806,7 +6459,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -6852,14 +6505,14 @@ var Progress_Progress = /*#__PURE__*/function (_Container) {
 
   _createClass(Progress, [{
     key: "value",
+    get: function get() {
+      return this._value;
+    },
     set: function set(val) {
       if (this._value === val) return;
       this._value = val;
       this._inner.width = "".concat(this._value, "%");
       this.emit('change', val);
-    },
-    get: function get() {
-      return this._value;
     }
   }]);
 
@@ -6870,7 +6523,7 @@ Element["a" /* default */].register('progress', Progress_Progress);
 /* harmony default export */ var components_Progress = __webpack_exports__["a"] = (Progress_Progress);
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6888,7 +6541,7 @@ var Container = __webpack_require__(2);
 var TextInput = __webpack_require__(7);
 
 // EXTERNAL MODULE: ./src/components/Button/index.js + 1 modules
-var Button = __webpack_require__(10);
+var Button = __webpack_require__(9);
 
 // EXTERNAL MODULE: ./src/components/Label/index.js + 1 modules
 var Label = __webpack_require__(3);
@@ -6897,7 +6550,7 @@ var Label = __webpack_require__(3);
 var src_class = __webpack_require__(0);
 
 // EXTERNAL MODULE: ./src/helpers/search.js
-var search = __webpack_require__(11);
+var search = __webpack_require__(12);
 
 // CONCATENATED MODULE: ./src/components/SelectInput/index.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -6922,7 +6575,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -8043,7 +7696,7 @@ Element["a" /* default */].register('tags', SelectInput_SelectInput, {
 /* harmony default export */ var components_SelectInput = __webpack_exports__["a"] = (SelectInput_SelectInput);
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8069,7 +7722,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -8134,7 +7787,7 @@ Spinner.TYPE_SMALL_THICK = 'small-thick'; // add more types here
 /* harmony default export */ var components_Spinner = __webpack_exports__["a"] = (Spinner);
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8167,7 +7820,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -8255,7 +7908,7 @@ Element["a" /* default */].register('text', TextAreaInput, {
 /* harmony default export */ var components_TextAreaInput = __webpack_exports__["a"] = (TextAreaInput);
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8270,10 +7923,10 @@ var Container = __webpack_require__(2);
 var Element = __webpack_require__(1);
 
 // EXTERNAL MODULE: ./src/components/TreeViewItem/index.js
-var TreeViewItem = __webpack_require__(6);
+var TreeViewItem = __webpack_require__(4);
 
 // EXTERNAL MODULE: ./src/helpers/search.js
-var search = __webpack_require__(11);
+var search = __webpack_require__(12);
 
 // CONCATENATED MODULE: ./src/components/TreeView/index.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -8298,7 +7951,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -9363,6 +9016,353 @@ var TreeView_TreeView = /*#__PURE__*/function (_Container) {
 /* harmony default export */ var components_TreeView = __webpack_exports__["a"] = (TreeView_TreeView);
 
 /***/ }),
+/* 25 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// CONCATENATED MODULE: ./src/components/VectorInput/style.scss
+// extracted by mini-css-extract-plugin
+
+// EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
+var Element = __webpack_require__(1);
+
+// EXTERNAL MODULE: ./src/components/NumericInput/index.js + 1 modules
+var NumericInput = __webpack_require__(10);
+
+// EXTERNAL MODULE: ./src/class.js
+var src_class = __webpack_require__(0);
+
+// CONCATENATED MODULE: ./src/components/VectorInput/index.js
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function set(target, property, value, receiver) { if (typeof Reflect !== "undefined" && Reflect.set) { set = Reflect.set; } else { set = function set(target, property, value, receiver) { var base = _superPropBase(target, property); var desc; if (base) { desc = Object.getOwnPropertyDescriptor(base, property); if (desc.set) { desc.set.call(receiver, value); return true; } else if (!desc.writable) { return false; } } desc = Object.getOwnPropertyDescriptor(receiver, property); if (desc) { if (!desc.writable) { return false; } desc.value = value; Object.defineProperty(receiver, property, desc); } else { _defineProperty(receiver, property, value); } return true; }; } return set(target, property, value, receiver); }
+
+function _set(target, property, value, receiver, isStrict) { var s = set(target, property, value, receiver || target); if (!s && isStrict) { throw new Error('failed to set property'); } return value; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var CLASS_VECTOR_INPUT = 'pcui-vector-input';
+/**
+ * @name VectorInput
+ * @classdesc A vector input
+ * @augments Element
+ * @mixes IBindable
+ * @mixes IFocusable
+ */
+
+var VectorInput_VectorInput = /*#__PURE__*/function (_Element) {
+  _inherits(VectorInput, _Element);
+
+  var _super = _createSuper(VectorInput);
+
+  /**
+   * Creates a new pcui.VectorInput.
+   *
+   * @param {object} args - The arguments.
+   * @param {number} [args.dimensions=3] - The number of dimensions in the vector. Can be between 2 to 4. Defaults to 3.
+   * @param {number} [args.min] - The minimum value for each vector element.
+   * @param {number} [args.max] - The maximum value for each vector element.
+   * @param {number} [args.precision] - The decimal precision for each vector element.
+   * @param {number} [args.step] - The incremental step when using arrow keys for each vector element.
+   * @param {boolean} [args.renderChanges] - If true each vector element will flash on changes.
+   * @param {string[]|string} [args.placeholder] - The placeholder string for each vector element.
+   */
+  function VectorInput(args) {
+    var _this;
+
+    _classCallCheck(this, VectorInput);
+
+    args = Object.assign({}, args); // set binding after inputs have been created
+
+    var binding = args.binding;
+    delete args.binding;
+    _this = _super.call(this, args.dom ? args.dom : document.createElement('div'), args);
+
+    _this.class.add(CLASS_VECTOR_INPUT);
+
+    var dimensions = Math.max(2, Math.min(4, args.dimensions || 3));
+
+    var onInputChange = _this._onInputChange.bind(_assertThisInitialized(_this));
+
+    _this._inputs = new Array(dimensions);
+
+    for (var i = 0; i < _this._inputs.length; i++) {
+      _this._inputs[i] = new NumericInput["a" /* default */]({
+        min: args.min,
+        max: args.max,
+        precision: args.precision,
+        step: args.step,
+        renderChanges: args.renderChanges,
+        placeholder: args.placeholder ? Array.isArray(args.placeholder) ? args.placeholder[i] : args.placeholder : null
+      });
+
+      _this._inputs[i].on('change', onInputChange);
+
+      _this._inputs[i].on('focus', function () {
+        _this.emit('focus');
+      });
+
+      _this._inputs[i].on('blur', function () {
+        _this.emit('blur');
+      });
+
+      _this.dom.appendChild(_this._inputs[i].dom);
+
+      _this._inputs[i].parent = _assertThisInitialized(_this);
+    } // set the binding after the inputs have been created
+    // because we rely on them in the overriden setter
+
+
+    if (binding) {
+      _this.binding = binding;
+    }
+
+    _this._applyingChange = false;
+
+    if (args.value !== undefined) {
+      _this.value = args.value;
+    }
+
+    return _this;
+  }
+
+  _createClass(VectorInput, [{
+    key: "_onInputChange",
+    value: function _onInputChange() {
+      if (this._applyingChange) return; // check if any of our inputs have the multiple_values class
+      // and if so inherit it for us as well
+
+      var showingMultipleValues = false;
+
+      for (var i = 0; i < this._inputs.length; i++) {
+        if (this._inputs[i].class.contains(src_class["m" /* MULTIPLE_VALUES */])) {
+          showingMultipleValues = true;
+          break;
+        }
+      }
+
+      if (showingMultipleValues) {
+        this.class.add(src_class["m" /* MULTIPLE_VALUES */]);
+      } else {
+        this.class.remove(src_class["m" /* MULTIPLE_VALUES */]);
+      }
+
+      this.emit('change', this.value);
+    }
+  }, {
+    key: "_updateValue",
+    value: function _updateValue(value) {
+      this.class.remove(src_class["m" /* MULTIPLE_VALUES */]);
+      if (JSON.stringify(this.value) === JSON.stringify(value)) return false;
+      this._applyingChange = true;
+
+      for (var i = 0; i < this._inputs.length; i++) {
+        // disable binding for each individual input when we use
+        // the 'value' setter for the whole vector value. That is because
+        // we do not want the individual inputs to emit their own binding events
+        // since we are setting the whole vector value here
+        var binding = this._inputs[i].binding;
+        var applyingChange = false;
+
+        if (binding) {
+          applyingChange = binding.applyingChange;
+          binding.applyingChange = true;
+        }
+
+        this._inputs[i].value = value && value[i] !== undefined ? value[i] : null;
+
+        if (binding) {
+          binding.applyingChange = applyingChange;
+        }
+      }
+
+      this.emit('change', this.value);
+      this._applyingChange = false;
+      return true;
+    }
+  }, {
+    key: "link",
+    value: function link(observers, paths) {
+      var _this2 = this;
+
+      _get(_getPrototypeOf(VectorInput.prototype), "link", this).call(this, observers, paths);
+
+      observers = Array.isArray(observers) ? observers : [observers];
+      paths = Array.isArray(paths) ? paths : [paths];
+      var useSinglePath = paths.length === 1 || observers.length !== paths.length;
+
+      if (useSinglePath) {
+        for (var i = 0; i < this._inputs.length; i++) {
+          // link observers to path.i for each dimension
+          this._inputs[i].link(observers, paths[0] + ".".concat(i));
+        }
+      } else {
+        var _loop = function _loop(_i) {
+          // link observers to paths[i].i for each dimension
+          _this2._inputs[_i].link(observers, paths.map(function (path) {
+            return "".concat(path, ".").concat(_i);
+          }));
+        };
+
+        for (var _i = 0; _i < this._inputs.length; _i++) {
+          _loop(_i);
+        }
+      }
+    }
+  }, {
+    key: "unlink",
+    value: function unlink() {
+      _get(_getPrototypeOf(VectorInput.prototype), "unlink", this).call(this);
+
+      for (var i = 0; i < this._inputs.length; i++) {
+        this._inputs[i].unlink();
+      }
+    }
+  }, {
+    key: "focus",
+    value: function focus() {
+      this._inputs[0].focus();
+    }
+  }, {
+    key: "blur",
+    value: function blur() {
+      for (var i = 0; i < this._inputs.length; i++) {
+        this._inputs[i].blur();
+      }
+    }
+  }, {
+    key: "value",
+    get: function get() {
+      var value = new Array(this._inputs.length);
+
+      for (var i = 0; i < this._inputs.length; i++) {
+        value[i] = this._inputs[i].value;
+      }
+
+      return value;
+    },
+    set: function set(value) {
+      if (!Array.isArray(value)) {
+        value = [];
+      }
+
+      var changed = this._updateValue(value);
+
+      if (changed && this._binding) {
+        this._binding.setValue(value);
+      }
+    }
+    /* eslint accessor-pairs: 0 */
+
+  }, {
+    key: "values",
+    set: function set(values) {
+      // create an array for each dimension (e.g. one array for x one for y one for z)
+      values = this._inputs.map(function (_, i) {
+        return values.map(function (arr) {
+          return arr[i];
+        });
+      });
+
+      this._inputs.forEach(function (input, i) {
+        input.values = values[i];
+      });
+    } // override binding setter to set a binding clone to
+    // each input
+
+  }, {
+    key: "binding",
+    get: // we have to override the getter too because
+    // we have overriden the setter
+    function get() {
+      return _get(_getPrototypeOf(VectorInput.prototype), "binding", this);
+    },
+    set: function set(value) {
+      _set(_getPrototypeOf(VectorInput.prototype), "binding", value, this, true);
+
+      for (var i = 0; i < this._inputs.length; i++) {
+        this._inputs[i].binding = value ? value.clone() : null;
+      }
+    }
+  }, {
+    key: "placeholder",
+    get: function get() {
+      return this._inputs.map(function (input) {
+        return input.placeholder;
+      });
+    },
+    set: function set(value) {
+      for (var i = 0; i < this._inputs.length; i++) {
+        this._inputs[i].placeholder = value[i] || value || null;
+      }
+    }
+  }, {
+    key: "inputs",
+    get: function get() {
+      return this._inputs.slice();
+    }
+  }]);
+
+  return VectorInput;
+}(Element["a" /* default */]); // add proxied properties
+
+
+['min', 'max', 'precision', 'step', 'renderChanges'].forEach(function (property) {
+  Object.defineProperty(VectorInput_VectorInput.prototype, property, {
+    get: function get() {
+      return this._inputs[0][property];
+    },
+    set: function set(value) {
+      for (var i = 0; i < this._inputs.length; i++) {
+        this._inputs[i][property] = value;
+      }
+    }
+  });
+});
+Element["a" /* default */].register('vec2', VectorInput_VectorInput, {
+  dimensions: 2,
+  renderChanges: true
+});
+Element["a" /* default */].register('vec3', VectorInput_VectorInput, {
+  dimensions: 3,
+  renderChanges: true
+});
+Element["a" /* default */].register('vec4', VectorInput_VectorInput, {
+  dimensions: 4,
+  renderChanges: true
+});
+/* harmony default export */ var components_VectorInput = __webpack_exports__["a"] = (VectorInput_VectorInput);
+
+/***/ }),
 /* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -9399,7 +9399,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -9452,12 +9452,12 @@ var Code_Code = /*#__PURE__*/function (_Container) {
 
   _createClass(Code, [{
     key: "text",
+    get: function get() {
+      return this._text;
+    },
     set: function set(value) {
       this._text = value;
       this._inner.text = value;
-    },
-    get: function get() {
-      return this._text;
     }
   }]);
 
@@ -9491,7 +9491,7 @@ var IBindable = function IBindable() {
  */
 
 
-/* unused harmony default export */ var _unused_webpack_default_export = (IBindable);
+/* harmony default export */ __webpack_exports__["a"] = (IBindable);
 
 /***/ }),
 /* 28 */
@@ -9517,13 +9517,34 @@ var IBindable = function IBindable() {
 __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
+__webpack_require__.d(__webpack_exports__, "IBindable", function() { return /* reexport */ IBindable["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "IFocusable", function() { return /* reexport */ interfaces_IFocusable; });
+__webpack_require__.d(__webpack_exports__, "ICollapsible", function() { return /* reexport */ interfaces_ICollapsible; });
+__webpack_require__.d(__webpack_exports__, "IScrollable", function() { return /* reexport */ interfaces_IScrollable; });
+__webpack_require__.d(__webpack_exports__, "IResizable", function() { return /* reexport */ interfaces_IResizable; });
+__webpack_require__.d(__webpack_exports__, "IFlex", function() { return /* reexport */ interfaces_IFocusable; });
+__webpack_require__.d(__webpack_exports__, "IGrid", function() { return /* reexport */ interfaces_IGrid; });
+__webpack_require__.d(__webpack_exports__, "ArrayInput", function() { return /* reexport */ ArrayInput["a" /* default */]; });
 __webpack_require__.d(__webpack_exports__, "BooleanInput", function() { return /* reexport */ BooleanInput["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "Button", function() { return /* reexport */ Button["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "Code", function() { return /* reexport */ Code["a" /* default */]; });
 __webpack_require__.d(__webpack_exports__, "Container", function() { return /* reexport */ Container["a" /* default */]; });
 __webpack_require__.d(__webpack_exports__, "ContextMenu", function() { return /* reexport */ ContextMenu["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "Divider", function() { return /* reexport */ Divider["a" /* default */]; });
 __webpack_require__.d(__webpack_exports__, "Element", function() { return /* reexport */ Element["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "InfoBox", function() { return /* reexport */ InfoBox["a" /* default */]; });
 __webpack_require__.d(__webpack_exports__, "Label", function() { return /* reexport */ Label["a" /* default */]; });
 __webpack_require__.d(__webpack_exports__, "NumericInput", function() { return /* reexport */ NumericInput["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "Overlay", function() { return /* reexport */ Overlay["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "Panel", function() { return /* reexport */ Panel["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "Progress", function() { return /* reexport */ Progress["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "SelectInput", function() { return /* reexport */ SelectInput["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "SliderInput", function() { return /* reexport */ SliderInput["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "Spinner", function() { return /* reexport */ Spinner["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "TextAreaInput", function() { return /* reexport */ TextAreaInput["a" /* default */]; });
 __webpack_require__.d(__webpack_exports__, "TextInput", function() { return /* reexport */ TextInput["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "TreeView", function() { return /* reexport */ TreeView["a" /* default */]; });
+__webpack_require__.d(__webpack_exports__, "TreeViewItem", function() { return /* reexport */ TreeViewItem["a" /* default */]; });
 __webpack_require__.d(__webpack_exports__, "VectorInput", function() { return /* reexport */ VectorInput["a" /* default */]; });
 
 // EXTERNAL MODULE: ./src/interfaces/IBindable/index.js
@@ -9547,11 +9568,11 @@ var IFocusable = /*#__PURE__*/function () {
 
   _createClass(IFocusable, [{
     key: "focus",
-
+    value:
     /**
      * Focus on the element
      */
-    value: function focus() {
+    function focus() {
       throw new Error('Not implemented');
     }
     /**
@@ -9663,13 +9684,13 @@ var IResizable = function IResizable() {
 
 /* harmony default export */ var interfaces_IResizable = (IResizable);
 // EXTERNAL MODULE: ./src/components/ArrayInput/index.js + 1 modules
-var ArrayInput = __webpack_require__(17);
+var ArrayInput = __webpack_require__(16);
 
 // EXTERNAL MODULE: ./src/components/BooleanInput/index.js + 2 modules
 var BooleanInput = __webpack_require__(14);
 
 // EXTERNAL MODULE: ./src/components/Button/index.js + 1 modules
-var Button = __webpack_require__(10);
+var Button = __webpack_require__(9);
 
 // EXTERNAL MODULE: ./src/components/Code/index.js + 1 modules
 var Code = __webpack_require__(26);
@@ -9681,52 +9702,52 @@ var Container = __webpack_require__(2);
 var ContextMenu = __webpack_require__(13);
 
 // EXTERNAL MODULE: ./src/components/Divider/index.js + 1 modules
-var Divider = __webpack_require__(18);
+var Divider = __webpack_require__(17);
 
 // EXTERNAL MODULE: ./src/components/Element/index.js + 1 modules
 var Element = __webpack_require__(1);
 
 // EXTERNAL MODULE: ./src/components/InfoBox/index.js + 1 modules
-var InfoBox = __webpack_require__(19);
+var InfoBox = __webpack_require__(18);
 
 // EXTERNAL MODULE: ./src/components/Label/index.js + 1 modules
 var Label = __webpack_require__(3);
 
 // EXTERNAL MODULE: ./src/components/NumericInput/index.js + 1 modules
-var NumericInput = __webpack_require__(9);
+var NumericInput = __webpack_require__(10);
 
 // EXTERNAL MODULE: ./src/components/Overlay/index.js + 1 modules
-var Overlay = __webpack_require__(20);
+var Overlay = __webpack_require__(19);
 
 // EXTERNAL MODULE: ./src/components/Panel/index.js + 1 modules
-var Panel = __webpack_require__(12);
+var Panel = __webpack_require__(11);
 
 // EXTERNAL MODULE: ./src/components/Progress/index.js + 1 modules
-var Progress = __webpack_require__(21);
+var Progress = __webpack_require__(20);
 
 // EXTERNAL MODULE: ./src/components/SelectInput/index.js + 1 modules
-var SelectInput = __webpack_require__(22);
+var SelectInput = __webpack_require__(21);
 
 // EXTERNAL MODULE: ./src/components/SliderInput/index.js + 1 modules
-var SliderInput = __webpack_require__(16);
+var SliderInput = __webpack_require__(15);
 
 // EXTERNAL MODULE: ./src/components/Spinner/index.js + 1 modules
-var Spinner = __webpack_require__(23);
+var Spinner = __webpack_require__(22);
 
 // EXTERNAL MODULE: ./src/components/TextAreaInput/index.js + 1 modules
-var TextAreaInput = __webpack_require__(24);
+var TextAreaInput = __webpack_require__(23);
 
 // EXTERNAL MODULE: ./src/components/TextInput/index.js + 1 modules
 var TextInput = __webpack_require__(7);
 
 // EXTERNAL MODULE: ./src/components/TreeView/index.js + 1 modules
-var TreeView = __webpack_require__(25);
+var TreeView = __webpack_require__(24);
 
 // EXTERNAL MODULE: ./src/components/TreeViewItem/index.js
-var TreeViewItem = __webpack_require__(6);
+var TreeViewItem = __webpack_require__(4);
 
 // EXTERNAL MODULE: ./src/components/VectorInput/index.js + 1 modules
-var VectorInput = __webpack_require__(15);
+var VectorInput = __webpack_require__(25);
 
 // EXTERNAL MODULE: ./src/scss/_pcui-hidden.scss
 var _pcui_hidden = __webpack_require__(28);

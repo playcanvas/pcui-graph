@@ -2,7 +2,6 @@ import JointGraph from './joint-graph.js';
 import GraphViewNode from './graph-view-node.js';
 import GraphViewEdge from './graph-view-edge.js';
 import { ContextMenu } from '../../pcui-external';
-import { Vec2 } from 'playcanvas';
 import * as joint from 'jointjs';
 import { jointShapeElement, jointShapeElementView } from './joint-shape-node.js';
 
@@ -166,7 +165,7 @@ class GraphView extends JointGraph {
 
     getGraphPosition(pos) {
         const boundingClientRect = this._paper.el.getBoundingClientRect();
-        return new Vec2(
+        return new pc.Vec2(
             (pos.x - boundingClientRect.x) / this._paper.scale().sx,
             (pos.y - boundingClientRect.y) / this._paper.scale().sx
         );
@@ -176,7 +175,7 @@ class GraphView extends JointGraph {
         const scale = this._paper.scale().sx;
         const translate = this._paper.translate();
         const boundingClientRect = this._paper.el.getBoundingClientRect();
-        return new Vec2(
+        return new pc.Vec2(
             (-translate.tx / scale) + ((pos.x - boundingClientRect.x) / scale),
             (-translate.ty / scale) + ((pos.y - boundingClientRect.y) / scale)
         );
@@ -334,11 +333,11 @@ class GraphView extends JointGraph {
         link.source(this.getNode(nodeId).model);
         link.target(this.getNode(nodeId).model);
         const mouseMoveEvent = (e) => {
-            var mousePos = this.getWindowToGraphPosition(new Vec2(e.clientX, e.clientY));
+            var mousePos = this.getWindowToGraphPosition(new pc.Vec2(e.clientX, e.clientY));
             var sourceNodeView = this._paper.findViewByModel(this.getNode(nodeId).model);
             var sourceNodePos = this.getGraphPosition(sourceNodeView.el.getBoundingClientRect());
             var pointerVector = mousePos.clone().sub(sourceNodePos);
-            var direction = (new Vec2(e.clientX, e.clientY)).clone().sub(sourceNodeView.el.getBoundingClientRect()).normalize().scale(20);
+            var direction = (new pc.Vec2(e.clientX, e.clientY)).clone().sub(sourceNodeView.el.getBoundingClientRect()).normalize().scale(20);
             pointerVector = sourceNodePos.add(pointerVector).sub(direction);
             link.target({
                 x: pointerVector.x,
@@ -428,7 +427,7 @@ class GraphView extends JointGraph {
 
     getGraphPosition() {
         var t = this._paper.translate();
-        return new Vec2([t.tx, t.ty]);
+        return new pc.Vec2([t.tx, t.ty]);
     }
 
     setGraphScale(scale) {

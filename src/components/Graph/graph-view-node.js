@@ -1,7 +1,17 @@
 import { TextInput, BooleanInput, NumericInput, Container, Label, ContextMenu, VectorInput } from '../../pcui-external.js';
 import * as joint from 'jointjs';
-import { Vec2 } from 'playcanvas';
-import { node } from 'prop-types';
+
+const Colors = {
+    bcgDarkest: '#20292b',
+    bcgDarker: '#293538',
+    bcgDark: '#2c393c',
+    bcgPrimary: '#364346',
+    textDarkest: '#5b7073',
+    textDark: '#9ba1a3',
+    textSecondary: '#b1b8ba',
+    textPrimary: '#ffffff',
+    textActive: '#f60'
+};
 
 class GraphViewNode {
     constructor(graphView, paper, graph, graphSchema, nodeData, nodeSchema, domEvent, onCreateEdge, onNodeSelected) {
@@ -17,10 +27,10 @@ class GraphViewNode {
         var portHeight = 0;
         var attributeHeight = 0;
         if (nodeSchema.inPorts) {
-            portHeight = (nodeSchema.inPorts.length * 25) + 10;
+            portHeight = (nodeSchema.inPorts.length * 25);
         }
         if (nodeSchema.outPorts) {
-            var outHeight = (nodeSchema.outPorts.length * 25) + 10;
+            var outHeight = (nodeSchema.outPorts.length * 25);
             if (outHeight > portHeight) portHeight = outHeight;
         }
         if (nodeSchema.attributes) {
@@ -37,18 +47,32 @@ class GraphViewNode {
         var rect = new joint.shapes.html.Element({
             attrs: {
                 body: {
-                    fill: nodeSchema.fill,
-                    stroke: nodeSchema.stroke,
+                    fill: nodeSchema.fill || Colors.bcgDarker,
+                    stroke: nodeSchema.stroke || Colors.bcgDarker,
                     strokeWidth: 2,
                     width: rectSize.x,
                     height: rectSize.y
                 },
                 labelBackground: {
-                    fill: '#293538',
-                    width: rectSize.x - 2,
-                    height: rectHeight - 2,
+                    fill: Colors.bcgDark,
                     refX: 1,
-                    refY: 1
+                    refY: 1,
+                    width: rectSize.x - 2,
+                    height: rectHeight - 2
+                },
+                inBackground: {
+                    fill: Colors.bcgPrimary,
+                    width: rectSize.x / 2 - 1,
+                    height: rectSize.y - rectHeight - 2,
+                    refX: 1,
+                    refY: rectHeight + 1
+                },
+                outBackground: {
+                    fill: Colors.bcgDark,
+                    width: rectSize.x / 2 - 1,
+                    height: rectSize.y - rectHeight - 2,
+                    refX: rectSize.x / 2,
+                    refY: rectHeight + 1
                 },
                 icon: {
                     text: nodeSchema.icon || '',
@@ -60,7 +84,7 @@ class GraphViewNode {
                 },
                 label: {
                     text: labelName,
-                    fill: 'white',
+                    fill: Colors.textPrimary,
                     textAnchor: 'left',
                     refX: 28,
                     refY: 14,
@@ -99,7 +123,7 @@ class GraphViewNode {
                         attrs: {
                             '.port-body': {
                                 strokeWidth: 2,
-                                fill: '#20292B',
+                                fill: Colors.bcgDarkest,
                                 magnet: true,
                                 r: 5,
                                 cy: 5,
@@ -131,7 +155,7 @@ class GraphViewNode {
                         attrs: {
                             '.port-body': {
                                 strokeWidth: 2,
-                                fill: '#20292B',
+                                fill: Colors.bcgDarkest,
                                 magnet: true,
                                 r: 5,
                                 cy: 5,
@@ -165,8 +189,8 @@ class GraphViewNode {
                         },
                         text: {
                             text: port.name,
-                            fill: 'white',
-                            'font-size': 12
+                            fill: Colors.textSecondary,
+                            'font-size': 14
                         }
                     }
                 });
@@ -212,8 +236,8 @@ class GraphViewNode {
                     },
                     text: {
                         text: port.name,
-                        fill: 'white',
-                        'font-size': 12
+                        fill: Colors.textSecondary,
+                        'font-size': 14
                     }
                 }
             }));
@@ -411,24 +435,13 @@ class GraphViewNode {
     }
 
     select() {
-        this.model.attr({
-            body: {
-                stroke: '#F60',
-                strokeWidth: 1
-            }
-        });
+        this.model.attr('body/stroke', Colors.textActive);
         this.state = GraphViewNode.STATES.SELECTED;
     }
 
     hover() {
         if (this.state === GraphViewNode.STATES.SELECTED) return;
-
-        this.model.attr({
-            body: {
-                stroke: 'rgba(255, 102, 0, 0.32)',
-                strokeWidth: 1
-            }
-        });
+        this.model.attr('body/stroke', 'rgba(255, 102, 0, 0.32)');
     }
 
     hoverRemove() {
@@ -437,12 +450,11 @@ class GraphViewNode {
         } else if (this.state === GraphViewNode.STATES.SELECTED) {
             this.select();
         }
-
     }
 
     deselect() {
         var nodeSchema = this._graphSchema.nodes[this.nodeData.nodeType];
-        this.model.attr('body/stroke', nodeSchema.stroke);
+        this.model.attr('body/stroke', nodeSchema.stroke || Colors.bcgDark);
         this.state = GraphViewNode.STATES.DEFAULT;
     }
 }

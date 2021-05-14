@@ -5,7 +5,6 @@ import 'jquery';
 import 'lodash';
 import 'backbone';
 import * as joint from 'jointjs';
-import { Vec2 } from 'playcanvas';
 
 class JointGraph {
 
@@ -69,13 +68,13 @@ class JointGraph {
         graphResizeObserver.observe(dom);
 
         this._panPaper = false;
-        this._translate = new Vec2();
-        this._totalTranslate = new Vec2();
-        this._pan = new Vec2();
-        this._mousePos = new Vec2();
+        this._translate = new pc.Vec2();
+        this._totalTranslate = new pc.Vec2();
+        this._pan = new pc.Vec2();
+        this._mousePos = new pc.Vec2();
         this._paper.on('blank:pointerdown', (e) => {
             this._panPaper = true;
-            this._mousePos = new Vec2(e.offsetX, e.offsetY);
+            this._mousePos = new pc.Vec2(e.offsetX, e.offsetY);
         });
         this._paper.on('blank:pointerup', () => {
             this._panPaper = false;
@@ -83,8 +82,8 @@ class JointGraph {
         });
         dom.addEventListener('mousemove', (e) => {
             if (this._panPaper) {
-                this._pan = this._mousePos.clone().sub(new Vec2(e.offsetX, e.offsetY));
-                this._mousePos = new Vec2(e.offsetX, e.offsetY);
+                this._pan = this._mousePos.clone().sub(new pc.Vec2(e.offsetX, e.offsetY));
+                this._mousePos = new pc.Vec2(e.offsetX, e.offsetY);
                 this._paper.translate(this._paper.translate().tx - this._pan.x, this._paper.translate().ty - this._pan.y);
             }
         });
@@ -236,18 +235,18 @@ class JointGraph {
                             name: 'center',
                             args: {
                                 dx: shift.x,
-                                dy: shift.y,
+                                dy: shift.y
                             }
-                        } 
+                        }
                     });
                     sibling.target(sibling.getTargetCell(), {
                         anchor: {
                             name: 'center',
                             args: {
                                 dx: shift.x,
-                                dy: shift.y,
+                                dy: shift.y
                             }
-                        } 
+                        }
                     });
                     this.ignoreAdjustVertices = false;
                 });
