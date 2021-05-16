@@ -1,4 +1,3 @@
-import { ContextMenu } from '../../pcui-external';
 import * as joint from 'jointjs';
 
 import sourceMarkerDefaultImage from '../../assets/source-marker-default.png';
@@ -111,7 +110,7 @@ class GraphViewEdge {
         if (!edgeCell) return;
         var contextMenu = document.createElement('div');
         this._paper.el.appendChild(contextMenu);
-        new ContextMenu({
+        new pcui.ContextMenu({
             triggerElement: edgeCell.el,
             dom: contextMenu,
             items: items

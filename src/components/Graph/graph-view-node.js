@@ -1,4 +1,3 @@
-import { TextInput, BooleanInput, NumericInput, Container, Label, ContextMenu, VectorInput } from '../../pcui-external.js';
 import * as joint from 'jointjs';
 
 const Colors = {
@@ -246,8 +245,8 @@ class GraphViewNode {
         var containers = [];
         if (nodeSchema.attributes) {
             nodeSchema.attributes.forEach((attribute, i) => {
-                const container = new Container({ class: 'graph-node-container' });
-                const label = new Label({ text: attribute.name, class: 'graph-node-label' });
+                const container = new pcui.Container({ class: 'graph-node-container' });
+                const label = new pcui.Label({ text: attribute.name, class: 'graph-node-label' });
                 let input;
                 let nodeValue;
                 if (nodeData.attributes) {
@@ -267,16 +266,16 @@ class GraphViewNode {
                 }
                 switch (attribute.type) {
                     case 'TEXT_INPUT':
-                        input = new TextInput({ class: 'graph-node-input', value: nodeValue });
+                        input = new pcui.TextInput({ class: 'graph-node-input', value: nodeValue });
                         break;
                     case 'BOOLEAN_INPUT':
-                        input = new BooleanInput({ class: 'graph-node-input', value: nodeValue });
+                        input = new pcui.BooleanInput({ class: 'graph-node-input', value: nodeValue });
                         break;
                     case 'NUMERIC_INPUT':
-                        input = new NumericInput({ class: 'graph-node-input', hideSlider: true, value: nodeValue && nodeValue.x ? nodeValue.x : nodeValue });
+                        input = new pcui.NumericInput({ class: 'graph-node-input', hideSlider: true, value: nodeValue && nodeValue.x ? nodeValue.x : nodeValue });
                         break;
                     case 'VEC_2_INPUT':
-                        input = new VectorInput({ dimensions: 2, class: 'graph-node-input', hideSlider: true, value: [
+                        input = new pcui.VectorInput({ dimensions: 2, class: 'graph-node-input', hideSlider: true, value: [
                             nodeValue.x,
                             nodeValue.y
                         ] });
@@ -284,7 +283,7 @@ class GraphViewNode {
                         input.inputs.forEach(i => i._sliderControl.dom.remove());
                         break;
                     case 'VEC_3_INPUT':
-                        input = new VectorInput({ dimensions: 3, class: 'graph-node-input', hideSlider: true, value: [
+                        input = new pcui.VectorInput({ dimensions: 3, class: 'graph-node-input', hideSlider: true, value: [
                             nodeValue.x,
                             nodeValue.y,
                             nodeValue.z
@@ -293,7 +292,7 @@ class GraphViewNode {
                         input.inputs.forEach(i => i._sliderControl.dom.remove());
                         break;
                     case 'VEC_4_INPUT':
-                        input = new VectorInput({ dimensions: 4, class: 'graph-node-input', hideSlider: true, value: [
+                        input = new pcui.VectorInput({ dimensions: 4, class: 'graph-node-input', hideSlider: true, value: [
                             nodeValue.x,
                             nodeValue.y,
                             nodeValue.z,
@@ -343,7 +342,7 @@ class GraphViewNode {
         var contextMenu = document.createElement('div');
         this._paper.el.appendChild(contextMenu);
         this._contextMenuElement = contextMenu;
-        this._contextMenu = new ContextMenu({
+        this._contextMenu = new pcui.ContextMenu({
             triggerElement: nodeView.el,
             dom: contextMenu,
             items: this._graphView._parent.initialiseNodeContextMenuItems(this.nodeData, items)

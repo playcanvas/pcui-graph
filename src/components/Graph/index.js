@@ -1,5 +1,3 @@
-import { Element } from '../../pcui-external';
-import { Observer } from '../../pcui-binding-external';
 import { diff } from 'json-diff';
 import { deepCopyFunction } from './util';
 import GraphView from './graph-view';
@@ -72,7 +70,7 @@ class SelectedItem {
     }
 }
 
-class Graph extends Element {
+class Graph extends pcui.Element {
     /**
      * Creates a new Graph.
      *
@@ -85,7 +83,7 @@ class Graph extends Element {
         super(args.dom ? args.dom : document.createElement('div'), args);
         this.class.add('pcui-graph');
         this.diff = diff;
-        this._graphData = new Observer({ data: args.graphData });
+        this._graphData = new window['pcui-binding'].Observer({ data: args.graphData });
         this._graphSchema = args.graphSchema;
         this._contextMenuItems = args.contextMenuItems;
 

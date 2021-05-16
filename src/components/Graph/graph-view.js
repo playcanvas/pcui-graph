@@ -1,7 +1,6 @@
 import JointGraph from './joint-graph.js';
 import GraphViewNode from './graph-view-node.js';
 import GraphViewEdge from './graph-view-edge.js';
-import { ContextMenu } from '../../pcui-external';
 import * as joint from 'jointjs';
 import { jointShapeElement, jointShapeElementView } from './joint-shape-node.js';
 
@@ -184,7 +183,7 @@ class GraphView extends JointGraph {
     addCanvasContextMenu(items) {
         this._viewContextMenu = document.createElement('div');
         this._paper.el.appendChild(this._viewContextMenu);
-        var contextMenu = new ContextMenu({
+        var contextMenu = new pcui.ContextMenu({
             dom: this._viewContextMenu,
             items: items
         });

@@ -26,7 +26,8 @@
     "webpack-bundle-analyzer": "^3.8.0"
   },
   "scripts": {
-    "build": "cd node_modules/@playcanvas/pcui; npm install; EXTRACT_CSS=true npm run build;cp dist/pcui-binding.js ../../../src/pcui-binding-external.js; cp dist/pcui.js ../../../src/pcui-external.js; cd ../../../; webpack --config webpack.config.js",
+    "build_": "cd node_modules/@playcanvas/pcui; npm install; EXTRACT_CSS=true npm run build;cp dist/pcui-binding.js ../../../src/pcui-binding-external.js; cp dist/pcui.js ../../../src/pcui-external.js; cd ../../../; webpack --config webpack.config.js",
+    "build": "webpack --config webpack.config.js",
     "lint": "eslint --ext .js src",
     "storybook": "jsdoc -r -X src/components > ./.storybook/utils/jsdoc-ast.json && start-storybook -p 9010 -s public",
     "build:analyze": "ENVIRONMENT=production ANALYZE_BUNDLE=true webpack --config webpack.config.js",
