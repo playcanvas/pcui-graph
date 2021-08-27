@@ -1,4 +1,5 @@
 import * as joint from 'jointjs';
+import * as pcui from '@playcanvas/pcui/pcui.js';
 
 const Colors = {
     bcgDarkest: '#20292b',
@@ -13,8 +14,9 @@ const Colors = {
 };
 
 class GraphViewNode {
-    constructor(graphView, paper, graph, graphSchema, nodeData, nodeSchema, domEvent, onCreateEdge, onNodeSelected) {
+    constructor(graphView, paper, graph, graphSchema, nodeData, nodeSchema, onCreateEdge, onNodeSelected) {
         this._graphView = graphView;
+        this._config = graphView._config;
         this._paper = paper;
         this._graph = graph;
         this._graphSchema = graphSchema;
@@ -26,10 +28,10 @@ class GraphViewNode {
         var portHeight = 0;
         var attributeHeight = 0;
         if (nodeSchema.inPorts) {
-            portHeight = (nodeSchema.inPorts.length * 25);
+            portHeight = (nodeSchema.inPorts.length * 25) + 12;
         }
         if (nodeSchema.outPorts) {
-            var outHeight = (nodeSchema.outPorts.length * 25);
+            var outHeight = (nodeSchema.outPorts.length * 25) + 12;
             if (outHeight > portHeight) portHeight = outHeight;
         }
         if (nodeSchema.attributes) {
@@ -46,46 +48,46 @@ class GraphViewNode {
         var rect = new joint.shapes.html.Element({
             attrs: {
                 body: {
-                    fill: nodeSchema.fill || Colors.bcgDarker,
-                    stroke: nodeSchema.stroke || Colors.bcgDarker,
+                    fill: this.getSchemaValue('fill'),
+                    stroke: this.getSchemaValue('stroke'),
                     strokeWidth: 2,
                     width: rectSize.x,
                     height: rectSize.y
                 },
                 labelBackground: {
-                    fill: Colors.bcgDark,
+                    fill: this.getSchemaValue('fill'),
                     refX: 1,
                     refY: 1,
                     width: rectSize.x - 2,
                     height: rectHeight - 2
                 },
                 inBackground: {
-                    fill: Colors.bcgPrimary,
-                    width: rectSize.x / 2 - 1,
+                    fill: this.getSchemaValue('fillSecondary'),
+                    width: this.getSchemaValue('inPorts') ? rectSize.x / 2 - 1 : rectSize.x - 2,
                     height: rectSize.y - rectHeight - 2,
                     refX: 1,
                     refY: rectHeight + 1
                 },
                 outBackground: {
-                    fill: Colors.bcgDark,
-                    width: rectSize.x / 2 - 1,
+                    fill: this.getSchemaValue('fill'),
+                    width: this.getSchemaValue('inPorts') ? rectSize.x / 2 - 1 : 0,
                     height: rectSize.y - rectHeight - 2,
                     refX: rectSize.x / 2,
                     refY: rectHeight + 1
                 },
-                icon: {
-                    text: nodeSchema.icon || '',
+                icon: this.getSchemaValue('includeIcon') ? {
+                    text: this.getSchemaValue('icon'),
                     fontFamily: 'pc-icon',
                     fontSize: 14,
-                    fill: nodeSchema.iconColor || '#F60',
+                    fill: this.getSchemaValue('iconColor'),
                     refX: 8,
                     refY: 8
-                },
+                } : undefined,
                 label: {
                     text: labelName,
-                    fill: Colors.textPrimary,
+                    fill: this.getSchemaValue('textColor'),
                     textAnchor: 'left',
-                    refX: 28,
+                    refX: this.getSchemaValue('includeIcon') ? 28 : 14,
                     refY: 14,
                     fontSize: 12,
                     fontWeight: 600,
@@ -130,7 +132,7 @@ class GraphViewNode {
                             },
                             '.port-inner-body': {
                                 strokeWidth: 2,
-                                stroke: '#0379EE',
+                                stroke: this._config.defaultStyles.edge.stroke,
                                 r: 1,
                                 cy: 5,
                                 cx: 1
@@ -162,7 +164,7 @@ class GraphViewNode {
                             },
                             '.port-inner-body': {
                                 strokeWidth: 2,
-                                stroke: '#0379EE',
+                                stroke: this._config.defaultStyles.edge.stroke,
                                 r: 1,
                                 cy: 5,
                                 cx: 9
@@ -184,11 +186,11 @@ class GraphViewNode {
                     markup: `<circle class="port-body" edgeType="${port.type}"></circle><circle class="port-inner-body" visibility="hidden"></circle>`,
                     attrs: {
                         '.port-body': {
-                            stroke: this._graphSchema.edges[port.type].stroke
+                            stroke: this._graphSchema.edges[port.type].stroke || this._config.defaultStyles.edge.stroke
                         },
                         text: {
                             text: port.name,
-                            fill: Colors.textSecondary,
+                            fill: this.getSchemaValue('textColorSecondary'),
                             'font-size': 14
                         }
                     }
@@ -231,11 +233,11 @@ class GraphViewNode {
                 attrs: {
                     type: port.type,
                     '.port-body': {
-                        stroke: this._graphSchema.edges[port.type].stroke
+                        stroke: this._graphSchema.edges[port.type].stroke || this._config.defaultStyles.edge.stroke
                     },
                     text: {
                         text: port.name,
-                        fill: Colors.textSecondary,
+                        fill: this.getSchemaValue('textColorSecondary'),
                         'font-size': 14
                     }
                 }
@@ -336,6 +338,10 @@ class GraphViewNode {
         this.model = rect;
     }
 
+    getSchemaValue(item) {
+        return this.nodeSchema[item] || this._config.defaultStyles.node[item];
+    }
+
     addContextMenu(items) {
         if (this._graphView._config.readOnly) return;
         var nodeView = this._paper.findViewByModel(this.model);
@@ -345,7 +351,7 @@ class GraphViewNode {
         this._contextMenu = new pcui.ContextMenu({
             triggerElement: nodeView.el,
             dom: contextMenu,
-            items: this._graphView._parent.initialiseNodeContextMenuItems(this.nodeData, items)
+            items: this._graphView._parent._initialiseNodeContextMenuItems(this.nodeData, items)
         });
     }
 
@@ -434,13 +440,13 @@ class GraphViewNode {
     }
 
     select() {
-        this.model.attr('body/stroke', Colors.textActive);
+        this.model.attr('body/stroke', this.getSchemaValue('strokeSelected'));
         this.state = GraphViewNode.STATES.SELECTED;
     }
 
     hover() {
         if (this.state === GraphViewNode.STATES.SELECTED) return;
-        this.model.attr('body/stroke', 'rgba(255, 102, 0, 0.32)');
+        this.model.attr('body/stroke', this.getSchemaValue('strokeHover'));
     }
 
     hoverRemove() {
@@ -452,8 +458,7 @@ class GraphViewNode {
     }
 
     deselect() {
-        var nodeSchema = this._graphSchema.nodes[this.nodeData.nodeType];
-        this.model.attr('body/stroke', nodeSchema.stroke || Colors.bcgDark);
+        this.model.attr('body/stroke', this.getSchemaValue('stroke'));
         this.state = GraphViewNode.STATES.DEFAULT;
     }
 }

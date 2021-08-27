@@ -3,20 +3,9 @@ import GraphViewNode from './graph-view-node.js';
 import GraphViewEdge from './graph-view-edge.js';
 import * as joint from 'jointjs';
 import { jointShapeElement, jointShapeElementView } from './joint-shape-node.js';
-
-export var GRAPH_ACTIONS = {
-    ADD_NODE: 'EVENT_ADD_NODE',
-    UPDATE_NODE_POSITION: 'EVENT_UPDATE_NODE_POSITION',
-    UPDATE_NODE_ATTRIBUTE: 'EVENT_UPDATE_NODE_ATTRIBUTE',
-    DELETE_NODE: 'EVENT_DELETE_NODE',
-    SELECT_NODE: 'EVENT_SELECT_NODE',
-    ADD_EDGE: 'EVENT_ADD_EDGE',
-    DELETE_EDGE: 'EVENT_DELETE_EDGE',
-    SELECT_EDGE: 'EVENT_SELECT_EDGE',
-    DESELECT_ITEM: 'EVENT_DESELECT_ITEM',
-    UPDATE_TRANSLATE: 'EVENT_UPDATE_TRANSLATE',
-    UPDATE_SCALE: 'EVENT_UPDATE_SCALE'
-};
+import { GRAPH_ACTIONS } from './constants.js';
+import * as pcui from '@playcanvas/pcui/pcui.js';
+import * as pc from 'playcanvas';
 
 class GraphView extends JointGraph {
     constructor(parent, dom, graphSchema, graphData, config) {
@@ -44,13 +33,13 @@ class GraphView extends JointGraph {
         this._graph.on('change:target', (cell) => this.updatePortStatesForEdge(cell, true));
 
         this._paper.on('cell:mousewheel', () => {
-            parent.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.UPDATE_SCALE, { detail: { scale: this._paper.scale().sx } } ));
+            parent._dispatchEvent(GRAPH_ACTIONS.UPDATE_SCALE, { scale: this._paper.scale().sx });
         });
         this._paper.on('blank:mousewheel', () => {
-            parent.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.UPDATE_SCALE, { detail: { scale: this._paper.scale().sx } } ));
+            parent._dispatchEvent(GRAPH_ACTIONS.UPDATE_SCALE, { scale: this._paper.scale().sx });
         });
         this._paper.on('blank:pointerup', () => {
-            parent.dom.dispatchEvent(new CustomEvent(GRAPH_ACTIONS.UPDATE_TRANSLATE, { detail: { pos: { x: this._paper.translate().tx, y: this._paper.translate().ty } } }));
+            parent._dispatchEvent(GRAPH_ACTIONS.UPDATE_TRANSLATE, { pos: { x: this._paper.translate().tx, y: this._paper.translate().ty } });
         });
 
         this._paper.on({
@@ -187,7 +176,6 @@ class GraphView extends JointGraph {
             dom: this._viewContextMenu,
             items: items
         });
-        window.contextMenu = contextMenu;
         return contextMenu._contextMenuEvent;
     }
 
@@ -212,7 +200,7 @@ class GraphView extends JointGraph {
         return this._nodes[id];
     }
 
-    addNode(nodeData, nodeSchema, domEvent, onCreateEdge, onNodeSelected) {
+    addNode(nodeData, nodeSchema, onCreateEdge, onNodeSelected) {
         const node = new GraphViewNode(
             this,
             this._paper,
@@ -220,7 +208,6 @@ class GraphView extends JointGraph {
             this._graphSchema,
             nodeData,
             nodeSchema,
-            domEvent,
             onCreateEdge,
             onNodeSelected
         );
@@ -328,7 +315,7 @@ class GraphView extends JointGraph {
 
     addUnconnectedEdge(nodeId, edgeType, edgeSchema, validateEdge, onEdgeConnected) {
         this.disableInputEvents();
-        const link = GraphViewEdge.createLink(edgeSchema);
+        const link = GraphViewEdge.createLink(this._config.defaultStyles, edgeSchema);
         link.source(this.getNode(nodeId).model);
         link.target(this.getNode(nodeId).model);
         const mouseMoveEvent = (e) => {
@@ -435,6 +422,11 @@ class GraphView extends JointGraph {
 
     getGraphScale() {
         return this._paper.scale().sx;
+    }
+
+    destroy() {
+        this._graph.clear();
+        this._paper.remove();
     }
 }
 

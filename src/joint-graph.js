@@ -5,6 +5,7 @@ import 'jquery';
 import 'lodash';
 import 'backbone';
 import * as joint from 'jointjs';
+import * as pc from 'playcanvas';
 
 class JointGraph {
 
@@ -22,9 +23,9 @@ class JointGraph {
             clickThreshold: 1,
             restrictTranslate: this._config.restrictTranslate,
             background: {
-                color: '#20292B'
+                color: config.defaultStyles.background.color
             },
-            gridSize: 10,
+            gridSize: config.defaultStyles.background.gridSize,
             linkPinning: false,
             defaultLink: (cellView, magnet) => {
                 var defaultLink = new joint.shapes.standard.Link({

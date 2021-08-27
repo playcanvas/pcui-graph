@@ -1,6 +1,6 @@
 const path = require('path');
 module.exports = {
-  stories: ['../src/components/Graph/index.stories.jsx'],
+  stories: ['./stories/**'],
   addons: [
     '@storybook/addon-actions/register',
     '@storybook/addon-links',

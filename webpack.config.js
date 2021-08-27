@@ -5,8 +5,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 var config = {
     mode: process.env.ENVIRONMENT === 'development' ? 'development' : 'production',
     entry: {
-        'pcuiGraph': './src/index.js',
-        'pcuiGraph-react': './src/components/index.js'
+        'pcuiGraph': './src/index.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
