@@ -1,16 +1,15 @@
-import { diff } from 'json-diff';
 import { deepCopyFunction } from './util';
 import GraphView from './graph-view';
 import './style.scss';
 import { GRAPH_ACTIONS, DEFAULT_CONFIG } from './constants.js';
-import * as pcui from '@playcanvas/pcui/pcui.js';
-import * as pcuiBinding from '@playcanvas/pcui/pcui-binding.js';
+import Element from '@playcanvas/pcui/Element';
+import { Observer } from '@playcanvas/observer';
 import SelectedItem from './selected-item';
 
 /**
  * Represents a new Graph.
  */
-class Graph extends pcui.Element {
+class Graph extends Element {
     /**
      * Creates a new Graph.
      *
@@ -30,9 +29,8 @@ class Graph extends pcui.Element {
     constructor(schema, options = {}) {
         super(options.dom ? options.dom : document.createElement('div'), {});
         this.class.add('pcui-graph');
-        this.diff = diff;
         this._graphSchema = schema;
-        this._graphData = new pcuiBinding.Observer({ data: options.initialData ? options.initialData : {} });
+        this._graphData = new Observer({ data: options.initialData ? options.initialData : {} });
         this._contextMenuItems = options.contextMenuItems || [];
         this._suppressGraphDataEvents = false;
 
@@ -97,14 +95,14 @@ class Graph extends pcui.Element {
         this.view.batchCells();
         var nodes = this._graphData.get(`data.nodes`);
         if (nodes) {
-            Object.keys(nodes).forEach(nodeKey => {
+            Object.keys(nodes).forEach((nodeKey) => {
                 var node = nodes[nodeKey];
                 var nodeSchema = this._graphSchema.nodes[node.nodeType];
                 if (nodeSchema.attributes) {
                     if (nodeSchema.attributes && !node.attributes) {
                         node.attributes = {};
                     }
-                    nodeSchema.attributes.forEach(attribute => {
+                    nodeSchema.attributes.forEach((attribute) => {
                         if (!node.attributes[attribute.name] && attribute.defaultValue) {
                             this._suppressGraphDataEvents = true;
                             this._graphData.set(`data.nodes.${nodeKey}.attributes.${attribute.name}`, attribute.defaultValue);
@@ -117,7 +115,7 @@ class Graph extends pcui.Element {
         }
         var edges = this._graphData.get(`data.edges`);
         if (edges) {
-            Object.keys(edges).forEach(edgeKey => {
+            Object.keys(edges).forEach((edgeKey) => {
                 this.createEdge(edges[edgeKey], edgeKey, true);
             });
         }
@@ -158,7 +156,7 @@ class Graph extends pcui.Element {
                             node.attributes = {};
                         }
                         if (nodeSchema.attributes) {
-                            nodeSchema.attributes.forEach(attribute => {
+                            nodeSchema.attributes.forEach((attribute) => {
                                 if (!node.attributes[attribute.name] && attribute.defaultValue) {
                                     node.attributes[attribute.name] = attribute.defaultValue;
                                 }
@@ -184,10 +182,10 @@ class Graph extends pcui.Element {
             }
             return item;
         };
-        const viewContextMenuItems = this._contextMenuItems.map(item => {
+        const viewContextMenuItems = this._contextMenuItems.map((item) => {
             item = updateItem(item);
             if (!item.items) return item;
-            item.items.map(subitem => {
+            item.items.map((subitem) => {
                 return updateItem(subitem);
             });
             return item;
@@ -250,7 +248,7 @@ class Graph extends pcui.Element {
             this._dispatchEvent(GRAPH_ACTIONS.SELECT_EDGE, { edge, prevItem: this._selectedItem });
         });
         if (edgeSchema.contextMenuItems) {
-            var contextMenuItems = deepCopyFunction(edgeSchema.contextMenuItems).map(item => {
+            var contextMenuItems = deepCopyFunction(edgeSchema.contextMenuItems).map((item) => {
                 if (item.action === GRAPH_ACTIONS.DELETE_EDGE) {
                     item.onClick = () => {
                         this._dispatchEvent(GRAPH_ACTIONS.DELETE_EDGE, { edgeId: edgeId, edge: this._graphData.get(`data.edges.${edgeId}`) });
@@ -324,7 +322,7 @@ class Graph extends pcui.Element {
         var prevAttributeValue;
         let attributeKey = node.attributes[attribute.name] !== undefined ? attribute.name : undefined;
         if (!attributeKey) {
-            Object.keys(node.attributes).forEach(k => {
+            Object.keys(node.attributes).forEach((k) => {
                 const item = node.attributes[k];
                 if (item.name === attribute.name) attributeKey = k;
             });
@@ -357,7 +355,7 @@ class Graph extends pcui.Element {
     }
 
     _initialiseNodeContextMenuItems(node, items) {
-        var contextMenuItems = deepCopyFunction(items).map(item => {
+        var contextMenuItems = deepCopyFunction(items).map((item) => {
             if (item.action === GRAPH_ACTIONS.ADD_EDGE) {
                 item.onClick = () => this._createUnconnectedEdgeForNode(node, item.edgeType);
             }
@@ -395,7 +393,7 @@ class Graph extends pcui.Element {
             this._onNodePositionUpdated.bind(this)
         );
         if (nodeSchema.attributes) {
-            nodeSchema.attributes.forEach(attribute => {
+            nodeSchema.attributes.forEach((attribute) => {
                 this.view.addNodeEvent(
                     node.id,
                     `updateAttribute`,
@@ -477,7 +475,7 @@ class Graph extends pcui.Element {
      */
     deleteNode(nodeId) {
         const { node, edges, edgeData } = this._deleteNode(nodeId);
-        Object.values(edges).forEach(e => {
+        Object.values(edges).forEach((e) => {
             const edge = edgeData[e];
             this.deleteEdge(`${edge.from}-${edge.to}`);
         });
@@ -504,7 +502,7 @@ class Graph extends pcui.Element {
         this.view.removeEdge(`${from}-${to}`);
         this._graphData.unset(`data.edges.${edgeId}`);
         var edges = this._graphData.get(`data.edges`);
-        Object.keys(edges).forEach(edgeKey => {
+        Object.keys(edges).forEach((edgeKey) => {
             var edge = edges[edgeKey];
             var edgeSchema = this._graphSchema.edges[edge.edgeType];
             if ([edge.from, edge.to].includes(from) && [edge.from, edge.to].includes(to)) {
@@ -545,7 +543,7 @@ class Graph extends pcui.Element {
      */
     setGraphScale(scale) {
         this.view.setGraphScale(scale);
-        Object.keys(this.view._nodes).forEach(nodeKey => {
+        Object.keys(this.view._nodes).forEach((nodeKey) => {
             this.view._paper.findViewByModel(this.view._nodes[nodeKey].model).updateBox();
         });
     }
@@ -613,7 +611,7 @@ class Graph extends pcui.Element {
         });
         this.on(GRAPH_ACTIONS.ADD_EDGE, ({ edge, edgeId }) => {
             if (Number.isFinite(edge.inPort)) {
-                Object.keys(this._graphData.get('data.edges')).forEach(edgeKey => {
+                Object.keys(this._graphData.get('data.edges')).forEach((edgeKey) => {
                     var edgeToCompare = this._graphData.get(`data.edges.${edgeKey}`);
                     if (edgeToCompare.to === edge.to && edgeToCompare.inPort === edge.inPort) {
                         this.deleteEdge(edgeKey);

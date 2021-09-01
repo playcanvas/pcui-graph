@@ -1,9 +1,5 @@
-import * as joint from 'jointjs';
-import * as pcui from '@playcanvas/pcui/pcui.js';
-
-import sourceMarkerDefaultImage from './assets/source-marker-default.png';
-import sourceMarkerActiveImage from './assets/source-marker-active.png';
-import sourceMarkerDeactiveImage from './assets/source-marker-deactive.png';
+import * as joint from 'jointjs/dist/joint.min';
+import ContextMenu from '@playcanvas/pcui/ContextMenu';
 
 joint.connectors.smoothInOut = function (sourcePoint, targetPoint, vertices, args) {
     var p1 = sourcePoint.clone();
@@ -79,7 +75,7 @@ class GraphViewEdge {
         if (edgeSchema.smooth || defaultStyles.edge.connectionStyle === 'smooth') {
             link.set('connector', { name: 'smooth' });
         } else if (edgeSchema.smoothInOut || defaultStyles.edge.connectionStyle === 'smoothInOut') {
-            link.set('connector', { name: 'smoothInOut' } );
+            link.set('connector', { name: 'smoothInOut' });
         }
         if (edgeData && Number.isFinite(edgeData.outPort)) {
             link.attr('line/targetMarker', null);
@@ -95,14 +91,6 @@ class GraphViewEdge {
         } else {
             link.attr('line/targetMarker', null);
         }
-        // link.attr('line/sourceMarker', {
-        //     'type': 'image',
-        //     'xlink:href': sourceMarkerDefaultImage,
-        //     'width': 12,
-        //     'height': 12,
-        //     'y': -6,
-        //     'x': -6
-        // });
         return link;
     }
 
@@ -112,7 +100,7 @@ class GraphViewEdge {
         if (!edgeCell) return;
         var contextMenu = document.createElement('div');
         this._paper.el.appendChild(contextMenu);
-        new pcui.ContextMenu({
+        new ContextMenu({
             triggerElement: edgeCell.el,
             dom: contextMenu,
             items: items

@@ -2,9 +2,9 @@ import 'jointjs/dist/joint.css';
 import 'jointjs/css/layout.css';
 import 'jointjs/css/themes/material.css';
 import 'jquery';
-import 'lodash';
 import 'backbone';
-import * as joint from 'jointjs';
+import _ from 'lodash';
+import * as joint from 'jointjs/dist/joint.min';
 
 const jointShapeElement = () => joint.shapes.standard.Rectangle.extend({
     defaults: joint.util.deepSupplement({

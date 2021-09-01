@@ -1,10 +1,10 @@
 import JointGraph from './joint-graph.js';
 import GraphViewNode from './graph-view-node.js';
 import GraphViewEdge from './graph-view-edge.js';
-import * as joint from 'jointjs';
+import * as joint from 'jointjs/dist/joint.min';
 import { jointShapeElement, jointShapeElementView } from './joint-shape-node.js';
 import { GRAPH_ACTIONS } from './constants.js';
-import * as pcui from '@playcanvas/pcui/pcui.js';
+import ContextMenu from '@playcanvas/pcui/ContextMenu';
 import * as pc from 'playcanvas';
 
 class GraphView extends JointGraph {
@@ -52,7 +52,7 @@ class GraphView extends JointGraph {
                     selectedEdge = this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE' ? this.getEdge(this._parent._selectedItem._id) : null;
                     if (selectedEdge) selectedEdgeId = selectedEdge.model.id;
                     if (this._config.edgeHoverEffect) {
-                        Object.keys(this._edges).forEach(edgeKey => {
+                        Object.keys(this._edges).forEach((edgeKey) => {
                             var currEdge = this.getEdge(edgeKey);
                             if (currEdge.model.id === selectedEdgeId) return;
                             if (![currEdge.edgeData.from, currEdge.edgeData.to].includes(node.nodeData.id)) {
@@ -68,7 +68,7 @@ class GraphView extends JointGraph {
                     edge.deselect();
                     selectedEdge = this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE' ? this.getEdge(this._parent._selectedItem._id) : null;
                     if (selectedEdge) selectedEdgeId = selectedEdge.model.id;
-                    Object.keys(this._edges).forEach(edgeKey => {
+                    Object.keys(this._edges).forEach((edgeKey) => {
                         var currEdge = this.getEdge(edgeKey);
                         if ((edge.model.id !== currEdge.model.id) && (selectedEdgeId !== currEdge.model.id)) {
                             currEdge.mute();
@@ -89,7 +89,7 @@ class GraphView extends JointGraph {
                         node.hoverRemove();
                     }
                     if (this._config.edgeHoverEffect) {
-                        Object.keys(this._edges).forEach(edgeKey => {
+                        Object.keys(this._edges).forEach((edgeKey) => {
                             var currEdge = this.getEdge(edgeKey);
                             if (selectedEdge && currEdge.model.id === selectedEdge.model.id) return;
                             currEdge.deselect();
@@ -98,7 +98,7 @@ class GraphView extends JointGraph {
                 }
                 var edge = this.getEdge(cellView.model.id);
                 if (this._config.edgeHoverEffect && edge && edge.state !== GraphViewEdge.STATES.SELECTED) {
-                    Object.keys(this._edges).forEach(edgeKey => {
+                    Object.keys(this._edges).forEach((edgeKey) => {
                         var currEdge = this.getEdge(edgeKey);
                         if (currEdge.state === GraphViewEdge.STATES.SELECTED) {
                             currEdge.select();
@@ -137,7 +137,7 @@ class GraphView extends JointGraph {
     applyBatchedCells() {
         this._batchingCells = false;
         this._graph.addCells(this._cells);
-        this._cellMountedFunctions.forEach(f => f());
+        this._cellMountedFunctions.forEach((f) => f());
         this._cells = [];
         this._cellMountedFunctions = [];
     }
@@ -151,13 +151,13 @@ class GraphView extends JointGraph {
         }
     }
 
-    getGraphPosition(pos) {
-        const boundingClientRect = this._paper.el.getBoundingClientRect();
-        return new pc.Vec2(
-            (pos.x - boundingClientRect.x) / this._paper.scale().sx,
-            (pos.y - boundingClientRect.y) / this._paper.scale().sx
-        );
-    }
+    // getGraphPosition(pos) {
+    //     const boundingClientRect = this._paper.el.getBoundingClientRect();
+    //     return new pc.Vec2(
+    //         (pos.x - boundingClientRect.x) / this._paper.scale().sx,
+    //         (pos.y - boundingClientRect.y) / this._paper.scale().sx
+    //     );
+    // }
 
     getWindowToGraphPosition(pos) {
         const scale = this._paper.scale().sx;
@@ -172,7 +172,7 @@ class GraphView extends JointGraph {
     addCanvasContextMenu(items) {
         this._viewContextMenu = document.createElement('div');
         this._paper.el.appendChild(this._viewContextMenu);
-        var contextMenu = new pcui.ContextMenu({
+        var contextMenu = new ContextMenu({
             dom: this._viewContextMenu,
             items: items
         });
@@ -293,7 +293,7 @@ class GraphView extends JointGraph {
     }
 
     removeEdge(id) {
-        let edge = this.getEdge(id);
+        const edge = this.getEdge(id);
         if (edge) {
             this._graph.removeCells(edge.model);
             delete this._edges[edge.model.id];
@@ -302,13 +302,13 @@ class GraphView extends JointGraph {
     }
 
     disableInputEvents() {
-        document.querySelectorAll('.graph-node-input').forEach(input => {
+        document.querySelectorAll('.graph-node-input').forEach((input) => {
             input.classList.add('graph-node-input-no-pointer-events');
         });
     }
 
     enableInputEvents() {
-        document.querySelectorAll('.graph-node-input').forEach(input => {
+        document.querySelectorAll('.graph-node-input').forEach((input) => {
             input.classList.remove('graph-node-input-no-pointer-events');
         });
     }
@@ -368,7 +368,7 @@ class GraphView extends JointGraph {
         const node = this.getNode(id);
         if (node) {
             node.select();
-            Object.keys(this._edges).forEach(edgeKey => {
+            Object.keys(this._edges).forEach((edgeKey) => {
                 var currEdge = this.getEdge(edgeKey);
                 currEdge.deselect();
             });
@@ -384,7 +384,7 @@ class GraphView extends JointGraph {
         var edge = this.getEdge(id);
         if (edge) {
             edge.select();
-            Object.keys(this._edges).forEach(edgeKey => {
+            Object.keys(this._edges).forEach((edgeKey) => {
                 var currEdge = this.getEdge(edgeKey);
                 if (edge.model.id !== currEdge.model.id) {
                     currEdge.mute();
@@ -398,7 +398,7 @@ class GraphView extends JointGraph {
     deselectEdge(id) {
         var edge = this.getEdge(id);
         if (edge) {
-            Object.keys(this._edges).forEach(edgeKey => {
+            Object.keys(this._edges).forEach((edgeKey) => {
                 var currEdge = this.getEdge(edgeKey);
                 currEdge.deselect();
             });

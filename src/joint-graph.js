@@ -4,11 +4,10 @@ import 'jointjs/css/themes/material.css';
 import 'jquery';
 import 'lodash';
 import 'backbone';
-import * as joint from 'jointjs';
+import * as joint from 'jointjs/dist/joint.min';
 import * as pc from 'playcanvas';
 
 class JointGraph {
-
     constructor(dom, config = {}) {
 
         this._config = config;

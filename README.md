@@ -11,9 +11,9 @@ npm install
 npm run build
 ```
 
-You can then use the library in your own project by including the `dist/pcuiGraph.js` file. The graph can then be instantiated as follows:
+You can then use the library in your own project by including the `dist/index.mjs` file. The graph can then be instantiated as follows:
 ```javascript
-import { Graph } from 'dist/pcuiGraph';
+import { Graph } from 'dist/index.mjs';
 
 const schema = {
     nodes: {
@@ -43,16 +43,29 @@ The library is also available on [npm](https://www.npmjs.com/package/pcui-graph)
 ```
 npm install @playcanvas/pcui-graph
 ```
+
+The npm package includes three builds of the library:
+```
+@playcanvas/pcui-graph/index.js // UMD build, excluding external dependencies (requires dependencies to be placed in the global namespace)
+@playcanvas/pcui-graph/index.mjs // module build, excluding external dependencies (requires a build tool like rollup / webpack)
+@playcanvas/pcui-graph/bundle.mjs // module build, with all external dependencies bundled
+```
+
+The current external dependencies for this project are:
+```
+@playcanvas/pcui
+@playcanvas/observer
+```
 ## Storybook
 
-Examples of different graphs that can be created with the library can be viewed by running this libraries storybook. Do so by running the following in the this projects root directory:
+Examples of different graphs created with this library can be viewed by running storybook. Do so by running the following in the this projects root directory:
 
 ```
 npm install
 npm run storybook
 ```
 
-Which will open the storybook locally at `http://localhost:9010`.
+Which will automatically open the storybook locally at `http://localhost:9009`.
 
 # Documentation
 
