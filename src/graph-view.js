@@ -5,7 +5,8 @@ import * as joint from 'jointjs/dist/joint.min';
 import { jointShapeElement, jointShapeElementView } from './joint-shape-node.js';
 import { GRAPH_ACTIONS } from './constants.js';
 import ContextMenu from '@playcanvas/pcui/ContextMenu';
-import * as pc from 'playcanvas';
+// TODO replace with a lighter math library
+import { Vec2 } from 'playcanvas';
 
 class GraphView extends JointGraph {
     constructor(parent, dom, graphSchema, graphData, config) {
@@ -155,7 +156,7 @@ class GraphView extends JointGraph {
         const scale = this._paper.scale().sx;
         const translate = this._paper.translate();
         const boundingClientRect = this._paper.el.getBoundingClientRect();
-        return new pc.Vec2(
+        return new Vec2(
             (-translate.tx / scale) + ((pos.x - boundingClientRect.x) / scale),
             (-translate.ty / scale) + ((pos.y - boundingClientRect.y) / scale)
         );
@@ -311,11 +312,11 @@ class GraphView extends JointGraph {
         link.source(this.getNode(nodeId).model);
         link.target(this.getNode(nodeId).model);
         const mouseMoveEvent = (e) => {
-            var mousePos = this.getWindowToGraphPosition(new pc.Vec2(e.clientX, e.clientY));
+            var mousePos = this.getWindowToGraphPosition(new Vec2(e.clientX, e.clientY));
             var sourceNodeView = this._paper.findViewByModel(this.getNode(nodeId).model);
             var sourceNodePos = this.getGraphPosition(sourceNodeView.el.getBoundingClientRect());
             var pointerVector = mousePos.clone().sub(sourceNodePos);
-            var direction = (new pc.Vec2(e.clientX, e.clientY)).clone().sub(sourceNodeView.el.getBoundingClientRect()).normalize().scale(20);
+            var direction = (new Vec2(e.clientX, e.clientY)).clone().sub(sourceNodeView.el.getBoundingClientRect()).normalize().scale(20);
             pointerVector = sourceNodePos.add(pointerVector).sub(direction);
             link.target({
                 x: pointerVector.x,
@@ -405,7 +406,7 @@ class GraphView extends JointGraph {
 
     getGraphPosition() {
         var t = this._paper.translate();
-        return new pc.Vec2([t.tx, t.ty]);
+        return new Vec2([t.tx, t.ty]);
     }
 
     setGraphScale(scale) {
