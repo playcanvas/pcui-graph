@@ -19,7 +19,7 @@ class Graph extends Element {
      * @param {HTMLElement} options.dom - If supplied, the graph will be attached to this element.
      * @param {object[]} options.contextMenuItems - The context menu items to add to the graph. Optional.
      * @param {boolean} options.readOnly - Whether the graph is read only. Optional. Defaults to false.
-     * @param {boolean} options.passiveUIEvents - If true, the graph will not update it's data and view upon user interaction. Instead these interactions can be handled explicitly by listening to fired events. Optional. Defaults to false.
+     * @param {boolean} options.passiveUIEvents - If true, the graph will not update its data and view upon user interaction. Instead, these interactions can be handled explicitly by listening to fired events. Optional. Defaults to false.
      * @param {boolean} options.incrementNodeNames - Whether the graph should increment the node name when a node with the same name already exists. Optional. Defaults to false.
      * @param {boolean} options.restrictTranslate - Whether the graph should restrict the translate graph operation to the graph area. Optional. Defaults to false.
      * @param {boolean} options.edgeHoverEffect - Whether the graph should show an edge highlight effect when the mouse is hovering over edges. Optional. Defaults to true.
