@@ -1,6 +1,6 @@
 const path = require('path');
 module.exports = {
-  stories: ['../src/components/Graph/index.stories.jsx'],
+  stories: ['./stories/**'],
   addons: [
     '@storybook/addon-actions/register',
     '@storybook/addon-links',
@@ -22,6 +22,14 @@ module.exports = {
           use: ['style-loader', 'css-loader', {
               loader: 'sass-loader'
           }],
+      }
+    );
+
+    config.module.rules.unshift(
+      {
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: "javascript/auto",
       }
     );
     // Return the altered config

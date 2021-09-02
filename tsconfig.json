@@ -1,0 +1,16 @@
+{
+    "include": ["./src/index.js"],
+    "exclude": [
+        "node_modules",
+        "./node_modules",
+        "./node_modules/*",
+        "./node_modules/@types/node/index.d.ts",
+    ],
+    "compilerOptions": {
+        "allowJs": true,
+        "declaration": true,
+        "module": "ES6",
+        "noEmit": true,
+        "skipLibCheck": true
+    }
+}

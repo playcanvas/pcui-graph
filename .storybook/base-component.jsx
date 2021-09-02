@@ -1,26 +1,15 @@
 import React from 'react';
-import Graph from './index.js';
+import { Graph } from '../src/index.js';
 
 class BaseComponent extends React.Component {
     constructor(props) {
         super(props);
-        if (props.onClick) {
-            this.onClick = props.onClick;
-        }
-        if (props.onChange) {
-            this.onChange = props.onChange;
-        }
-        if (props.link) {
-            this.link = props.link;
-        }
     }
     attachElement = (nodeElement, containerElement) => {
         if (!nodeElement) return;
-        this.element = new Graph({
-            ...this.props,
+        this.element = new Graph(this.props.schema, {
+            ...this.props.options,
             dom: nodeElement,
-            container: containerElement,
-            parent: undefined
         });
         if (this.onClick) {
             this.element.on('click', this.onClick);

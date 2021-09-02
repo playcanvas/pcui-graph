@@ -1,14 +1,14 @@
-import 'jointjs/dist/joint.css';
-import 'jointjs/css/layout.css';
-import 'jointjs/css/themes/material.css';
+import './lib/joint.scss';
+import './lib/layout.scss';
+import './lib/material.scss';
 import 'jquery';
 import 'lodash';
 import 'backbone';
-import * as joint from 'jointjs';
+import * as joint from 'jointjs/dist/joint.min';
+// TODO replace with a lighter math library
 import { Vec2 } from 'playcanvas';
 
 class JointGraph {
-
     constructor(dom, config = {}) {
 
         this._config = config;
@@ -23,9 +23,9 @@ class JointGraph {
             clickThreshold: 1,
             restrictTranslate: this._config.restrictTranslate,
             background: {
-                color: '#20292B'
+                color: config.defaultStyles.background.color
             },
-            gridSize: 10,
+            gridSize: config.defaultStyles.background.gridSize,
             linkPinning: false,
             defaultLink: (cellView, magnet) => {
                 var defaultLink = new joint.shapes.standard.Link({
@@ -63,7 +63,7 @@ class JointGraph {
             }
         });
 
-        const graphResizeObserver = new ResizeObserver(_ => {
+        const graphResizeObserver = new ResizeObserver((_) => {
             this._resizeGraph();
         });
         graphResizeObserver.observe(dom);
@@ -236,18 +236,18 @@ class JointGraph {
                             name: 'center',
                             args: {
                                 dx: shift.x,
-                                dy: shift.y,
+                                dy: shift.y
                             }
-                        } 
+                        }
                     });
                     sibling.target(sibling.getTargetCell(), {
                         anchor: {
                             name: 'center',
                             args: {
                                 dx: shift.x,
-                                dy: shift.y,
+                                dy: shift.y
                             }
-                        } 
+                        }
                     });
                     this.ignoreAdjustVertices = false;
                 });

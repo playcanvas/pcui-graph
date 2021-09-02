@@ -1,0 +1,15 @@
+{
+    "name": "Shader Graph API",
+    "entryPoints": ["src/index.js"],
+    "exclude": "**/node_modules/**",
+    "externalPattern": "**/node_modules/**",
+    "out": "_docs",
+    "entryDocument": "README.md",
+    "highlightTheme": "github-light",
+    "excludeInternal": false,
+    "excludePrivate": true,
+    "excludeNotDocumented": true,
+    "sort": "source-order",
+    "defaultCategory": "Public",
+    "categoryOrder": ["Public", "*"]
+}
