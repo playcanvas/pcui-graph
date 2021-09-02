@@ -1,5 +1,7 @@
 # PCUI Graph
 
+![PCUI Graph](https://blog.playcanvas.com/wp-content/uploads/2021/09/image.png)
+
 Create node based visual graphs in the browser. Supports undirected / directed graphs as well as visual scripting graphs containing nodes with input / output ports. Your graphs can be saved to a JSON file and loaded back into a new graph view at any time.
 
 ## Getting Started
