@@ -115,12 +115,6 @@ class GraphViewEdge {
             stroke: edgeSchema.strokeSelected || this._config.defaultStyles.edge.strokeSelected,
             fill: edgeSchema.strokeSelected || this._config.defaultStyles.edge.strokeSelected
         });
-        // this.model.attr('line/sourceMarker', {
-        //     stroke: '#F60',
-        //     fill: '#F60'
-        // });
-        // this.model.attr('line/sourceMarker/xlink:href', sourceMarkerActiveImage);
-        // this.state = GraphViewEdge.STATES.SELECTED;
     }
 
     deselect() {
