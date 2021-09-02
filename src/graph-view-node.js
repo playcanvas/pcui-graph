@@ -70,14 +70,14 @@ class GraphViewNode {
                 inBackground: {
                     fill: this.getSchemaValue('fillSecondary'),
                     width: this.getSchemaValue('inPorts') ? rectSize.x / 2 - 1 : rectSize.x - 2,
-                    height: rectSize.y - rectHeight - 2,
+                    height: (rectSize.y - rectHeight - 2) >= 0 ? rectSize.y - rectHeight - 2 : 0,
                     refX: 1,
                     refY: rectHeight + 1
                 },
                 outBackground: {
                     fill: this.getSchemaValue('fill'),
                     width: this.getSchemaValue('inPorts') ? rectSize.x / 2 - 1 : 0,
-                    height: rectSize.y - rectHeight - 2,
+                    height: (rectSize.y - rectHeight - 2) >= 0 ? rectSize.y - rectHeight - 2 : 0,
                     refX: rectSize.x / 2,
                     refY: rectHeight + 1
                 },

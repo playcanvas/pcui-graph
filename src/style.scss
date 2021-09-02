@@ -128,15 +128,3 @@
 .pcui-contextmenu-parent, .pcui-contextmenu-child {
     height: 27px;
 }
-
-.joint-paper {
-    z-index: -999999;
-    position: absolute;
-}
-
-.joint-paper-grid {
-    height: 100%;
-    z-index: -1;
-    width: 100%;
-    position: absolute;
-}

@@ -1,6 +1,6 @@
-import 'jointjs/dist/joint.css';
-import 'jointjs/css/layout.css';
-import 'jointjs/css/themes/material.css';
+import './lib/joint.scss';
+import './lib/layout.scss';
+import './lib/material.scss';
 import 'jquery';
 import 'lodash';
 import 'backbone';

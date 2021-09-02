@@ -1,4 +1,3 @@
-import sass from 'rollup-plugin-sass';
 import resolve from 'rollup-plugin-node-resolve';
 import { uglify } from 'rollup-plugin-uglify';
 import postcss from 'rollup-plugin-postcss';
@@ -13,21 +12,18 @@ const umdBuild = {
         name: 'pcuiGraph',
         globals: {
             '@playcanvas/observer': 'observer',
-            '@playcanvas/pcui': 'pcui'
+            '@playcanvas/pcui': 'pcui',
+            'playcanvas': 'pc'
         }
     },
-    external: ['@playcanvas/observer', '@playcanvas/pcui'],
+    external: ['@playcanvas/observer', '@playcanvas/pcui', 'playcanvas'],
     plugins: [
+        postcss({
+            minimize: false,
+            extensions: ['.css', '.scss']
+        }),
         commonjs({ transformMixedEsModules: true }),
         babel({ babelHelpers: 'bundled' }),
-        postcss({
-            minimize: true,
-            extensions: ['.css']
-        }),
-        sass({
-            insert: true,
-            output: false
-        }),
         resolve(),
         process.env.NODE_ENV === 'production' && uglify()
     ]
@@ -39,17 +35,13 @@ const moduleBuild = {
         file: 'dist/index.mjs',
         format: 'module'
     },
-    external: ['@playcanvas/observer', '@playcanvas/pcui'],
+    external: ['@playcanvas/observer', '@playcanvas/pcui', 'playcanvas'],
     plugins: [
         commonjs({ transformMixedEsModules: true }),
         babel({ babelHelpers: 'bundled' }),
         postcss({
-            minimize: true,
-            extensions: ['.css']
-        }),
-        sass({
-            insert: true,
-            output: false
+            minimize: false,
+            extensions: ['.css', '.scss']
         }),
         resolve(),
         process.env.NODE_ENV === 'production' && uglify()
@@ -66,12 +58,8 @@ const bundleBuild = {
         commonjs({ transformMixedEsModules: true }),
         babel({ babelHelpers: 'bundled' }),
         postcss({
-            minimize: true,
-            extensions: ['.css']
-        }),
-        sass({
-            insert: true,
-            output: false
+            minimize: false,
+            extensions: ['.css', '.scss']
         }),
         resolve(),
         process.env.NODE_ENV === 'production' && uglify()
