@@ -2,7 +2,7 @@
   "name": "@playcanvas/pcui-graph",
   "version": "1.0.0",
   "author": "PlayCanvas <support@playcanvas.com>",
-  "homepage": "https://playcanvas.github.io/pcui",
+  "homepage": "https://github.com/playcanvas/pcui-graph",
   "description": "",
   "license": "MIT",
   "main": "pcui-graph.js",
@@ -33,8 +33,8 @@
     "lint": "eslint --ext .js src",
     "storybook": "start-storybook -p 9010 -s public",
     "build:docs": "typedoc --options typedoc.json; cp ./_docs/classes/Graph.md ./docs/Graph.md; rm -rf ./_docs",
-    "publish": "npm run build:prod && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && && cp ./docs dist npm publish dist",
-    "publish:dry": "npm run build:prod && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && && cp ./docs dist npm publish dist --dry-run"
+    "pkg:publish": "rm -rf ./dist/ && npm run build:prod && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && cp -r ./docs dist && npm publish dist",
+    "pkg:publish:dry": "rm -rf ./dist/ && npm run build:prod && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && cp -r ./docs dist && npm publish dist --dry-run"
 
   },
   "browserslist": {
