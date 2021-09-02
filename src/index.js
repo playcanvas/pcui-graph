@@ -527,7 +527,7 @@ class Graph extends Element {
 
     /**
      *
-     * get the current center position of the viewport in the graph
+     * Get the current center position of the viewport in the graph
      *
      * @returns {object} The current center position of the viewport in the graph as an object containing x and y
      */
