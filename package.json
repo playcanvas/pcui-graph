@@ -32,7 +32,10 @@
     "build:prod": "NODE_ENV=production rollup -c --environment target:all",
     "lint": "eslint --ext .js src",
     "storybook": "start-storybook -p 9010 -s public",
-    "build:docs": "typedoc --options typedoc.json; cp ./_docs/classes/Graph.md ./docs/Graph.md; rm -rf ./_docs"
+    "build:docs": "typedoc --options typedoc.json; cp ./_docs/classes/Graph.md ./docs/Graph.md; rm -rf ./_docs",
+    "publish": "npm run build:prod && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && && cp ./docs dist npm publish dist",
+    "publish:dry": "npm run build:prod && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && && cp ./docs dist npm publish dist --dry-run"
+
   },
   "browserslist": {
     "production": [

@@ -63,7 +63,7 @@ class JointGraph {
             }
         });
 
-        const graphResizeObserver = new ResizeObserver((_ => {
+        const graphResizeObserver = new ResizeObserver((_) => {
             this._resizeGraph();
         });
         graphResizeObserver.observe(dom);
