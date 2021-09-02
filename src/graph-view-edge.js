@@ -131,11 +131,6 @@ class GraphViewEdge {
             'stroke': edgeSchema.stroke || this._config.defaultStyles.edge.stroke,
             'fill': edgeSchema.stroke || this._config.defaultStyles.edge.stroke
         });
-        // this.model.attr('line/sourceMarker', {
-        //     stroke: edgeSchema.targetMarkerStroke || edgeSchema.stroke,
-        //     fill: edgeSchema.targetMarkerStroke || edgeSchema.stroke
-        // });
-        // this.model.attr('line/sourceMarker/xlink:href', sourceMarkerDefaultImage);
         this.state = GraphViewEdge.STATES.DEFAULT;
     }
 
@@ -147,11 +142,6 @@ class GraphViewEdge {
             stroke: '#9BA1A3',
             fill: '#9BA1A3'
         });
-        // this.model.attr('line/sourceMarker', {
-        //     stroke: '#9BA1A3',
-        //     fill: '#9BA1A3'
-        // });
-        // this.model.attr('line/sourceMarker/xlink:href', sourceMarkerDeactiveImage);
     }
 
     addSourceMarker() {

@@ -151,14 +151,6 @@ class GraphView extends JointGraph {
         }
     }
 
-    // getGraphPosition(pos) {
-    //     const boundingClientRect = this._paper.el.getBoundingClientRect();
-    //     return new pc.Vec2(
-    //         (pos.x - boundingClientRect.x) / this._paper.scale().sx,
-    //         (pos.y - boundingClientRect.y) / this._paper.scale().sx
-    //     );
-    // }
-
     getWindowToGraphPosition(pos) {
         const scale = this._paper.scale().sx;
         const translate = this._paper.translate();
