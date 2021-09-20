@@ -17,6 +17,9 @@ const jointShapeElement = () => joint.shapes.standard.Rectangle.extend({
             selector: 'labelBackground'
         }, {
             tagName: 'rect',
+            selector: 'labelSeparator'
+        }, {
+            tagName: 'rect',
             selector: 'inBackground'
         }, {
             tagName: 'rect',
