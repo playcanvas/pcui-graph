@@ -12,11 +12,10 @@ const umdBuild = {
         name: 'pcuiGraph',
         globals: {
             '@playcanvas/observer': 'observer',
-            '@playcanvas/pcui': 'pcui',
-            'playcanvas': 'pc'
+            '@playcanvas/pcui': 'pcui'
         }
     },
-    external: ['@playcanvas/observer', '@playcanvas/pcui', 'playcanvas'],
+    external: ['@playcanvas/observer', '@playcanvas/pcui'],
     plugins: [
         postcss({
             minimize: false,
@@ -35,7 +34,7 @@ const moduleBuild = {
         file: 'dist/index.mjs',
         format: 'module'
     },
-    external: ['@playcanvas/observer', '@playcanvas/pcui', 'playcanvas'],
+    external: ['@playcanvas/observer', '@playcanvas/pcui'],
     plugins: [
         commonjs({ transformMixedEsModules: true }),
         babel({ babelHelpers: 'bundled' }),

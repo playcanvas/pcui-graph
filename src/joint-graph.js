@@ -6,7 +6,7 @@ import 'lodash';
 import 'backbone';
 import * as joint from 'jointjs/dist/joint.min';
 // TODO replace with a lighter math library
-import { Vec2 } from 'playcanvas';
+import { Vec2 } from 'playcanvas/src/math/vec2.js';
 
 class JointGraph {
     constructor(dom, config = {}) {

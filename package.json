@@ -17,7 +17,6 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "playcanvas": "^1.38.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
@@ -25,17 +24,17 @@
     "webpack-bundle-analyzer": "^3.8.0"
   },
   "scripts": {
+    "build": "rollup -c --environment target:all",
     "build:umd": "rollup -c --environment target:umd",
     "build:module": "rollup -c --environment target:module",
     "build:bundle": "rollup -c --environment target:bundle",
-    "build": "rollup -c --environment target:all",
+    "build:watch": "rollup -c --environment target:all --watch",
     "build:prod": "NODE_ENV=production rollup -c --environment target:all",
     "lint": "eslint --ext .js src",
     "storybook": "start-storybook -p 9010 -s public",
     "build:docs": "typedoc --options typedoc.json; cp ./_docs/classes/Graph.md ./docs/Graph.md; rm -rf ./_docs",
-    "pkg:publish": "rm -rf ./dist/ && npm run build:prod && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && cp -r ./docs dist && npm publish dist",
-    "pkg:publish:dry": "rm -rf ./dist/ && npm run build:prod && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && cp -r ./docs dist && npm publish dist --dry-run"
-
+    "pkg:publish": "rm -rf ./dist/ && npm run build:prod && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && cp -r ./docs dist && npm publish dist --access=public",
+    "pkg:publish:dry": "rm -rf ./dist/ && npm run build:prod && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && cp -r ./docs dist && npm publish dist --dry-run --access=public"
   },
   "browserslist": {
     "production": [
@@ -84,6 +83,7 @@
     "json-loader": "^0.5.7",
     "lodash": "^4.17.20",
     "node-sass": "^4.14.1",
+    "playcanvas": "https://github.com/playcanvas/engine/archive/c6f750223e3c184b26995a1d9952f769811ca542.tar.gz",
     "postcss": "^8.3.6",
     "prop-types": "^15.7.2",
     "react-app-rewire-alias": "^0.1.6",

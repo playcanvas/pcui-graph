@@ -32,6 +32,12 @@ module.exports = {
         type: "javascript/auto",
       }
     );
+
+    config.module.rules[5].include = [
+      /node_modules\/acorn-jsx/,
+      /node_modules\/playcanvas/
+    ];
+
     // Return the altered config
     return config;
   },

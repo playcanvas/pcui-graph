@@ -6,7 +6,7 @@ import { jointShapeElement, jointShapeElementView } from './joint-shape-node.js'
 import { GRAPH_ACTIONS } from './constants.js';
 import ContextMenu from '@playcanvas/pcui/ContextMenu';
 // TODO replace with a lighter math library
-import { Vec2 } from 'playcanvas';
+import { Vec2 } from 'playcanvas/src/math/vec2.js';
 
 class GraphView extends JointGraph {
     constructor(parent, dom, graphSchema, graphData, config) {
