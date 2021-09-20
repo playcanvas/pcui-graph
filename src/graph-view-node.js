@@ -34,13 +34,13 @@ class GraphViewNode {
         var portHeight = 0;
         var attributeHeight = 0;
         if (nodeSchema.inPorts) {
-            portHeight = (nodeSchema.inPorts.length * 25) + 12;
+            portHeight = (nodeSchema.inPorts.length * 25) + 10;
         }
         if (nodeSchema.outPorts) {
-            var outHeight = (nodeSchema.outPorts.length * 25) + 12;
+            var outHeight = (nodeSchema.outPorts.length * 25) + 10;
             if (outHeight > portHeight) portHeight = outHeight;
         }
-        if (nodeSchema.attributes) {
+        if (nodeSchema.attributes && nodeSchema.attributes.length > 0) {
             attributeHeight = nodeSchema.attributes.length * 32 + 10;
         }
         var rectSize = { x: 226, y: rectHeight + portHeight + attributeHeight };
@@ -62,10 +62,17 @@ class GraphViewNode {
                 },
                 labelBackground: {
                     fill: this.getSchemaValue('fill'),
-                    refX: 1,
-                    refY: 1,
+                    refX: 2,
+                    refY: 2,
+                    width: rectSize.x - 4,
+                    height: rectHeight - 4
+                },
+                labelSeparator: {
+                    fill: this.getSchemaValue('stroke'),
                     width: rectSize.x - 2,
-                    height: rectHeight - 2
+                    height: this.getSchemaValue('inPorts') || this.getSchemaValue('outPorts') ? 2 : 0,
+                    refX: 1,
+                    refY: rectHeight - 1
                 },
                 inBackground: {
                     fill: this.getSchemaValue('fillSecondary'),

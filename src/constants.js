@@ -25,7 +25,7 @@ export var DEFAULT_CONFIG = {
             gridSize: 10
         },
         node: {
-            fill: '#293538',
+            fill: '#2c393c',
             fillSecondary: '#364346',
             stroke: '#293538',
             strokeSelected: '#F60',
