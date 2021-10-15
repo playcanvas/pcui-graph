@@ -31,7 +31,7 @@ const schema = {
     edges: {
         0: {
             from: [0], // this edge can connect nodes of type 0
-            to: [1] // to nodes of type 1,
+            to: [1], // to nodes of type 1,
             stroke: 'blue'
         }
     }
