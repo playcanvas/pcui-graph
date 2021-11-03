@@ -4,7 +4,6 @@ import GraphViewEdge from './graph-view-edge.js';
 import * as joint from 'jointjs/dist/joint.min';
 import { jointShapeElement, jointShapeElementView } from './joint-shape-node.js';
 import { GRAPH_ACTIONS } from './constants.js';
-import ContextMenu from '@playcanvas/pcui/ContextMenu';
 // TODO replace with a lighter math library
 import { Vec2 } from 'playcanvas/src/math/vec2.js';
 
@@ -16,6 +15,7 @@ class GraphView extends JointGraph {
         this._dom = dom;
         this._graphSchema = graphSchema;
         this._graphData = graphData;
+        this.pcui = parent.pcui;
 
         this._config = config;
 
@@ -165,7 +165,7 @@ class GraphView extends JointGraph {
     addCanvasContextMenu(items) {
         this._viewContextMenu = document.createElement('div');
         this._paper.el.appendChild(this._viewContextMenu);
-        var contextMenu = new ContextMenu({
+        var contextMenu = new this.pcui.ContextMenu({
             dom: this._viewContextMenu,
             items: items
         });
@@ -415,6 +415,14 @@ class GraphView extends JointGraph {
 
     getGraphScale() {
         return this._paper.scale().sx;
+    }
+
+    getNodeDomElement(id) {
+        return this.getNode(id).model.findView(this._paper).el;
+    }
+
+    getEdgeDomElement(id) {
+        return this.getEdge(id).model.findView(this._paper).el;
     }
 
     destroy() {

@@ -8,6 +8,36 @@ import * as joint from 'jointjs/dist/joint.min';
 // TODO replace with a lighter math library
 import { Vec2 } from 'playcanvas/src/math/vec2.js';
 
+joint.V.matrixToTransformString = function(matrix) {
+    matrix || (matrix = true);
+    return 'matrix(' + [
+        matrix.a || 1,
+        matrix.b || 0,
+        matrix.c || 0,
+        matrix.d || 1,
+        matrix.e || 0,
+        matrix.f || 0
+    ] + ')';
+};
+
+joint.V.prototype.transform = function(matrix, opt) {
+
+    var node = this.node;
+    if (joint.V.isUndefined(matrix)) {
+        return (node.parentNode)
+            ? this.getTransformToElement(node.parentNode)
+            : node.getScreenCTM();
+    }
+
+    if (opt && opt.absolute) {
+        return this.attr('transform', joint.V.matrixToTransformString(matrix));
+    }
+
+    var svgTransform = joint.V.createSVGTransform(matrix);
+    node.transform.baseVal.appendItem(svgTransform);
+    return this;
+};
+
 class JointGraph {
     constructor(dom, config = {}) {
 
@@ -27,6 +57,7 @@ class JointGraph {
             },
             gridSize: config.defaultStyles.background.gridSize,
             linkPinning: false,
+            interactive: !this._config.readOnly,
             defaultLink: (cellView, magnet) => {
                 var defaultLink = new joint.shapes.standard.Link({
                     connector: {

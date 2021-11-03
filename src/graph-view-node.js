@@ -1,11 +1,4 @@
 import * as joint from 'jointjs/dist/joint.min';
-import ContextMenu from '@playcanvas/pcui/ContextMenu';
-import Container from '@playcanvas/pcui/Container';
-import Label from '@playcanvas/pcui/Label';
-import TextInput from '@playcanvas/pcui/TextInput';
-import BooleanInput from '@playcanvas/pcui/BooleanInput';
-import NumericInput from '@playcanvas/pcui/NumericInput';
-import VectorInput from '@playcanvas/pcui/VectorInput';
 
 const Colors = {
     bcgDarkest: '#20292b',
@@ -30,7 +23,7 @@ class GraphViewNode {
         this.nodeSchema = nodeSchema;
         this.state = GraphViewNode.STATES.DEFAULT;
 
-        var rectHeight = 28;
+        var rectHeight = this.getSchemaValue('baseHeight');
         var portHeight = 0;
         var attributeHeight = 0;
         if (nodeSchema.inPorts) {
@@ -43,7 +36,7 @@ class GraphViewNode {
         if (nodeSchema.attributes && nodeSchema.attributes.length > 0) {
             attributeHeight = nodeSchema.attributes.length * 32 + 10;
         }
-        var rectSize = { x: 226, y: rectHeight + portHeight + attributeHeight };
+        var rectSize = { x: this.getSchemaValue('baseWidth'), y: rectHeight + portHeight + attributeHeight };
 
         var labelName;
         if (nodeSchema.outPorts || nodeSchema.inPorts) {
@@ -99,14 +92,20 @@ class GraphViewNode {
                 label: {
                     text: labelName,
                     fill: this.getSchemaValue('textColor'),
-                    textAnchor: 'left',
-                    refX: this.getSchemaValue('includeIcon') ? 28 : 14,
-                    refY: 14,
+                    textAnchor: this.getSchemaValue('textAlignMiddle') ? 'middle' : 'left',
+                    refX: !this.getSchemaValue('textAlignMiddle') ? (this.getSchemaValue('includeIcon') ? 28 : 14) : rectSize.x / 2,
+                    refY: !this.getSchemaValue('textAlignMiddle') ? 14 : rectHeight / 2,
                     fontSize: 12,
                     fontWeight: 600,
-                    width: 40,
-                    height: 40
+                    width: rectSize.x,
+                    height: rectHeight,
+                    lineSpacing: 50
                 },
+                marker: nodeData.marker ? {
+                    refX: rectSize.x - 20,
+                    fill: this.getSchemaValue('stroke'),
+                    d: 'M0 0 L20 0 L20 20 Z'
+                } : null,
                 texture: nodeData.texture ? {
                     href: nodeData.texture,
                     fill: 'red',
@@ -261,8 +260,8 @@ class GraphViewNode {
         var containers = [];
         if (nodeSchema.attributes) {
             nodeSchema.attributes.forEach((attribute, i) => {
-                const container = new Container({ class: 'graph-node-container' });
-                const label = new Label({ text: attribute.name, class: 'graph-node-label' });
+                const container = new this._graphView.pcui.Container({ class: 'graph-node-container' });
+                const label = new this._graphView.pcui.Label({ text: attribute.name, class: 'graph-node-label' });
                 let input;
                 let nodeValue;
                 if (nodeData.attributes) {
@@ -282,16 +281,16 @@ class GraphViewNode {
                 }
                 switch (attribute.type) {
                     case 'TEXT_INPUT':
-                        input = new TextInput({ class: 'graph-node-input', value: nodeValue });
+                        input = new this._graphView.pcui.TextInput({ class: 'graph-node-input', value: nodeValue });
                         break;
                     case 'BOOLEAN_INPUT':
-                        input = new BooleanInput({ class: 'graph-node-input', value: nodeValue });
+                        input = new this._graphView.pcui.BooleanInput({ class: 'graph-node-input', value: nodeValue });
                         break;
                     case 'NUMERIC_INPUT':
-                        input = new NumericInput({ class: 'graph-node-input', hideSlider: true, value: nodeValue && nodeValue.x ? nodeValue.x : nodeValue });
+                        input = new this._graphView.pcui.NumericInput({ class: 'graph-node-input', hideSlider: true, value: nodeValue && nodeValue.x ? nodeValue.x : nodeValue });
                         break;
                     case 'VEC_2_INPUT':
-                        input = new VectorInput({ dimensions: 2,
+                        input = new this._graphView.pcui.VectorInput({ dimensions: 2,
                             class: 'graph-node-input',
                             hideSlider: true,
                             value: [
@@ -302,7 +301,7 @@ class GraphViewNode {
                         input.inputs.forEach((i) => i._sliderControl.dom.remove());
                         break;
                     case 'VEC_3_INPUT':
-                        input = new VectorInput({ dimensions: 3,
+                        input = new this._graphView.pcui.VectorInput({ dimensions: 3,
                             class: 'graph-node-input',
                             hideSlider: true,
                             value: [
@@ -314,7 +313,7 @@ class GraphViewNode {
                         input.inputs.forEach((i) => i._sliderControl.dom.remove());
                         break;
                     case 'VEC_4_INPUT':
-                        input = new VectorInput({ dimensions: 4,
+                        input = new this._graphView.pcui.VectorInput({ dimensions: 4,
                             class: 'graph-node-input',
                             hideSlider: true,
                             value: [
@@ -362,7 +361,7 @@ class GraphViewNode {
     }
 
     getSchemaValue(item) {
-        return this.nodeSchema[item] || this._config.defaultStyles.node[item];
+        return this.nodeSchema[item] !== undefined ? this.nodeSchema[item] : this._config.defaultStyles.node[item];
     }
 
     addContextMenu(items) {
@@ -371,7 +370,7 @@ class GraphViewNode {
         var contextMenu = document.createElement('div');
         this._paper.el.appendChild(contextMenu);
         this._contextMenuElement = contextMenu;
-        this._contextMenu = new ContextMenu({
+        this._contextMenu = new this._graphView.pcui.ContextMenu({
             triggerElement: nodeView.el,
             dom: contextMenu,
             items: this._graphView._parent._initialiseNodeContextMenuItems(this.nodeData, items)

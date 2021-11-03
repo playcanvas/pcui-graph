@@ -3,6 +3,7 @@ import { uglify } from 'rollup-plugin-uglify';
 import postcss from 'rollup-plugin-postcss';
 import commonjs from '@rollup/plugin-commonjs';
 import { babel } from '@rollup/plugin-babel';
+import jscc from 'rollup-plugin-jscc';
 
 const umdBuild = {
     input: 'src/index.js',
@@ -17,6 +18,9 @@ const umdBuild = {
     },
     external: ['@playcanvas/observer', '@playcanvas/pcui'],
     plugins: [
+        jscc({
+            values: { _STRIP_SCSS: process.env.STRIP_SCSS }
+        }),
         postcss({
             minimize: false,
             extensions: ['.css', '.scss']

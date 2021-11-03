@@ -19,7 +19,13 @@ export var DEFAULT_CONFIG = {
     restrictTranslate: false,
     edgeHoverEffect: true,
     includeFonts: true,
+    useGlobalPCUI: false,
     defaultStyles: {
+        initialScale: 1,
+        initialPosition: {
+            x: 0,
+            y: 0
+        },
         background: {
             color: '#20292B',
             gridSize: 10
@@ -34,7 +40,11 @@ export var DEFAULT_CONFIG = {
             textColorSecondary: '#b1b8ba',
             includeIcon: true,
             icon: '',
-            iconColor: '#F60'
+            iconColor: '#F60',
+            baseHeight: 28,
+            baseWidth: 226,
+            textAlignMiddle: false
+
         },
         edge: {
             stroke: 'rgb(3, 121, 238)',
