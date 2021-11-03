@@ -43,7 +43,7 @@ document.body.appendChild(graph.dom);
 
 The library is also available on [npm](https://www.npmjs.com/package/pcui-graph) and can be installed in your project with 
 ```
-npm install @playcanvas/pcui-graph
+npm install --save @playcanvas/pcui-graph @playcanvas/pcui @playcanvas/observer
 ```
 
 The npm package includes three builds of the library:
@@ -53,11 +53,6 @@ The npm package includes three builds of the library:
 @playcanvas/pcui-graph/bundle.mjs // module build, with all external dependencies bundled
 ```
 
-The current external dependencies for this project are:
-```
-@playcanvas/pcui
-@playcanvas/observer
-```
 ## Storybook
 
 Examples of different graphs created with this library can be viewed by running storybook. Do so by running the following in the this projects root directory:
