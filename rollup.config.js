@@ -21,7 +21,7 @@ const umdBuild = {
     external: ['@playcanvas/observer', '@playcanvas/pcui'],
     plugins: [
         jscc({
-            values: { _EDITOR_BUILD: process.env.EDITOR_BUILD }
+            values: { _STRIP_SCSS: process.env.STRIP_SCSS }
         }),
         postcss({
             minimize: false,

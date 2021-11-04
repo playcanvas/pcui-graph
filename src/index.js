@@ -66,14 +66,14 @@ class Graph extends Element {
         }
         if (this._config.readOnly) this._config.selfContainedMode = true;
         if (this._config.includeFonts) {
-            /*#if _EDITOR_BUILD
+            /*#if _STRIP_SCSS
             //#else */
             require('./style-fonts.scss');
             //#endif
         }
 
         if (!this._config.useGlobalPCUI) {
-            /*#if _EDITOR_BUILD
+            /*#if _STRIP_SCSS
             //#else */
             this.pcui = {
                 ContextMenu: require('@playcanvas/pcui/ContextMenu').default,
