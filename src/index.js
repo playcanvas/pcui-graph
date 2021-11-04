@@ -85,6 +85,8 @@ class Graph extends Element {
                 VectorInput: require('@playcanvas/pcui/VectorInput').default
             };
             //#endif
+        } else {
+            this.pcui = window.pcui;
         }
 
         this._buildGraphFromData();
