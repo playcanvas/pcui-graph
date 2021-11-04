@@ -144,11 +144,11 @@ export const DirectedGraphExample = (args) => {
 document.querySelector('#root').setAttribute('style', 'position: fixed; width: 100%; height: 100%');
 document.body.setAttribute('style', 'margin: 0px; padding: 0px;');
 
-// setTimeout(() => {
-//     Object.keys(GRAPH_ACTIONS).forEach((key) => {
-//         const graphAction = GRAPH_ACTIONS[key];
-//         document.querySelector('.pcui-graph').ui.on(graphAction, (data) => {
-//             console.log(graphAction, data);
-//         });
-//     });
-// }, 500);
+setTimeout(() => {
+    Object.keys(GRAPH_ACTIONS).forEach((key) => {
+        const graphAction = GRAPH_ACTIONS[key];
+        document.querySelector('.pcui-graph').ui.on(graphAction, (data) => {
+            console.log(graphAction, data);
+        });
+    });
+}, 500);
