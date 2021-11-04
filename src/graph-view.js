@@ -316,7 +316,7 @@ class GraphView extends JointGraph {
             var sourceNodeView = this._paper.findViewByModel(this.getNode(nodeId).model);
             var sourceNodePos = this.getGraphPosition(sourceNodeView.el.getBoundingClientRect());
             var pointerVector = mousePos.clone().sub(sourceNodePos);
-            var direction = (new Vec2(e.clientX, e.clientY)).clone().sub(sourceNodeView.el.getBoundingClientRect()).normalize().scale(20);
+            var direction = (new Vec2(e.clientX, e.clientY)).clone().sub(sourceNodeView.el.getBoundingClientRect()).normalize().mulScalar(20);
             pointerVector = sourceNodePos.add(pointerVector).sub(direction);
             link.target({
                 x: pointerVector.x,

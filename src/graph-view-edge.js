@@ -31,7 +31,9 @@ class GraphViewEdge {
                 port: `out${edgeData.outPort}`
             });
         } else {
-            link.source(sourceNode.model);
+            if (sourceNode.model) {
+                link.source(sourceNode.model);
+            }
         }
         var targetNode = this._graphView.getNode(edgeData.to);
         if (edgeData && Number.isFinite(edgeData.inPort)) {

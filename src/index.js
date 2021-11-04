@@ -66,14 +66,14 @@ class Graph extends Element {
         }
         if (this._config.readOnly) this._config.selfContainedMode = true;
         if (this._config.includeFonts) {
-            /*#if _STRIP_SCSS
+            /*#if _EDITOR_BUILD
             //#else */
             require('./style-fonts.scss');
             //#endif
         }
 
         if (!this._config.useGlobalPCUI) {
-            /*#if _STRIP_SCSS
+            /*#if _EDITOR_BUILD
             //#else */
             this.pcui = {
                 ContextMenu: require('@playcanvas/pcui/ContextMenu').default,
@@ -90,7 +90,6 @@ class Graph extends Element {
         }
 
         this._buildGraphFromData();
-        window.top.graph = this;
         if (options.defaultStyles.initialScale) {
             this.setGraphScale(options.defaultStyles.initialScale);
         }

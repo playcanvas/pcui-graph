@@ -4,6 +4,8 @@ import postcss from 'rollup-plugin-postcss';
 import commonjs from '@rollup/plugin-commonjs';
 import { babel } from '@rollup/plugin-babel';
 import jscc from 'rollup-plugin-jscc';
+import builtins from 'rollup-plugin-node-builtins';
+import globals from 'rollup-plugin-node-globals';
 
 const umdBuild = {
     input: 'src/index.js',
@@ -19,13 +21,15 @@ const umdBuild = {
     external: ['@playcanvas/observer', '@playcanvas/pcui'],
     plugins: [
         jscc({
-            values: { _STRIP_SCSS: process.env.STRIP_SCSS }
+            values: { _EDITOR_BUILD: process.env.EDITOR_BUILD }
         }),
         postcss({
             minimize: false,
             extensions: ['.css', '.scss']
         }),
         commonjs({ transformMixedEsModules: true }),
+        globals(),
+        builtins(),
         babel({ babelHelpers: 'bundled' }),
         resolve(),
         process.env.NODE_ENV === 'production' && uglify()
@@ -41,6 +45,8 @@ const moduleBuild = {
     external: ['@playcanvas/observer', '@playcanvas/pcui'],
     plugins: [
         commonjs({ transformMixedEsModules: true }),
+        globals(),
+        builtins(),
         babel({ babelHelpers: 'bundled' }),
         postcss({
             minimize: false,
@@ -59,6 +65,8 @@ const bundleBuild = {
     },
     plugins: [
         commonjs({ transformMixedEsModules: true }),
+        globals(),
+        builtins(),
         babel({ babelHelpers: 'bundled' }),
         postcss({
             minimize: false,
