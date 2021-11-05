@@ -33,6 +33,9 @@ const jointShapeElement = () => joint.shapes.standard.Rectangle.extend({
         }, {
             tagName: 'image',
             selector: 'texture'
+        }, {
+            tagName: 'path',
+            selector: 'marker'
         }]
     }, joint.shapes.standard.Rectangle.prototype.defaults)
 });

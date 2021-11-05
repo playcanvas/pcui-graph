@@ -1,5 +1,4 @@
 import * as joint from 'jointjs/dist/joint.min';
-import ContextMenu from '@playcanvas/pcui/ContextMenu';
 
 joint.connectors.smoothInOut = function (sourcePoint, targetPoint, vertices, args) {
     var p1 = sourcePoint.clone();
@@ -32,7 +31,9 @@ class GraphViewEdge {
                 port: `out${edgeData.outPort}`
             });
         } else {
-            link.source(sourceNode.model);
+            if (sourceNode.model) {
+                link.source(sourceNode.model);
+            }
         }
         var targetNode = this._graphView.getNode(edgeData.to);
         if (edgeData && Number.isFinite(edgeData.inPort)) {
@@ -45,7 +46,8 @@ class GraphViewEdge {
         }
 
         var onCellMountedToDom = () => {
-            this._paper.findViewByModel(link).on('cell:pointerdown', function () {
+            this._paper.findViewByModel(link).on('cell:pointerdown', () => {
+                if (this._config.readOnly) return;
                 onEdgeSelected(edgeData);
             });
             if (edgeData && Number.isFinite(edgeData.inPort)) {
@@ -91,6 +93,12 @@ class GraphViewEdge {
         } else {
             link.attr('line/targetMarker', null);
         }
+
+        if (edgeSchema.sourceMarker || defaultStyles.edge.sourceMarker) {
+            link.attr('line/sourceMarker', {
+                d: 'M 6 0 a 6 6 0 1 0 0 1'
+            });
+        }
         return link;
     }
 
@@ -100,7 +108,7 @@ class GraphViewEdge {
         if (!edgeCell) return;
         var contextMenu = document.createElement('div');
         this._paper.el.appendChild(contextMenu);
-        new ContextMenu({
+        new this._graphView.pcui.ContextMenu({
             triggerElement: edgeCell.el,
             dom: contextMenu,
             items: items

@@ -41,7 +41,8 @@ class Graph extends Element {
             incrementNodeNames: options.incrementNodeNames,
             restrictTranslate: options.restrictTranslate,
             edgeHoverEffect: options.edgeHoverEffect,
-            includeFonts: options.includeFonts
+            includeFonts: options.includeFonts,
+            useGlobalPCUI: options.useGlobalPCUI
         };
         if (options.defaultStyles) {
             if (options.defaultStyles.background) {
@@ -65,10 +66,36 @@ class Graph extends Element {
         }
         if (this._config.readOnly) this._config.selfContainedMode = true;
         if (this._config.includeFonts) {
+            /*#if _STRIP_SCSS
+            //#else */
             require('./style-fonts.scss');
+            //#endif
+        }
+
+        if (!this._config.useGlobalPCUI) {
+            /*#if _STRIP_SCSS
+            //#else */
+            this.pcui = {
+                ContextMenu: require('@playcanvas/pcui/ContextMenu').default,
+                Container: require('@playcanvas/pcui/Container').default,
+                Label: require('@playcanvas/pcui/Label').default,
+                TextInput: require('@playcanvas/pcui/TextInput').default,
+                BooleanInput: require('@playcanvas/pcui/BooleanInput').default,
+                NumericInput: require('@playcanvas/pcui/NumericInput').default,
+                VectorInput: require('@playcanvas/pcui/VectorInput').default
+            };
+            //#endif
+        } else {
+            this.pcui = window.pcui;
         }
 
         this._buildGraphFromData();
+        if (options.defaultStyles.initialScale) {
+            this.setGraphScale(options.defaultStyles.initialScale);
+        }
+        if (options.defaultStyles.initialPosition) {
+            this.setGraphPosition(options.defaultStyles.initialPosition.x, options.defaultStyles.initialPosition.y);
+        }
     }
 
     /**
