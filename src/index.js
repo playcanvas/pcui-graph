@@ -370,7 +370,7 @@ class Graph extends Element {
             node.attributes[attributeKey] = value;
         }
         if (JSON.stringify(node.attributes[attributeKey]) === JSON.stringify(prevAttributeValue)) return;
-        this.updateNodeAttribute(nodeId, attribute.name, prevAttributeValue);
+        this.updateNodeAttribute(nodeId, attribute.name, value);
         this._dispatchEvent(
             GRAPH_ACTIONS.UPDATE_NODE_ATTRIBUTE,
             {
@@ -634,7 +634,7 @@ class Graph extends Element {
             this.updateNodePosition(nodeId, { x: node.posX, y: node.posY });
         });
         this.on(GRAPH_ACTIONS.UPDATE_NODE_ATTRIBUTE, ({ node }) => {
-            this._graphData.set(`data.nodes.${nodeId}`, node);
+            this._graphData.set(`data.nodes.${node.id}`, node);
         });
         this.on(GRAPH_ACTIONS.ADD_EDGE, ({ edge, edgeId }) => {
             if (Number.isFinite(edge.inPort)) {

@@ -33,13 +33,16 @@ class GraphViewNode {
             var outHeight = (nodeSchema.outPorts.length * 25) + 10;
             if (outHeight > portHeight) portHeight = outHeight;
         }
-        if (nodeSchema.attributes && nodeSchema.attributes.length > 0) {
-            attributeHeight = nodeSchema.attributes.length * 32 + 10;
+        const visibleAttributes = nodeSchema.attributes && nodeSchema.attributes.filter(a => !a.hidden);
+        if (visibleAttributes && visibleAttributes.length > 0) {
+            attributeHeight = visibleAttributes.length * 32 + 10;
         }
         var rectSize = { x: this.getSchemaValue('baseWidth'), y: rectHeight + portHeight + attributeHeight };
 
         var labelName;
-        if (nodeSchema.outPorts || nodeSchema.inPorts) {
+        if (nodeSchema.headerTextFormatter) {
+            labelName = nodeSchema.headerTextFormatter(nodeData.attributes);
+        } else if (nodeSchema.outPorts || nodeSchema.inPorts) {
             labelName = nodeData.attributes && nodeData.attributes.name ? `${nodeData.attributes.name} (${nodeSchema.name})` : nodeSchema.name;
         } else {
             labelName = nodeData.attributes && nodeData.attributes.name || nodeData.name;
@@ -196,13 +199,13 @@ class GraphViewNode {
                     id: `in${i}`,
                     group: 'in',
                     edgeType: port.edgeType,
-                    markup: `<circle class="port-body" edgeType="${port.type}"></circle><circle class="port-inner-body" visibility="hidden"></circle>`,
+                    markup: `<circle class="port-body" id="${nodeData.id}-in${i}" edgeType="${port.type}"></circle><circle class="port-inner-body" visibility="hidden"></circle>`,
                     attrs: {
                         '.port-body': {
                             stroke: this._graphSchema.edges[port.type].stroke || this._config.defaultStyles.edge.stroke
                         },
                         text: {
-                            text: port.name,
+                            text: port.textFormatter ? port.textFormatter(nodeData.attributes) : port.name,
                             fill: this.getSchemaValue('textColorSecondary'),
                             'font-size': 14
                         }
@@ -242,14 +245,14 @@ class GraphViewNode {
             nodeSchema.outPorts.forEach((port, i) => rect.addPort({
                 id: `out${i}`,
                 group: 'out',
-                markup: `<circle class="port-body" edgeType="${port.type}"></circle><circle class="port-inner-body" visibility="hidden"></circle>`,
+                markup: `<circle class="port-body" id="${nodeData.id}-out${i}" edgeType="${port.type}"></circle><circle class="port-inner-body" visibility="hidden"></circle>`,
                 attrs: {
                     type: port.type,
                     '.port-body': {
                         stroke: this._graphSchema.edges[port.type].stroke || this._config.defaultStyles.edge.stroke
                     },
                     text: {
-                        text: port.name,
+                        text: port.textFormatter ? port.textFormatter(nodeData.attributes) : port.name,
                         fill: this.getSchemaValue('textColorSecondary'),
                         'font-size': 14
                     }
@@ -258,8 +261,8 @@ class GraphViewNode {
         }
 
         var containers = [];
-        if (nodeSchema.attributes) {
-            nodeSchema.attributes.forEach((attribute, i) => {
+        if (visibleAttributes) {
+            visibleAttributes.forEach((attribute, i) => {
                 const container = new this._graphView.pcui.Container({ class: 'graph-node-container' });
                 const label = new this._graphView.pcui.Label({ text: attribute.name, class: 'graph-node-label' });
                 let input;
@@ -387,16 +390,28 @@ class GraphViewNode {
         return arr;
     }
 
-    updateAttribute(attribute, value) {
-        if (attribute === 'name') {
-            var labelName;
-            if (this.nodeSchema.outPorts || this.nodeSchema.inPorts) {
-                labelName = `${value} (${this.nodeSchema.name})`;
-            } else {
-                labelName = value;
-            }
-            this.model.attr('label/text', labelName);
+    updateFormattedTextFields() {
+        if (this.nodeSchema.headerTextFormatter) {
+            this.model.attr('label/text', this.nodeSchema.headerTextFormatter(this.nodeData.attributes));
         }
+        if (this.nodeSchema.outPorts) {
+            this.nodeSchema.outPorts.forEach((port, i) => {
+                if (port.textFormatter) {
+                    document.getElementById(`${this.nodeData.id}-out${i}`).parentElement.parentElement.querySelector('tspan').innerHTML = port.textFormatter(this.nodeData.attributes);
+                }
+            });
+        }
+        if (this.nodeSchema.inPorts) {
+            this.nodeSchema.inPorts.forEach((port, i) => {
+                if (port.textFormatter) {
+                    document.getElementById(`${this.nodeData.id}-in${i}`).parentElement.parentElement.querySelector('tspan').innerHTML = port.textFormatter(this.nodeData.attributes);
+                }
+            });
+        }
+    }
+
+    updateAttribute(attribute, value) {
+        this.nodeData.attributes[attribute] = value;
         const attributeElement = document.querySelector(`#nodediv_${this.model.id}`).querySelector(`#input_${attribute}`);
         if (attributeElement) {
             attributeElement.ui.suspendEvents = true;
@@ -408,6 +423,7 @@ class GraphViewNode {
             attributeElement.ui.error = false;
             attributeElement.ui.suspendEvents = false;
         }
+        this.updateFormattedTextFields();
     }
 
     updateNodeType(nodeType) {
@@ -431,7 +447,9 @@ class GraphViewNode {
                 break;
             }
             case 'updateAttribute': {
-                document.querySelector(`#nodediv_${this.model.id}`).querySelector(`#input_${attribute.name}`).ui.on('change', (value) => {
+                const attributeElement = document.querySelector(`#nodediv_${this.model.id}`).querySelector(`#input_${attribute.name}`);
+                if (!attributeElement) break;
+                attributeElement.ui.on('change', (value) => {
                     if (attribute.name === 'name') {
                         var nameTaken = false;
                         Object.keys(this._graphView._graphData.get('data.nodes')).forEach((nodeKey) => {
@@ -446,13 +464,6 @@ class GraphViewNode {
                             return;
                         }
                         attributeElement.ui.error = false;
-                        var labelName;
-                        if (this.nodeSchema.outPorts || this.nodeSchema.inPorts) {
-                            labelName = `${this.nodeSchema.name} (${value})`;
-                        } else {
-                            labelName = value;
-                        }
-                        this.model.attr('label/text', labelName);
                     }
                     callback(this.nodeData.id, attribute, value);
                 });
