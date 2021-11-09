@@ -268,7 +268,7 @@ class GraphViewNode {
                 let input;
                 let nodeValue;
                 if (nodeData.attributes) {
-                    if (nodeData.attributes[attribute.name]) {
+                    if (nodeData.attributes[attribute.name] !== undefined) {
                         nodeValue = nodeData.attributes[attribute.name];
                     } else {
                         Object.keys(nodeData.attributes).forEach((k) => {
