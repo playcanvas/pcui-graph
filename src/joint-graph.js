@@ -2,7 +2,7 @@ import './lib/joint.scss';
 import './lib/layout.scss';
 import './lib/material.scss';
 import 'jquery';
-import 'lodash';
+import _ from 'lodash';
 import 'backbone';
 import * as joint from 'jointjs/dist/joint.min';
 // TODO replace with a lighter math library
@@ -95,7 +95,7 @@ class JointGraph {
         });
 
         const graphResizeObserver = new ResizeObserver((_) => {
-            this._resizeGraph();
+            this._resizeGraph(dom);
         });
         graphResizeObserver.observe(dom);
 
@@ -147,8 +147,8 @@ class JointGraph {
 
     }
 
-    _resizeGraph() {
-        this._paper.setDimensions(this._dom.offsetWidth, this._dom.offsetHeight);
+    _resizeGraph(dom) {
+        this._paper.setDimensions(dom.offsetWidth, dom.offsetHeight);
     }
 
     _scaleToPoint(nextScale, x, y) {
