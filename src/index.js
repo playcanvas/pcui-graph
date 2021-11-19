@@ -25,6 +25,7 @@ class Graph extends Element {
      * @param {boolean} options.edgeHoverEffect - Whether the graph should show an edge highlight effect when the mouse is hovering over edges. Optional. Defaults to true.
      * @param {boolean} options.includeFonts - If true the graph will include a default font style. Defaults to true.
      * @param {object} options.defaultStyles - Used to override the graph's default styling. Check ./constants.js for a full list of style properties.
+     * @param {object} options.adjustVertices - If true, multiple edges conntected between two nodes will be spaced apart.
      */
     constructor(schema, options = {}) {
         super(options.dom ? options.dom : document.createElement('div'), {});
@@ -42,7 +43,8 @@ class Graph extends Element {
             restrictTranslate: options.restrictTranslate,
             edgeHoverEffect: options.edgeHoverEffect,
             includeFonts: options.includeFonts,
-            useGlobalPCUI: options.useGlobalPCUI
+            useGlobalPCUI: options.useGlobalPCUI,
+            adjustVertices: options.adjustVertices
         };
         if (options.defaultStyles) {
             if (options.defaultStyles.background) {
