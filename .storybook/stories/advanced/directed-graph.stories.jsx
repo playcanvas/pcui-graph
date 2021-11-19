@@ -106,6 +106,11 @@ var GRAPH_DATA = {
             from: 1235,
             to: 1236
         },
+        '1236-1235': {
+            edgeType: GRAPH_ENUM.EDGE.EDGE,
+            from: 1236,
+            to: 1235
+        }
     }
 };
 
@@ -129,6 +134,7 @@ export const DirectedGraphExample = (args) => {
         passiveUIEvents: false,
         includeFonts: true,
         incrementNodeNames: true,
+        adjustVertices: true,
         defaultStyles: {
             background: {
                 color: '#20292B',

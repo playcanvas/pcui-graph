@@ -20,6 +20,7 @@ export var DEFAULT_CONFIG = {
     edgeHoverEffect: true,
     includeFonts: true,
     useGlobalPCUI: false,
+    adjustVertices: false,
     defaultStyles: {
         initialScale: 1,
         initialPosition: {
