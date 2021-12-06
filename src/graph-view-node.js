@@ -40,8 +40,9 @@ class GraphViewNode {
         var rectSize = { x: this.getSchemaValue('baseWidth'), y: rectHeight + portHeight + attributeHeight };
 
         var labelName;
-        if (nodeSchema.headerTextFormatter) {
-            labelName = nodeSchema.headerTextFormatter(nodeData.attributes);
+        var formattedText = nodeSchema.headerTextFormatter && nodeSchema.headerTextFormatter(nodeData.attributes, nodeData.id);
+        if (typeof formattedText === 'string') {
+            labelName = nodeSchema.headerTextFormatter(nodeData.attributes, nodeData.id);
         } else if (nodeSchema.outPorts || nodeSchema.inPorts) {
             labelName = nodeData.attributes && nodeData.attributes.name ? `${nodeData.attributes.name} (${nodeSchema.name})` : nodeSchema.name;
         } else {
@@ -392,7 +393,10 @@ class GraphViewNode {
 
     updateFormattedTextFields() {
         if (this.nodeSchema.headerTextFormatter) {
-            this.model.attr('label/text', this.nodeSchema.headerTextFormatter(this.nodeData.attributes));
+            const formattedText = this.nodeSchema.headerTextFormatter(this.nodeData.attributes, this.nodeData.id);
+            if (typeof formattedText === 'string') {
+                this.model.attr('label/text', formattedText);
+            }
         }
         if (this.nodeSchema.outPorts) {
             this.nodeSchema.outPorts.forEach((port, i) => {
@@ -424,6 +428,13 @@ class GraphViewNode {
             attributeElement.ui.suspendEvents = false;
         }
         this.updateFormattedTextFields();
+    }
+
+    setAttributeErrorState(attribute, value) {
+        const attributeElement = document.querySelector(`#nodediv_${this.model.id}`).querySelector(`#input_${attribute}`);
+        if (attributeElement) {
+            attributeElement.ui.error = value;
+        }
     }
 
     updateNodeType(nodeType) {

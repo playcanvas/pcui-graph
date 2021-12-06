@@ -222,6 +222,10 @@ class GraphView extends JointGraph {
         this.getNode(id).updateAttribute(attribute, value);
     }
 
+    setNodeAttributeErrorState(id, attribute, value) {
+        this.getNode(id).setAttributeErrorState(attribute, value);
+    }
+
     updateNodePosition(id, pos) {
         this.getNode(id).updatePosition(pos);
     }

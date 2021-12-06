@@ -467,6 +467,19 @@ class Graph extends Element {
 
     /**
      *
+     * Set the error state of a node attribute
+     *
+     * @param {number} nodeId - The node to update
+     * @param {string} attributeName - The name of the attribute to update
+     * @param {boolean} value - Whether the attribute should be set in the error state
+     */
+    setNodeAttributeErrorState(nodeId, attributeName, value) {
+        if (!this._graphData.get(`data.nodes.${nodeId}`)) return;
+        this.view.setNodeAttributeErrorState(nodeId, attributeName, value);
+    }
+
+    /**
+     *
      * Update the type of a node
      *
      * @param {number} nodeId - The node to update
