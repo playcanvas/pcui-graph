@@ -44,7 +44,8 @@ export var DEFAULT_CONFIG = {
             iconColor: '#F60',
             baseHeight: 28,
             baseWidth: 226,
-            textAlignMiddle: false
+            textAlignMiddle: false,
+            lineHeight: 12
 
         },
         edge: {

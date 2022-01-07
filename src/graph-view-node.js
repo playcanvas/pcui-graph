@@ -103,7 +103,8 @@ class GraphViewNode {
                     fontWeight: 600,
                     width: rectSize.x,
                     height: rectHeight,
-                    lineSpacing: 50
+                    lineSpacing: 50,
+                    lineHeight: this.getSchemaValue('lineHeight')
                 },
                 marker: nodeData.marker ? {
                     refX: rectSize.x - 20,
