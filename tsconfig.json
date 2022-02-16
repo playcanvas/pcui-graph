@@ -9,8 +9,10 @@
     "compilerOptions": {
         "allowJs": true,
         "declaration": true,
+        "emitDeclarationOnly": true,
         "module": "ES6",
-        "noEmit": true,
-        "skipLibCheck": true
+        "outDir": "./dist",
+        "skipLibCheck": true,
+        "declarationMap": true
     }
 }

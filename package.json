@@ -6,6 +6,7 @@
   "description": "",
   "license": "MIT",
   "main": "pcui-graph.js",
+  "types": "dist/index.d.ts",
   "bugs": {
     "url": "https://github.com/playcanvas/pcui-graph/issues"
   },
@@ -29,7 +30,7 @@
     "build:module": "rollup -c --environment target:module",
     "build:bundle": "rollup -c --environment target:bundle",
     "build:watch": "rollup -c --environment target:all --watch",
-    "build:prod": "NODE_ENV=production rollup -c --environment target:all",
+    "build:prod": "NODE_ENV=production rollup -c --environment target:all && tsc",
     "lint": "eslint --ext .js src",
     "storybook": "start-storybook -p 9010 -s public",
     "build:docs": "typedoc --options typedoc.json; cp ./_docs/classes/Graph.md ./docs/Graph.md; rm -rf ./_docs",
