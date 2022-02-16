@@ -5,7 +5,8 @@
   "homepage": "https://github.com/playcanvas/pcui-graph",
   "description": "",
   "license": "MIT",
-  "main": "pcui-graph.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "bugs": {
     "url": "https://github.com/playcanvas/pcui-graph/issues"
