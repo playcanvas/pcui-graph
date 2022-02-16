@@ -2,7 +2,7 @@ import { deepCopyFunction } from './util';
 import GraphView from './graph-view';
 import './style.scss';
 import { GRAPH_ACTIONS, DEFAULT_CONFIG } from './constants.js';
-import Element from '@playcanvas/pcui/Element';
+import { Element } from '@playcanvas/pcui';
 import { Observer } from '@playcanvas/observer';
 import SelectedItem from './selected-item';
 
@@ -77,15 +77,8 @@ class Graph extends Element {
         if (!this._config.useGlobalPCUI) {
             /*#if _STRIP_SCSS
             //#else */
-            this.pcui = {
-                ContextMenu: require('@playcanvas/pcui/ContextMenu').default,
-                Container: require('@playcanvas/pcui/Container').default,
-                Label: require('@playcanvas/pcui/Label').default,
-                TextInput: require('@playcanvas/pcui/TextInput').default,
-                BooleanInput: require('@playcanvas/pcui/BooleanInput').default,
-                NumericInput: require('@playcanvas/pcui/NumericInput').default,
-                VectorInput: require('@playcanvas/pcui/VectorInput').default
-            };
+
+            this.pcui = require('@playcanvas/pcui');
             //#endif
         } else {
             this.pcui = window.pcui;
