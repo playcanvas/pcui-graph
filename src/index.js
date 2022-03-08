@@ -2,7 +2,7 @@ import { deepCopyFunction } from './util';
 import GraphView from './graph-view';
 import './style.scss';
 import { GRAPH_ACTIONS, DEFAULT_CONFIG } from './constants.js';
-import Element from '@playcanvas/pcui/Element';
+import { Element } from '@playcanvas/pcui';
 import { Observer } from '@playcanvas/observer';
 import SelectedItem from './selected-item';
 
@@ -14,18 +14,18 @@ class Graph extends Element {
      * Creates a new Graph.
      *
      * @param {object} schema - The graph schema.
-     * @param {object} options - The graph configuration. Optional.
-     * @param {object} options.initialData - The graph data to initialize the graph with.
-     * @param {HTMLElement} options.dom - If supplied, the graph will be attached to this element.
-     * @param {object[]} options.contextMenuItems - The context menu items to add to the graph. Optional.
-     * @param {boolean} options.readOnly - Whether the graph is read only. Optional. Defaults to false.
-     * @param {boolean} options.passiveUIEvents - If true, the graph will not update its data and view upon user interaction. Instead, these interactions can be handled explicitly by listening to fired events. Optional. Defaults to false.
-     * @param {boolean} options.incrementNodeNames - Whether the graph should increment the node name when a node with the same name already exists. Optional. Defaults to false.
-     * @param {boolean} options.restrictTranslate - Whether the graph should restrict the translate graph operation to the graph area. Optional. Defaults to false.
-     * @param {boolean} options.edgeHoverEffect - Whether the graph should show an edge highlight effect when the mouse is hovering over edges. Optional. Defaults to true.
-     * @param {boolean} options.includeFonts - If true the graph will include a default font style. Defaults to true.
-     * @param {object} options.defaultStyles - Used to override the graph's default styling. Check ./constants.js for a full list of style properties.
-     * @param {object} options.adjustVertices - If true, multiple edges conntected between two nodes will be spaced apart.
+     * @param {object} [options] - The graph configuration. Optional.
+     * @param {object} [options.initialData] - The graph data to initialize the graph with.
+     * @param {HTMLElement} [options.dom] - If supplied, the graph will be attached to this element.
+     * @param {object[]} [options.contextMenuItems] - The context menu items to add to the graph. Optional.
+     * @param {boolean} [options.readOnly] - Whether the graph is read only. Optional. Defaults to false.
+     * @param {boolean} [options.passiveUIEvents] - If true, the graph will not update its data and view upon user interaction. Instead, these interactions can be handled explicitly by listening to fired events. Optional. Defaults to false.
+     * @param {boolean} [options.incrementNodeNames] - Whether the graph should increment the node name when a node with the same name already exists. Optional. Defaults to false.
+     * @param {boolean} [options.restrictTranslate] - Whether the graph should restrict the translate graph operation to the graph area. Optional. Defaults to false.
+     * @param {boolean} [options.edgeHoverEffect] - Whether the graph should show an edge highlight effect when the mouse is hovering over edges. Optional. Defaults to true.
+     * @param {boolean} [options.includeFonts] - If true the graph will include a default font style. Defaults to true.
+     * @param {object} [options.defaultStyles] - Used to override the graph's default styling. Check ./constants.js for a full list of style properties.
+     * @param {object} [options.adjustVertices] - If true, multiple edges conntected between two nodes will be spaced apart.
      */
     constructor(schema, options = {}) {
         super(options.dom ? options.dom : document.createElement('div'), {});
@@ -43,7 +43,6 @@ class Graph extends Element {
             restrictTranslate: options.restrictTranslate,
             edgeHoverEffect: options.edgeHoverEffect,
             includeFonts: options.includeFonts,
-            useGlobalPCUI: options.useGlobalPCUI,
             adjustVertices: options.adjustVertices
         };
         if (options.defaultStyles) {
@@ -72,23 +71,6 @@ class Graph extends Element {
             //#else */
             require('./style-fonts.scss');
             //#endif
-        }
-
-        if (!this._config.useGlobalPCUI) {
-            /*#if _STRIP_SCSS
-            //#else */
-            this.pcui = {
-                ContextMenu: require('@playcanvas/pcui/ContextMenu').default,
-                Container: require('@playcanvas/pcui/Container').default,
-                Label: require('@playcanvas/pcui/Label').default,
-                TextInput: require('@playcanvas/pcui/TextInput').default,
-                BooleanInput: require('@playcanvas/pcui/BooleanInput').default,
-                NumericInput: require('@playcanvas/pcui/NumericInput').default,
-                VectorInput: require('@playcanvas/pcui/VectorInput').default
-            };
-            //#endif
-        } else {
-            this.pcui = window.pcui;
         }
 
         this._buildGraphFromData();

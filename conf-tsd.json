@@ -1,0 +1,11 @@
+{
+    "source": {
+        "include": ["src/index.js"]
+    },
+    "opts": {
+        "destination": "dist",
+        "outFile": "pcui-graph.d.ts",
+        "recurse": true,
+        "template": "node_modules/tsd-jsdoc/dist"
+    }
+}

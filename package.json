@@ -1,11 +1,13 @@
 {
   "name": "@playcanvas/pcui-graph",
-  "version": "1.1.4",
+  "version": "2.0.0",
   "author": "PlayCanvas <support@playcanvas.com>",
   "homepage": "https://github.com/playcanvas/pcui-graph",
   "description": "",
   "license": "MIT",
-  "main": "pcui-graph.js",
+  "main": "dist/pcui-graph.js",
+  "module": "dist/pcui-graph.mjs",
+  "types": "dist/pcui-graph.d.ts",
   "bugs": {
     "url": "https://github.com/playcanvas/pcui-graph/issues"
   },
@@ -24,18 +26,23 @@
     "webpack-bundle-analyzer": "^3.8.0"
   },
   "scripts": {
-    "build": "rollup -c --environment target:all",
-    "build:umd": "rollup -c --environment target:umd",
-    "build:module": "rollup -c --environment target:module",
-    "build:bundle": "rollup -c --environment target:bundle",
-    "build:watch": "rollup -c --environment target:all --watch",
-    "build:prod": "NODE_ENV=production rollup -c --environment target:all",
+    "build": "NODE_ENV=production rollup -c --environment target:all",
+    "watch": "rollup -c --environment target:all --watch",
+    "watch:umd": "rollup -c --environment target:umd --watch",
+    "watch:module": "rollup -c --environment target:module --watch",
     "lint": "eslint --ext .js src",
     "storybook": "start-storybook -p 9010 -s public",
     "build:docs": "typedoc --options typedoc.json; cp ./_docs/classes/Graph.md ./docs/Graph.md; rm -rf ./_docs",
-    "pkg:publish": "rm -rf ./dist/ && npm run build:prod && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && cp -r ./docs dist && npm publish dist --access=public",
-    "pkg:publish:dry": "rm -rf ./dist/ && npm run build:prod && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && cp -r ./docs dist && npm publish dist --dry-run --access=public"
+    "tsd": "jsdoc -c conf-tsd.json && node tsd.js"
   },
+  "files": [
+    "dist/pcui-graph.js",
+    "dist/pcui-graph.mjs",
+    "dist/pcui-graph.d.ts",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
   "browserslist": {
     "production": [
       ">0.2%",
@@ -62,7 +69,7 @@
     "@babel/preset-react": "^7.10.4",
     "@playcanvas/eslint-config": "^1.0.6",
     "@playcanvas/observer": "1.1.0",
-    "@playcanvas/pcui": "2.1.1",
+    "@playcanvas/pcui": "2.3.1",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^20.0.0",
     "@storybook/addon-actions": "^6.0.3",
@@ -78,7 +85,7 @@
     "eslint": "^7.10.0",
     "jointjs": "^3.2.0",
     "jquery": "^3.5.1",
-    "jsdoc": "^3.6.5",
+    "jsdoc": "^3.6.10",
     "json-diff": "^0.5.4",
     "json-loader": "^0.5.7",
     "lodash": "^4.17.20",
@@ -98,6 +105,7 @@
     "rollup-plugin-postcss": "^4.0.1",
     "rollup-plugin-sass": "^1.2.6",
     "rollup-plugin-uglify": "^6.0.4",
+    "tsd-jsdoc": "^2.5.0",
     "typedoc": "^0.21.6",
     "typedoc-plugin-markdown": "^3.10.4",
     "typescript": "^4.3.5",

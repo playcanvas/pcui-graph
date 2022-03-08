@@ -7,10 +7,10 @@ import jscc from 'rollup-plugin-jscc';
 import builtins from 'rollup-plugin-node-builtins';
 import globals from 'rollup-plugin-node-globals';
 
-const umdBuild = {
+const umd = {
     input: 'src/index.js',
     output: {
-        file: 'dist/index.js',
+        file: 'dist/pcui-graph.js',
         format: 'umd',
         name: 'pcuiGraph',
         globals: {
@@ -36,33 +36,13 @@ const umdBuild = {
     ]
 };
 
-const moduleBuild = {
+const module = {
     input: 'src/index.js',
     output: {
-        file: 'dist/index.mjs',
+        file: 'dist/pcui-graph.mjs',
         format: 'module'
     },
     external: ['@playcanvas/observer', '@playcanvas/pcui'],
-    plugins: [
-        commonjs({ transformMixedEsModules: true }),
-        globals(),
-        builtins(),
-        babel({ babelHelpers: 'bundled' }),
-        postcss({
-            minimize: false,
-            extensions: ['.css', '.scss']
-        }),
-        resolve(),
-        process.env.NODE_ENV === 'production' && uglify()
-    ]
-};
-
-const bundleBuild = {
-    input: 'src/index.js',
-    output: {
-        file: 'dist/bundle.mjs',
-        format: 'module'
-    },
     plugins: [
         commonjs({ transformMixedEsModules: true }),
         globals(),
@@ -81,10 +61,9 @@ const bundleBuild = {
 let targets;
 if (process.env.target) {
     switch (process.env.target.toLowerCase()) {
-        case "umd":      targets = [umdBuild]; break;
-        case "module":      targets = [moduleBuild]; break;
-        case "bundle":      targets = [bundleBuild]; break;
-        case "all":      targets = [umdBuild, moduleBuild, bundleBuild]; break;
+        case "umd":      targets = [umd]; break;
+        case "module":      targets = [module]; break;
+        case "all":      targets = [umd, module]; break;
     }
 }
 

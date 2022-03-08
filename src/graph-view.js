@@ -6,6 +6,7 @@ import { jointShapeElement, jointShapeElementView } from './joint-shape-node.js'
 import { GRAPH_ACTIONS } from './constants.js';
 // TODO replace with a lighter math library
 import { Vec2 } from 'playcanvas/src/math/vec2.js';
+import { ContextMenu } from '@playcanvas/pcui';
 
 class GraphView extends JointGraph {
     constructor(parent, dom, graphSchema, graphData, config) {
@@ -15,7 +16,6 @@ class GraphView extends JointGraph {
         this._dom = dom;
         this._graphSchema = graphSchema;
         this._graphData = graphData;
-        this.pcui = parent.pcui;
 
         this._config = config;
 
@@ -165,7 +165,7 @@ class GraphView extends JointGraph {
     addCanvasContextMenu(items) {
         this._viewContextMenu = document.createElement('div');
         this._paper.el.appendChild(this._viewContextMenu);
-        var contextMenu = new this.pcui.ContextMenu({
+        var contextMenu = new ContextMenu({
             dom: this._viewContextMenu,
             items: items
         });
