@@ -48,8 +48,8 @@ npm install --save @playcanvas/pcui-graph @playcanvas/pcui @playcanvas/observer
 
 The npm package includes two builds of the library:
 ```
-@playcanvas/pcui-graph/pcui-graph.js // UMD build (requires that the pcui and observer libraries are present in the global namespace)
-@playcanvas/pcui-graph/pcui-graph.mjs // module build (requires a build tool like rollup / webpack)
+@playcanvas/pcui-graph/dist/pcui-graph.js // UMD build (requires that the pcui and observer libraries are present in the global namespace)
+@playcanvas/pcui-graph/dist/pcui-graph.mjs // module build (requires a build tool like rollup / webpack)
 ```
 
 ## Storybook
