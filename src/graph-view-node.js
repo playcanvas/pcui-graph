@@ -1,4 +1,5 @@
 import * as joint from 'jointjs/dist/joint.min';
+import { ContextMenu, Container, Label, TextInput, BooleanInput, NumericInput, VectorInput } from '@playcanvas/pcui';
 
 const Colors = {
     bcgDarkest: '#20292b',
@@ -265,8 +266,8 @@ class GraphViewNode {
         var containers = [];
         if (visibleAttributes) {
             visibleAttributes.forEach((attribute, i) => {
-                const container = new this._graphView.pcui.Container({ class: 'graph-node-container' });
-                const label = new this._graphView.pcui.Label({ text: attribute.name, class: 'graph-node-label' });
+                const container = new Container({ class: 'graph-node-container' });
+                const label = new Label({ text: attribute.name, class: 'graph-node-label' });
                 let input;
                 let nodeValue;
                 if (nodeData.attributes) {
@@ -286,16 +287,16 @@ class GraphViewNode {
                 }
                 switch (attribute.type) {
                     case 'TEXT_INPUT':
-                        input = new this._graphView.pcui.TextInput({ class: 'graph-node-input', value: nodeValue });
+                        input = new TextInput({ class: 'graph-node-input', value: nodeValue });
                         break;
                     case 'BOOLEAN_INPUT':
-                        input = new this._graphView.pcui.BooleanInput({ class: 'graph-node-input', value: nodeValue });
+                        input = new BooleanInput({ class: 'graph-node-input', value: nodeValue });
                         break;
                     case 'NUMERIC_INPUT':
-                        input = new this._graphView.pcui.NumericInput({ class: 'graph-node-input', hideSlider: true, value: nodeValue && nodeValue.x ? nodeValue.x : nodeValue });
+                        input = new NumericInput({ class: 'graph-node-input', hideSlider: true, value: nodeValue && nodeValue.x ? nodeValue.x : nodeValue });
                         break;
                     case 'VEC_2_INPUT':
-                        input = new this._graphView.pcui.VectorInput({ dimensions: 2,
+                        input = new VectorInput({ dimensions: 2,
                             class: 'graph-node-input',
                             hideSlider: true,
                             value: [
@@ -306,7 +307,7 @@ class GraphViewNode {
                         input.inputs.forEach((i) => i._sliderControl.dom.remove());
                         break;
                     case 'VEC_3_INPUT':
-                        input = new this._graphView.pcui.VectorInput({ dimensions: 3,
+                        input = new VectorInput({ dimensions: 3,
                             class: 'graph-node-input',
                             hideSlider: true,
                             value: [
@@ -318,7 +319,7 @@ class GraphViewNode {
                         input.inputs.forEach((i) => i._sliderControl.dom.remove());
                         break;
                     case 'VEC_4_INPUT':
-                        input = new this._graphView.pcui.VectorInput({ dimensions: 4,
+                        input = new VectorInput({ dimensions: 4,
                             class: 'graph-node-input',
                             hideSlider: true,
                             value: [
@@ -375,7 +376,7 @@ class GraphViewNode {
         var contextMenu = document.createElement('div');
         this._paper.el.appendChild(contextMenu);
         this._contextMenuElement = contextMenu;
-        this._contextMenu = new this._graphView.pcui.ContextMenu({
+        this._contextMenu = new ContextMenu({
             triggerElement: nodeView.el,
             dom: contextMenu,
             items: this._graphView._parent._initialiseNodeContextMenuItems(this.nodeData, items)
