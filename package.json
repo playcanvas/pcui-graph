@@ -26,7 +26,7 @@
     "webpack-bundle-analyzer": "^3.8.0"
   },
   "scripts": {
-    "build": "NODE_ENV=production rollup -c --environment target:all",
+    "build": "cross-env NODE_ENV=production rollup -c --environment target:all",
     "watch": "rollup -c --environment target:all --watch",
     "watch:umd": "rollup -c --environment target:umd --watch",
     "watch:module": "rollup -c --environment target:module --watch",
@@ -82,6 +82,7 @@
     "@storybook/react": "^6.0.3",
     "babel-loader": "^8.1.0",
     "backbone": "^1.4.0",
+    "cross-env": "^7.0.3",
     "eslint": "^7.10.0",
     "jointjs": "^3.2.0",
     "jquery": "^3.5.1",
