@@ -90,7 +90,7 @@
     "json-diff": "^0.5.4",
     "json-loader": "^0.5.7",
     "lodash": "^4.17.20",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.1",
     "playcanvas": "https://github.com/playcanvas/engine/archive/c6f750223e3c184b26995a1d9952f769811ca542.tar.gz",
     "postcss": "^8.3.6",
     "prop-types": "^15.7.2",
