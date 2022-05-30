@@ -44,6 +44,9 @@ const module = {
     },
     external: ['@playcanvas/observer', '@playcanvas/pcui'],
     plugins: [
+        jscc({
+            values: { _STRIP_SCSS: process.env.STRIP_SCSS }
+        }),
         commonjs({ transformMixedEsModules: true }),
         globals(),
         builtins(),
