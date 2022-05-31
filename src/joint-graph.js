@@ -6,7 +6,7 @@ import _ from 'lodash';
 import 'backbone';
 import * as joint from 'jointjs/dist/joint.min';
 // TODO replace with a lighter math library
-import { Vec2 } from 'playcanvas/src/math/vec2.js';
+import { Vec2 } from './lib/vec2.js';
 
 joint.V.matrixToTransformString = function(matrix) {
     matrix || (matrix = true);

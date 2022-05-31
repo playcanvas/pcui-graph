@@ -5,7 +5,7 @@ import * as joint from 'jointjs/dist/joint.min';
 import { jointShapeElement, jointShapeElementView } from './joint-shape-node.js';
 import { GRAPH_ACTIONS } from './constants.js';
 // TODO replace with a lighter math library
-import { Vec2 } from 'playcanvas/src/math/vec2.js';
+import { Vec2 } from './lib/vec2.js';
 import { ContextMenu } from '@playcanvas/pcui';
 
 class GraphView extends JointGraph {
