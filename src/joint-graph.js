@@ -8,7 +8,7 @@ import * as joint from 'jointjs/dist/joint.min';
 // TODO replace with a lighter math library
 import { Vec2 } from './lib/vec2.js';
 
-joint.V.matrixToTransformString = function(matrix) {
+joint.V.matrixToTransformString = function (matrix) {
     matrix || (matrix = true);
     return 'matrix(' + [
         matrix.a || 1,
@@ -20,13 +20,13 @@ joint.V.matrixToTransformString = function(matrix) {
     ] + ')';
 };
 
-joint.V.prototype.transform = function(matrix, opt) {
+joint.V.prototype.transform = function (matrix, opt) {
 
     var node = this.node;
     if (joint.V.isUndefined(matrix)) {
-        return (node.parentNode)
-            ? this.getTransformToElement(node.parentNode)
-            : node.getScreenCTM();
+        return (node.parentNode) ?
+            this.getTransformToElement(node.parentNode) :
+            node.getScreenCTM();
     }
 
     if (opt && opt.absolute) {
@@ -128,8 +128,7 @@ class JointGraph {
 
             this._scaleToPoint(newScale, x, y);
         };
-        const handleCellMouseWheel = (cellView, e, x, y, delta) =>
-            handleCanvasMouseWheel(e, x, y, delta);
+        const handleCellMouseWheel = (cellView, e, x, y, delta) => handleCanvasMouseWheel(e, x, y, delta);
 
         this._paper.on('cell:mousewheel', handleCellMouseWheel);
         this._paper.on('blank:mousewheel', handleCanvasMouseWheel);
@@ -230,7 +229,7 @@ class JointGraph {
                 // find the middle point of the link
                 var sourceCenter = graph.getCell(sourceId).getBBox().center();
                 var targetCenter = graph.getCell(targetId).getBBox().center();
-                var midPoint = joint.g.Line(sourceCenter, targetCenter).midpoint();
+                joint.g.Line(sourceCenter, targetCenter).midpoint();
                 // find the angle of the link
                 var theta = sourceCenter.theta(targetCenter);
                 // constant

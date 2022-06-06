@@ -304,7 +304,7 @@ class GraphViewNode {
                                 nodeValue.y
                             ] });
                         input.dom.setAttribute('style', 'margin-right: 6px;');
-                        input.inputs.forEach((i) => i._sliderControl.dom.remove());
+                        input.inputs.forEach(i => i._sliderControl.dom.remove());
                         break;
                     case 'VEC_3_INPUT':
                         input = new VectorInput({ dimensions: 3,
@@ -316,7 +316,7 @@ class GraphViewNode {
                                 nodeValue.z
                             ] });
                         input.dom.setAttribute('style', 'margin-right: 6px;');
-                        input.inputs.forEach((i) => i._sliderControl.dom.remove());
+                        input.inputs.forEach(i => i._sliderControl.dom.remove());
                         break;
                     case 'VEC_4_INPUT':
                         input = new VectorInput({ dimensions: 4,
@@ -329,7 +329,7 @@ class GraphViewNode {
                                 nodeValue.w
                             ] });
                         input.dom.setAttribute('style', 'margin-right: 6px;');
-                        input.inputs.forEach((i) => i._sliderControl.dom.remove());
+                        input.inputs.forEach(i => i._sliderControl.dom.remove());
                         break;
                 }
                 input.enabled = !this._graphView._config.readOnly;
