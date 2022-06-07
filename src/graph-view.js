@@ -29,9 +29,8 @@ class GraphView extends JointGraph {
         joint.shapes.html.Element = jointShapeElement();
         joint.shapes.html.ElementView = jointShapeElementView(this._paper);
 
-        // this._graph.on('add', (cell) => this.updatePortStatesForEdge(cell, true));
-        this._graph.on('remove', (cell) => this.updatePortStatesForEdge(cell, false));
-        this._graph.on('change:target', (cell) => this.updatePortStatesForEdge(cell, true));
+        this._graph.on('remove', cell => this.updatePortStatesForEdge(cell, false));
+        this._graph.on('change:target', cell => this.updatePortStatesForEdge(cell, true));
 
         this._paper.on('cell:mousewheel', () => {
             parent._dispatchEvent(GRAPH_ACTIONS.UPDATE_SCALE, { scale: this._paper.scale().sx });
@@ -138,7 +137,7 @@ class GraphView extends JointGraph {
     applyBatchedCells() {
         this._batchingCells = false;
         this._graph.addCells(this._cells);
-        this._cellMountedFunctions.forEach((f) => f());
+        this._cellMountedFunctions.forEach(f => f());
         this._cells = [];
         this._cellMountedFunctions = [];
     }

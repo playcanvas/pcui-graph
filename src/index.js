@@ -67,10 +67,10 @@ class Graph extends Element {
         }
         if (this._config.readOnly) this._config.selfContainedMode = true;
         if (this._config.includeFonts) {
-            /*#if _STRIP_SCSS
-            //#else */
+            // #if _STRIP_SCSS
+            // //#else
             require('./style-fonts.scss');
-            //#endif
+            // #endif
         }
 
         this._buildGraphFromData();

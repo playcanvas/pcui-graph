@@ -5,7 +5,6 @@
     "externalPattern": "**/node_modules/**",
     "out": "_docs",
     "entryDocument": "README.md",
-    "highlightTheme": "github-light",
     "excludeInternal": false,
     "excludePrivate": true,
     "excludeNotDocumented": true,

@@ -1,5 +1,5 @@
-import resolve from 'rollup-plugin-node-resolve';
-import { uglify } from 'rollup-plugin-uglify';
+import resolve from '@rollup/plugin-node-resolve';
+import { terser } from 'rollup-plugin-terser';
 import postcss from 'rollup-plugin-postcss';
 import commonjs from '@rollup/plugin-commonjs';
 import { babel } from '@rollup/plugin-babel';
@@ -32,7 +32,7 @@ const umd = {
         builtins(),
         babel({ babelHelpers: 'bundled' }),
         resolve(),
-        process.env.NODE_ENV === 'production' && uglify()
+        process.env.NODE_ENV === 'production' && terser()
     ]
 };
 
@@ -56,7 +56,7 @@ const module = {
             extensions: ['.css', '.scss']
         }),
         resolve(),
-        process.env.NODE_ENV === 'production' && uglify()
+        process.env.NODE_ENV === 'production' && terser()
     ]
 };
 
