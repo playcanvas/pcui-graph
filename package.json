@@ -1,6 +1,6 @@
 {
   "name": "@playcanvas/pcui-graph",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "author": "PlayCanvas <support@playcanvas.com>",
   "homepage": "https://github.com/playcanvas/pcui-graph",
   "description": "",
@@ -16,7 +16,8 @@
     "url": "git+https://github.com/playcanvas/pcui-graph.git"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production rollup -c --environment target:all",
+    "build": "cross-env NODE_ENV=production rollup -c --environment target:all && npm run bundle:styles",
+    "bundle:styles": "scss-bundle -e ./src/style.scss -o ./dist/pcui-graph.scss",
     "watch": "rollup -c --environment target:all --watch",
     "watch:umd": "rollup -c --environment target:umd --watch",
     "watch:module": "rollup -c --environment target:module --watch",
@@ -102,6 +103,7 @@
     "rollup-plugin-sass": "^1.2.12",
     "rollup-plugin-terser": "^7.0.2",
     "sass-loader": "^10.1.1",
+    "scss-bundle": "^3.1.2",
     "tsd-jsdoc": "^2.5.0",
     "typedoc": "^0.22.17",
     "typedoc-plugin-markdown": "^3.12.1",
