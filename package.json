@@ -30,6 +30,7 @@
     "dist/pcui-graph.js",
     "dist/pcui-graph.mjs",
     "dist/pcui-graph.d.ts",
+    "dist/pcui-graph.scss",
     "package.json",
     "README.md",
     "LICENSE"
