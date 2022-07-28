@@ -1,4 +1,10 @@
+@import './lib/joint.scss';
+@import './lib/layout.scss';
+@import './lib/material.scss';
+
 .pcui-graph {
+    font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+
     width: 100%;
     height: 100%;
 
