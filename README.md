@@ -54,14 +54,14 @@ The npm package includes two builds of the library:
 
 ## Storybook
 
-Examples of different graphs created with this library can be viewed by running storybook. Do so by running the following in the this projects root directory:
+Examples of graphs created using PCUI Graph are available in this library's [storybook](https://playcanvas.github.io/pcui-graph/storybook/). Alternatively you can run the storybook locally and use it as a development environment for your own graphs. To do so, run the following commands in this projects root directory:
 
 ```
 npm install
 npm run storybook
 ```
 
-Which will automatically open the storybook locally at `http://localhost:9009`.
+This will automatically open the storybook locally at `http://localhost:9009`.
 
 # Documentation
 
