@@ -144,7 +144,7 @@ class Graph extends Element {
         var updateItem = (item) => {
             switch (item.action) {
                 case GRAPH_ACTIONS.ADD_NODE: {
-                    item.onClick = (e) => {
+                    item.onSelect = (e) => {
                         var node = {
                             ...item,
                             id: Number(`${Date.now()}${Math.floor(Math.random() * 10000)}`)
@@ -170,7 +170,7 @@ class Graph extends Element {
                             node.attributes.name = `${node.attributes.name} ${Object.keys(this._graphData.get('data.nodes')).length}`;
                         }
                         let element = e.target;
-                        while (!element.classList.contains('pcui-contextmenu')) {
+                        while (!element.classList.contains('pcui-menu-items')) {
                             element = element.parentElement;
                         }
                         var pos = {
@@ -254,7 +254,7 @@ class Graph extends Element {
         if (edgeSchema.contextMenuItems) {
             var contextMenuItems = deepCopyFunction(edgeSchema.contextMenuItems).map((item) => {
                 if (item.action === GRAPH_ACTIONS.DELETE_EDGE) {
-                    item.onClick = () => {
+                    item.onSelect = () => {
                         this._dispatchEvent(GRAPH_ACTIONS.DELETE_EDGE, { edgeId: edgeId, edge: this._graphData.get(`data.edges.${edgeId}`) });
                     };
                 }
@@ -361,10 +361,10 @@ class Graph extends Element {
     _initialiseNodeContextMenuItems(node, items) {
         var contextMenuItems = deepCopyFunction(items).map((item) => {
             if (item.action === GRAPH_ACTIONS.ADD_EDGE) {
-                item.onClick = () => this._createUnconnectedEdgeForNode(node, item.edgeType);
+                item.onSelect = () => this._createUnconnectedEdgeForNode(node, item.edgeType);
             }
             if (item.action === GRAPH_ACTIONS.DELETE_NODE) {
-                item.onClick = () => {
+                item.onSelect = () => {
                     this._dispatchEvent(GRAPH_ACTIONS.DELETE_NODE, this._deleteNode(node.id));
                 };
             }

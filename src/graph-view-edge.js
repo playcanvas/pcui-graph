@@ -1,5 +1,5 @@
 import * as joint from 'jointjs/dist/joint.min';
-import { ContextMenu } from '@playcanvas/pcui';
+import { Menu } from '@playcanvas/pcui';
 
 joint.connectors.smoothInOut = function (sourcePoint, targetPoint, vertices, args) {
     var p1 = sourcePoint.clone();
@@ -105,14 +105,15 @@ class GraphViewEdge {
 
     addContextMenu(items) {
         if (this._graphView._config.readOnly) return;
-        var edgeCell = this._paper.findViewByModel(this.model);
-        if (!edgeCell) return;
-        var contextMenu = document.createElement('div');
-        this._paper.el.appendChild(contextMenu);
-        new ContextMenu({
-            triggerElement: edgeCell.el,
-            dom: contextMenu,
+        this._contextMenu = new Menu({
             items: items
+        });
+        this._paper.el.appendChild(this._contextMenu.dom);
+        var edgeElement = this._paper.findViewByModel(this.model).el;
+        edgeElement.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            this._contextMenu.position(e.clientX, e.clientY);
+            this._contextMenu.hidden = false;
         });
     }
 
