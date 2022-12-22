@@ -6,7 +6,7 @@ import { jointShapeElement, jointShapeElementView } from './joint-shape-node.js'
 import { GRAPH_ACTIONS } from './constants.js';
 // TODO replace with a lighter math library
 import { Vec2 } from './lib/vec2.js';
-import { ContextMenu } from '@playcanvas/pcui';
+import { Menu } from '@playcanvas/pcui';
 
 class GraphView extends JointGraph {
     constructor(parent, dom, graphSchema, graphData, config) {
@@ -38,8 +38,14 @@ class GraphView extends JointGraph {
         this._paper.on('blank:mousewheel', () => {
             parent._dispatchEvent(GRAPH_ACTIONS.UPDATE_SCALE, { scale: this._paper.scale().sx });
         });
-        this._paper.on('blank:pointerup', () => {
+        this._paper.on('blank:pointerup', (event) => {
             parent._dispatchEvent(GRAPH_ACTIONS.UPDATE_TRANSLATE, { pos: { x: this._paper.translate().tx, y: this._paper.translate().ty } });
+        });
+        this._paper.on({
+            'blank:contextmenu': (event) => {
+                this._viewMenu.position(event.clientX, event.clientY);
+                this._viewMenu.hidden = false;
+            }
         });
 
         this._paper.on({
@@ -162,13 +168,11 @@ class GraphView extends JointGraph {
     }
 
     addCanvasContextMenu(items) {
-        this._viewContextMenu = document.createElement('div');
-        this._paper.el.appendChild(this._viewContextMenu);
-        var contextMenu = new ContextMenu({
-            dom: this._viewContextMenu,
+        this._viewMenu = new Menu({
             items: items
         });
-        return contextMenu._contextMenuEvent;
+        this._paper.el.appendChild(this._viewMenu.dom);
+        return this._viewMenu._contextMenuEvent;
     }
 
     addNodeContextMenu(id, items) {

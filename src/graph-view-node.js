@@ -1,5 +1,5 @@
 import * as joint from 'jointjs/dist/joint.min';
-import { ContextMenu, Container, Label, TextInput, BooleanInput, NumericInput, VectorInput } from '@playcanvas/pcui';
+import { Menu, Container, Label, TextInput, BooleanInput, NumericInput, VectorInput } from '@playcanvas/pcui';
 
 const Colors = {
     bcgDarkest: '#20292b',
@@ -372,14 +372,15 @@ class GraphViewNode {
 
     addContextMenu(items) {
         if (this._graphView._config.readOnly) return;
-        var nodeView = this._paper.findViewByModel(this.model);
-        var contextMenu = document.createElement('div');
-        this._paper.el.appendChild(contextMenu);
-        this._contextMenuElement = contextMenu;
-        this._contextMenu = new ContextMenu({
-            triggerElement: nodeView.el,
-            dom: contextMenu,
+        this._contextMenu = new Menu({
             items: this._graphView._parent._initialiseNodeContextMenuItems(this.nodeData, items)
+        });
+        this._paper.el.appendChild(this._contextMenu.dom);
+        var nodeElement = this._paper.findViewByModel(this.model).el;
+        nodeElement.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            this._contextMenu.position(e.clientX, e.clientY);
+            this._contextMenu.hidden = false;
         });
     }
 
