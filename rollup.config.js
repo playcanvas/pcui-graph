@@ -6,6 +6,17 @@ import { babel } from '@rollup/plugin-babel';
 import jscc from 'rollup-plugin-jscc';
 import builtins from 'rollup-plugin-node-builtins';
 import globals from 'rollup-plugin-node-globals';
+import alias from '@rollup/plugin-alias';
+import path from 'path';
+
+const PCUI_DIR = process.env.PCUI_PATH || 'node_modules/@playcanvas/pcui';
+
+const PCUI_PATH = path.resolve(PCUI_DIR, 'react');
+
+// define supported module overrides
+const aliasEntries = {
+    'pcui': PCUI_PATH
+};
 
 const umd = {
     input: 'src/index.js',
@@ -27,6 +38,7 @@ const umd = {
             minimize: false,
             extensions: ['.css', '.scss']
         }),
+        alias({ entries: aliasEntries }),
         commonjs({ transformMixedEsModules: true }),
         globals(),
         builtins(),
@@ -47,6 +59,7 @@ const module = {
         jscc({
             values: { _STRIP_SCSS: process.env.STRIP_SCSS }
         }),
+        alias({ entries: aliasEntries }),
         commonjs({ transformMixedEsModules: true }),
         globals(),
         builtins(),
