@@ -454,7 +454,7 @@ class GraphViewNode {
         switch (event) {
             case 'updatePosition': {
                 nodeView.on('element:pointerup', () => {
-                    var newPos = this._graphView.getWindowToGraphPosition(nodeView.el.getBoundingClientRect());
+                    var newPos = this._graphView.getWindowToGraphPosition(nodeView.getBBox());
                     callback(this.nodeData.id, newPos);
                 });
                 break;
