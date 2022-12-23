@@ -1,6 +1,3 @@
-import './lib/joint.scss';
-import './lib/layout.scss';
-import './lib/material.scss';
 import 'jquery';
 import _ from 'lodash';
 import 'backbone';
