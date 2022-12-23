@@ -157,13 +157,17 @@ class GraphView extends JointGraph {
         }
     }
 
-    getWindowToGraphPosition(pos) {
+    getWindowToGraphPosition(pos, usePaperPosition = true) {
         const scale = this._paper.scale().sx;
         const translate = this._paper.translate();
-        const boundingClientRect = this._paper.el.getBoundingClientRect();
+        if (usePaperPosition) {
+            const paperPosition = this._paper.el.getBoundingClientRect();
+            pos.x -= paperPosition.x;
+            pos.y -= paperPosition.y;
+        }
         return new Vec2(
-            (-translate.tx / scale) + ((pos.x - boundingClientRect.x) / scale),
-            (-translate.ty / scale) + ((pos.y - boundingClientRect.y) / scale)
+            (-translate.tx / scale) + (pos.x / scale),
+            (-translate.ty / scale) + (pos.y / scale)
         );
     }
 
