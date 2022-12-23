@@ -17,7 +17,7 @@
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production rollup -c --environment target:all && npm run bundle:styles",
-    "bundle:styles": "scss-bundle -e ./src/style.scss -o ./dist/pcui-graph.scss",
+    "bundle:styles": "scss-bundle -e ./src/styles/style.scss -o ./dist/pcui-graph.scss",
     "watch": "rollup -c --environment target:all --watch",
     "watch:umd": "rollup -c --environment target:umd --watch",
     "watch:module": "rollup -c --environment target:module --watch",
@@ -33,7 +33,8 @@
     "dist/pcui-graph.scss",
     "package.json",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "styles"
   ],
   "browserslist": {
     "production": [

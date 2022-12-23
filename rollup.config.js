@@ -74,12 +74,29 @@ const module = {
 };
 
 
+const styles = {
+    input: 'src/styles/index.js',
+    output: {
+        file: 'styles/dist/index.mjs',
+        format: 'esm'
+    },
+    plugins: [
+        resolve(),
+        postcss({
+            minimize: false,
+            extensions: ['.css', '.scss']
+        })
+    ]
+};
+
+
 let targets;
 if (process.env.target) {
     switch (process.env.target.toLowerCase()) {
         case "umd":      targets = [umd]; break;
         case "module":      targets = [module]; break;
-        case "all":      targets = [umd, module]; break;
+        case "styles":      targets = [styles]; break;
+        case "all":      targets = [umd, module, styles]; break;
     }
 }
 

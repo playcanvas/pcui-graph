@@ -1,5 +1,6 @@
 import React from 'react';
-import { Graph } from '../src/index.js';
+import Graph from '../src/index.js';
+import '../src/styles/index.js';
 
 class BaseComponent extends React.Component {
     constructor(props) {

@@ -1,9 +1,7 @@
 import { deepCopyFunction } from './util';
 import GraphView from './graph-view';
-import './style.scss';
 import { GRAPH_ACTIONS, DEFAULT_CONFIG } from './constants.js';
 import { Element } from '@playcanvas/pcui';
-import '@playcanvas/pcui/styles';
 import { Observer } from '@playcanvas/observer';
 import SelectedItem from './selected-item';
 
@@ -658,4 +656,4 @@ class Graph extends Element {
 
 Graph.GRAPH_ACTIONS = GRAPH_ACTIONS;
 
-export { Graph };
+export default Graph;
