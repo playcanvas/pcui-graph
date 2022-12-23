@@ -1,0 +1,17 @@
+{
+  "name": "pcui-graph-styles",
+  "version": "1.0.0",
+  "author": "PlayCanvas <support@playcanvas.com>",
+  "homepage": "https://playcanvas.github.io/pcui-graph",
+  "description": "PCUI graph styles",
+  "private": true,
+  "main": "dist/index.mjs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/playcanvas/pcui-graph/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/playcanvas/pcui-graph.git"
+  }
+}
