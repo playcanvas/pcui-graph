@@ -11,6 +11,7 @@
 # production
 /build
 /dist
+/styles/dist
 /.storybook/utils/jsdoc-ast.json
 
 # misc
