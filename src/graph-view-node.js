@@ -442,7 +442,6 @@ class GraphViewNode {
 
     updateNodeType(nodeType) {
         this._paper.findViewByModel(this.model).el.removeEventListener('contextmenu', this._contextMenu._contextMenuEvent);
-        this._paper.el.removeChild(this._contextMenuElement);
         this.addContextMenu(this._graphSchema.nodes[nodeType].contextMenuItems);
     }
 
