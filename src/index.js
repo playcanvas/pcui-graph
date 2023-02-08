@@ -26,7 +26,9 @@ class Graph extends Element {
      * @param {object} [options.adjustVertices] - If true, multiple edges conntected between two nodes will be spaced apart.
      */
     constructor(schema, options = {}) {
-        super(options.dom ? options.dom : document.createElement('div'), {});
+        super({
+            dom: options.dom
+        });
         this.class.add('pcui-graph');
         this._graphSchema = schema;
         this._graphData = new Observer({ data: options.initialData ? options.initialData : {} });
