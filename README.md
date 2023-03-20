@@ -13,6 +13,7 @@ npm install @playcanvas/pcui-graph
 ```
 
 You can then use the library in your own project by importing the PCUI Graph build and its styling file into your project. The graph can then be instantiated as follows:
+
 ```javascript
 import Graph from '@playcanvas/pcui-graph';
 import '@playcanvas/pcui-graph/styles';
@@ -41,12 +42,14 @@ const graph = new Graph(schema);
 document.body.appendChild(graph.dom);
 ```
 
-The library is also available on [npm](https://www.npmjs.com/package/pcui-graph) and can be installed in your project with 
+The library is also available on [npm](https://www.npmjs.com/package/pcui-graph) and can be installed in your project with:
+
 ```
 npm install --save @playcanvas/pcui-graph @playcanvas/pcui @playcanvas/observer
 ```
 
 The npm package includes two builds of the library:
+
 ```
 @playcanvas/pcui-graph/dist/pcui-graph.js // UMD build (requires that the pcui and observer libraries are present in the global namespace)
 @playcanvas/pcui-graph/dist/pcui-graph.mjs // module build (requires a build tool like rollup / webpack)
