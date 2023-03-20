@@ -2,7 +2,8 @@
 
 # Config Options
 
-Options can be passed to the graph constructor as a JSON object which change the default behaviour of the graph. You can do so as follows:
+Options can be passed to the graph constructor as a JSON object which change the default behavior of the graph. You can do so as follows:
+
 ```javascript
 const graph = new Graph(schema, {
     readOnly: true,

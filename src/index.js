@@ -23,7 +23,7 @@ class Graph extends Element {
      * @param {boolean} [options.restrictTranslate] - Whether the graph should restrict the translate graph operation to the graph area. Optional. Defaults to false.
      * @param {boolean} [options.edgeHoverEffect] - Whether the graph should show an edge highlight effect when the mouse is hovering over edges. Optional. Defaults to true.
      * @param {object} [options.defaultStyles] - Used to override the graph's default styling. Check ./constants.js for a full list of style properties.
-     * @param {object} [options.adjustVertices] - If true, multiple edges conntected between two nodes will be spaced apart.
+     * @param {object} [options.adjustVertices] - If true, multiple edges connected between two nodes will be spaced apart.
      */
     constructor(schema, options = {}) {
         super({
