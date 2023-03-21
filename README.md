@@ -15,6 +15,7 @@ npm install @playcanvas/pcui-graph
 You can then use the library in your own project by importing the PCUI Graph build and its styling file into your project. The graph can then be instantiated as follows:
 ```javascript
 import Graph from '@playcanvas/pcui-graph';
+import '@playcanvas/pcui/styles';
 import '@playcanvas/pcui-graph/styles';
 
 const schema = {
