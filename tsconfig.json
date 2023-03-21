@@ -10,7 +10,6 @@
         "allowJs": true,
         "declaration": true,
         "module": "ES6",
-        "noEmit": true,
         "skipLibCheck": true
     }
 }

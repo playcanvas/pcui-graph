@@ -22,7 +22,7 @@
   "license": "MIT",
   "main": "dist/pcui-graph.js",
   "module": "dist/pcui-graph.mjs",
-  "types": "dist/pcui-graph.d.ts",
+  "types": "types/index.d.ts",
   "bugs": {
     "url": "https://github.com/playcanvas/pcui-graph/issues"
   },
@@ -32,24 +32,24 @@
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production rollup -c --environment target:all && npm run bundle:styles",
+    "build:docs": "typedoc --options typedoc.json && shx cp ./_docs/classes/Graph.md ./docs/Graph.md && shx rm -rf ./_docs",
+    "build:types": "tsc --project ./tsconfig.json --declaration --emitDeclarationOnly --outDir types",
     "bundle:styles": "scss-bundle -e ./src/styles/style.scss -o ./dist/pcui-graph.scss",
-    "watch": "rollup -c --environment target:all --watch",
-    "watch:umd": "rollup -c --environment target:umd --watch",
-    "watch:module": "rollup -c --environment target:module --watch",
     "lint": "eslint --ext .js src",
     "storybook": "start-storybook -p 9010 -s public",
-    "build:docs": "typedoc --options typedoc.json && shx cp ./_docs/classes/Graph.md ./docs/Graph.md && shx rm -rf ./_docs",
-    "tsd": "jsdoc -c conf-tsd.json && node tsd.js"
+    "watch": "rollup -c --environment target:all --watch",
+    "watch:umd": "rollup -c --environment target:umd --watch",
+    "watch:module": "rollup -c --environment target:module --watch"
   },
   "files": [
     "dist/pcui-graph.js",
     "dist/pcui-graph.mjs",
-    "dist/pcui-graph.d.ts",
     "dist/pcui-graph.scss",
     "package.json",
     "README.md",
     "LICENSE",
-    "styles"
+    "styles",
+    "types"
   ],
   "browserslist": {
     "production": [
@@ -95,7 +95,6 @@
     "eslint": "^8.36.0",
     "jointjs": "^3.5.5",
     "jquery": "^3.6.0",
-    "jsdoc": "^3.6.10",
     "json-diff": "^0.9.0",
     "json-loader": "^0.5.7",
     "lodash": "^4.17.21",
@@ -117,7 +116,6 @@
     "sass-loader": "^13.2.1",
     "scss-bundle": "^3.1.2",
     "shx": "^0.3.4",
-    "tsd-jsdoc": "^2.5.0",
     "typedoc": "^0.23.28",
     "typedoc-plugin-markdown": "^3.14.0",
     "typedoc-plugin-rename-defaults": "^0.6.4",
