@@ -89,7 +89,6 @@ class Graph extends Element {
      * This can be passed into the graph constructor to reload the current graph.
      *
      * @type {object}
-     * @readonly
      */
     get data() {
         return this._graphData.get('data');
