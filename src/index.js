@@ -475,7 +475,7 @@ class Graph extends Element {
         const edges = [];
         const edgeData = {};
         const edgeKeys = Object.keys(this._graphData.get('data.edges'));
-        for (var i = 0; i < edgeKeys.length; i++) {
+        for (let i = 0; i < edgeKeys.length; i++) {
             const edge = this._graphData.get(`data.edges.${edgeKeys[i]}`);
             edgeData[edgeKeys[i]] = edge;
             if (edge.from === nodeId || edge.to === nodeId) {
