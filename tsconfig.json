@@ -15,8 +15,15 @@
     },
     "typedocOptions": {
         "entryPoints": ["./src/index.js"],
+        "exclude": "**/node_modules/**",
+        "externalPattern": "**/node_modules/**",
+        "excludeInternal": false,
+        "excludePrivate": true,
+        "excludeNotDocumented": true,
+        "name": "Shader Graph API",
         "out": "typedocs",
-        "readme": "none"
+        "readme": "none",
+        "sort": "source-order"
     },
     "include": ["./src/index.js"],
     "exclude": ["node_modules/**/*", "node_modules"]
