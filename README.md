@@ -16,6 +16,7 @@ You can then use the library in your own project by importing the PCUI Graph bui
 
 ```javascript
 import Graph from '@playcanvas/pcui-graph';
+import '@playcanvas/pcui/styles';
 import '@playcanvas/pcui-graph/styles';
 
 const schema = {
