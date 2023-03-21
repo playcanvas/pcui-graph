@@ -6,7 +6,7 @@ import * as joint from 'jointjs/dist/joint.min';
 import { Vec2 } from './lib/vec2.js';
 
 joint.V.matrixToTransformString = function (matrix) {
-    matrix || (matrix = true);
+    matrix || (matrix = true); // eslint-disable-line no-unused-expressions
     return 'matrix(' + [
         matrix.a || 1,
         matrix.b || 0,
