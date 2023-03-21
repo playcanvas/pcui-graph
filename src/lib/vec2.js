@@ -3,7 +3,7 @@
 /**
  * A 2-dimensional vector.
  */
- class Vec2 {
+class Vec2 {
     /**
      * Create a new Vec2 instance.
      *
