@@ -52,10 +52,9 @@
     "extends": "@playcanvas/eslint-config"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.2",
-    "@babel/plugin-proposal-class-properties": "^7.17.12",
-    "@babel/preset-env": "^7.18.2",
-    "@babel/preset-react": "^7.17.12",
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
     "@playcanvas/eslint-config": "^1.3.0",
     "@playcanvas/observer": "1.3.6",
     "@playcanvas/pcui": "4.0.0",
