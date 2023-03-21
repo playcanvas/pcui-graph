@@ -2,13 +2,13 @@ import * as joint from 'jointjs/dist/joint.min';
 import { Menu } from '@playcanvas/pcui';
 
 joint.connectors.smoothInOut = function (sourcePoint, targetPoint, vertices, args) {
-    var p1 = sourcePoint.clone();
+    const p1 = sourcePoint.clone();
     p1.offset(30, 0);
 
-    var p2 = targetPoint.clone();
+    const p2 = targetPoint.clone();
     p2.offset(-30, 0);
 
-    var path = new joint.g.Path(joint.g.Path.createSegment('M', sourcePoint));
+    const path = new joint.g.Path(joint.g.Path.createSegment('M', sourcePoint));
     path.appendSegment(joint.g.Path.createSegment('C', p1, p2, targetPoint));
     return path;
 };
@@ -24,8 +24,8 @@ class GraphViewEdge {
         this._edgeSchema = edgeSchema;
         this.state = GraphViewEdge.STATES.DEFAULT;
 
-        var link = GraphViewEdge.createLink(this._config.defaultStyles, edgeSchema, edgeData);
-        var sourceNode = this._graphView.getNode(edgeData.from);
+        const link = GraphViewEdge.createLink(this._config.defaultStyles, edgeSchema, edgeData);
+        const sourceNode = this._graphView.getNode(edgeData.from);
         if (edgeData && Number.isFinite(edgeData.outPort)) {
             link.source({
                 id: sourceNode.model.id,
@@ -36,7 +36,7 @@ class GraphViewEdge {
                 link.source(sourceNode.model);
             }
         }
-        var targetNode = this._graphView.getNode(edgeData.to);
+        const targetNode = this._graphView.getNode(edgeData.to);
         if (edgeData && Number.isFinite(edgeData.inPort)) {
             link.target({
                 id: targetNode.model.id,
@@ -46,7 +46,7 @@ class GraphViewEdge {
             link.target(targetNode.model);
         }
 
-        var onCellMountedToDom = () => {
+        const onCellMountedToDom = () => {
             this._paper.findViewByModel(link).on('cell:pointerdown', () => {
                 if (this._config.readOnly) return;
                 onEdgeSelected(edgeData);
@@ -68,7 +68,7 @@ class GraphViewEdge {
     }
 
     static createLink(defaultStyles, edgeSchema, edgeData) {
-        var link = new joint.shapes.standard.Link();
+        const link = new joint.shapes.standard.Link();
         link.attr({
             line: {
                 strokeWidth: edgeSchema.strokeWidth || defaultStyles.edge.strokeWidth,
@@ -109,7 +109,7 @@ class GraphViewEdge {
             items: items
         });
         this._paper.el.appendChild(this._contextMenu.dom);
-        var edgeElement = this._paper.findViewByModel(this.model).el;
+        const edgeElement = this._paper.findViewByModel(this.model).el;
         edgeElement.addEventListener('contextmenu', (e) => {
             e.preventDefault();
             this._contextMenu.position(e.clientX, e.clientY);

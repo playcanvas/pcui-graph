@@ -98,11 +98,11 @@ class Graph extends Element {
         this.view = new GraphView(this, this.dom, this._graphSchema, this._graphData, this._config);
 
         this.view.batchCells();
-        var nodes = this._graphData.get(`data.nodes`);
+        const nodes = this._graphData.get(`data.nodes`);
         if (nodes) {
             Object.keys(nodes).forEach((nodeKey) => {
-                var node = nodes[nodeKey];
-                var nodeSchema = this._graphSchema.nodes[node.nodeType];
+                const node = nodes[nodeKey];
+                const nodeSchema = this._graphSchema.nodes[node.nodeType];
                 if (nodeSchema.attributes) {
                     if (nodeSchema.attributes && !node.attributes) {
                         node.attributes = {};
@@ -118,7 +118,7 @@ class Graph extends Element {
                 this.createNode(this._graphData.get(`data.nodes.${nodeKey}`), undefined, true);
             });
         }
-        var edges = this._graphData.get(`data.edges`);
+        const edges = this._graphData.get(`data.edges`);
         if (edges) {
             Object.keys(edges).forEach((edgeKey) => {
                 this.createEdge(edges[edgeKey], edgeKey, true);
@@ -142,11 +142,11 @@ class Graph extends Element {
     }
 
     _addCanvasContextMenu() {
-        var updateItem = (item) => {
+        const updateItem = (item) => {
             switch (item.action) {
                 case GRAPH_ACTIONS.ADD_NODE: {
                     item.onSelect = (e) => {
-                        var node = {
+                        const node = {
                             ...item,
                             id: Number(`${Date.now()}${Math.floor(Math.random() * 10000)}`)
                         };
@@ -156,7 +156,7 @@ class Graph extends Element {
                         delete node.action;
                         delete node.text;
                         delete node.onClick;
-                        var nodeSchema = this._graphSchema.nodes[node.nodeType];
+                        const nodeSchema = this._graphSchema.nodes[node.nodeType];
                         if (nodeSchema.attributes && !node.attributes) {
                             node.attributes = {};
                         }
@@ -174,7 +174,7 @@ class Graph extends Element {
                         while (!element.classList.contains('pcui-menu-items')) {
                             element = element.parentElement;
                         }
-                        var pos = {
+                        let pos = {
                             x: Number(element.style.left.replace('px', '')),
                             y: Number(element.style.top.replace('px', ''))
                         };
@@ -236,7 +236,7 @@ class Graph extends Element {
     }
 
     _isValidEdge(edgeType, source, target) {
-        var edge = this._graphSchema.edges[edgeType];
+        const edge = this._graphSchema.edges[edgeType];
         return edge.from.includes(this._graphData.get(`data.nodes.${source}.nodeType`)) && edge.to.includes(this._graphData.get(`data.nodes.${target}.nodeType`));
     }
 
@@ -248,12 +248,12 @@ class Graph extends Element {
      * @param {number} edgeId - The edge id for the new edge
      */
     createEdge(edge, edgeId) {
-        var edgeSchema = this._graphSchema.edges[edge.edgeType];
+        const edgeSchema = this._graphSchema.edges[edge.edgeType];
         this.view.addEdge(edge, edgeSchema, (edge) => {
             this._dispatchEvent(GRAPH_ACTIONS.SELECT_EDGE, { edge, prevItem: this._selectedItem });
         });
         if (edgeSchema.contextMenuItems) {
-            var contextMenuItems = deepCopyFunction(edgeSchema.contextMenuItems).map((item) => {
+            const contextMenuItems = deepCopyFunction(edgeSchema.contextMenuItems).map((item) => {
                 if (item.action === GRAPH_ACTIONS.DELETE_EDGE) {
                     item.onSelect = () => {
                         this._dispatchEvent(GRAPH_ACTIONS.DELETE_EDGE, { edgeId: edgeId, edge: this._graphData.get(`data.edges.${edgeId}`) });
@@ -261,7 +261,7 @@ class Graph extends Element {
                 }
                 return item;
             });
-            var addEdgeContextMenuFunction = () => {
+            const addEdgeContextMenuFunction = () => {
                 if (Number.isFinite(edge.outPort)) {
                     this.view.addEdgeContextMenu(`${edge.from},${edge.outPort}-${edge.to},${edge.inPort}`, contextMenuItems);
                 } else {
@@ -283,8 +283,8 @@ class Graph extends Element {
 
 
     _onEdgeConnected(edgeType, from, to) {
-        var edgeId = Number(`${Date.now()}${Math.floor(Math.random() * 10000)}`);
-        var edge = {
+        const edgeId = Number(`${Date.now()}${Math.floor(Math.random() * 10000)}`);
+        const edge = {
             from: from,
             to: to,
             edgeType: edgeType,
@@ -294,7 +294,7 @@ class Graph extends Element {
     }
 
     _createUnconnectedEdgeForNode(node, edgeType) {
-        var edgeSchema = this._graphSchema.edges[edgeType];
+        const edgeSchema = this._graphSchema.edges[edgeType];
         this.view.addUnconnectedEdge(node.id, edgeType, edgeSchema, this._isValidEdge.bind(this), this._onEdgeConnected.bind(this));
     }
 
@@ -311,9 +311,9 @@ class Graph extends Element {
     }
 
     _onNodePositionUpdated(nodeId, pos) {
-        var node = this._graphData.get(`data.nodes.${nodeId}`);
-        var prevPosX = node.posX;
-        var prevPosY = node.posY;
+        const node = this._graphData.get(`data.nodes.${nodeId}`);
+        const prevPosX = node.posX;
+        const prevPosY = node.posY;
         if (pos.x !== node.posX || pos.y !== node.posY) {
             node.posX = pos.x;
             node.posY = pos.y;
@@ -323,8 +323,8 @@ class Graph extends Element {
     }
 
     _onNodeAttributeUpdated(nodeId, attribute, value) {
-        var node = this._graphData.get(`data.nodes.${nodeId}`);
-        var prevAttributeValue;
+        const node = this._graphData.get(`data.nodes.${nodeId}`);
+        let prevAttributeValue;
         let attributeKey = node.attributes[attribute.name] !== undefined ? attribute.name : undefined;
         if (!attributeKey) {
             Object.keys(node.attributes).forEach((k) => {
@@ -338,7 +338,7 @@ class Graph extends Element {
             prevAttributeValue = node.attributes[attributeKey];
         }
         if (Array.isArray(value)) {
-            var keyMap = ['x', 'y', 'z', 'w'];
+            const keyMap = ['x', 'y', 'z', 'w'];
             value.forEach((v, i) => {
                 node.attributes[attributeKey][keyMap[i]] = v;
             });
@@ -359,8 +359,8 @@ class Graph extends Element {
         );
     }
 
-    _initialiseNodeContextMenuItems(node, items) {
-        var contextMenuItems = deepCopyFunction(items).map((item) => {
+    _initializeNodeContextMenuItems(node, items) {
+        const contextMenuItems = deepCopyFunction(items).map((item) => {
             if (item.action === GRAPH_ACTIONS.ADD_EDGE) {
                 item.onSelect = () => this._createUnconnectedEdgeForNode(node, item.edgeType);
             }
@@ -381,7 +381,7 @@ class Graph extends Element {
      * @param {object} node - The node to add
      */
     createNode(node) {
-        var nodeSchema = this._graphSchema.nodes[node.nodeType];
+        const nodeSchema = this._graphSchema.nodes[node.nodeType];
         node = this.view.addNode(
             node,
             nodeSchema,
@@ -408,7 +408,7 @@ class Graph extends Element {
             });
         }
         if (nodeSchema.contextMenuItems) {
-            var contextMenuItems = this._initialiseNodeContextMenuItems(node, nodeSchema.contextMenuItems);
+            const contextMenuItems = this._initializeNodeContextMenuItems(node, nodeSchema.contextMenuItems);
             this.view.addNodeContextMenu(node.id, contextMenuItems);
         }
     }
@@ -472,11 +472,11 @@ class Graph extends Element {
         if (!this._graphData.get(`data.nodes.${nodeId}`)) return;
         if (this._selectedItem && this._selectedItem._id === nodeId) this.deselectItem();
         const node = this._graphData.get(`data.nodes.${nodeId}`);
-        var edges = [];
-        var edgeData = {};
-        var edgeKeys = Object.keys(this._graphData.get('data.edges'));
+        const edges = [];
+        const edgeData = {};
+        const edgeKeys = Object.keys(this._graphData.get('data.edges'));
         for (var i = 0; i < edgeKeys.length; i++) {
-            var edge = this._graphData.get(`data.edges.${edgeKeys[i]}`);
+            const edge = this._graphData.get(`data.edges.${edgeKeys[i]}`);
             edgeData[edgeKeys[i]] = edge;
             if (edge.from === nodeId || edge.to === nodeId) {
                 edges.push(edgeKeys[i]);
@@ -509,7 +509,7 @@ class Graph extends Element {
      */
     deleteEdge(edgeId) {
         if (!this._graphData.get(`data.edges.${edgeId}`)) return;
-        var { from, to, outPort, inPort } = this._graphData.get(`data.edges.${edgeId}`) || {};
+        const { from, to, outPort, inPort } = this._graphData.get(`data.edges.${edgeId}`) || {};
         if (this._selectedItem && this._selectedItem._id === `${from}-${to}`) this.deselectItem();
 
         if (Number.isFinite(outPort)) {
@@ -519,10 +519,10 @@ class Graph extends Element {
         }
         this.view.removeEdge(`${from}-${to}`);
         this._graphData.unset(`data.edges.${edgeId}`);
-        var edges = this._graphData.get(`data.edges`);
+        const edges = this._graphData.get(`data.edges`);
         Object.keys(edges).forEach((edgeKey) => {
-            var edge = edges[edgeKey];
-            var edgeSchema = this._graphSchema.edges[edge.edgeType];
+            const edge = edges[edgeKey];
+            const edgeSchema = this._graphSchema.edges[edge.edgeType];
             if ([edge.from, edge.to].includes(from) && [edge.from, edge.to].includes(to)) {
                 this.view.addEdge(edge, edgeSchema, (edge) => {
                     this.selectEdge(edge, edgeKey);
@@ -575,7 +575,6 @@ class Graph extends Element {
     getGraphScale() {
         return this.view.getGraphScale();
     }
-
 
     /**
      *
@@ -630,7 +629,7 @@ class Graph extends Element {
         this.on(GRAPH_ACTIONS.ADD_EDGE, ({ edge, edgeId }) => {
             if (Number.isFinite(edge.inPort)) {
                 Object.keys(this._graphData.get('data.edges')).forEach((edgeKey) => {
-                    var edgeToCompare = this._graphData.get(`data.edges.${edgeKey}`);
+                    const edgeToCompare = this._graphData.get(`data.edges.${edgeKey}`);
                     if (edgeToCompare.to === edge.to && edgeToCompare.inPort === edge.inPort) {
                         this.deleteEdge(edgeKey);
                     }
