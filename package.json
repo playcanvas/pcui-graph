@@ -23,7 +23,7 @@
     "watch:module": "rollup -c --environment target:module --watch",
     "lint": "eslint --ext .js src",
     "storybook": "start-storybook -p 9010 -s public",
-    "build:docs": "typedoc --options typedoc.json; cp ./_docs/classes/Graph.md ./docs/Graph.md; rm -rf ./_docs",
+    "build:docs": "typedoc --options typedoc.json && shx cp ./_docs/classes/Graph.md ./docs/Graph.md && shx rm -rf ./_docs",
     "tsd": "jsdoc -c conf-tsd.json && node tsd.js"
   },
   "files": [
@@ -103,6 +103,7 @@
     "rollup-plugin-terser": "^7.0.2",
     "sass-loader": "^13.2.1",
     "scss-bundle": "^3.1.2",
+    "shx": "^0.3.4",
     "tsd-jsdoc": "^2.5.0",
     "typedoc": "^0.23.28",
     "typedoc-plugin-markdown": "^3.14.0",
