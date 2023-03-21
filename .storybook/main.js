@@ -1,4 +1,3 @@
-const path = require('path');
 module.exports = {
   stories: ['./stories/**'],
   addons: [
@@ -41,4 +40,7 @@ module.exports = {
     // Return the altered config
     return config;
   },
+  core: {
+    builder: "webpack5"
+  }
 };
