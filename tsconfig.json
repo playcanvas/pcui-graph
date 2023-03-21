@@ -20,7 +20,7 @@
         "excludeInternal": false,
         "excludePrivate": true,
         "excludeNotDocumented": true,
-        "name": "Shader Graph API",
+        "name": "PCUI Graph API",
         "out": "typedocs",
         "readme": "none",
         "sort": "source-order"
