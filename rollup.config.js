@@ -1,13 +1,17 @@
-import resolve from '@rollup/plugin-node-resolve';
-import postcss from 'rollup-plugin-postcss';
-import commonjs from '@rollup/plugin-commonjs';
+import path from 'path';
+
+// 1st party plugins
+import alias from '@rollup/plugin-alias';
 import { babel } from '@rollup/plugin-babel';
+import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
+
+// 3rd party plugins
 import jscc from 'rollup-plugin-jscc';
 import builtins from 'rollup-plugin-node-builtins';
 import globals from 'rollup-plugin-node-globals';
-import alias from '@rollup/plugin-alias';
-import path from 'path';
+import postcss from 'rollup-plugin-postcss';
 
 const PCUI_DIR = process.env.PCUI_PATH || 'node_modules/@playcanvas/pcui';
 
