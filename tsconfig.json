@@ -20,7 +20,7 @@
         "excludeInternal": false,
         "excludePrivate": true,
         "excludeNotDocumented": true,
-        "name": "PCUI Graph API",
+        "name": "Home",
         "out": "typedocs",
         "readme": "none",
         "sort": "source-order"
