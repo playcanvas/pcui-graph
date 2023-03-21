@@ -16,14 +16,22 @@ class Graph extends Element {
      * @param {object} [options] - The graph configuration. Optional.
      * @param {object} [options.initialData] - The graph data to initialize the graph with.
      * @param {HTMLElement} [options.dom] - If supplied, the graph will be attached to this element.
-     * @param {object[]} [options.contextMenuItems] - The context menu items to add to the graph. Optional.
-     * @param {boolean} [options.readOnly] - Whether the graph is read only. Optional. Defaults to false.
-     * @param {boolean} [options.passiveUIEvents] - If true, the graph will not update its data and view upon user interaction. Instead, these interactions can be handled explicitly by listening to fired events. Optional. Defaults to false.
-     * @param {boolean} [options.incrementNodeNames] - Whether the graph should increment the node name when a node with the same name already exists. Optional. Defaults to false.
-     * @param {boolean} [options.restrictTranslate] - Whether the graph should restrict the translate graph operation to the graph area. Optional. Defaults to false.
-     * @param {boolean} [options.edgeHoverEffect] - Whether the graph should show an edge highlight effect when the mouse is hovering over edges. Optional. Defaults to true.
-     * @param {object} [options.defaultStyles] - Used to override the graph's default styling. Check ./constants.js for a full list of style properties.
-     * @param {object} [options.adjustVertices] - If true, multiple edges connected between two nodes will be spaced apart.
+     * @param {object[]} [options.contextMenuItems] - The context menu items to add to the graph.
+     * @param {boolean} [options.readOnly] - Whether the graph is read only. Optional. Defaults to
+     * false.
+     * @param {boolean} [options.passiveUIEvents] - If true, the graph will not update its data and
+     * view upon user interaction. Instead, these interactions can be handled explicitly by
+     * listening to fired events. Optional. Defaults to false.
+     * @param {boolean} [options.incrementNodeNames] - Whether the graph should increment the node
+     * name when a node with the same name already exists. Optional. Defaults to false.
+     * @param {boolean} [options.restrictTranslate] - Whether the graph should restrict the
+     * translate graph operation to the graph area. Optional. Defaults to false.
+     * @param {boolean} [options.edgeHoverEffect] - Whether the graph should show an edge highlight
+     * effect when the mouse is hovering over edges. Optional. Defaults to true.
+     * @param {object} [options.defaultStyles] - Used to override the graph's default styling. Check
+     * ./constants.js for a full list of style properties.
+     * @param {object} [options.adjustVertices] - If true, multiple edges connected between two
+     * nodes will be spaced apart.
      */
     constructor(schema, options = {}) {
         super({
@@ -77,8 +85,8 @@ class Graph extends Element {
     }
 
     /**
-     *
-     * The current graph data. Contains an object with any nodes and edges present in the graph. This can be passed into the graph constructor to reload the current graph.
+     * The current graph data. Contains an object with any nodes and edges present in the graph.
+     * This can be passed into the graph constructor to reload the current graph.
      *
      * @type {object}
      * @readonly
@@ -88,7 +96,8 @@ class Graph extends Element {
     }
 
     /**
-     * Destroy the graph. Clears the graph from the DOM and removes all event listeners associated with the graph.
+     * Destroy the graph. Clears the graph from the DOM and removes all event listeners associated
+     * with the graph.
      */
     destroy() {
         this.view.destroy();
@@ -199,7 +208,6 @@ class Graph extends Element {
     }
 
     /**
-     *
      * Select a node in the current graph.
      *
      * @param {object} node - The node to select
@@ -211,7 +219,6 @@ class Graph extends Element {
     }
 
     /**
-     *
      * Select an edge in the current graph.
      *
      * @param {object} edge - The edge to select
@@ -224,9 +231,7 @@ class Graph extends Element {
     }
 
     /**
-     *
      * Deselect the currently selected item in the graph.
-     *
      */
     deselectItem() {
         if (this._selectedItem) {
@@ -241,11 +246,10 @@ class Graph extends Element {
     }
 
     /**
+     * Add an edge to the graph.
      *
-     * Add an edge to the graph
-     *
-     * @param {object} edge - The edge to add
-     * @param {number} edgeId - The edge id for the new edge
+     * @param {object} edge - The edge to add.
+     * @param {number} edgeId - The edge id for the new edge.
      */
     createEdge(edge, edgeId) {
         var edgeSchema = this._graphSchema.edges[edge.edgeType];
@@ -375,10 +379,9 @@ class Graph extends Element {
     }
 
     /**
+     * Add a node to the graph.
      *
-     * Add a node to the graph
-     *
-     * @param {object} node - The node to add
+     * @param {object} node - The node to add.
      */
     createNode(node) {
         var nodeSchema = this._graphSchema.nodes[node.nodeType];
@@ -414,11 +417,10 @@ class Graph extends Element {
     }
 
     /**
+     * Update the position of a node.
      *
-     * Update the position of a node
-     *
-     * @param {number} nodeId - The node to add
-     * @param {object} pos - The new position, given as an object containing x and y properties
+     * @param {number} nodeId - The node to add.
+     * @param {object} pos - The new position, given as an object containing x and y properties.
      */
     updateNodePosition(nodeId, pos) {
         if (!this._graphData.get(`data.nodes.${nodeId}`)) return;
@@ -428,12 +430,11 @@ class Graph extends Element {
     }
 
     /**
+     * Update the value of an attribute of a node.
      *
-     * Update the value of an attribute of a node
-     *
-     * @param {number} nodeId - The node to update
-     * @param {string} attributeName - The name of the attribute to update
-     * @param {object} value - The new value for the attribute
+     * @param {number} nodeId - The node to update.
+     * @param {string} attributeName - The name of the attribute to update.
+     * @param {object} value - The new value for the attribute.
      */
     updateNodeAttribute(nodeId, attributeName, value) {
         if (!this._graphData.get(`data.nodes.${nodeId}`)) return;
@@ -442,12 +443,11 @@ class Graph extends Element {
     }
 
     /**
+     * Set the error state of a node attribute.
      *
-     * Set the error state of a node attribute
-     *
-     * @param {number} nodeId - The node to update
-     * @param {string} attributeName - The name of the attribute to update
-     * @param {boolean} value - Whether the attribute should be set in the error state
+     * @param {number} nodeId - The node to update.
+     * @param {string} attributeName - The name of the attribute to update.
+     * @param {boolean} value - Whether the attribute should be set in the error state.
      */
     setNodeAttributeErrorState(nodeId, attributeName, value) {
         if (!this._graphData.get(`data.nodes.${nodeId}`)) return;
@@ -455,11 +455,10 @@ class Graph extends Element {
     }
 
     /**
+     * Update the type of a node.
      *
-     * Update the type of a node
-     *
-     * @param {number} nodeId - The node to update
-     * @param {string} nodeType - The new type for the node
+     * @param {number} nodeId - The node to update.
+     * @param {string} nodeType - The new type for the node.
      */
     updateNodeType(nodeId, nodeType) {
         if (Number.isFinite(nodeType) && this._graphData.get(`data.nodes.${nodeId}`)) {
@@ -486,10 +485,9 @@ class Graph extends Element {
     }
 
     /**
+     * Delete a node from the graph.
      *
-     * Delete a node from the graph
-     *
-     * @param {number} nodeId - The node to delete
+     * @param {number} nodeId - The node to delete.
      */
     deleteNode(nodeId) {
         const { node, edges, edgeData } = this._deleteNode(nodeId);
@@ -502,10 +500,9 @@ class Graph extends Element {
     }
 
     /**
+     * Delete an edge from the graph.
      *
-     * Delete an edge from the graph
-     *
-     * @param {string} edgeId - The edge to delete
+     * @param {string} edgeId - The edge to delete.
      */
     deleteEdge(edgeId) {
         if (!this._graphData.get(`data.edges.${edgeId}`)) return;
@@ -533,31 +530,29 @@ class Graph extends Element {
     }
 
     /**
+     * Set the center of the viewport to the given position.
      *
-     * Set the center of the viewport to the given position
-     *
-     * @param {number} posX - The x position to set the center of the viewport to
-     * @param {number} posY - The y position to set the center of the viewport to
+     * @param {number} posX - The x position to set the center of the viewport to.
+     * @param {number} posY - The y position to set the center of the viewport to.
      */
     setGraphPosition(posX, posY) {
         this.view.setGraphPosition(posX, posY);
     }
 
     /**
+     * Get the current center position of the viewport in the graph.
      *
-     * Get the current center position of the viewport in the graph
-     *
-     * @returns {object} The current center position of the viewport in the graph as an object containing x and y
+     * @returns {object} The current center position of the viewport in the graph as an object
+     * containing x and y.
      */
     getGraphPosition() {
         return this.view.getGraphPosition();
     }
 
     /**
+     * Set the scale of the graph.
      *
-     * Set the scale of the graph
-     *
-     * @param {number} scale - The new scale of the graph
+     * @param {number} scale - The new scale of the graph.
      */
     setGraphScale(scale) {
         this.view.setGraphScale(scale);
@@ -567,10 +562,9 @@ class Graph extends Element {
     }
 
     /**
+     * Get the current scale of the graph.
      *
-     * Get the current scale of the graph
-     *
-     * @returns {number} The current scale of the graph
+     * @returns {number} The current scale of the graph.
      */
     getGraphScale() {
         return this.view.getGraphScale();
@@ -578,22 +572,21 @@ class Graph extends Element {
 
 
     /**
+     * Convert a position in window space to a position in graph space.
      *
-     * Convert a position in window space to a position in graph space
-     *
-     * @param {object} pos - A position in the window, as an object containing x and y
-     * @returns {object} The position in the graph based on the given window position, as an object containing x and y
+     * @param {object} pos - A position in the window, as an object containing x and y.
+     * @returns {object} The position in the graph based on the given window position, as an object
+     * containing x and y.
      */
     getWindowToGraphPosition(pos) {
         return this.view.getWindowToGraphPosition(pos);
     }
 
     /**
+     * Add an event listener to the graph.
      *
-     * Add an event listener to the graph
-     *
-     * @param {string} eventName - The name of the event to listen for
-     * @param {Function} callback - The callback to call when the event is triggered
+     * @param {string} eventName - The name of the event to listen for.
+     * @param {Function} callback - The callback to call when the event is triggered.
      */
     on(eventName, callback) {
         if (this._config.readOnly && (!eventName.includes('EVENT_SELECT_') && !eventName.includes('EVENT_DESELECT'))) return;
