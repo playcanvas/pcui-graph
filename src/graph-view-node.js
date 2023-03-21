@@ -24,24 +24,24 @@ class GraphViewNode {
         this.nodeSchema = nodeSchema;
         this.state = GraphViewNode.STATES.DEFAULT;
 
-        var rectHeight = this.getSchemaValue('baseHeight');
-        var portHeight = 0;
-        var attributeHeight = 0;
+        const rectHeight = this.getSchemaValue('baseHeight');
+        let portHeight = 0;
+        let attributeHeight = 0;
         if (nodeSchema.inPorts) {
             portHeight = (nodeSchema.inPorts.length * 25) + 10;
         }
         if (nodeSchema.outPorts) {
-            var outHeight = (nodeSchema.outPorts.length * 25) + 10;
+            const outHeight = (nodeSchema.outPorts.length * 25) + 10;
             if (outHeight > portHeight) portHeight = outHeight;
         }
         const visibleAttributes = nodeSchema.attributes && nodeSchema.attributes.filter(a => !a.hidden);
         if (visibleAttributes && visibleAttributes.length > 0) {
             attributeHeight = visibleAttributes.length * 32 + 10;
         }
-        var rectSize = { x: this.getSchemaValue('baseWidth'), y: rectHeight + portHeight + attributeHeight };
+        const rectSize = { x: this.getSchemaValue('baseWidth'), y: rectHeight + portHeight + attributeHeight };
 
-        var labelName;
-        var formattedText = nodeSchema.headerTextFormatter && nodeSchema.headerTextFormatter(nodeData.attributes, nodeData.id);
+        let labelName;
+        const formattedText = nodeSchema.headerTextFormatter && nodeSchema.headerTextFormatter(nodeData.attributes, nodeData.id);
         if (typeof formattedText === 'string') {
             labelName = nodeSchema.headerTextFormatter(nodeData.attributes, nodeData.id);
         } else if (nodeSchema.outPorts || nodeSchema.inPorts) {
@@ -49,7 +49,7 @@ class GraphViewNode {
         } else {
             labelName = nodeData.attributes && nodeData.attributes.name || nodeData.name;
         }
-        var rect = new joint.shapes.html.Element({
+        const rect = new joint.shapes.html.Element({
             attrs: {
                 body: {
                     fill: this.getSchemaValue('fill'),
@@ -216,19 +216,19 @@ class GraphViewNode {
                 });
                 this._graph.on('change:target', (cell) => {
                     if (this._suppressChangeTargetEvent) return;
-                    var target = cell.get('target');
-                    var source = cell.get('source');
+                    let target = cell.get('target');
+                    let source = cell.get('source');
                     if (!target || !source) return;
                     if (target && target.port && target.port.includes('out')) {
-                        var temp = target;
+                        const temp = target;
                         target = source;
                         source = temp;
                     }
                     if (!target || !target.id || target.id !== this.model.id) return;
                     if (source && source.port && target.port && Number(target.port.replace('in', '')) === i) {
-                        var sourceNodeId = this._graphView.getNode(source.id).nodeData.id;
-                        var edgeId = `${sourceNodeId},${source.port.replace('out', '')}-${this.nodeData.id},${target.port.replace('in', '')}`;
-                        var edge = {
+                        const sourceNodeId = this._graphView.getNode(source.id).nodeData.id;
+                        const edgeId = `${sourceNodeId},${source.port.replace('out', '')}-${this.nodeData.id},${target.port.replace('in', '')}`;
+                        const edge = {
                             to: this.nodeData.id,
                             from: sourceNodeId,
                             outPort: Number(source.port.replace('out', '')),
@@ -263,7 +263,7 @@ class GraphViewNode {
             }));
         }
 
-        var containers = [];
+        const containers = [];
         if (visibleAttributes) {
             visibleAttributes.forEach((attribute, i) => {
                 const container = new Container({ class: 'graph-node-container' });
@@ -341,8 +341,8 @@ class GraphViewNode {
             });
         }
 
-        var onCellMountedToDom = () => {
-            var nodeDiv = document.querySelector(`#nodediv_${rect.id}`);
+        const onCellMountedToDom = () => {
+            const nodeDiv = document.querySelector(`#nodediv_${rect.id}`);
             containers.forEach((container) => {
                 nodeDiv.appendChild(container.dom);
             });
@@ -373,10 +373,10 @@ class GraphViewNode {
     addContextMenu(items) {
         if (this._graphView._config.readOnly) return;
         this._contextMenu = new Menu({
-            items: this._graphView._parent._initialiseNodeContextMenuItems(this.nodeData, items)
+            items: this._graphView._parent._initializeNodeContextMenuItems(this.nodeData, items)
         });
         this._paper.el.appendChild(this._contextMenu.dom);
-        var nodeElement = this._paper.findViewByModel(this.model).el;
+        const nodeElement = this._paper.findViewByModel(this.model).el;
         nodeElement.addEventListener('contextmenu', (e) => {
             e.preventDefault();
             this._contextMenu.position(e.clientX, e.clientY);
@@ -386,7 +386,7 @@ class GraphViewNode {
 
 
     mapVectorToArray(v) {
-        var arr = [];
+        const arr = [];
         if (Number.isFinite(v.x)) arr.push(v.x);
         if (Number.isFinite(v.y)) arr.push(v.y);
         if (Number.isFinite(v.z)) arr.push(v.z);
@@ -450,11 +450,11 @@ class GraphViewNode {
     }
 
     addEvent(event, callback, attribute) {
-        var nodeView = this._paper.findViewByModel(this.model);
+        const nodeView = this._paper.findViewByModel(this.model);
         switch (event) {
             case 'updatePosition': {
                 nodeView.on('element:pointerup', () => {
-                    var newPos = this._graphView.getWindowToGraphPosition(nodeView.getBBox(), false);
+                    const newPos = this._graphView.getWindowToGraphPosition(nodeView.getBBox(), false);
                     callback(this.nodeData.id, newPos);
                 });
                 break;
@@ -464,9 +464,9 @@ class GraphViewNode {
                 if (!attributeElement) break;
                 attributeElement.ui.on('change', (value) => {
                     if (attribute.name === 'name') {
-                        var nameTaken = false;
+                        let nameTaken = false;
                         Object.keys(this._graphView._graphData.get('data.nodes')).forEach((nodeKey) => {
-                            var node = this._graphView._graphData.get('data.nodes')[nodeKey];
+                            const node = this._graphView._graphData.get('data.nodes')[nodeKey];
                             if (node.name === value) {
                                 nameTaken = true;
                             }

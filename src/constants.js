@@ -1,4 +1,4 @@
-export var GRAPH_ACTIONS = {
+export const GRAPH_ACTIONS = {
     ADD_NODE: 'EVENT_ADD_NODE',
     DELETE_NODE: 'EVENT_DELETE_NODE',
     SELECT_NODE: 'EVENT_SELECT_NODE',
@@ -12,7 +12,7 @@ export var GRAPH_ACTIONS = {
     UPDATE_SCALE: 'EVENT_UPDATE_SCALE'
 };
 
-export var DEFAULT_CONFIG = {
+export const DEFAULT_CONFIG = {
     readOnly: false,
     passiveUIEvents: false,
     incrementNodeNames: false,

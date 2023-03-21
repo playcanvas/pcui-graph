@@ -67,7 +67,7 @@ const jointShapeElementView = paper => joint.dia.ElementView.extend({
     },
     updateBox: function () {
         // Set the position and dimension of the box so that it covers the JointJS element.
-        var bbox = this.model.getBBox();
+        const bbox = this.model.getBBox();
         // Example of updating the HTML with a data stored in the cell model.
         this.div.setAttribute('style', `
             position: absolute;
