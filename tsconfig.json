@@ -1,15 +1,23 @@
 {
-    "include": ["./src/index.js"],
-    "exclude": [
-        "node_modules",
-        "./node_modules",
-        "./node_modules/*",
-        "./node_modules/@types/node/index.d.ts",
-    ],
     "compilerOptions": {
+        "noImplicitAny": true,
         "allowJs": true,
-        "declaration": true,
-        "module": "ES6",
-        "skipLibCheck": true
-    }
+        "target": "es6",
+        "jsx": "react",
+        "lib": [
+            "es2019",
+            "dom",
+            "dom.iterable"
+        ],
+        "esModuleInterop" : true,
+        "sourceMap": true,
+        "moduleResolution": "node"
+    },
+    "typedocOptions": {
+        "entryPoints": ["./src/index.js"],
+        "out": "typedocs",
+        "readme": "none"
+    },
+    "include": ["./src/index.js"],
+    "exclude": ["node_modules/**/*", "node_modules"]
 }
