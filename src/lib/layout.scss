@@ -46,7 +46,7 @@ path:not([d]) {
 /*
 
 Elements have CSS classes named by their types. E.g. type: basic.Rect has a CSS class "element basic Rect".
-This makes it possible to easilly style elements in CSS and have generic CSS rules applying to
+This makes it possible to easily style elements in CSS and have generic CSS rules applying to
 the whole group of elements. Each plugin can provide its own stylesheet.
 
 */
@@ -113,7 +113,7 @@ Vertex markers are `<circle>` elements that appear at connection vertex position
    cursor: move;
    cursor: -webkit-grab;
    cursor: -moz-grab;
-/*   display: none;   */   /* setting `display: none` on .marker-arrowheads effectivelly switches of links reconnecting */
+/*   display: none;   */   /* setting `display: none` on .marker-arrowheads effectively switches of links reconnecting */
 }
 .link-tools {
    opacity: 0;

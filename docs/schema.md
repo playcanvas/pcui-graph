@@ -2,9 +2,10 @@
 
 # Schema
 
-The schema object is used to define what type of graph you will be initialising. More specifically, it defines which node your graph can contain and how those nodes can be connected together with edges.
+The schema object is used to define what type of graph you will be initializing. More specifically, it defines which node your graph can contain and how those nodes can be connected together with edges.
 
 It should contain a set of nodes and edges which can be created in the graph. Each node and edge that is defined will need a unique number key which is used to reference that particular part of the schema. In the above example the single edge type defined references the two nodes contained in the schema when defining which node types it can connect. When creating large schemas, it can be useful to define these keys before creating the schema, so they can be easily referenced:
+
 ```javascript
 const NODE_KEYS = {
     HELLO: 0,
@@ -37,7 +38,7 @@ const schema = {
 
 The schemas above are used to created directed graphs, as they define edges which contain `from` and `to` attributes. These attributes tell an edge which nodes they can connect, creating a directed edge from one node to another.
 
-When creating visual programming graphs, nodes are not connected directly. Instead, they contain input and output ports which can be connected together. This will need to be expressed in the schema you create. To achieve this, you can add `inPorts` and `outPorts` attributes to your nodes in the schema. These will define a set of ports which will be created on a given node, specifiying which edges can connect those ports.
+When creating visual programming graphs, nodes are not connected directly. Instead, they contain input and output ports which can be connected together. This will need to be expressed in the schema you create. To achieve this, you can add `inPorts` and `outPorts` attributes to your nodes in the schema. These will define a set of ports which will be created on a given node, specifying which edges can connect those ports.
 
 The schema defined above can be reworked to support port connections as follows:
 
@@ -84,6 +85,7 @@ const schema = {
 You can see that created ports have a type which defines the edge type each port accepts. Only input and output ports of the same type can be connected together in the graph. Ports also contain a name which will appear next to the port in the graph.
 
 Nodes can also contain editable attributes, which will show up as input fields within them. These attributes can be set in a node as follows:
+
 ```javascript
 const schema = {
     nodes: {
@@ -121,6 +123,8 @@ const schema = {
 ```
 
 Editable attributes for a given node type must have unique names as they are stored in the graph data in a dictionary. When a node with an editable attribute is created, it can be accessed via the graph data as follows:
+
 ```javascript
 const selectedItemId = graph.selectedItem.id;
 const currentBooleanValue = graph.data.nodes[selectedItemId].attributes['Editable boolean'].value;
+```
