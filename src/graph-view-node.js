@@ -373,7 +373,7 @@ class GraphViewNode {
     addContextMenu(items) {
         if (this._graphView._config.readOnly) return;
         this._contextMenu = new Menu({
-            items: this._graphView._parent._initialiseNodeContextMenuItems(this.nodeData, items)
+            items: this._graphView._parent._initializeNodeContextMenuItems(this.nodeData, items)
         });
         this._paper.el.appendChild(this._contextMenu.dom);
         const nodeElement = this._paper.findViewByModel(this.model).el;
