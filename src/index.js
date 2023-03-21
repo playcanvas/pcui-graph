@@ -17,7 +17,6 @@ class Graph extends Element {
      * @param {object} [options.initialData] - The graph data to initialize the graph with.
      * @param {HTMLElement} [options.dom] - If supplied, the graph will be attached to this element.
      * @param {object[]} [options.contextMenuItems] - The context menu items to add to the graph.
-     * Optional.
      * @param {boolean} [options.readOnly] - Whether the graph is read only. Optional. Defaults to
      * false.
      * @param {boolean} [options.passiveUIEvents] - If true, the graph will not update its data and
