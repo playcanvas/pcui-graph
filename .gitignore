@@ -12,6 +12,7 @@
 /build
 /dist
 /styles/dist
+/typedocs
 /.storybook/utils/jsdoc-ast.json
 
 # misc

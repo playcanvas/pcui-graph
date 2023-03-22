@@ -32,7 +32,7 @@
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production rollup -c --environment target:all && npm run bundle:styles",
-    "build:docs": "typedoc --options typedoc.json && shx cp ./_docs/classes/Graph.md ./docs/Graph.md && shx rm -rf ./_docs",
+    "build:docs": "typedoc --tsconfig ./tsconfig.json && shx cp ./typedocs/classes/Graph.md ./docs/Graph.md",
     "build:types": "tsc --project ./tsconfig.json --declaration --emitDeclarationOnly --outDir types",
     "bundle:styles": "scss-bundle -e ./src/styles/style.scss -o ./dist/pcui-graph.scss",
     "lint": "eslint --ext .js src",
@@ -88,6 +88,8 @@
     "@storybook/manager-webpack5": "^6.5.16",
     "@storybook/preset-create-react-app": "^4.0.0",
     "@storybook/react": "^6.5.16",
+    "@types/node": "^18.15.5",
+    "@types/react": "^18.0.28",
     "babel-loader": "^9.1.2",
     "backbone": "^1.4.1",
     "cross-env": "^7.0.3",
