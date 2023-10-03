@@ -72,7 +72,7 @@ Element.constructor
 
 #### Defined in
 
-[index.js:36](https://github.com/playcanvas/pcui-graph/blob/6c082be/src/index.js#L36)
+[index.js:36](https://github.com/playcanvas/pcui-graph/blob/6d30f18/src/index.js#L36)
 
 ## Accessors
 
@@ -89,7 +89,7 @@ This can be passed into the graph constructor to reload the current graph.
 
 #### Defined in
 
-[index.js:93](https://github.com/playcanvas/pcui-graph/blob/6c082be/src/index.js#L93)
+[index.js:93](https://github.com/playcanvas/pcui-graph/blob/6d30f18/src/index.js#L93)
 
 ## Methods
 
@@ -110,7 +110,7 @@ Element.destroy
 
 #### Defined in
 
-[index.js:101](https://github.com/playcanvas/pcui-graph/blob/6c082be/src/index.js#L101)
+[index.js:101](https://github.com/playcanvas/pcui-graph/blob/6d30f18/src/index.js#L101)
 
 ___
 
@@ -132,7 +132,7 @@ Select a node in the current graph.
 
 #### Defined in
 
-[index.js:214](https://github.com/playcanvas/pcui-graph/blob/6c082be/src/index.js#L214)
+[index.js:214](https://github.com/playcanvas/pcui-graph/blob/6d30f18/src/index.js#L214)
 
 ___
 
@@ -155,7 +155,7 @@ Select an edge in the current graph.
 
 #### Defined in
 
-[index.js:226](https://github.com/playcanvas/pcui-graph/blob/6c082be/src/index.js#L226)
+[index.js:226](https://github.com/playcanvas/pcui-graph/blob/6d30f18/src/index.js#L226)
 
 ___
 
@@ -171,7 +171,7 @@ Deselect the currently selected item in the graph.
 
 #### Defined in
 
-[index.js:235](https://github.com/playcanvas/pcui-graph/blob/6c082be/src/index.js#L235)
+[index.js:235](https://github.com/playcanvas/pcui-graph/blob/6d30f18/src/index.js#L235)
 
 ___
 
@@ -194,7 +194,7 @@ Add an edge to the graph.
 
 #### Defined in
 
-[index.js:253](https://github.com/playcanvas/pcui-graph/blob/6c082be/src/index.js#L253)
+[index.js:253](https://github.com/playcanvas/pcui-graph/blob/6d30f18/src/index.js#L253)
 
 ___
 
@@ -216,7 +216,7 @@ Add a node to the graph.
 
 #### Defined in
 
-[index.js:385](https://github.com/playcanvas/pcui-graph/blob/6c082be/src/index.js#L385)
+[index.js:385](https://github.com/playcanvas/pcui-graph/blob/6d30f18/src/index.js#L385)
 
 ___
 
@@ -239,7 +239,7 @@ Update the position of a node.
 
 #### Defined in
 
-[index.js:424](https://github.com/playcanvas/pcui-graph/blob/6c082be/src/index.js#L424)
+[index.js:424](https://github.com/playcanvas/pcui-graph/blob/6d30f18/src/index.js#L424)
 
 ___
 
@@ -263,7 +263,7 @@ Update the value of an attribute of a node.
 
 #### Defined in
 
-[index.js:438](https://github.com/playcanvas/pcui-graph/blob/6c082be/src/index.js#L438)
+[index.js:438](https://github.com/playcanvas/pcui-graph/blob/6d30f18/src/index.js#L438)
 
 ___
 
@@ -287,7 +287,7 @@ Set the error state of a node attribute.
 
 #### Defined in
 
-[index.js:451](https://github.com/playcanvas/pcui-graph/blob/6c082be/src/index.js#L451)
+[index.js:451](https://github.com/playcanvas/pcui-graph/blob/6d30f18/src/index.js#L451)
 
 ___
 
@@ -310,7 +310,7 @@ Update the type of a node.
 
 #### Defined in
 
-[index.js:462](https://github.com/playcanvas/pcui-graph/blob/6c082be/src/index.js#L462)
+[index.js:462](https://github.com/playcanvas/pcui-graph/blob/6d30f18/src/index.js#L462)
 
 ___
 
@@ -332,7 +332,7 @@ Delete a node from the graph.
 
 #### Defined in
 
-[index.js:491](https://github.com/playcanvas/pcui-graph/blob/6c082be/src/index.js#L491)
+[index.js:491](https://github.com/playcanvas/pcui-graph/blob/6d30f18/src/index.js#L491)
 
 ___
 
@@ -354,7 +354,7 @@ Delete an edge from the graph.
 
 #### Defined in
 
-[index.js:506](https://github.com/playcanvas/pcui-graph/blob/6c082be/src/index.js#L506)
+[index.js:506](https://github.com/playcanvas/pcui-graph/blob/6d30f18/src/index.js#L506)
 
 ___
 
@@ -377,7 +377,7 @@ Set the center of the viewport to the given position.
 
 #### Defined in
 
-[index.js:537](https://github.com/playcanvas/pcui-graph/blob/6c082be/src/index.js#L537)
+[index.js:537](https://github.com/playcanvas/pcui-graph/blob/6d30f18/src/index.js#L537)
 
 ___
 
@@ -396,7 +396,7 @@ containing x and y.
 
 #### Defined in
 
-[index.js:547](https://github.com/playcanvas/pcui-graph/blob/6c082be/src/index.js#L547)
+[index.js:547](https://github.com/playcanvas/pcui-graph/blob/6d30f18/src/index.js#L547)
 
 ___
 
@@ -418,7 +418,7 @@ Set the scale of the graph.
 
 #### Defined in
 
-[index.js:556](https://github.com/playcanvas/pcui-graph/blob/6c082be/src/index.js#L556)
+[index.js:556](https://github.com/playcanvas/pcui-graph/blob/6d30f18/src/index.js#L556)
 
 ___
 
@@ -436,7 +436,7 @@ The current scale of the graph.
 
 #### Defined in
 
-[index.js:568](https://github.com/playcanvas/pcui-graph/blob/6c082be/src/index.js#L568)
+[index.js:568](https://github.com/playcanvas/pcui-graph/blob/6d30f18/src/index.js#L568)
 
 ___
 
@@ -461,7 +461,7 @@ containing x and y.
 
 #### Defined in
 
-[index.js:579](https://github.com/playcanvas/pcui-graph/blob/6c082be/src/index.js#L579)
+[index.js:579](https://github.com/playcanvas/pcui-graph/blob/6d30f18/src/index.js#L579)
 
 ___
 
@@ -488,4 +488,4 @@ Element.on
 
 #### Defined in
 
-[index.js:589](https://github.com/playcanvas/pcui-graph/blob/6c082be/src/index.js#L589)
+[index.js:589](https://github.com/playcanvas/pcui-graph/blob/6d30f18/src/index.js#L589)
