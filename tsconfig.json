@@ -22,6 +22,11 @@
         "excludeNotDocumented": true,
         "name": "Home",
         "out": "typedocs",
+        "plugin": [
+            "typedoc-plugin-markdown",
+            "typedoc-plugin-mdn-links",
+            "typedoc-plugin-rename-defaults"
+        ],
         "readme": "none",
         "sort": "source-order"
     },
