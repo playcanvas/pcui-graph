@@ -98,7 +98,7 @@
     "jointjs": "^3.6.5",
     "jquery": "^3.6.4",
     "lodash": "^4.17.21",
-    "node-sass": "^8.0.0",
+    "node-sass": "^9.0.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-app-rewire-alias": "^1.1.7",
