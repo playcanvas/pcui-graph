@@ -111,7 +111,7 @@
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-postcss": "^4.0.2",
-    "sass-loader": "^13.2.1",
+    "sass-loader": "^14.0.0",
     "scss-bundle": "^3.1.2",
     "shx": "^0.3.4",
     "stylelint": "^16.1.0",
