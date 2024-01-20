@@ -65,7 +65,7 @@ npm install
 npm run storybook
 ```
 
-This will automatically open the storybook locally at `http://localhost:9009`.
+This will automatically open the storybook locally at `http://localhost:9010`.
 
 # Documentation
 

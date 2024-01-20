@@ -1,5 +1,4 @@
 import React from 'react';
-import { GRAPH_ACTIONS } from '../../../src/constants';
 import Component from '../../base-component';
 
 var name = 'Styled Graph';

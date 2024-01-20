@@ -37,7 +37,7 @@
     "bundle:styles": "scss-bundle -e ./src/styles/style.scss -o ./dist/pcui-graph.scss",
     "lint": "eslint --ext .js src",
     "lint:styles": "stylelint src/styles/style.scss",
-    "storybook": "start-storybook -p 9010 -s public",
+    "storybook": "start-storybook -p 9010",
     "watch": "rollup -c --environment target:all --watch",
     "watch:umd": "rollup -c --environment target:umd --watch",
     "watch:module": "rollup -c --environment target:module --watch"
