@@ -1,16 +1,11 @@
 import React from 'react';
-import Component from '../../base-component';
-
-var name = 'Styled Graph';
-var config = {
-    title: `Basic/${name}`
-};
+import Graph from '../../base-component';
 
 export default {
-    title: config.title,
-    component: Component,
-    parameters: {
-        docs: {}
+    title: 'Basic/Styled Graph',
+    component: Graph,
+    argTypes: {
+        // Define the args that you want to be editable in the Storybook UI
     }
 };
 
@@ -119,23 +114,29 @@ var GRAPH_DATA = {
     }
 };
 
-export const StyledGraphExample = (args) => { 
-    return <Component schema={GRAPH_SCHEMA} options={{
-        initialData: GRAPH_DATA,
-        passiveUIEvents: false,
-        includeFonts: true,
-        defaultStyles: {
-            background: {
-                color: 'white',
-                gridSize: 1
-            },
-            edge: {
-                connectionStyle: 'default',
-                targetMarker: false
-            }
+// Template function
+const Template = (args) => <Graph schema={GRAPH_SCHEMA} options={{...args}} />;
+
+// Default story using the template
+export const StyledGraphExample = Template.bind({});
+
+// Default args for the story
+StyledGraphExample.args = {
+    initialData: GRAPH_DATA,
+    passiveUIEvents: false,
+    includeFonts: true,
+    defaultStyles: {
+        background: {
+            color: 'white',
+            gridSize: 1
+        },
+        edge: {
+            connectionStyle: 'default',
+            targetMarker: false
         }
-    }} />;
+    }
 };
 
-document.querySelector('#root').setAttribute('style', 'position: fixed; width: 100%; height: 100%');
+
+document.getElementById('storybook-root').setAttribute('style', 'position: fixed; width: 100%; height: 100%');
 document.body.setAttribute('style', 'margin: 0px; padding: 0px;');

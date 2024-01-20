@@ -1,17 +1,12 @@
 import React from 'react';
 import { GRAPH_ACTIONS } from '../../../src/constants';
-import Component from '../../base-component';
-
-var name = 'Directed Graph';
-var config = {
-    title: `Advanced/${name}`
-};
+import Graph from '../../base-component';
 
 export default {
-    title: config.title,
-    component: Component,
-    parameters: {
-        docs: {}
+    title: 'Advanced/Directed Graph',
+    component: Graph,
+    argTypes: {
+        // Define the args that you want to be editable in the Storybook UI
     }
 };
 
@@ -127,27 +122,32 @@ const GRAPH_CONTEXT_MENU_ITEMS_ITEMS = [
     }
 ];
 
-export const DirectedGraphExample = (args) => { 
-    return <Component schema={GRAPH_SCHEMA} options={{
-        initialData: GRAPH_DATA,
-        contextMenuItems: GRAPH_CONTEXT_MENU_ITEMS_ITEMS,
-        passiveUIEvents: false,
-        includeFonts: true,
-        incrementNodeNames: true,
-        adjustVertices: true,
-        defaultStyles: {
-            background: {
-                color: '#20292B',
-                gridSize: 10
-            },
-            edge: {
-                connectionStyle: 'default'
-            }
+// Template function
+const Template = (args) => <Graph schema={GRAPH_SCHEMA} options={{...args}} />;
+
+// Default story using the template
+export const DirectedGraphExample = Template.bind({});
+
+// Default args for the story
+DirectedGraphExample.args = {
+    initialData: GRAPH_DATA,
+    contextMenuItems: GRAPH_CONTEXT_MENU_ITEMS_ITEMS,
+    passiveUIEvents: false,
+    includeFonts: true,
+    incrementNodeNames: true,
+    adjustVertices: true,
+    defaultStyles: {
+        background: {
+            color: '#20292B',
+            gridSize: 10
+        },
+        edge: {
+            connectionStyle: 'default'
         }
-    }} />;
+    }
 };
 
-document.querySelector('#root').setAttribute('style', 'position: fixed; width: 100%; height: 100%');
+document.getElementById('storybook-root').setAttribute('style', 'position: fixed; width: 100%; height: 100%');
 document.body.setAttribute('style', 'margin: 0px; padding: 0px;');
 
 setTimeout(() => {

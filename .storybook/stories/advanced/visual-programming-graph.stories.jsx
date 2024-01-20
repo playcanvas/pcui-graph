@@ -1,17 +1,12 @@
 import React from 'react';
 import { GRAPH_ACTIONS } from '../../../src/constants';
-import Component from '../../base-component';
-
-var name = 'Visual Programming Graph';
-var config = {
-    title: `Advanced/${name}`
-};
+import Graph from '../../base-component';
 
 export default {
-    title: config.title,
-    component: Component,
-    parameters: {
-        docs: {}
+    title: 'Advanced/Visual Programming Graph',
+    component: Graph,
+    argTypes: {
+        // Define the args that you want to be editable in the Storybook UI
     }
 };
 
@@ -381,23 +376,28 @@ var GRAPH_CONTEXT_MENU_ITEMS = [
     },
 ];
 
+// Template function
+const Template = (args) => <Graph schema={GRAPH_SCHEMA} options={{...args}} />;
 
-export const VisualProgrammingGraphExample = (args) => { 
-    return <Component schema={GRAPH_SCHEMA} options={{
-        initialData: GRAPH_DATA,
-        contextMenuItems: GRAPH_CONTEXT_MENU_ITEMS,
-        passiveUIEvents: false,
-        includeFonts: true,
-        defaultStyles: {
-            edge: {
-                connectionStyle: 'smoothInOut'
-            },
-            background: {
-                color: '#20292B',
-                gridSize: 10
-            }
+// Default story using the template
+export const VisualProgrammingGraphExample = Template.bind({});
+
+// Default args for the story
+VisualProgrammingGraphExample.args = {
+    initialData: GRAPH_DATA,
+    contextMenuItems: GRAPH_CONTEXT_MENU_ITEMS,
+    passiveUIEvents: false,
+    includeFonts: true,
+    defaultStyles: {
+        edge: {
+            connectionStyle: 'smoothInOut'
+        },
+        background: {
+            color: '#20292B',
+            gridSize: 10
         }
-    }} />;
+    }
 };
-document.querySelector('#root').setAttribute('style', 'position: fixed; width: 100%; height: 100%');
+
+document.getElementById('storybook-root').setAttribute('style', 'position: fixed; width: 100%; height: 100%');
 document.body.setAttribute('style', 'margin: 0px; padding: 0px;');
