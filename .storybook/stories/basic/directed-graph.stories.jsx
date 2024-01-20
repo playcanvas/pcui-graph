@@ -1,26 +1,21 @@
 import React from 'react';
-import Component from '../../base-component';
-
-var name = 'Directed Graph';
-var config = {
-    title: `Basic/${name}`
-};
+import Graph from '../../base-component';
 
 export default {
-    title: config.title,
-    component: Component,
-    parameters: {
-        docs: {}
+    title: 'Basic/Directed Graph',
+    component: Graph,
+    argTypes: {
+        // Define the args that you want to be editable in the Storybook UI
     }
 };
 
 const GRAPH_ENUM = {
     NODE: {
         HELLO: 0,
-        WORLD: 0,
+        WORLD: 0
     },
     EDGE: {
-        HELLO_TO_WORLD: 0,
+        HELLO_TO_WORLD: 0
     }
 };
 
@@ -36,10 +31,10 @@ const GRAPH_SCHEMA = {
     edges: {
         [GRAPH_ENUM.EDGE.HELLO_TO_WORLD]: {
             from: [
-                GRAPH_ENUM.NODE.HELLO,
+                GRAPH_ENUM.NODE.HELLO
             ],
             to: [
-                GRAPH_ENUM.NODE.WORLD,
+                GRAPH_ENUM.NODE.WORLD
             ]
         }
     }
@@ -71,23 +66,28 @@ var GRAPH_DATA = {
     }
 };
 
-export const DirectedGraphExample = (args) => { 
-    return <Component schema={GRAPH_SCHEMA} options={{
-        initialData: GRAPH_DATA,
-        passiveUIEvents: false,
-        includeFonts: true,
-        defaultStyles: {
-            background: {
-                color: '#20292B',
-                gridSize: 10
-            },
-            edge: {
-                connectionStyle: 'default',
-                targetMarker: true
-            }
+// Template function
+const Template = (args) => <Graph schema={GRAPH_SCHEMA} options={{...args}} />;
+
+// Default story using the template
+export const DirectedGraphExample = Template.bind({});
+
+// Default args for the story
+DirectedGraphExample.args = {
+    initialData: GRAPH_DATA,
+    passiveUIEvents: false,
+    includeFonts: true,
+    defaultStyles: {
+        background: {
+            color: '#20292B',
+            gridSize: 10
+        },
+        edge: {
+            connectionStyle: 'default',
+            targetMarker: true
         }
-    }} />;
+    }
 };
 
-document.querySelector('#root').setAttribute('style', 'position: fixed; width: 100%; height: 100%');
+document.getElementById('storybook-root').setAttribute('style', 'position: fixed; width: 100%; height: 100%');
 document.body.setAttribute('style', 'margin: 0px; padding: 0px;');

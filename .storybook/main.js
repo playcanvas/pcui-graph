@@ -1,11 +1,14 @@
 module.exports = {
-  stories: ['./stories/**'],
+  stories: ['./**/*.stories.@(js|jsx|ts|tsx|mdx)'],
+
   addons: [
-    '@storybook/addon-actions/register',
+    '@storybook/addon-actions',
     '@storybook/addon-links',
     '@storybook/addon-docs',
-    '@storybook/addon-backgrounds/register'
+    '@storybook/addon-backgrounds/register',
+    '@storybook/preset-create-react-app'
   ],
+
   webpackFinal: async (config, { configType }) => {
     // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
     // You can change the configuration based on that.
@@ -15,32 +18,17 @@ module.exports = {
         if (!rule.test) return true;
         return !rule.test.test(".scss");
     });
-    config.module.rules.unshift(
-      {
-          test: /\.s[ac]ss$/i,
-          use: ['style-loader', 'css-loader', {
-              loader: 'sass-loader'
-          }],
-      }
-    );
-
-    config.module.rules.unshift(
-      {
-        test: /\.mjs$/,
-        include: /node_modules/,
-        type: "javascript/auto",
-      }
-    );
-
-    config.module.rules[5].include = [
-      /node_modules\/acorn-jsx/,
-      /node_modules\/playcanvas/
-    ];
 
     // Return the altered config
     return config;
   },
-  core: {
-    builder: "webpack5"
+
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {}
+  },
+
+  docs: {
+    autodocs: true
   }
 };
