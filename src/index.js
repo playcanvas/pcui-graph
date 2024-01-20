@@ -1,3 +1,20 @@
+/**
+ * The PCUIGraph module is an extension of the PlayCanvas User Interface (PCUI) framework. It
+ * provides a new PCUI Element type for building interactive, node-based graphs.
+ *
+ * Key features include:
+ *
+ * - Scalable and customizable node-based graphs for visualizing complex data.
+ * - Interactive elements such as draggable nodes, clickable edges, and zoomable views.
+ * - Easy integration within a PCUI-based user interface.
+ *
+ * Whether it's for displaying network topologies, process flows, or complex relational data,
+ * PCUIGraph provides a robust and flexible solution for integrating graph visualizations into your
+ * web projects.
+ *
+ * @module PCUIGraph
+ */
+
 import { deepCopyFunction } from './util.js';
 import GraphView from './graph-view.js';
 import { GRAPH_ACTIONS, DEFAULT_CONFIG } from './constants.js';
