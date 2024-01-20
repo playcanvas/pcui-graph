@@ -1,6 +1,6 @@
 # PCUI Graph
 
-![PCUI Graph](https://blog.playcanvas.com/wp-content/uploads/2021/09/image.png)
+![PCUI Graph](https://blog.playcanvas.com/assets/media/pcui-graph-editors.png)
 
 Create node based visual graphs in the browser. Supports undirected / directed graphs as well as visual scripting graphs containing nodes with input / output ports. Your graphs can be saved to a JSON file and loaded back into a new graph view at any time.
 
@@ -43,7 +43,7 @@ const graph = new Graph(schema);
 document.body.appendChild(graph.dom);
 ```
 
-The library is also available on [npm](https://www.npmjs.com/package/pcui-graph) and can be installed in your project with:
+The library is also available on [npm](https://www.npmjs.com/package/@playcanvas/pcui-graph) and can be installed in your project with:
 
 ```
 npm install --save @playcanvas/pcui-graph @playcanvas/pcui @playcanvas/observer
@@ -52,7 +52,7 @@ npm install --save @playcanvas/pcui-graph @playcanvas/pcui @playcanvas/observer
 The npm package includes two builds of the library:
 
 ```
-@playcanvas/pcui-graph/dist/pcui-graph.js // UMD build (requires that the pcui and observer libraries are present in the global namespace)
+@playcanvas/pcui-graph/dist/pcui-graph.js  // UMD build (requires that the pcui and observer libraries are present in the global namespace)
 @playcanvas/pcui-graph/dist/pcui-graph.mjs // module build (requires a build tool like rollup / webpack)
 ```
 
