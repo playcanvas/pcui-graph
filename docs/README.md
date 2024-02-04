@@ -28,4 +28,4 @@ Open your browser and visit: http://localhost:3000/
 
 ### Publishing Docs
 
-The PCUI=Graph docs site is automatically redeployed one every commit to the `main` branch.
+The PCUI-Graph docs site is automatically redeployed one every commit to the `main` branch.
