@@ -8,9 +8,7 @@ Create node based visual graphs in the browser. Supports undirected / directed g
 
 First install PCUI Graph into your npm project:
 
-```
-npm install @playcanvas/pcui-graph
-```
+    npm install @playcanvas/pcui-graph --save-dev
 
 You can then use the library in your own project by importing the PCUI Graph build and its styling file into your project. The graph can then be instantiated as follows:
 
@@ -45,38 +43,22 @@ document.body.appendChild(graph.dom);
 
 The library is also available on [npm](https://www.npmjs.com/package/@playcanvas/pcui-graph) and can be installed in your project with:
 
-```
-npm install --save @playcanvas/pcui-graph @playcanvas/pcui @playcanvas/observer
-```
+    npm install --save @playcanvas/pcui-graph @playcanvas/pcui @playcanvas/observer
 
 The npm package includes two builds of the library:
 
-```
-@playcanvas/pcui-graph/dist/pcui-graph.js  // UMD build (requires that the pcui and observer libraries are present in the global namespace)
-@playcanvas/pcui-graph/dist/pcui-graph.mjs // module build (requires a build tool like rollup / webpack)
-```
+    @playcanvas/pcui-graph/dist/pcui-graph.js  // UMD build (requires that the pcui and observer libraries are present in the global namespace)
+    @playcanvas/pcui-graph/dist/pcui-graph.mjs // module build (requires a build tool like rollup / webpack)
 
 ## Storybook
 
 Examples of graphs created using PCUI Graph are available in this library's [storybook](https://playcanvas.github.io/pcui-graph/storybook/). Alternatively you can run the storybook locally and use it as a development environment for your own graphs. To do so, run the following commands in this projects root directory:
 
-```
-npm install
-npm run storybook
-```
+    npm install
+    npm run storybook
 
 This will automatically open the storybook in a new browser tab.
 
 # Documentation
 
-- [Config Options](./docs/config-options.md)
-
-- [Schema](./docs/schema.md)
-
-- [Context Menus](./docs/context-menus.md)
-
-- [Styling](./docs/styling.md)
-
-- [Events](./docs/events.md)
-
-- [API](./docs/api.md)
+Information on building the documentation can be found in the [docs](./docs/README.md) directory.
