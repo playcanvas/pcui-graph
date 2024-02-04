@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Styling
+permalink: /styling/
 ---
 
 You can style your graph by overriding it's default style properties. This can be achieved by modifying the defaultStyles passed in as part of an options object to the graph constructor.

@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Config Options
+permalink: /config-options/
 ---
 
 Options can be passed to the graph constructor as a JSON object which change the default behavior of the graph. You can do so as follows:

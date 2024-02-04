@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Context Menus
+permalink: /context-menus/
 ---
 
 It is possible to create context menus on your graph which display when right clicking various graph items. There are three types of context menus; background, node and edge. You can define a set of actions which will display in each of these menus and each action item in the menu will fire an action event when selected.
