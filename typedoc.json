@@ -1,0 +1,17 @@
+{
+    "entryPoints": ["./src/index.js"],
+    "githubPages": false,
+    "name": "PCUI-Graph API",
+    "navigationLinks": {
+        "Developer Site": "https://developer.playcanvas.com/",
+        "Discord": "https://discord.gg/RSaMRzg",
+        "Forum": "https://forum.playcanvas.com/",
+        "GitHub": "https://github.com/playcanvas/pcui-graph"
+    },
+    "out": "typedocs",
+    "plugin": [
+        "typedoc-plugin-mdn-links",
+        "typedoc-plugin-rename-defaults"
+    ],
+    "readme": "none"
+}

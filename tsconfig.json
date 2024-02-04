@@ -13,23 +13,6 @@
         "sourceMap": true,
         "moduleResolution": "node"
     },
-    "typedocOptions": {
-        "entryPoints": ["./src/index.js"],
-        "exclude": "**/node_modules/**",
-        "externalPattern": "**/node_modules/**",
-        "excludeInternal": false,
-        "excludePrivate": true,
-        "excludeNotDocumented": true,
-        "name": "Home",
-        "out": "typedocs",
-        "plugin": [
-            "typedoc-plugin-markdown",
-            "typedoc-plugin-mdn-links",
-            "typedoc-plugin-rename-defaults"
-        ],
-        "readme": "none",
-        "sort": "source-order"
-    },
     "include": ["./src/index.js"],
     "exclude": ["node_modules/**/*", "node_modules"]
 }

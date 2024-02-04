@@ -1,6 +1,7 @@
-[Home](../README.md#Documentation) / Schema
-
-# Schema
+---
+layout: page
+title: Schema
+---
 
 The schema object is used to define what type of graph you will be initializing. More specifically, it defines which node your graph can contain and how those nodes can be connected together with edges.
 

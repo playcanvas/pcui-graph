@@ -1,8 +1,9 @@
-[Home](../README.md#Documentation) / Events
+---
+layout: page
+title: Events
+---
 
-# Events
-
-After creating a graph, you can register a callback for various events. This is achieved using the graphs [on function](./Graph.md#on). The following events are supported:
+After creating a graph, you can register a callback for various events. This is achieved using the graphs [on function](https://api.playcanvas.com/classes/PCUIGraph.Graph.html#on). The following events are supported:
 
 ```javascript
 import Graph from '@playcanvas/pcui-graph';
