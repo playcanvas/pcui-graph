@@ -1,6 +1,7 @@
-[Home](../README.md#Documentation) / Config Options
-
-# Config Options
+---
+layout: page
+title: Config Options
+---
 
 Options can be passed to the graph constructor as a JSON object which change the default behavior of the graph. You can do so as follows:
 
@@ -11,4 +12,4 @@ const graph = new Graph(schema, {
 });
 ```
 
-You can see a full list of options [here](./Graph.md#constructor).
+You can see a full list of options [here](https://api.playcanvas.com/classes/PCUIGraph.Graph.html#constructor).
