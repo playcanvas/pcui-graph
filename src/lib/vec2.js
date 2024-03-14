@@ -2,6 +2,8 @@
 
 /**
  * A 2-dimensional vector.
+ * 
+ * @hidden
  */
 class Vec2 {
     /**
