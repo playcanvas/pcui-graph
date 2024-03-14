@@ -3,7 +3,7 @@
 /**
  * A 2-dimensional vector.
  * 
- * @hidden
+ * @ignore
  */
 class Vec2 {
     /**
