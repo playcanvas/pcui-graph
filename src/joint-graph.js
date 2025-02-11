@@ -1,20 +1,21 @@
 import 'jquery';
+import * as joint from 'jointjs/dist/joint.min.js';
 import _ from 'lodash';
 import 'backbone';
-import * as joint from 'jointjs/dist/joint.min'; // eslint-disable-line import/extensions
+
 // TODO replace with a lighter math library
 import { Vec2 } from './lib/vec2.js';
 
 joint.V.matrixToTransformString = function (matrix) {
     matrix || (matrix = true); // eslint-disable-line no-unused-expressions
-    return 'matrix(' + [
+    return `matrix(${[
         matrix.a || 1,
         matrix.b || 0,
         matrix.c || 0,
         matrix.d || 1,
         matrix.e || 0,
         matrix.f || 0
-    ] + ')';
+    ]})`;
 };
 
 joint.V.prototype.transform = function (matrix, opt) {
@@ -179,17 +180,17 @@ class JointGraph {
         if (cell instanceof joint.dia.Element) {
             // `cell` is an element
             _.chain(graph.getConnectedLinks(cell))
-                .groupBy((link) => {
-                    // the key of the group is the model id of the link's source or target
-                    // cell id is omitted
-                    return _.omit([link.source().id, link.target().id], cell.id)[0];
-                })
-                .each((group, key) => {
-                    // if the member of the group has both source and target model
-                    // then adjust vertices
-                    if (key !== 'undefined') this.adjustVertices(graph, _.first(group));
-                })
-                .value();
+            .groupBy((link) => {
+                // the key of the group is the model id of the link's source or target
+                // cell id is omitted
+                return _.omit([link.source().id, link.target().id], cell.id)[0];
+            })
+            .each((group, key) => {
+                // if the member of the group has both source and target model
+                // then adjust vertices
+                if (key !== 'undefined') this.adjustVertices(graph, _.first(group));
+            })
+            .value();
             return;
         }
         // `cell` is a link

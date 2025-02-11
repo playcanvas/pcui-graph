@@ -1,7 +1,7 @@
 export const deepCopyFunction = (inObject) => {
     let value, key;
 
-    if (typeof inObject !== "object" || inObject === null) {
+    if (typeof inObject !== 'object' || inObject === null) {
         return inObject; // Return the value if inObject is not an object
     }
 

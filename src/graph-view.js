@@ -1,12 +1,14 @@
-import JointGraph from './joint-graph.js';
-import GraphViewNode from './graph-view-node.js';
-import GraphViewEdge from './graph-view-edge.js';
-import * as joint from 'jointjs/dist/joint.min'; // eslint-disable-line import/extensions
-import { jointShapeElement, jointShapeElementView } from './joint-shape-node.js';
+import { Menu } from '@playcanvas/pcui';
+import * as joint from 'jointjs/dist/joint.min.js';
+
 import { GRAPH_ACTIONS } from './constants.js';
+import GraphViewEdge from './graph-view-edge.js';
+import GraphViewNode from './graph-view-node.js';
+import JointGraph from './joint-graph.js';
+import { jointShapeElement, jointShapeElementView } from './joint-shape-node.js';
 // TODO replace with a lighter math library
 import { Vec2 } from './lib/vec2.js';
-import { Menu } from '@playcanvas/pcui';
+
 
 class GraphView extends JointGraph {
     constructor(parent, dom, graphSchema, graphData, config) {

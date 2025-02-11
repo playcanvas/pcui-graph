@@ -23,11 +23,11 @@ class Vec2 {
              * @type {number}
              */
             this.x = x[0];
-             /**
-              * The second component of the vector.
-              *
-              * @type {number}
-              */
+            /**
+             * The second component of the vector.
+             *
+             * @type {number}
+             */
             this.y = x[1];
         } else {
             this.x = x;
