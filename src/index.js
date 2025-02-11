@@ -123,7 +123,7 @@ class Graph extends Element {
         this.view = new GraphView(this, this.dom, this._graphSchema, this._graphData, this._config);
 
         this.view.batchCells();
-        const nodes = this._graphData.get(`data.nodes`);
+        const nodes = this._graphData.get('data.nodes');
         if (nodes) {
             Object.keys(nodes).forEach((nodeKey) => {
                 const node = nodes[nodeKey];
@@ -143,7 +143,7 @@ class Graph extends Element {
                 this.createNode(this._graphData.get(`data.nodes.${nodeKey}`), undefined, true);
             });
         }
-        const edges = this._graphData.get(`data.edges`);
+        const edges = this._graphData.get('data.edges');
         if (edges) {
             Object.keys(edges).forEach((edgeKey) => {
                 this.createEdge(edges[edgeKey], edgeKey, true);
@@ -420,7 +420,7 @@ class Graph extends Element {
             nodeSchema.attributes.forEach((attribute) => {
                 this.view.addNodeEvent(
                     node.id,
-                    `updateAttribute`,
+                    'updateAttribute',
                     this._onNodeAttributeUpdated.bind(this),
                     attribute
                 );
@@ -532,7 +532,7 @@ class Graph extends Element {
         }
         this.view.removeEdge(`${from}-${to}`);
         this._graphData.unset(`data.edges.${edgeId}`);
-        const edges = this._graphData.get(`data.edges`);
+        const edges = this._graphData.get('data.edges');
         Object.keys(edges).forEach((edgeKey) => {
             const edge = edges[edgeKey];
             const edgeSchema = this._graphSchema.edges[edge.edgeType];

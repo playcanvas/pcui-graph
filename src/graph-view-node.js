@@ -1,4 +1,4 @@
-import * as joint from 'jointjs/dist/joint.min'; // eslint-disable-line import/extensions
+import * as joint from 'jointjs/dist/joint.min';
 import { Menu, Container, Label, TextInput, BooleanInput, NumericInput, VectorInput } from '@playcanvas/pcui';
 
 const Colors = {

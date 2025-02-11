@@ -1,4 +1,4 @@
-import * as joint from 'jointjs/dist/joint.min'; // eslint-disable-line import/extensions
+import * as joint from 'jointjs/dist/joint.min';
 import { Menu } from '@playcanvas/pcui';
 
 joint.connectors.smoothInOut = function (sourcePoint, targetPoint, vertices, args) {

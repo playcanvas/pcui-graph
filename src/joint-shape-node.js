@@ -1,7 +1,7 @@
 import 'jquery';
 import 'backbone';
 import _ from 'lodash';
-import * as joint from 'jointjs/dist/joint.min'; // eslint-disable-line import/extensions
+import * as joint from 'jointjs/dist/joint.min';
 
 const jointShapeElement = () => joint.shapes.standard.Rectangle.extend({
     defaults: joint.util.deepSupplement({

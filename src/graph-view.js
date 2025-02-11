@@ -1,7 +1,7 @@
 import JointGraph from './joint-graph.js';
 import GraphViewNode from './graph-view-node.js';
 import GraphViewEdge from './graph-view-edge.js';
-import * as joint from 'jointjs/dist/joint.min'; // eslint-disable-line import/extensions
+import * as joint from 'jointjs/dist/joint.min';
 import { jointShapeElement, jointShapeElementView } from './joint-shape-node.js';
 import { GRAPH_ACTIONS } from './constants.js';
 // TODO replace with a lighter math library
