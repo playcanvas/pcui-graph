@@ -4,6 +4,7 @@
         "allowJs": true,
         "target": "es6",
         "jsx": "react",
+        "types": ["react"],
         "lib": [
             "es2019",
             "dom",
