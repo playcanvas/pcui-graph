@@ -1,4 +1,5 @@
 {
+    "$schema": "https://typedoc.org/schema.json",
     "entryPoints": ["./src/index.js"],
     "githubPages": false,
     "name": "PCUI-Graph API",
