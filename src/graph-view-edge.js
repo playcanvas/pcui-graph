@@ -1,5 +1,5 @@
-import * as joint from 'jointjs/dist/joint.min';
 import { Menu } from '@playcanvas/pcui';
+import * as joint from 'jointjs/dist/joint.min';
 
 joint.connectors.smoothInOut = function (sourcePoint, targetPoint, vertices, args) {
     const p1 = sourcePoint.clone();

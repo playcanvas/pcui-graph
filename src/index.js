@@ -15,12 +15,13 @@
  * @module PCUIGraph
  */
 
-import { deepCopyFunction } from './util.js';
-import GraphView from './graph-view.js';
-import { GRAPH_ACTIONS, DEFAULT_CONFIG } from './constants.js';
-import { Element } from '@playcanvas/pcui';
 import { Observer } from '@playcanvas/observer';
+import { Element } from '@playcanvas/pcui';
+
+import { GRAPH_ACTIONS, DEFAULT_CONFIG } from './constants.js';
+import GraphView from './graph-view.js';
 import SelectedItem from './selected-item.js';
+import { deepCopyFunction } from './util.js';
 
 /**
  * Represents a new Graph.

@@ -1,7 +1,7 @@
 import 'jquery';
 import 'backbone';
-import _ from 'lodash';
 import * as joint from 'jointjs/dist/joint.min';
+import _ from 'lodash';
 
 const jointShapeElement = () => joint.shapes.standard.Rectangle.extend({
     defaults: joint.util.deepSupplement({

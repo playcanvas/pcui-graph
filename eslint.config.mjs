@@ -16,27 +16,8 @@ export default [
             globals: {
                 ...globals.browser,
                 ...globals.mocha,
-                ...globals.node,
-                'Ammo': 'readonly',
-                'earcut': 'readonly',
-                'opentype': 'readonly',
-                'pc': 'readonly',
-                'TWEEN': 'readonly',
-                'twgsl': 'readonly',
-                'webkitAudioContext': 'readonly'
+                ...globals.node
             }
-        },
-        rules: {
-            'import/order': 'off'
         }
-    },
-    {
-        ignores: [
-            'tests/**/*',
-            'examples/lib/*',
-            'scripts/textmesh/*.min.js',
-            'src/polyfill/*',
-            'scripts/spine/*'
-        ]
     }
 ];
