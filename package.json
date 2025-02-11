@@ -23,6 +23,7 @@
   "main": "dist/pcui-graph.js",
   "module": "dist/pcui-graph.mjs",
   "types": "types/index.d.ts",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/playcanvas/pcui-graph/issues"
   },
@@ -39,6 +40,7 @@
     "build:types": "tsc --project ./tsconfig.json --declaration --emitDeclarationOnly --outDir types",
     "bundle:styles": "scss-bundle -e ./src/styles/style.scss -o ./dist/pcui-graph.scss",
     "lint": "eslint src",
+    "lint:package": "publint",
     "lint:styles": "stylelint src/styles/style.scss",
     "serve:docs": "serve docs/_site",
     "storybook": "storybook dev",
@@ -99,6 +101,7 @@
     "jquery": "3.7.1",
     "lodash": "4.17.21",
     "prop-types": "15.8.1",
+    "publint": "0.3.4",
     "rollup": "4.22.4",
     "rollup-plugin-jscc": "2.0.0",
     "rollup-plugin-node-builtins": "2.1.2",
