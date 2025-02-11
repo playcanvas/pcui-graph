@@ -28,6 +28,12 @@ jobs:
     - name: Build PCUI Graph
       run: npm run build
 
+    - name: Build Types
+      run: npm run build:types
+
+    - name: Run Publint
+      run: npm run lint:package
+
   lint:
     name: Lint
     runs-on: ubuntu-latest
