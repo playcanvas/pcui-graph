@@ -4,7 +4,7 @@
 [![NPM Version](https://img.shields.io/npm/v/@playcanvas/pcui-graph.svg?style=flat?style=flat)](https://www.npmjs.com/package/@playcanvas/pcui-graph)
 [![NPM Downloads](https://img.shields.io/npm/dw/@playcanvas/pcui-graph)](https://npmtrends.com/@playcanvas/pcui=gra[j)
 
-![PCUI Graph](./docs/assets/pcui-graph-banner.png)
+![pcui-graph-banner](https://github.com/user-attachments/assets/e0aa8953-221b-4122-b8ce-247c389ae6d6)
 
 Create node based visual graphs in the browser. Supports undirected / directed graphs as well as visual scripting graphs containing nodes with input / output ports. Your graphs can be saved to a JSON file and loaded back into a new graph view at any time.
 
