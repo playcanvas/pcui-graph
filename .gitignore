@@ -9,11 +9,9 @@
 /coverage
 
 # production
-/build
 /dist
+/docs
 /styles/dist
-/typedocs
-/.storybook/utils/jsdoc-ast.json
 /types
 
 # misc
