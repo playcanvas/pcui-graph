@@ -69,7 +69,7 @@
     "@babel/preset-react": "7.26.3",
     "@playcanvas/eslint-config": "2.0.9",
     "@playcanvas/observer": "1.6.6",
-    "@playcanvas/pcui": "5.1.0",
+    "@playcanvas/pcui": "5.2.0",
     "@rollup/plugin-alias": "5.1.1",
     "@rollup/plugin-babel": "6.0.4",
     "@rollup/plugin-commonjs": "28.0.2",
