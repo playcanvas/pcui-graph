@@ -76,7 +76,6 @@
     "@rollup/plugin-node-resolve": "16.0.0",
     "@rollup/plugin-terser": "0.4.4",
     "@storybook/addon-essentials": "8.5.8",
-    "@storybook/addon-links": "8.5.8",
     "@storybook/preset-create-react-app": "8.5.8",
     "@storybook/react-webpack5": "8.5.8",
     "@storybook/test": "8.5.8",

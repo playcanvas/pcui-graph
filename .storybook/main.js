@@ -3,7 +3,6 @@ const config = {
 
     addons: [
         '@storybook/addon-essentials',
-        '@storybook/addon-links',
         '@storybook/preset-create-react-app'
     ],
 
