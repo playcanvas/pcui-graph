@@ -2,10 +2,8 @@ const config = {
     stories: ['./**/*.stories.@(js|jsx|ts|tsx|mdx)'],
 
     addons: [
-        '@storybook/addon-actions',
+        '@storybook/addon-essentials',
         '@storybook/addon-links',
-        '@storybook/addon-docs',
-        '@storybook/addon-backgrounds/register',
         '@storybook/preset-create-react-app'
     ],
 
