@@ -1,17 +1,37 @@
 {
     "$schema": "https://typedoc.org/schema.json",
-    "entryPoints": ["./src/index.js"],
-    "githubPages": false,
-    "name": "PCUI Graph API",
+    "entryPoints": [
+        "./src/index.js"
+    ],
+    "exclude": [
+        "**/node_modules/**"
+    ],
+    "excludeNotDocumented": true,
+    "externalSymbolLinkMappings": {
+        "@playcanvas/pcui": {
+            "Element": "https://api.playcanvas.com/pcui/classes/Element.html"
+        }
+    },
+    "favicon": "utils/typedoc/favicon.ico",
+    "hostedBaseUrl": "https://api.playcanvas.com/pcui-graph/",
+    "includeVersion": true,
+    "name": "PCUI Graph API Reference",
     "navigationLinks": {
         "Developer Site": "https://developer.playcanvas.com/",
+        "Blog": "https://blog.playcanvas.com/",
         "Discord": "https://discord.gg/RSaMRzg",
         "Forum": "https://forum.playcanvas.com/",
         "GitHub": "https://github.com/playcanvas/pcui-graph"
+    },
+    "sidebarLinks": {
+        "Home": "/"
     },
     "plugin": [
         "typedoc-plugin-mdn-links",
         "typedoc-plugin-rename-defaults"
     ],
-    "readme": "none"
+    "readme": "none",
+    "searchGroupBoosts": {
+        "Classes": 2
+    }
 }
