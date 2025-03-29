@@ -4,7 +4,7 @@
 [![NPM Version](https://img.shields.io/npm/v/@playcanvas/pcui-graph.svg?style=flat?style=flat)](https://www.npmjs.com/package/@playcanvas/pcui-graph)
 [![NPM Downloads](https://img.shields.io/npm/dw/@playcanvas/pcui-graph)](https://npmtrends.com/@playcanvas/pcui=gra[j)
 
-| [User Guide](https://developer.playcanvas.com/user-manual/pcui/pcui-graph/) | [API Reference](https://api.playcanvas.com/modules/PCUIGraph.html) | [React Examples](https://playcanvas.github.io/pcui-graph/storybook/) | [Blog](https://blog.playcanvas.com/) | [Forum](https://forum.playcanvas.com/) | [Discord](https://discord.gg/RSaMRzg) |
+| [User Guide](https://developer.playcanvas.com/user-manual/pcui/pcui-graph/) | [API Reference](https://api.playcanvas.com/pcui-graph/) | [React Examples](https://playcanvas.github.io/pcui-graph/storybook/) | [Blog](https://blog.playcanvas.com/) | [Forum](https://forum.playcanvas.com/) | [Discord](https://discord.gg/RSaMRzg) |
 
 ![pcui-graph-banner](https://github.com/user-attachments/assets/e0aa8953-221b-4122-b8ce-247c389ae6d6)
 
