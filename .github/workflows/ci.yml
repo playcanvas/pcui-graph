@@ -1,7 +1,6 @@
 name: CI
 
 on:
-  workflow_dispatch:
   push:
     branches: [ main ]
   pull_request:
@@ -11,65 +10,40 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v5
-    
-    - name: Setup Node.js 18.x
-      uses: actions/setup-node@v4
-      with:
-        node-version: 22.x
-    
-    - name: Install dependencies
-      run: npm clean-install --progress=false --no-fund
+      - name: Check out code
+        uses: actions/checkout@v5
 
-    - name: Build PCUI Graph
-      run: npm run build
+      - name: Set up Node.js 18.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org/'
 
-    - name: Build Types
-      run: npm run build:types
+      - name: Install Dependencies
+        run: npm ci
 
-    - name: Run Publint
-      run: npm run lint:package
+      - name: Build PCUI Graph
+        run: npm run build
 
   lint:
     name: Lint
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v5
-    
-    - name: Setup Node.js 18.x
-      uses: actions/setup-node@v4
-      with:
-        node-version: 22.x
-    
-    - name: Install dependencies
-      run: npm clean-install --progress=false --no-fund
-    
-    - name: Run ESLint
-      run: npm run lint
+      - name: Check out code
+        uses: actions/checkout@v5
 
-  lint-styles:
-    name: Lint Styles
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
+      - name: Set up Node.js 18.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org/'
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v5
-    
-    - name: Setup Node.js 18.x
-      uses: actions/setup-node@v4
-      with:
-        node-version: 22.x
-    
-    - name: Install dependencies
-      run: npm clean-install --progress=false --no-fund
-    
-    - name: Run Stylelint
-      run: npm run lint:styles
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+

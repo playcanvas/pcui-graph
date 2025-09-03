@@ -1,5 +1,5 @@
-import playcanvasConfig from '@playcanvas/eslint-config';
 import babelParser from '@babel/eslint-parser';
+import playcanvasConfig from '@playcanvas/eslint-config';
 import globals from 'globals';
 
 export default [
