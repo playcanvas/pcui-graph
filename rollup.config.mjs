@@ -1,26 +1,11 @@
-import path from 'path';
-
-// 1st party plugins
-import alias from '@rollup/plugin-alias';
 import { babel } from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
-
-// 3rd party plugins
 import jscc from 'rollup-plugin-jscc';
 import builtins from 'rollup-plugin-node-builtins';
 import globals from 'rollup-plugin-node-globals';
 import postcss from 'rollup-plugin-postcss';
-
-const PCUI_DIR = process.env.PCUI_PATH || 'node_modules/@playcanvas/pcui';
-
-const PCUI_PATH = path.resolve(PCUI_DIR, 'react');
-
-// define supported module overrides
-const aliasEntries = {
-    'pcui': PCUI_PATH
-};
 
 const umd = {
     input: 'src/index.js',
@@ -42,7 +27,6 @@ const umd = {
             minimize: false,
             extensions: ['.css', '.scss']
         }),
-        alias({ entries: aliasEntries }),
         commonjs({ transformMixedEsModules: true }),
         globals(),
         builtins(),
@@ -63,7 +47,6 @@ const module = {
         jscc({
             values: { _STRIP_SCSS: process.env.STRIP_SCSS }
         }),
-        alias({ entries: aliasEntries }),
         commonjs({ transformMixedEsModules: true }),
         globals(),
         builtins(),
@@ -97,10 +80,10 @@ const styles = {
 let targets;
 if (process.env.target) {
     switch (process.env.target.toLowerCase()) {
-        case "umd":      targets = [umd]; break;
-        case "module":      targets = [module]; break;
-        case "styles":      targets = [styles]; break;
-        case "all":      targets = [umd, module, styles]; break;
+        case 'umd':      targets = [umd]; break;
+        case 'module':      targets = [module]; break;
+        case 'styles':      targets = [styles]; break;
+        case 'all':      targets = [umd, module, styles]; break;
     }
 }
 
