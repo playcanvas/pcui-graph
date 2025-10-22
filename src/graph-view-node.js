@@ -23,6 +23,9 @@ class GraphViewNode {
         this.nodeData = nodeData;
         this.nodeSchema = nodeSchema;
         this.state = GraphViewNode.STATES.DEFAULT;
+        
+        // Track event listeners for cleanup
+        this._inputEventListeners = [];
 
         const rectHeight = this.getSchemaValue('baseHeight');
         let portHeight = 0;
@@ -374,25 +377,44 @@ class GraphViewNode {
         // Stop event propagation on input elements to prevent JointJS from
         // intercepting pointer events, which would prevent input interaction
         const stopPropagation = e => e.stopPropagation();
+        
+        const addTrackedListener = (element, eventType, handler) => {
+            element.addEventListener(eventType, handler);
+            this._inputEventListeners.push({ element, eventType, handler });
+        };
 
         // Handle the wrapper element
-        input.dom.addEventListener('pointerdown', stopPropagation);
-        input.dom.addEventListener('mousedown', stopPropagation);
+        addTrackedListener(input.dom, 'pointerdown', stopPropagation);
+        addTrackedListener(input.dom, 'mousedown', stopPropagation);
 
         // Handle the actual input element(s)
         if (input.input) {
-            input.input.addEventListener('pointerdown', stopPropagation);
-            input.input.addEventListener('mousedown', stopPropagation);
+            addTrackedListener(input.input, 'pointerdown', stopPropagation);
+            addTrackedListener(input.input, 'mousedown', stopPropagation);
         }
 
         // Handle VectorInput which has multiple sub-inputs
         if (input.inputs) {
             input.inputs.forEach((subInput) => {
                 if (subInput.input) {
-                    subInput.input.addEventListener('pointerdown', stopPropagation);
-                    subInput.input.addEventListener('mousedown', stopPropagation);
+                    addTrackedListener(subInput.input, 'pointerdown', stopPropagation);
+                    addTrackedListener(subInput.input, 'mousedown', stopPropagation);
                 }
             });
+        }
+    }
+
+    destroy() {
+        // Remove all tracked input event listeners to prevent memory leaks
+        this._inputEventListeners.forEach(({ element, eventType, handler }) => {
+            element.removeEventListener(eventType, handler);
+        });
+        this._inputEventListeners = [];
+        
+        // Clean up context menu if it exists
+        if (this._contextMenu) {
+            this._contextMenu.destroy();
+            this._contextMenu = null;
         }
     }
 
@@ -545,3 +567,4 @@ GraphViewNode.STATES = {
 };
 
 export default GraphViewNode;
+
