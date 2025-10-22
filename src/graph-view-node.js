@@ -23,7 +23,7 @@ class GraphViewNode {
         this.nodeData = nodeData;
         this.nodeSchema = nodeSchema;
         this.state = GraphViewNode.STATES.DEFAULT;
-        
+
         // Track event listeners for cleanup
         this._inputEventListeners = [];
 
@@ -377,7 +377,7 @@ class GraphViewNode {
         // Stop event propagation on input elements to prevent JointJS from
         // intercepting pointer events, which would prevent input interaction
         const stopPropagation = e => e.stopPropagation();
-        
+
         const addTrackedListener = (element, eventType, handler) => {
             element.addEventListener(eventType, handler);
             this._inputEventListeners.push({ element, eventType, handler });
@@ -410,7 +410,7 @@ class GraphViewNode {
             element.removeEventListener(eventType, handler);
         });
         this._inputEventListeners = [];
-        
+
         // Clean up context menu if it exists
         if (this._contextMenu) {
             this._contextMenu.destroy();
@@ -567,4 +567,3 @@ GraphViewNode.STATES = {
 };
 
 export default GraphViewNode;
-

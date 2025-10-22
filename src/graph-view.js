@@ -444,13 +444,13 @@ class GraphView extends JointGraph {
 
     destroy() {
         // Clean up all nodes before clearing the graph
-        Object.values(this._nodes).forEach(node => {
+        Object.values(this._nodes).forEach((node) => {
             if (node) {
                 node.destroy();
             }
         });
         this._nodes = {};
-        
+
         this._graph.clear();
         this._paper.remove();
     }
