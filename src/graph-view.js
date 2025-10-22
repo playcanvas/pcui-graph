@@ -222,9 +222,13 @@ class GraphView extends JointGraph {
 
     removeNode(modelId) {
         const node = this.getNode(modelId);
-        this._graph.removeCells(node.model);
-        delete this._nodes[node.nodeData.id];
-        delete this._nodes[modelId];
+        if (node) {
+            // Clean up node resources before removal
+            node.destroy();
+            this._graph.removeCells(node.model);
+            delete this._nodes[node.nodeData.id];
+            delete this._nodes[modelId];
+        }
     }
 
     updateNodeAttribute(id, attribute, value) {
@@ -439,6 +443,14 @@ class GraphView extends JointGraph {
     }
 
     destroy() {
+        // Clean up all nodes before clearing the graph
+        Object.values(this._nodes).forEach((node) => {
+            if (node) {
+                node.destroy();
+            }
+        });
+        this._nodes = {};
+
         this._graph.clear();
         this._paper.remove();
     }
