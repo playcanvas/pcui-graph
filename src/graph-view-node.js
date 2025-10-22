@@ -334,6 +334,10 @@ class GraphViewNode {
                 }
                 input.enabled = !this._graphView._config.readOnly;
                 input.dom.setAttribute('id', `input_${attribute.name}`);
+
+                // Prevent input interactions from triggering node selection
+                this._preventNodeSelectionOnInput(input);
+
                 container.dom.setAttribute('style', `margin-top: ${i === 0 ? 33 + portHeight : 5}px; margin-bottom: 5px;`);
                 container.append(label);
                 container.append(input);
@@ -364,6 +368,32 @@ class GraphViewNode {
         }
 
         this.model = rect;
+    }
+
+    _preventNodeSelectionOnInput(input) {
+        // Stop event propagation on input elements to prevent JointJS from
+        // intercepting pointer events, which would prevent input interaction
+        const stopPropagation = e => e.stopPropagation();
+
+        // Handle the wrapper element
+        input.dom.addEventListener('pointerdown', stopPropagation);
+        input.dom.addEventListener('mousedown', stopPropagation);
+
+        // Handle the actual input element(s)
+        if (input.input) {
+            input.input.addEventListener('pointerdown', stopPropagation);
+            input.input.addEventListener('mousedown', stopPropagation);
+        }
+
+        // Handle VectorInput which has multiple sub-inputs
+        if (input.inputs) {
+            input.inputs.forEach((subInput) => {
+                if (subInput.input) {
+                    subInput.input.addEventListener('pointerdown', stopPropagation);
+                    subInput.input.addEventListener('mousedown', stopPropagation);
+                }
+            });
+        }
     }
 
     getSchemaValue(item) {
