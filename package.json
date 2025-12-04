@@ -73,7 +73,7 @@
     "@playcanvas/eslint-config": "2.0.9",
     "@playcanvas/observer": "1.6.6",
     "@playcanvas/pcui": "5.2.0",
-    "@rollup/plugin-alias": "^5.1.1",
+    "@rollup/plugin-alias": "5.1.1",
     "@rollup/plugin-babel": "6.0.4",
     "@rollup/plugin-commonjs": "28.0.3",
     "@rollup/plugin-node-resolve": "16.0.1",
@@ -81,7 +81,7 @@
     "@storybook/addon-docs": "10.1.4",
     "@storybook/react-webpack5": "10.1.4",
     "@types/react": "19.0.12",
-    "@vitest/mocker": "^4.0.15",
+    "@vitest/mocker": "4.0.15",
     "babel-loader": "10.0.0",
     "backbone": "1.6.0",
     "cross-env": "7.0.3",
@@ -110,7 +110,7 @@
     "typedoc-plugin-mdn-links": "5.0.1",
     "typedoc-plugin-rename-defaults": "0.7.3",
     "typescript": "5.8.2",
-    "vitest": "^4.0.15"
+    "vitest": "4.0.15"
   },
   "peerDependencies": {
     "react": "^18.2.0 || ^19.0.0",
