@@ -1,6 +1,6 @@
 import babelParser from '@babel/eslint-parser';
 import playcanvasConfig from '@playcanvas/eslint-config';
-import storybook from 'eslint-plugin-storybook';
+import storybook from 'eslint-plugin-storybook'; // eslint-disable-line import/no-unresolved
 import globals from 'globals';
 
 export default [...playcanvasConfig, {
