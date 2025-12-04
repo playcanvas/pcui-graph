@@ -1,22 +1,28 @@
 const preview = {
     parameters: {
         backgrounds: {
-            default: 'playcanvas',
-            values: [
-                {
+            options: {
+                playcanvas: {
                     name: 'playcanvas',
                     value: '#374346'
                 },
-                {
+
+                white: {
                     name: 'white',
                     value: '#FFFFFF'
                 }
-            ]
+            }
         },
         controls: { expanded: true }
     },
 
-    tags: ['autodocs']
+    tags: ['autodocs'],
+
+    initialGlobals: {
+        backgrounds: {
+            value: 'playcanvas'
+        }
+    }
 };
 
 export default preview;
