@@ -1,9 +1,7 @@
 const config = {
     stories: ['./**/*.stories.@(js|jsx|ts|tsx|mdx)'],
 
-    addons: [
-        '@storybook/addon-essentials'
-    ],
+    addons: ['@storybook/addon-docs'],
 
     webpackFinal: async (config, { configType }) => {
         config.module.rules = config.module.rules.filter(rule => {
