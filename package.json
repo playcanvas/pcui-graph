@@ -78,6 +78,7 @@
     "@rollup/plugin-commonjs": "28.0.3",
     "@rollup/plugin-node-resolve": "16.0.1",
     "@rollup/plugin-terser": "0.4.4",
+    "@storybook/addon-docs": "9.1.16",
     "@storybook/react-webpack5": "9.1.16",
     "@types/react": "19.0.12",
     "babel-loader": "10.0.0",
@@ -85,6 +86,7 @@
     "cross-env": "7.0.3",
     "css-loader": "7.1.2",
     "eslint": "9.23.0",
+    "eslint-plugin-storybook": "9.1.16",
     "globals": "16.0.0",
     "jointjs": "3.7.7",
     "jquery": "3.7.1",
@@ -106,9 +108,7 @@
     "typedoc": "0.28.1",
     "typedoc-plugin-mdn-links": "5.0.1",
     "typedoc-plugin-rename-defaults": "0.7.3",
-    "typescript": "5.8.2",
-    "eslint-plugin-storybook": "9.1.16",
-    "@storybook/addon-docs": "9.1.16"
+    "typescript": "5.8.2"
   },
   "peerDependencies": {
     "react": "^18.2.0 || ^19.0.0",
