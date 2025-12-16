@@ -1,5 +1,5 @@
-import { Menu, Container, Label, TextInput, BooleanInput, NumericInput, VectorInput } from '@playcanvas/pcui';
 import * as joint from '@joint/core';
+import { Menu, Container, Label, TextInput, BooleanInput, NumericInput, VectorInput } from '@playcanvas/pcui';
 
 const Colors = {
     bcgDarkest: '#20292b',
