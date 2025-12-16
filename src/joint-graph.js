@@ -1,5 +1,5 @@
 import 'jquery';
-import * as joint from 'jointjs/dist/joint.min.js';
+import * as joint from '@joint/core';
 import _ from 'lodash';
 import 'backbone';
 

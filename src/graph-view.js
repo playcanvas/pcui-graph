@@ -1,5 +1,5 @@
 import { Menu } from '@playcanvas/pcui';
-import * as joint from 'jointjs/dist/joint.min.js';
+import * as joint from '@joint/core';
 
 import { GRAPH_ACTIONS } from './constants.js';
 import GraphViewEdge from './graph-view-edge.js';
