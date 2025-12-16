@@ -139,9 +139,18 @@ class GraphViewNode {
                                 }
                             }
                         },
-                        markup: '<circle class="port-body"></circle><circle class="port-inner-body" visibility="hidden"></circle>',
+                        markup: [{
+                            tagName: 'circle',
+                            selector: 'portBody',
+                            className: 'port-body'
+                        }, {
+                            tagName: 'circle',
+                            selector: 'portInnerBody',
+                            className: 'port-inner-body',
+                            attributes: { visibility: 'hidden' }
+                        }],
                         attrs: {
-                            '.port-body': {
+                            portBody: {
                                 strokeWidth: 2,
                                 fill: Colors.bcgDarkest,
                                 magnet: true,
@@ -149,7 +158,7 @@ class GraphViewNode {
                                 cy: 5,
                                 cx: 1
                             },
-                            '.port-inner-body': {
+                            portInnerBody: {
                                 strokeWidth: 2,
                                 stroke: this._config.defaultStyles.edge.stroke,
                                 r: 1,
@@ -171,9 +180,18 @@ class GraphViewNode {
                                 name: 'left', args: { y: 5, x: -5 }
                             }
                         },
-                        markup: '<circle class="port-body"></circle><circle class="port-inner-body" visibility="hidden"></circle>',
+                        markup: [{
+                            tagName: 'circle',
+                            selector: 'portBody',
+                            className: 'port-body'
+                        }, {
+                            tagName: 'circle',
+                            selector: 'portInnerBody',
+                            className: 'port-inner-body',
+                            attributes: { visibility: 'hidden' }
+                        }],
                         attrs: {
-                            '.port-body': {
+                            portBody: {
                                 strokeWidth: 2,
                                 fill: Colors.bcgDarkest,
                                 magnet: true,
@@ -181,7 +199,7 @@ class GraphViewNode {
                                 cy: 5,
                                 cx: 9
                             },
-                            '.port-inner-body': {
+                            portInnerBody: {
                                 strokeWidth: 2,
                                 stroke: this._config.defaultStyles.edge.stroke,
                                 r: 1,
@@ -202,9 +220,19 @@ class GraphViewNode {
                     id: `in${i}`,
                     group: 'in',
                     edgeType: port.edgeType,
-                    markup: `<circle class="port-body" id="${nodeData.id}-in${i}" edgeType="${port.type}"></circle><circle class="port-inner-body" visibility="hidden"></circle>`,
+                    markup: [{
+                        tagName: 'circle',
+                        selector: 'portBody',
+                        className: 'port-body',
+                        attributes: { id: `${nodeData.id}-in${i}`, edgeType: port.type }
+                    }, {
+                        tagName: 'circle',
+                        selector: 'portInnerBody',
+                        className: 'port-inner-body',
+                        attributes: { visibility: 'hidden' }
+                    }],
                     attrs: {
-                        '.port-body': {
+                        portBody: {
                             stroke: this._graphSchema.edges[port.type].stroke || this._config.defaultStyles.edge.stroke
                         },
                         text: {
@@ -248,10 +276,20 @@ class GraphViewNode {
             nodeSchema.outPorts.forEach((port, i) => rect.addPort({
                 id: `out${i}`,
                 group: 'out',
-                markup: `<circle class="port-body" id="${nodeData.id}-out${i}" edgeType="${port.type}"></circle><circle class="port-inner-body" visibility="hidden"></circle>`,
+                markup: [{
+                    tagName: 'circle',
+                    selector: 'portBody',
+                    className: 'port-body',
+                    attributes: { id: `${nodeData.id}-out${i}`, edgeType: port.type }
+                }, {
+                    tagName: 'circle',
+                    selector: 'portInnerBody',
+                    className: 'port-inner-body',
+                    attributes: { visibility: 'hidden' }
+                }],
                 attrs: {
                     type: port.type,
-                    '.port-body': {
+                    portBody: {
                         stroke: this._graphSchema.edges[port.type].stroke || this._config.defaultStyles.edge.stroke
                     },
                     text: {
