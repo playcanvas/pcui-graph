@@ -1,5 +1,3 @@
-import 'jquery';
-import 'backbone';
 import * as joint from '@joint/core';
 import _ from 'lodash';
 

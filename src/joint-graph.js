@@ -1,7 +1,5 @@
-import 'jquery';
 import * as joint from '@joint/core';
 import _ from 'lodash';
-import 'backbone';
 
 // TODO replace with a lighter math library
 import { Vec2 } from './lib/vec2.js';
