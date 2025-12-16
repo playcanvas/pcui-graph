@@ -92,7 +92,7 @@ class GraphViewNode {
                     fontSize: 14,
                     fill: this.getSchemaValue('iconColor'),
                     x: 8,
-                    y: 16
+                    y: 19
                 } : undefined,
                 label: {
                     text: labelName,
