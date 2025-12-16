@@ -91,15 +91,15 @@ class GraphViewNode {
                     fontFamily: 'pc-icon',
                     fontSize: 14,
                     fill: this.getSchemaValue('iconColor'),
-                    refX: 8,
-                    refY: 8
+                    x: 8,
+                    y: 16
                 } : undefined,
                 label: {
                     text: labelName,
                     fill: this.getSchemaValue('textColor'),
                     textAnchor: this.getSchemaValue('textAlignMiddle') ? 'middle' : 'left',
-                    refX: !this.getSchemaValue('textAlignMiddle') ? (this.getSchemaValue('includeIcon') ? 28 : 14) : rectSize.x / 2,
-                    refY: !this.getSchemaValue('textAlignMiddle') ? 14 : rectHeight / 2,
+                    x: !this.getSchemaValue('textAlignMiddle') ? (this.getSchemaValue('includeIcon') ? 28 : 14) : rectSize.x / 2,
+                    y: !this.getSchemaValue('textAlignMiddle') ? 14 : rectHeight / 2,
                     fontSize: 12,
                     fontWeight: 600,
                     width: rectSize.x,
