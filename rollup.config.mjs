@@ -3,7 +3,6 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import jscc from 'rollup-plugin-jscc';
-import nodePolyfills from 'rollup-plugin-polyfill-node';
 import postcss from 'rollup-plugin-postcss';
 
 const umd = {
@@ -27,7 +26,6 @@ const umd = {
             extensions: ['.css', '.scss']
         }),
         commonjs({ transformMixedEsModules: true }),
-        nodePolyfills(),
         babel({ babelHelpers: 'bundled' }),
         resolve(),
         process.env.NODE_ENV === 'production' && terser()
@@ -46,7 +44,6 @@ const module = {
             values: { _STRIP_SCSS: process.env.STRIP_SCSS }
         }),
         commonjs({ transformMixedEsModules: true }),
-        nodePolyfills(),
         babel({ babelHelpers: 'bundled' }),
         postcss({
             minimize: false,
