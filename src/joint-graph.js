@@ -1,7 +1,5 @@
-import 'jquery';
-import * as joint from 'jointjs/dist/joint.min.js';
+import * as joint from '@joint/core';
 import _ from 'lodash';
-import 'backbone';
 
 // TODO replace with a lighter math library
 import { Vec2 } from './lib/vec2.js';
@@ -57,29 +55,49 @@ class JointGraph {
             linkPinning: false,
             interactive: !this._config.readOnly,
             defaultLink: (cellView, magnet) => {
-                const defaultLink = new joint.shapes.standard.Link({
-                    connector: {
-                        name: 'normal'
+                // Use native getAttribute - joint.V().attr() can be problematic in 4.x
+                const stroke = magnet.getAttribute('stroke') || '#0379EE';
+                return new joint.shapes.standard.Link({
+                    connector: { name: 'normal' },
+                    attrs: {
+                        line: {
+                            stroke: stroke,
+                            strokeWidth: 2,
+                            targetMarker: null
+                        }
                     }
                 });
-                defaultLink.attr({
-                    line: {
-                        stroke: joint.V(magnet).attr('stroke'),
-                        strokeWidth: 2,
-                        targetMarker: null
-                    }
-                });
-                return defaultLink;
             },
             validateConnection: (cellViewS, magnetS, cellViewT, magnetT, end, linkView) => {
-                if (joint.V(cellViewS).id === joint.V(cellViewT).id) return false;
-                if (!joint.V(magnetS) || !joint.V(magnetT)) return false;
-                const sPort = joint.V(magnetS).attr('port');
-                const tPort = joint.V(magnetT.parentNode).attr('port');
+                // Can't connect to self
+                if (cellViewS.model.id === cellViewT.model.id) return false;
+
+                // Need valid magnets
+                if (!magnetS || !magnetT) return false;
+
+                // Get port info from the parent group element
+                const sPortGroup = magnetS.parentNode;
+                const tPortGroup = magnetT.parentNode;
+                if (!sPortGroup || !tPortGroup) return false;
+
+                const sPort = sPortGroup.getAttribute('port');
+                const tPort = tPortGroup.getAttribute('port');
+                if (!sPort || !tPort) return false;
+
+                // Can't connect in-to-in or out-to-out
                 if ((sPort.includes('in') && tPort.includes('in')) || (sPort.includes('out') && tPort.includes('out'))) return false;
-                if (sPort.includes('in') && joint.V(magnetS.children[1]).attr().visibility !== 'hidden') return false;
-                // if (tPort.includes('in') && joint.V(magnetT.parentNode.children[1]).attr().visibility !== 'hidden') return false;
-                if (cellViewS._portElementsCache[sPort].portContentElement.children()[0].attr().edgeType !== cellViewT._portElementsCache[tPort].portContentElement.children()[0].attr().edgeType) return false;
+
+                // Check if source port is already connected (for 'in' ports)
+                if (sPort.includes('in')) {
+                    const innerBody = sPortGroup.querySelector('.port-inner-body');
+                    if (innerBody && innerBody.getAttribute('visibility') !== 'hidden') return false;
+                }
+
+                // Check edge type compatibility (JointJS 4.x converts edgeType to edge-type)
+                const sEdgeType = magnetS.getAttribute('edge-type') || magnetS.getAttribute('edgeType');
+                const tEdgeType = magnetT.getAttribute('edge-type') || magnetT.getAttribute('edgeType');
+                if (sEdgeType !== tEdgeType) return false;
+
                 return true;
             },
             markAvailable: true,

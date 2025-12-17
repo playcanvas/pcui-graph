@@ -1,11 +1,16 @@
-@import '../lib/joint';
-@import '../lib/layout';
-@import '../lib/material';
-
 .pcui-graph {
     font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
     width: 100%;
     height: 100%;
+
+    // JointJS 4.x no longer includes CSS - add magnet styles for link creation
+    [magnet="true"]:not(.joint-element) {
+        cursor: crosshair;
+    }
+
+    [magnet="true"]:hover {
+        opacity: 0.7;
+    }
 
     .available-magnet {
         fill: greenyellow;
@@ -123,10 +128,6 @@
         display: flex;
         align-items: center;
         pointer-events: inherit;
-    }
-
-    .graph-node-container:first-child {
-        // margin-top: 33px !important;
     }
 
     .graph-node-label {
