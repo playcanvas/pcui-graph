@@ -92,7 +92,6 @@
     "lodash": "4.17.21",
     "publint": "0.3.16",
     "rollup": "4.53.5",
-    "rollup-plugin-jscc": "2.0.0",
     "rollup-plugin-postcss": "4.0.2",
     "sass-loader": "16.0.6",
     "scss-bundle": "3.1.2",

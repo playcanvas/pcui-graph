@@ -2,7 +2,6 @@ import { babel } from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
-import jscc from 'rollup-plugin-jscc';
 import postcss from 'rollup-plugin-postcss';
 
 const umd = {
@@ -18,9 +17,6 @@ const umd = {
     },
     external: ['@playcanvas/observer', '@playcanvas/pcui'],
     plugins: [
-        jscc({
-            values: { _STRIP_SCSS: process.env.STRIP_SCSS }
-        }),
         postcss({
             minimize: false,
             extensions: ['.css', '.scss']
@@ -40,9 +36,6 @@ const module = {
     },
     external: ['@playcanvas/observer', '@playcanvas/pcui'],
     plugins: [
-        jscc({
-            values: { _STRIP_SCSS: process.env.STRIP_SCSS }
-        }),
         commonjs({ transformMixedEsModules: true }),
         babel({ babelHelpers: 'bundled' }),
         postcss({
