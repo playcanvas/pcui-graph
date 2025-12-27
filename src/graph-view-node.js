@@ -24,6 +24,9 @@ class GraphViewNode {
         this.nodeSchema = nodeSchema;
         this.state = GraphViewNode.STATES.DEFAULT;
 
+        // Track event listeners for cleanup
+        this._inputEventListeners = [];
+
         const rectHeight = this.getSchemaValue('baseHeight');
         let portHeight = 0;
         let attributeHeight = 0;
@@ -372,6 +375,10 @@ class GraphViewNode {
                 }
                 input.enabled = !this._graphView._config.readOnly;
                 input.dom.setAttribute('id', `input_${attribute.name}`);
+
+                // Prevent input interactions from triggering node selection
+                this._preventNodeSelectionOnInput(input);
+
                 container.dom.setAttribute('style', `margin-top: ${i === 0 ? 33 + portHeight : 5}px; margin-bottom: 5px;`);
                 container.append(label);
                 container.append(input);
@@ -402,6 +409,51 @@ class GraphViewNode {
         }
 
         this.model = rect;
+    }
+
+    _preventNodeSelectionOnInput(input) {
+        // Stop event propagation on input elements to prevent JointJS from
+        // intercepting pointer events, which would prevent input interaction
+        const stopPropagation = e => e.stopPropagation();
+
+        const addTrackedListener = (element, eventType, handler) => {
+            element.addEventListener(eventType, handler);
+            this._inputEventListeners.push({ element, eventType, handler });
+        };
+
+        // Handle the wrapper element
+        addTrackedListener(input.dom, 'pointerdown', stopPropagation);
+        addTrackedListener(input.dom, 'mousedown', stopPropagation);
+
+        // Handle the actual input element(s)
+        if (input.input) {
+            addTrackedListener(input.input, 'pointerdown', stopPropagation);
+            addTrackedListener(input.input, 'mousedown', stopPropagation);
+        }
+
+        // Handle VectorInput which has multiple sub-inputs
+        if (input.inputs) {
+            input.inputs.forEach((subInput) => {
+                if (subInput.input) {
+                    addTrackedListener(subInput.input, 'pointerdown', stopPropagation);
+                    addTrackedListener(subInput.input, 'mousedown', stopPropagation);
+                }
+            });
+        }
+    }
+
+    destroy() {
+        // Remove all tracked input event listeners to prevent memory leaks
+        this._inputEventListeners.forEach(({ element, eventType, handler }) => {
+            element.removeEventListener(eventType, handler);
+        });
+        this._inputEventListeners = [];
+
+        // Clean up context menu if it exists
+        if (this._contextMenu) {
+            this._contextMenu.destroy();
+            this._contextMenu = null;
+        }
     }
 
     getSchemaValue(item) {
