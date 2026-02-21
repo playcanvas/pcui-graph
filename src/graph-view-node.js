@@ -389,6 +389,7 @@ class GraphViewNode {
                     this._hasLinked = false;
                     return;
                 }
+                rect.toFront();
                 onNodeSelected(this.nodeData);
             });
         };

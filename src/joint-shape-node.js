@@ -44,40 +44,27 @@ const jointShapeElementView = paper => joint.dia.ElementView.extend({
         this.div.setAttribute('id', `nodediv_${this.model.id}`);
         this.div.classList.add('graph-node-div');
 
-        // // Update the box position whenever the underlying model changes.
-        this.model.on('change', this.updateBox, this);
-        paper.on('cell:mousewheel', this.updateBox, this);
-        paper.on('blank:mousewheel', this.updateBox, this);
-        paper.on('blank:pointerup', this.updateBox, this);
-        document.addEventListener('mousemove', (e) => {
-            this.updateBox();
-        });
-        // // Remove the box when the model gets removed from the graph.
-        this.model.on('remove', this.removeBox, this);
+        this._fo = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
+        this._fo.setAttribute('pointer-events', 'none');
+        this._fo.appendChild(this.div);
 
-        this.updateBox();
+        this.model.on('change', this.updateBox, this);
+        this.model.on('remove', this.removeBox, this);
     },
     render: function () {
         joint.dia.ElementView.prototype.render.apply(this, arguments);
-        paper.$el.append(this.div);
+        this.el.appendChild(this._fo);
         this.updateBox();
         return this;
     },
     updateBox: function () {
-        // Set the position and dimension of the box so that it covers the JointJS element.
         const bbox = this.model.getBBox();
-        // Example of updating the HTML with a data stored in the cell model.
-        this.div.setAttribute('style', `
-            position: absolute;
-            width: ${bbox.width}px;
-            height: ${bbox.height}px;
-            left: ${bbox.width / 2 * paper.scale().sx}px;
-            top: ${bbox.height / 2 * paper.scale().sx}px;
-            transform: translate(${paper.translate().tx + paper.scale().sx * bbox.x - bbox.width / 2}px, ${paper.translate().ty + paper.scale().sx * bbox.y - (bbox.height / 2)}px) scale(${paper.scale().sx});
-        `);
+        this._fo.setAttribute('width', bbox.width);
+        this._fo.setAttribute('height', bbox.height);
+        this.div.setAttribute('style', `width: ${bbox.width}px; height: ${bbox.height}px;`);
     },
     removeBox: function (evt) {
-        this.div.remove();
+        this._fo.remove();
     }
 });
 
