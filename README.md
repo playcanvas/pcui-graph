@@ -4,8 +4,10 @@
 [![NPM Downloads](https://img.shields.io/npm/dw/@playcanvas/pcui-graph)](https://npmtrends.com/@playcanvas/pcui-graph)
 [![License](https://img.shields.io/npm/l/@playcanvas/pcui-graph)](https://github.com/playcanvas/pcui-graph/blob/main/LICENSE)
 [![Discord](https://img.shields.io/badge/Discord-5865F2?style=flat&logo=discord&logoColor=white&color=black)](https://discord.gg/RSaMRzg)
+[![Reddit](https://img.shields.io/badge/Reddit-FF4500?style=flat&logo=reddit&logoColor=white&color=black)](https://www.reddit.com/r/PlayCanvas)
+[![X](https://img.shields.io/badge/X-000000?style=flat&logo=x&logoColor=white&color=black)](https://x.com/intent/follow?screen_name=playcanvas)
 
-| [User Guide](https://developer.playcanvas.com/user-manual/pcui/pcui-graph/) | [API Reference](https://api.playcanvas.com/pcui-graph/) | [React Examples](https://playcanvas.github.io/pcui-graph/storybook/) | [Blog](https://blog.playcanvas.com/) | [Forum](https://forum.playcanvas.com/) | [Discord](https://discord.gg/RSaMRzg) |
+| [User Guide](https://developer.playcanvas.com/user-manual/pcui/pcui-graph/) | [API Reference](https://api.playcanvas.com/pcui-graph/) | [React Examples](https://playcanvas.github.io/pcui-graph/storybook/) | [Discord](https://discord.gg/RSaMRzg) | [Blog](https://blog.playcanvas.com/) | [Forum](https://forum.playcanvas.com/) |
 
 ![pcui-graph-banner](https://github.com/user-attachments/assets/e0aa8953-221b-4122-b8ce-247c389ae6d6)
 
