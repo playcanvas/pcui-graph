@@ -94,11 +94,11 @@ class Graph extends Element {
         if (this._config.readOnly) this._config.selfContainedMode = true;
 
         this._buildGraphFromData();
-        if (options.defaultStyles.initialScale) {
-            this.setGraphScale(options.defaultStyles.initialScale);
+        if (this._config.defaultStyles.initialScale) {
+            this.setGraphScale(this._config.defaultStyles.initialScale);
         }
-        if (options.defaultStyles.initialPosition) {
-            this.setGraphPosition(options.defaultStyles.initialPosition.x, options.defaultStyles.initialPosition.y);
+        if (this._config.defaultStyles.initialPosition) {
+            this.setGraphPosition(this._config.defaultStyles.initialPosition.x, this._config.defaultStyles.initialPosition.y);
         }
     }
 
