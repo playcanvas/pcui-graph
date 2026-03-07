@@ -167,7 +167,10 @@ class JointGraph {
         if (config.adjustVertices) {
             const adjustGraphVertices = _.partial(this.adjustVertices.bind(this), this._graph);
 
+            // adjust vertices when a cell is removed or its source/target was changed
             this._graph.on('add remove change:source change:target', adjustGraphVertices);
+
+            // adjust vertices when the user stops interacting with an element
             this._paper.on('cell:pointerup', adjustGraphVertices);
         }
     }
@@ -200,24 +203,38 @@ class JointGraph {
 
     adjustVertices(graph: any, cell: any): void {
         if (this.ignoreAdjustVertices) return;
+        // if `cell` is a view, find its model
         cell = cell.model || cell;
         if (cell instanceof joint.dia.Element) {
+            // `cell` is an element
             _.chain(graph.getConnectedLinks(cell))
             .groupBy((link: any) => {
+                // the key of the group is the model id of the link's source or target
+                // cell id is omitted
                 return (_.omit([link.source().id, link.target().id], cell.id) as any)[0];
             })
             .each((group: any, key: any) => {
+                // if the member of the group has both source and target model
+                // then adjust vertices
                 if (key !== 'undefined') this.adjustVertices(graph, _.first(group));
             })
             .value();
             return;
         }
+        // `cell` is a link
+        // get its source and target model IDs
         const sourceId = cell.get('source').id || cell.previous('source').id;
         const targetId = cell.get('target').id || cell.previous('target').id;
+        // if one of the ends is not a model
+        // (if the link is pinned to paper at a point)
+        // the link is interpreted as having no siblings
         if (!sourceId || !targetId) return;
+        // identify link siblings
         const siblings = _.filter(graph.getLinks(), (sibling: any) => {
             const siblingSourceId = sibling.source().id;
             const siblingTargetId = sibling.target().id;
+            // if source and target are the same
+            // or if source and target are reversed
             return ((siblingSourceId === sourceId) && (siblingTargetId === targetId)) ||
                 ((siblingSourceId === targetId) && (siblingTargetId === sourceId));
         });
