@@ -256,7 +256,6 @@ class JointGraph {
                 // find the middle point of the link
                 const sourceCenter = graph.getCell(sourceId).getBBox().center();
                 const targetCenter = graph.getCell(targetId).getBBox().center();
-                new g.Line(sourceCenter, targetCenter).midpoint();
                 // find the angle of the link
                 const theta = sourceCenter.theta(targetCenter);
                 // constant
