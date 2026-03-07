@@ -285,7 +285,7 @@ class Graph extends Element {
     createEdge(edge, edgeId) {
         const edgeSchema = this._graphSchema.edges[edge.edgeType];
         this.view.addEdge(edge, edgeSchema, (edge) => {
-            this._dispatchEvent(GRAPH_ACTIONS.SELECT_EDGE, { edge, prevItem: this._selectedItem });
+            this._dispatchEvent(GRAPH_ACTIONS.SELECT_EDGE, { edge, edgeId, prevItem: this._selectedItem });
         });
         if (edgeSchema.contextMenuItems) {
             const contextMenuItems = deepCopyFunction(edgeSchema.contextMenuItems).map((item) => {
