@@ -41,8 +41,6 @@ class GraphViewNode {
 
     _contextMenu: Menu | null;
 
-    _contextMenuHandler: ((e: MouseEvent) => void) | null;
-
     _suppressChangeTargetEvent: boolean;
 
     _hasLinked: boolean;
@@ -56,7 +54,6 @@ class GraphViewNode {
         this.nodeData = nodeData;
         this.nodeSchema = nodeSchema;
         this.state = GraphViewNode.STATES.DEFAULT;
-        this._contextMenuHandler = null;
         this._suppressChangeTargetEvent = false;
         this._hasLinked = false;
 
@@ -452,12 +449,11 @@ class GraphViewNode {
         });
         this._paper.el.appendChild(this._contextMenu.dom);
         const nodeElement = this._paper.findViewByModel(this.model).el;
-        this._contextMenuHandler = (e: MouseEvent) => {
+        nodeElement.addEventListener('contextmenu', (e: MouseEvent) => {
             e.preventDefault();
-            this._contextMenu!.position(e.clientX, e.clientY);
-            this._contextMenu!.hidden = false;
-        };
-        nodeElement.addEventListener('contextmenu', this._contextMenuHandler);
+            this._contextMenu.position(e.clientX, e.clientY);
+            this._contextMenu.hidden = false;
+        });
     }
 
     mapVectorToArray(v: any): number[] {
@@ -516,9 +512,7 @@ class GraphViewNode {
     }
 
     updateNodeType(nodeType: string | number): void {
-        if (this._contextMenuHandler) {
-            this._paper.findViewByModel(this.model).el.removeEventListener('contextmenu', this._contextMenuHandler);
-        }
+        this._paper.findViewByModel(this.model).el.removeEventListener('contextmenu', (this._contextMenu as any)._contextMenuEvent);
         this.addContextMenu(this._graphSchema.nodes[nodeType].contextMenuItems);
     }
 
