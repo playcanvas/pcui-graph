@@ -622,7 +622,7 @@ class Graph extends Element {
     setGraphScale(scale: number): void {
         this.view.setGraphScale(scale);
         Object.keys(this.view._nodes).forEach((nodeKey) => {
-            this.view._paper.findViewByModel(this.view._nodes[nodeKey].model).updateBox();
+            (this.view._paper.findViewByModel(this.view._nodes[nodeKey].model) as any).updateBox();
         });
     }
 

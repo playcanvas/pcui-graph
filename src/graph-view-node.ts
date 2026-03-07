@@ -25,9 +25,9 @@ class GraphViewNode {
 
     _config: any;
 
-    _paper: any;
+    _paper: joint.dia.Paper;
 
-    _graph: any;
+    _graph: joint.dia.Graph;
 
     _graphSchema: any;
 
@@ -37,15 +37,15 @@ class GraphViewNode {
 
     state: number;
 
-    model: any;
+    model: joint.dia.Element;
 
-    _contextMenu: any;
+    _contextMenu: Menu | null;
 
     _suppressChangeTargetEvent: boolean;
 
     _hasLinked: boolean;
 
-    constructor(graphView: GraphView, paper: any, graph: any, graphSchema: any, nodeData: any, nodeSchema: any, onCreateEdge: (edgeId: string, edge: any) => void, onNodeSelected: (nodeData: any) => void) {
+    constructor(graphView: GraphView, paper: joint.dia.Paper, graph: joint.dia.Graph, graphSchema: any, nodeData: any, nodeSchema: any, onCreateEdge: (edgeId: string, edge: any) => void, onNodeSelected: (nodeData: any) => void) {
         this._graphView = graphView;
         this._config = graphView._config;
         this._paper = paper;
@@ -275,7 +275,7 @@ class GraphViewNode {
                         }
                     }
                 });
-                this._graph.on('change:target', (cell: any) => {
+                this._graph.on('change:target', (cell: joint.dia.Cell) => {
                     if (this._suppressChangeTargetEvent) return;
                     let target = cell.get('target');
                     let source = cell.get('source');
@@ -297,7 +297,7 @@ class GraphViewNode {
                             edgeType: port.type
                         };
                         this._suppressChangeTargetEvent = true;
-                        this._graph.removeCells(cell);
+                        this._graph.removeCells([cell]);
                         this._suppressChangeTargetEvent = false;
                         onCreateEdge(edgeId, edge);
                     }
@@ -512,7 +512,7 @@ class GraphViewNode {
     }
 
     updateNodeType(nodeType: string | number): void {
-        this._paper.findViewByModel(this.model).el.removeEventListener('contextmenu', this._contextMenu._contextMenuEvent);
+        this._paper.findViewByModel(this.model).el.removeEventListener('contextmenu', (this._contextMenu as any)._contextMenuEvent);
         this.addContextMenu(this._graphSchema.nodes[nodeType].contextMenuItems);
     }
 

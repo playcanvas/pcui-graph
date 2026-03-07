@@ -3,15 +3,15 @@ import { Menu } from '@playcanvas/pcui';
 
 import type GraphView from './graph-view';
 
-(joint as any).connectors.smoothInOut = function (sourcePoint: any, targetPoint: any, vertices: any, args: any) {
+(joint.connectors as any).smoothInOut = function (sourcePoint: joint.g.Point, targetPoint: joint.g.Point) {
     const p1 = sourcePoint.clone();
     p1.offset(30, 0);
 
     const p2 = targetPoint.clone();
     p2.offset(-30, 0);
 
-    const path = new (joint.g as any).Path((joint.g as any).Path.createSegment('M', sourcePoint));
-    path.appendSegment((joint.g as any).Path.createSegment('C', p1, p2, targetPoint));
+    const path = new joint.g.Path(joint.g.Path.createSegment('M', sourcePoint));
+    path.appendSegment(joint.g.Path.createSegment('C', p1, p2, targetPoint));
     return path;
 };
 
@@ -25,9 +25,9 @@ class GraphViewEdge {
 
     _config: any;
 
-    _paper: any;
+    _paper: joint.dia.Paper;
 
-    _graph: any;
+    _graph: joint.dia.Graph;
 
     _graphSchema: any;
 
@@ -37,11 +37,11 @@ class GraphViewEdge {
 
     state: number;
 
-    model: any;
+    model: joint.shapes.standard.Link;
 
-    _contextMenu: any;
+    _contextMenu: Menu | null;
 
-    constructor(graphView: GraphView, paper: any, graph: any, graphSchema: any, edgeData: any, edgeSchema: any, onEdgeSelected: (edgeData: any) => void) {
+    constructor(graphView: GraphView, paper: joint.dia.Paper, graph: joint.dia.Graph, graphSchema: any, edgeData: any, edgeSchema: any, onEdgeSelected: (edgeData: any) => void) {
         this._graphView = graphView;
         this._config = graphView._config;
         this._paper = paper;
@@ -50,6 +50,7 @@ class GraphViewEdge {
         this.edgeData = edgeData;
         this._edgeSchema = edgeSchema;
         this.state = GraphViewEdge.STATES.DEFAULT;
+        this._contextMenu = null;
 
         const link = GraphViewEdge.createLink(this._config.defaultStyles, edgeSchema, edgeData);
         const sourceNode = this._graphView.getNode(edgeData.from);
@@ -94,7 +95,7 @@ class GraphViewEdge {
         this.model = link;
     }
 
-    static createLink(defaultStyles: any, edgeSchema: any, edgeData?: any): any {
+    static createLink(defaultStyles: any, edgeSchema: any, edgeData?: any): joint.shapes.standard.Link {
         const link = new joint.shapes.standard.Link();
         link.attr({
             line: {

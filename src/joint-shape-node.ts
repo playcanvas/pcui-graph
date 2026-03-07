@@ -35,7 +35,7 @@ const jointShapeElement = () => (joint.shapes.standard.Rectangle as any).extend(
     }, (joint.shapes.standard.Rectangle as any).prototype.defaults)
 });
 
-const jointShapeElementView = (paper: any) => joint.dia.ElementView.extend({
+const jointShapeElementView = (paper: joint.dia.Paper) => joint.dia.ElementView.extend({
     initialize: function () {
         _.bindAll(this, 'updateBox');
         joint.dia.ElementView.prototype.initialize.apply(this, arguments as any);
