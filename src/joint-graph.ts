@@ -253,7 +253,6 @@ class JointGraph {
             } default: {
                 // there are multiple siblings
                 // we need to create vertices
-                // find the middle point of the link
                 const sourceCenter = graph.getCell(sourceId).getBBox().center();
                 const targetCenter = graph.getCell(targetId).getBBox().center();
                 // find the angle of the link
