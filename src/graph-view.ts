@@ -67,6 +67,7 @@ class GraphView extends JointGraph {
         });
         this._paper.on({
             'blank:contextmenu': (event: dia.Event) => {
+                if (!this._viewMenu) return;
                 this._viewMenu.position(event.clientX, event.clientY);
                 this._viewMenu.hidden = false;
             }
