@@ -241,24 +241,48 @@ class JointGraph {
         const numSiblings = siblings.length;
         switch (numSiblings) {
             case 0: {
+                // the link has no siblings
                 break;
             } case 1: {
+                // there is only one link
+                // no vertices needed
                 cell.unset('vertices');
                 cell.set('connector', { name: 'normal' });
                 break;
             } default: {
+                // there are multiple siblings
+                // we need to create vertices
+                // find the middle point of the link
                 const sourceCenter = graph.getCell(sourceId).getBBox().center();
                 const targetCenter = graph.getCell(targetId).getBBox().center();
                 (joint.g as any).Line(sourceCenter, targetCenter).midpoint();
+                // find the angle of the link
                 const theta = sourceCenter.theta(targetCenter);
+                // constant
+                // the maximum distance between two sibling links
                 const GAP = 20;
                 _.each(siblings, (sibling: any, index: number) => {
+                    // we want offset values to be calculated as 0, 20, 20, 40, 40, 60, 60 ...
                     let offset = GAP * Math.ceil(index / 2);
+                    // place the vertices at points which are `offset` pixels perpendicularly away
+                    // from the first link
+                    //
+                    // as index goes up, alternate left and right
+                    //
+                    //  ^  odd indices
+                    //  |
+                    //  |---->  index 0 sibling - centerline (between source and target centers)
+                    //  |
+                    //  v  even indices
                     const sign = ((index % 2) ? 1 : -1);
+                    // to assure symmetry, if there is an even number of siblings
+                    // shift all vertices leftward perpendicularly away from the centerline
                     if ((numSiblings % 2) === 0) {
                         offset -= ((GAP / 2) * sign);
                     }
+                    // make reverse links count the same as non-reverse
                     const reverse = ((theta < 180) ? 1 : -1);
+                    // we found the vertex
                     const angle = (joint.g as any).toRad(theta + (sign * reverse * 90));
 
                     const shift = (joint.g as any).Point.fromPolar(offset * sign, angle, 0);
