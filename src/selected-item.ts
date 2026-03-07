@@ -1,24 +1,34 @@
+import type Graph from './index';
+
 class SelectedItem {
-    constructor(graph, type, id, edgeId) {
+    _graph: Graph;
+
+    _type: string;
+
+    _id: string | number;
+
+    _edgeId: string | number | undefined;
+
+    constructor(graph: Graph, type: string, id: string | number, edgeId?: string | number) {
         this._graph = graph;
         this._type = type;
         this._id = id;
         this._edgeId = edgeId;
     }
 
-    get type() {
+    get type(): string {
         return this._type;
     }
 
-    get id() {
+    get id(): string | number {
         return this._id;
     }
 
-    get edgeId() {
+    get edgeId(): string | number | undefined {
         return this._edgeId;
     }
 
-    selectItem() {
+    selectItem(): void {
         switch (this._type) {
             case 'NODE':
                 this._graph.view.selectNode(this._id);
@@ -29,7 +39,7 @@ class SelectedItem {
         }
     }
 
-    deselectItem() {
+    deselectItem(): void {
         switch (this._type) {
             case 'NODE':
                 this._graph.view.deselectNode(this._id);

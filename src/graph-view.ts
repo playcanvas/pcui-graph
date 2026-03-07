@@ -1,17 +1,37 @@
 import * as joint from '@joint/core';
 import { Menu } from '@playcanvas/pcui';
 
-import { GRAPH_ACTIONS } from './constants.js';
-import GraphViewEdge from './graph-view-edge.js';
-import GraphViewNode from './graph-view-node.js';
-import JointGraph from './joint-graph.js';
-import { jointShapeElement, jointShapeElementView } from './joint-shape-node.js';
-// TODO replace with a lighter math library
-import { Vec2 } from './lib/vec2.js';
+import { GRAPH_ACTIONS } from './constants';
+import GraphViewEdge from './graph-view-edge';
+import GraphViewNode from './graph-view-node';
+import JointGraph from './joint-graph';
+import { jointShapeElement, jointShapeElementView } from './joint-shape-node';
+import { Vec2 } from './lib/vec2';
 
+import type Graph from './index';
 
 class GraphView extends JointGraph {
-    constructor(parent, dom, graphSchema, graphData, config) {
+    _parent: Graph;
+
+    _dom: HTMLElement;
+
+    _graphSchema: any;
+
+    _graphData: any;
+
+    _nodes: Record<string, GraphViewNode>;
+
+    _edges: Record<string, GraphViewEdge>;
+
+    _cells: any[];
+
+    _cellMountedFunctions: (() => void)[];
+
+    _batchingCells: boolean;
+
+    _viewMenu: any;
+
+    constructor(parent: Graph, dom: HTMLElement, graphSchema: any, graphData: any, config: any) {
         super(dom, config);
 
         this._parent = parent;
@@ -26,13 +46,14 @@ class GraphView extends JointGraph {
 
         this._cells = [];
         this._cellMountedFunctions = [];
+        this._batchingCells = false;
 
-        joint.shapes.html = {};
-        joint.shapes.html.Element = jointShapeElement();
-        joint.shapes.html.ElementView = jointShapeElementView(this._paper);
+        (joint.shapes as any).html = {};
+        (joint.shapes as any).html.Element = jointShapeElement();
+        (joint.shapes as any).html.ElementView = jointShapeElementView(this._paper);
 
-        this._graph.on('remove', cell => this.updatePortStatesForEdge(cell, false));
-        this._graph.on('change:target', cell => this.updatePortStatesForEdge(cell, true));
+        this._graph.on('remove', (cell: any) => this.updatePortStatesForEdge(cell, false));
+        this._graph.on('change:target', (cell: any) => this.updatePortStatesForEdge(cell, true));
 
         this._paper.on('cell:mousewheel', () => {
             parent._dispatchEvent(GRAPH_ACTIONS.UPDATE_SCALE, { scale: this._paper.scale().sx });
@@ -40,20 +61,20 @@ class GraphView extends JointGraph {
         this._paper.on('blank:mousewheel', () => {
             parent._dispatchEvent(GRAPH_ACTIONS.UPDATE_SCALE, { scale: this._paper.scale().sx });
         });
-        this._paper.on('blank:pointerup', (event) => {
+        this._paper.on('blank:pointerup', (event: any) => {
             parent._dispatchEvent(GRAPH_ACTIONS.UPDATE_TRANSLATE, { pos: { x: this._paper.translate().tx, y: this._paper.translate().ty } });
         });
         this._paper.on({
-            'blank:contextmenu': (event) => {
+            'blank:contextmenu': (event: any) => {
                 this._viewMenu.position(event.clientX, event.clientY);
                 this._viewMenu.hidden = false;
             }
         });
 
         this._paper.on({
-            'cell:mouseenter': (cellView) => {
-                let selectedEdge;
-                let selectedEdgeId;
+            'cell:mouseenter': (cellView: any) => {
+                let selectedEdge: GraphViewEdge | null;
+                let selectedEdgeId: any;
                 const node = this.getNode(cellView.model.id);
                 if (node && node.state !== GraphViewNode.STATES.SELECTED) {
                     node.hover();
@@ -86,8 +107,8 @@ class GraphView extends JointGraph {
                     this.getNode(edge.edgeData.to).hover();
                 }
             },
-            'cell:mouseleave': (cellView, e) => {
-                let selectedEdge;
+            'cell:mouseleave': (cellView: any, e: any) => {
+                let selectedEdge: GraphViewEdge | null;
 
                 if (e.relatedTarget && e.relatedTarget.classList.contains('graph-node-input')) return;
                 const node = this.getNode(cellView.model.id);
@@ -130,19 +151,19 @@ class GraphView extends JointGraph {
         });
     }
 
-    batchCells() {
+    batchCells(): void {
         this._batchingCells = true;
     }
 
-    isBatchingCells() {
+    isBatchingCells(): boolean {
         return this._batchingCells;
     }
 
-    addCellMountedFunction(f) {
+    addCellMountedFunction(f: () => void): void {
         this._cellMountedFunctions.push(f);
     }
 
-    applyBatchedCells() {
+    applyBatchedCells(): void {
         this._batchingCells = false;
         this._graph.addCells(this._cells);
         this._cellMountedFunctions.forEach(f => f());
@@ -150,7 +171,7 @@ class GraphView extends JointGraph {
         this._cellMountedFunctions = [];
     }
 
-    updatePortStatesForEdge(cell, connected) {
+    updatePortStatesForEdge(cell: any, connected: boolean): void {
         const source = cell.get('source');
         const target = cell.get('target');
         if (source && source.port && target && target.port) {
@@ -159,7 +180,7 @@ class GraphView extends JointGraph {
         }
     }
 
-    getWindowToGraphPosition(pos, usePaperPosition = true) {
+    getWindowToGraphPosition(pos: any, usePaperPosition: boolean = true): Vec2 {
         const scale = this._paper.scale().sx;
         const translate = this._paper.translate();
         if (usePaperPosition) {
@@ -173,15 +194,15 @@ class GraphView extends JointGraph {
         );
     }
 
-    addCanvasContextMenu(items) {
+    addCanvasContextMenu(items: any[]): any {
         this._viewMenu = new Menu({
             items: items
         });
         this._paper.el.appendChild(this._viewMenu.dom);
-        return this._viewMenu._contextMenuEvent;
+        return (this._viewMenu as any)._contextMenuEvent;
     }
 
-    addNodeContextMenu(id, items) {
+    addNodeContextMenu(id: string | number, items: any[]): void {
         const addNodeContextMenuFunction = () => {
             const node = this.getNode(id);
             node.addContextMenu(items);
@@ -193,16 +214,16 @@ class GraphView extends JointGraph {
         }
     }
 
-    addEdgeContextMenu(id, items) {
+    addEdgeContextMenu(id: string, items: any[]): void {
         const edge = this.getEdge(id);
         edge.addContextMenu(items);
     }
 
-    getNode(id) {
+    getNode(id: string | number): GraphViewNode {
         return this._nodes[id];
     }
 
-    addNode(nodeData, nodeSchema, onCreateEdge, onNodeSelected) {
+    addNode(nodeData: any, nodeSchema: any, onCreateEdge: (edgeId: string, edge: any) => void, onNodeSelected: (nodeData: any) => void): any {
         const node = new GraphViewNode(
             this,
             this._paper,
@@ -220,30 +241,30 @@ class GraphView extends JointGraph {
         return node.nodeData;
     }
 
-    removeNode(modelId) {
+    removeNode(modelId: string | number): void {
         const node = this.getNode(modelId);
         this._graph.removeCells(node.model);
         delete this._nodes[node.nodeData.id];
         delete this._nodes[modelId];
     }
 
-    updateNodeAttribute(id, attribute, value) {
+    updateNodeAttribute(id: string | number, attribute: string, value: any): void {
         this.getNode(id).updateAttribute(attribute, value);
     }
 
-    setNodeAttributeErrorState(id, attribute, value) {
+    setNodeAttributeErrorState(id: string | number, attribute: string, value: boolean): void {
         this.getNode(id).setAttributeErrorState(attribute, value);
     }
 
-    updateNodePosition(id, pos) {
+    updateNodePosition(id: string | number, pos: { x: number; y: number }): void {
         this.getNode(id).updatePosition(pos);
     }
 
-    updateNodeType(id, nodeType) {
+    updateNodeType(id: string | number, nodeType: string | number): void {
         this.getNode(id).updateNodeType(nodeType);
     }
 
-    addNodeEvent(id, event, callback, attribute) {
+    addNodeEvent(id: string | number, event: string, callback: (...args: any[]) => void, attribute?: any): void {
         const addNodeEventFunction = () => {
             const node = this.getNode(id);
             node.addEvent(event, callback, attribute);
@@ -255,13 +276,11 @@ class GraphView extends JointGraph {
         }
     }
 
-    getEdge(id) {
-        if (this._edges[id]) {
-            return this._edges[id];
-        }
+    getEdge(id: string | number): GraphViewEdge {
+        return this._edges[id];
     }
 
-    addEdge(edgeData, edgeSchema, onEdgeSelected) {
+    addEdge(edgeData: any, edgeSchema: any, onEdgeSelected: (edgeData: any) => void): any {
         let edge;
         if (Number.isFinite(edgeData.outPort)) {
             edge = this.getEdge(`${edgeData.from},${edgeData.outPort}-${edgeData.to},${edgeData.inPort}`);
@@ -298,7 +317,7 @@ class GraphView extends JointGraph {
         return edge.edgeData;
     }
 
-    removeEdge(id) {
+    removeEdge(id: string): void {
         const edge = this.getEdge(id);
         if (edge) {
             this._graph.removeCells(edge.model);
@@ -307,27 +326,27 @@ class GraphView extends JointGraph {
         delete this._edges[id];
     }
 
-    disableInputEvents() {
+    disableInputEvents(): void {
         document.querySelectorAll('.graph-node-input').forEach((input) => {
             input.classList.add('graph-node-input-no-pointer-events');
         });
     }
 
-    enableInputEvents() {
+    enableInputEvents(): void {
         document.querySelectorAll('.graph-node-input').forEach((input) => {
             input.classList.remove('graph-node-input-no-pointer-events');
         });
     }
 
-    addUnconnectedEdge(nodeId, edgeType, edgeSchema, validateEdge, onEdgeConnected) {
+    addUnconnectedEdge(nodeId: number, edgeType: string, edgeSchema: any, validateEdge: (edgeType: string, source: number, target: number) => boolean, onEdgeConnected: (edgeType: string, from: number, to: number) => void): void {
         this.disableInputEvents();
         const link = GraphViewEdge.createLink(this._config.defaultStyles, edgeSchema);
         link.source(this.getNode(nodeId).model);
         link.target(this.getNode(nodeId).model);
-        const mouseMoveEvent = (e) => {
+        const mouseMoveEvent = (e: MouseEvent) => {
             const mousePos = this.getWindowToGraphPosition(new Vec2(e.clientX, e.clientY));
             const sourceNodeView = this._paper.findViewByModel(this.getNode(nodeId).model);
-            const sourceNodePos = this.getGraphPosition(sourceNodeView.el.getBoundingClientRect());
+            const sourceNodePos = this.getGraphPosition();
             let pointerVector = mousePos.clone().sub(sourceNodePos);
             const direction = (new Vec2(e.clientX, e.clientY)).clone().sub(sourceNodeView.el.getBoundingClientRect()).normalize().mulScalar(20);
             pointerVector = sourceNodePos.add(pointerVector).sub(direction);
@@ -336,11 +355,10 @@ class GraphView extends JointGraph {
                 y: pointerVector.y
             });
         };
-        const cellPointerDownEvent = (cellView) => {
+        const cellPointerDownEvent = (cellView: any) => {
             if (!this.getNode(cellView.model.id)) return;
             const targetNodeId = this.getNode(cellView.model.id).nodeData.id;
             const nodeModel = this.getNode(nodeId).model;
-            // test whether a valid connection has been made
             if ((cellView.model.id !== nodeModel.id) && !cellView.model.isLink() && validateEdge(edgeType, nodeId, targetNodeId)) {
                 link.target(cellView.model);
                 onEdgeConnected(edgeType, nodeId, targetNodeId);
@@ -364,13 +382,13 @@ class GraphView extends JointGraph {
         this._graph.addCell(link);
     }
 
-    onBlankSelection(callback) {
+    onBlankSelection(callback: () => void): void {
         this._paper.on('blank:pointerdown', () => {
             callback();
         });
     }
 
-    selectNode(id) {
+    selectNode(id: string | number): void {
         const node = this.getNode(id);
         if (node) {
             node.select();
@@ -381,12 +399,12 @@ class GraphView extends JointGraph {
         }
     }
 
-    deselectNode(id) {
+    deselectNode(id: string | number): void {
         const node = this.getNode(id);
         if (node) node.deselect();
     }
 
-    selectEdge(id) {
+    selectEdge(id: string | number): void {
         const edge = this.getEdge(id);
         if (edge) {
             edge.select();
@@ -401,7 +419,7 @@ class GraphView extends JointGraph {
         }
     }
 
-    deselectEdge(id) {
+    deselectEdge(id: string | number): void {
         const edge = this.getEdge(id);
         if (edge) {
             Object.keys(this._edges).forEach((edgeKey) => {
@@ -413,32 +431,32 @@ class GraphView extends JointGraph {
         }
     }
 
-    setGraphPosition(posX, posY) {
+    setGraphPosition(posX: number, posY: number): void {
         this._paper.translate(posX, posY);
     }
 
-    getGraphPosition() {
+    getGraphPosition(): Vec2 {
         const t = this._paper.translate();
         return new Vec2([t.tx, t.ty]);
     }
 
-    setGraphScale(scale) {
+    setGraphScale(scale: number): void {
         this._paper.scale(scale);
     }
 
-    getGraphScale() {
+    getGraphScale(): number {
         return this._paper.scale().sx;
     }
 
-    getNodeDomElement(id) {
+    getNodeDomElement(id: string | number): HTMLElement {
         return this.getNode(id).model.findView(this._paper).el;
     }
 
-    getEdgeDomElement(id) {
+    getEdgeDomElement(id: string | number): HTMLElement {
         return this.getEdge(id).model.findView(this._paper).el;
     }
 
-    destroy() {
+    destroy(): void {
         this._graph.clear();
         this._paper.remove();
     }

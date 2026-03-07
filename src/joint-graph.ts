@@ -1,11 +1,10 @@
 import * as joint from '@joint/core';
 import _ from 'lodash';
 
-// TODO replace with a lighter math library
-import { Vec2 } from './lib/vec2.js';
+import { Vec2 } from './lib/vec2';
 
-joint.V.matrixToTransformString = function (matrix) {
-    matrix || (matrix = true); // eslint-disable-line no-unused-expressions
+(joint.V as any).matrixToTransformString = function (matrix: any) {
+    if (!matrix) matrix = true;
     return `matrix(${[
         matrix.a || 1,
         matrix.b || 0,
@@ -16,29 +15,47 @@ joint.V.matrixToTransformString = function (matrix) {
     ]})`;
 };
 
-joint.V.prototype.transform = function (matrix, opt) {
+(joint.V as any).prototype.transform = function (matrix: any, opt: any) {
 
     const node = this.node;
-    if (joint.V.isUndefined(matrix)) {
+    if ((joint.V as any).isUndefined(matrix)) {
         return (node.parentNode) ?
             this.getTransformToElement(node.parentNode) :
             node.getScreenCTM();
     }
 
     if (opt && opt.absolute) {
-        return this.attr('transform', joint.V.matrixToTransformString(matrix));
+        return this.attr('transform', (joint.V as any).matrixToTransformString(matrix));
     }
 
-    const svgTransform = joint.V.createSVGTransform(matrix);
+    const svgTransform = (joint.V as any).createSVGTransform(matrix);
     node.transform.baseVal.appendItem(svgTransform);
     return this;
 };
 
 class JointGraph {
-    constructor(dom, config = {}) {
+    _config: any;
+
+    _graph: any;
+
+    _paper: any;
+
+    _panPaper: boolean;
+
+    _translate: Vec2;
+
+    _totalTranslate: Vec2;
+
+    _pan: Vec2;
+
+    _mousePos: Vec2;
+
+    ignoreAdjustVertices: boolean;
+
+    constructor(dom: HTMLElement, config: any = {}) {
 
         this._config = config;
-        this._graph = new joint.dia.Graph({}, { cellNamespace: joint.shape });
+        this._graph = new joint.dia.Graph({}, { cellNamespace: (joint as any).shape });
 
         this._paper = new joint.dia.Paper({
             el: dom,
@@ -54,8 +71,7 @@ class JointGraph {
             gridSize: config.defaultStyles.background.gridSize,
             linkPinning: false,
             interactive: !this._config.readOnly,
-            defaultLink: (cellView, magnet) => {
-                // Use native getAttribute - joint.V().attr() can be problematic in 4.x
+            defaultLink: (cellView: any, magnet: any) => {
                 const stroke = magnet.getAttribute('stroke') || '#0379EE';
                 return new joint.shapes.standard.Link({
                     connector: { name: 'normal' },
@@ -68,7 +84,7 @@ class JointGraph {
                     }
                 });
             },
-            validateConnection: (cellViewS, magnetS, cellViewT, magnetT, end, linkView) => {
+            validateConnection: (cellViewS: any, magnetS: any, cellViewT: any, magnetT: any, end: any, linkView: any) => {
                 // Can't connect to self
                 if (cellViewS.model.id === cellViewT.model.id) return false;
 
@@ -108,9 +124,9 @@ class JointGraph {
                     { color: '#06101b', scaleFactor: 10, thickness: 2 }
                 ]
             }
-        });
+        } as any);
 
-        const graphResizeObserver = new ResizeObserver((_) => {
+        const graphResizeObserver = new ResizeObserver(() => {
             this._resizeGraph(dom);
         });
         graphResizeObserver.observe(dom);
@@ -120,7 +136,8 @@ class JointGraph {
         this._totalTranslate = new Vec2();
         this._pan = new Vec2();
         this._mousePos = new Vec2();
-        this._paper.on('blank:pointerdown', (e) => {
+        this.ignoreAdjustVertices = false;
+        this._paper.on('blank:pointerdown', (e: any) => {
             this._panPaper = true;
             this._mousePos = new Vec2(e.offsetX, e.offsetY);
         });
@@ -128,7 +145,7 @@ class JointGraph {
             this._panPaper = false;
             this._translate.add(this._pan);
         });
-        dom.addEventListener('mousemove', (e) => {
+        dom.addEventListener('mousemove', (e: MouseEvent) => {
             if (this._panPaper) {
                 this._pan = this._mousePos.clone().sub(new Vec2(e.offsetX, e.offsetY));
                 this._mousePos = new Vec2(e.offsetX, e.offsetY);
@@ -136,15 +153,13 @@ class JointGraph {
             }
         });
 
-        const handleCanvasMouseWheel = (e, x, y, delta) => {
+        const handleCanvasMouseWheel = (e: any, x: number, y: number, delta: number) => {
             e.preventDefault();
-
             const oldScale = this._paper.scale().sx;
             const newScale = oldScale + delta * 0.025;
-
             this._scaleToPoint(newScale, x, y);
         };
-        const handleCellMouseWheel = (cellView, e, x, y, delta) => handleCanvasMouseWheel(e, x, y, delta);
+        const handleCellMouseWheel = (cellView: any, e: any, x: number, y: number, delta: number) => handleCanvasMouseWheel(e, x, y, delta);
 
         this._paper.on('cell:mousewheel', handleCellMouseWheel);
         this._paper.on('blank:mousewheel', handleCanvasMouseWheel);
@@ -158,18 +173,15 @@ class JointGraph {
             // adjust vertices when the user stops interacting with an element
             this._paper.on('cell:pointerup', adjustGraphVertices);
         }
-
-
     }
 
-    _resizeGraph(dom) {
+    _resizeGraph(dom: HTMLElement): void {
         this._paper.setDimensions(dom.offsetWidth, dom.offsetHeight);
     }
 
-    _scaleToPoint(nextScale, x, y) {
+    _scaleToPoint(nextScale: number, x: number, y: number): void {
         if (nextScale >= (this._config.minZoom || 0.25) && nextScale <= (this._config.maxZoom || 1.5)) {
             const currentScale = this._paper.scale().sx;
-
             const beta = currentScale / nextScale;
 
             const ax = x - (x * beta);
@@ -183,27 +195,25 @@ class JointGraph {
             this._paper.translate(nextTx, nextTy);
 
             const ctm = this._paper.matrix();
-
             ctm.a = nextScale;
             ctm.d = nextScale;
-
             this._paper.matrix(ctm);
         }
     }
 
-    adjustVertices(graph, cell) {
+    adjustVertices(graph: any, cell: any): void {
         if (this.ignoreAdjustVertices) return;
         // if `cell` is a view, find its model
         cell = cell.model || cell;
         if (cell instanceof joint.dia.Element) {
             // `cell` is an element
             _.chain(graph.getConnectedLinks(cell))
-            .groupBy((link) => {
+            .groupBy((link: any) => {
                 // the key of the group is the model id of the link's source or target
                 // cell id is omitted
-                return _.omit([link.source().id, link.target().id], cell.id)[0];
+                return (_.omit([link.source().id, link.target().id], cell.id) as any)[0];
             })
-            .each((group, key) => {
+            .each((group: any, key: any) => {
                 // if the member of the group has both source and target model
                 // then adjust vertices
                 if (key !== 'undefined') this.adjustVertices(graph, _.first(group));
@@ -220,7 +230,7 @@ class JointGraph {
         // the link is interpreted as having no siblings
         if (!sourceId || !targetId) return;
         // identify link siblings
-        const siblings = _.filter(graph.getLinks(), (sibling) => {
+        const siblings = _.filter(graph.getLinks(), (sibling: any) => {
             const siblingSourceId = sibling.source().id;
             const siblingTargetId = sibling.target().id;
             // if source and target are the same
@@ -245,13 +255,13 @@ class JointGraph {
                 // find the middle point of the link
                 const sourceCenter = graph.getCell(sourceId).getBBox().center();
                 const targetCenter = graph.getCell(targetId).getBBox().center();
-                joint.g.Line(sourceCenter, targetCenter).midpoint();
+                (joint.g as any).Line(sourceCenter, targetCenter).midpoint();
                 // find the angle of the link
                 const theta = sourceCenter.theta(targetCenter);
                 // constant
                 // the maximum distance between two sibling links
                 const GAP = 20;
-                _.each(siblings, (sibling, index) => {
+                _.each(siblings, (sibling: any, index: number) => {
                     // we want offset values to be calculated as 0, 20, 20, 40, 40, 60, 60 ...
                     let offset = GAP * Math.ceil(index / 2);
                     // place the vertices at points which are `offset` pixels perpendicularly away
@@ -273,9 +283,9 @@ class JointGraph {
                     // make reverse links count the same as non-reverse
                     const reverse = ((theta < 180) ? 1 : -1);
                     // we found the vertex
-                    const angle = joint.g.toRad(theta + (sign * reverse * 90));
+                    const angle = (joint.g as any).toRad(theta + (sign * reverse * 90));
 
-                    const shift = joint.g.Point.fromPolar(offset * sign, angle, 0);
+                    const shift = (joint.g as any).Point.fromPolar(offset * sign, angle, 0);
                     this.ignoreAdjustVertices = true;
                     sibling.source(sibling.getSourceCell(), {
                         anchor: {

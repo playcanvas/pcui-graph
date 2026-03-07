@@ -1,6 +1,8 @@
 import * as joint from '@joint/core';
 import { Menu, Container, Label, TextInput, BooleanInput, NumericInput, VectorInput } from '@playcanvas/pcui';
 
+import type GraphView from './graph-view';
+
 const Colors = {
     bcgDarkest: '#20292b',
     bcgDarker: '#293538',
@@ -14,7 +16,36 @@ const Colors = {
 };
 
 class GraphViewNode {
-    constructor(graphView, paper, graph, graphSchema, nodeData, nodeSchema, onCreateEdge, onNodeSelected) {
+    static STATES = {
+        DEFAULT: 0,
+        SELECTED: 1
+    };
+
+    _graphView: GraphView;
+
+    _config: any;
+
+    _paper: any;
+
+    _graph: any;
+
+    _graphSchema: any;
+
+    nodeData: any;
+
+    nodeSchema: any;
+
+    state: number;
+
+    model: any;
+
+    _contextMenu: any;
+
+    _suppressChangeTargetEvent: boolean;
+
+    _hasLinked: boolean;
+
+    constructor(graphView: GraphView, paper: any, graph: any, graphSchema: any, nodeData: any, nodeSchema: any, onCreateEdge: (edgeId: string, edge: any) => void, onNodeSelected: (nodeData: any) => void) {
         this._graphView = graphView;
         this._config = graphView._config;
         this._paper = paper;
@@ -23,6 +54,8 @@ class GraphViewNode {
         this.nodeData = nodeData;
         this.nodeSchema = nodeSchema;
         this.state = GraphViewNode.STATES.DEFAULT;
+        this._suppressChangeTargetEvent = false;
+        this._hasLinked = false;
 
         const rectHeight = this.getSchemaValue('baseHeight');
         let portHeight = 0;
@@ -34,7 +67,7 @@ class GraphViewNode {
             const outHeight = (nodeSchema.outPorts.length * 25) + 10;
             if (outHeight > portHeight) portHeight = outHeight;
         }
-        const visibleAttributes = nodeSchema.attributes && nodeSchema.attributes.filter(a => !a.hidden);
+        const visibleAttributes = nodeSchema.attributes && nodeSchema.attributes.filter((a: any) => !a.hidden);
         if (visibleAttributes && visibleAttributes.length > 0) {
             attributeHeight = visibleAttributes.length * 32 + 10;
         }
@@ -49,7 +82,7 @@ class GraphViewNode {
         } else {
             labelName = nodeData.attributes && nodeData.attributes.name || nodeData.name;
         }
-        const rect = new joint.shapes.html.Element({
+        const rect = new (joint.shapes as any).html.Element({
             attrs: {
                 body: {
                     fill: this.getSchemaValue('fill'),
@@ -215,7 +248,7 @@ class GraphViewNode {
         rect.resize(rectSize.x, rectSize.y);
 
         if (nodeSchema.inPorts) {
-            nodeSchema.inPorts.forEach((port, i) => {
+            nodeSchema.inPorts.forEach((port: any, i: number) => {
                 rect.addPort({
                     id: `in${i}`,
                     group: 'in',
@@ -242,7 +275,7 @@ class GraphViewNode {
                         }
                     }
                 });
-                this._graph.on('change:target', (cell) => {
+                this._graph.on('change:target', (cell: any) => {
                     if (this._suppressChangeTargetEvent) return;
                     let target = cell.get('target');
                     let source = cell.get('source');
@@ -273,7 +306,7 @@ class GraphViewNode {
         }
 
         if (nodeSchema.outPorts) {
-            nodeSchema.outPorts.forEach((port, i) => rect.addPort({
+            nodeSchema.outPorts.forEach((port: any, i: number) => rect.addPort({
                 id: `out${i}`,
                 group: 'out',
                 markup: [{
@@ -301,18 +334,18 @@ class GraphViewNode {
             }));
         }
 
-        const containers = [];
+        const containers: Container[] = [];
         if (visibleAttributes) {
-            visibleAttributes.forEach((attribute, i) => {
+            visibleAttributes.forEach((attribute: any, i: number) => {
                 const container = new Container({ class: 'graph-node-container' });
                 const label = new Label({ text: attribute.name, class: 'graph-node-label' });
-                let input;
-                let nodeValue;
+                let input: any;
+                let nodeValue: any;
                 if (nodeData.attributes) {
                     if (nodeData.attributes[attribute.name] !== undefined) {
                         nodeValue = nodeData.attributes[attribute.name];
                     } else {
-                        Object.keys(nodeData.attributes).forEach((k) => {
+                        Object.keys(nodeData.attributes).forEach((k: string) => {
                             const a = nodeData.attributes[k];
                             if (a.name === attribute.name) {
                                 nodeValue = a.defaultValue;
@@ -340,9 +373,9 @@ class GraphViewNode {
                             value: [
                                 nodeValue.x,
                                 nodeValue.y
-                            ] });
+                            ] } as any);
                         input.dom.setAttribute('style', 'margin-right: 6px;');
-                        input.inputs.forEach(i => i._sliderControl.dom.remove());
+                        input.inputs.forEach((inp: any) => inp._sliderControl.dom.remove());
                         break;
                     case 'VEC_3_INPUT':
                         input = new VectorInput({ dimensions: 3,
@@ -352,9 +385,9 @@ class GraphViewNode {
                                 nodeValue.x,
                                 nodeValue.y,
                                 nodeValue.z
-                            ] });
+                            ] } as any);
                         input.dom.setAttribute('style', 'margin-right: 6px;');
-                        input.inputs.forEach(i => i._sliderControl.dom.remove());
+                        input.inputs.forEach((inp: any) => inp._sliderControl.dom.remove());
                         break;
                     case 'VEC_4_INPUT':
                         input = new VectorInput({ dimensions: 4,
@@ -365,9 +398,9 @@ class GraphViewNode {
                                 nodeValue.y,
                                 nodeValue.z,
                                 nodeValue.w
-                            ] });
+                            ] } as any);
                         input.dom.setAttribute('style', 'margin-right: 6px;');
-                        input.inputs.forEach(i => i._sliderControl.dom.remove());
+                        input.inputs.forEach((inp: any) => inp._sliderControl.dom.remove());
                         break;
                 }
                 input.enabled = !this._graphView._config.readOnly;
@@ -382,7 +415,7 @@ class GraphViewNode {
         const onCellMountedToDom = () => {
             const nodeDiv = document.querySelector(`#nodediv_${rect.id}`);
             containers.forEach((container) => {
-                nodeDiv.appendChild(container.dom);
+                nodeDiv!.appendChild(container.dom);
             });
             this._paper.findViewByModel(rect).on('element:pointerdown', () => {
                 if (this._hasLinked) {
@@ -405,27 +438,26 @@ class GraphViewNode {
         this.model = rect;
     }
 
-    getSchemaValue(item) {
+    getSchemaValue(item: string): any {
         return this.nodeSchema[item] !== undefined ? this.nodeSchema[item] : this._config.defaultStyles.node[item];
     }
 
-    addContextMenu(items) {
+    addContextMenu(items: any[]): void {
         if (this._graphView._config.readOnly) return;
         this._contextMenu = new Menu({
             items: this._graphView._parent._initializeNodeContextMenuItems(this.nodeData, items)
         });
         this._paper.el.appendChild(this._contextMenu.dom);
         const nodeElement = this._paper.findViewByModel(this.model).el;
-        nodeElement.addEventListener('contextmenu', (e) => {
+        nodeElement.addEventListener('contextmenu', (e: MouseEvent) => {
             e.preventDefault();
             this._contextMenu.position(e.clientX, e.clientY);
             this._contextMenu.hidden = false;
         });
     }
 
-
-    mapVectorToArray(v) {
-        const arr = [];
+    mapVectorToArray(v: any): number[] {
+        const arr: number[] = [];
         if (Number.isFinite(v.x)) arr.push(v.x);
         if (Number.isFinite(v.y)) arr.push(v.y);
         if (Number.isFinite(v.z)) arr.push(v.z);
@@ -433,7 +465,7 @@ class GraphViewNode {
         return arr;
     }
 
-    updateFormattedTextFields() {
+    updateFormattedTextFields(): void {
         if (this.nodeSchema.headerTextFormatter) {
             const formattedText = this.nodeSchema.headerTextFormatter(this.nodeData.attributes, this.nodeData.id);
             if (typeof formattedText === 'string') {
@@ -441,24 +473,24 @@ class GraphViewNode {
             }
         }
         if (this.nodeSchema.outPorts) {
-            this.nodeSchema.outPorts.forEach((port, i) => {
+            this.nodeSchema.outPorts.forEach((port: any, i: number) => {
                 if (port.textFormatter) {
-                    document.getElementById(`${this.nodeData.id}-out${i}`).parentElement.parentElement.querySelector('tspan').innerHTML = port.textFormatter(this.nodeData.attributes);
+                    document.getElementById(`${this.nodeData.id}-out${i}`)!.parentElement!.parentElement!.querySelector('tspan')!.innerHTML = port.textFormatter(this.nodeData.attributes);
                 }
             });
         }
         if (this.nodeSchema.inPorts) {
-            this.nodeSchema.inPorts.forEach((port, i) => {
+            this.nodeSchema.inPorts.forEach((port: any, i: number) => {
                 if (port.textFormatter) {
-                    document.getElementById(`${this.nodeData.id}-in${i}`).parentElement.parentElement.querySelector('tspan').innerHTML = port.textFormatter(this.nodeData.attributes);
+                    document.getElementById(`${this.nodeData.id}-in${i}`)!.parentElement!.parentElement!.querySelector('tspan')!.innerHTML = port.textFormatter(this.nodeData.attributes);
                 }
             });
         }
     }
 
-    updateAttribute(attribute, value) {
+    updateAttribute(attribute: string, value: any): void {
         this.nodeData.attributes[attribute] = value;
-        const attributeElement = document.querySelector(`#nodediv_${this.model.id}`).querySelector(`#input_${attribute}`);
+        const attributeElement = document.querySelector(`#nodediv_${this.model.id}`)!.querySelector(`#input_${attribute}`) as any;
         if (attributeElement) {
             attributeElement.ui.suspendEvents = true;
             if (Number.isFinite(value.x)) {
@@ -472,23 +504,23 @@ class GraphViewNode {
         this.updateFormattedTextFields();
     }
 
-    setAttributeErrorState(attribute, value) {
-        const attributeElement = document.querySelector(`#nodediv_${this.model.id}`).querySelector(`#input_${attribute}`);
+    setAttributeErrorState(attribute: string, value: boolean): void {
+        const attributeElement = document.querySelector(`#nodediv_${this.model.id}`)!.querySelector(`#input_${attribute}`) as any;
         if (attributeElement) {
             attributeElement.ui.error = value;
         }
     }
 
-    updateNodeType(nodeType) {
+    updateNodeType(nodeType: string | number): void {
         this._paper.findViewByModel(this.model).el.removeEventListener('contextmenu', this._contextMenu._contextMenuEvent);
         this.addContextMenu(this._graphSchema.nodes[nodeType].contextMenuItems);
     }
 
-    updatePosition(pos) {
+    updatePosition(pos: { x: number; y: number }): void {
         this.model.position(pos.x, pos.y);
     }
 
-    addEvent(event, callback, attribute) {
+    addEvent(event: string, callback: (...args: any[]) => void, attribute?: any): void {
         const nodeView = this._paper.findViewByModel(this.model);
         switch (event) {
             case 'updatePosition': {
@@ -499,23 +531,23 @@ class GraphViewNode {
                 break;
             }
             case 'updateAttribute': {
-                const attributeElement = document.querySelector(`#nodediv_${this.model.id}`).querySelector(`#input_${attribute.name}`);
+                const attributeElement = document.querySelector(`#nodediv_${this.model.id}`)!.querySelector(`#input_${attribute.name}`) as any;
                 if (!attributeElement) break;
-                attributeElement.ui.on('change', (value) => {
+                attributeElement.ui.on('change', (value: any) => {
                     if (attribute.name === 'name') {
                         let nameTaken = false;
-                        Object.keys(this._graphView._graphData.get('data.nodes')).forEach((nodeKey) => {
+                        Object.keys(this._graphView._graphData.get('data.nodes')).forEach((nodeKey: string) => {
                             const node = this._graphView._graphData.get('data.nodes')[nodeKey];
                             if (node.name === value) {
                                 nameTaken = true;
                             }
                         });
-                        const attributeElement = document.querySelector(`#nodediv_${this.model.id}`).querySelector(`#input_${attribute.name}`);
+                        const attrEl = document.querySelector(`#nodediv_${this.model.id}`)!.querySelector(`#input_${attribute.name}`) as any;
                         if (nameTaken) {
-                            attributeElement.ui.error = true;
+                            attrEl.ui.error = true;
                             return;
                         }
-                        attributeElement.ui.error = false;
+                        attrEl.ui.error = false;
                     }
                     callback(this.nodeData.id, attribute, value);
                 });
@@ -524,17 +556,17 @@ class GraphViewNode {
         }
     }
 
-    select() {
+    select(): void {
         this.model.attr('body/stroke', this.getSchemaValue('strokeSelected'));
         this.state = GraphViewNode.STATES.SELECTED;
     }
 
-    hover() {
+    hover(): void {
         if (this.state === GraphViewNode.STATES.SELECTED) return;
         this.model.attr('body/stroke', this.getSchemaValue('strokeHover'));
     }
 
-    hoverRemove() {
+    hoverRemove(): void {
         if (this.state === GraphViewNode.STATES.DEFAULT) {
             this.deselect();
         } else if (this.state === GraphViewNode.STATES.SELECTED) {
@@ -542,15 +574,10 @@ class GraphViewNode {
         }
     }
 
-    deselect() {
+    deselect(): void {
         this.model.attr('body/stroke', this.getSchemaValue('stroke'));
         this.state = GraphViewNode.STATES.DEFAULT;
     }
 }
-
-GraphViewNode.STATES = {
-    DEFAULT: 0,
-    SELECTED: 1
-};
 
 export default GraphViewNode;

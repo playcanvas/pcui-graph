@@ -1,20 +1,47 @@
 import * as joint from '@joint/core';
 import { Menu } from '@playcanvas/pcui';
 
-joint.connectors.smoothInOut = function (sourcePoint, targetPoint, vertices, args) {
+import type GraphView from './graph-view';
+
+(joint as any).connectors.smoothInOut = function (sourcePoint: any, targetPoint: any, vertices: any, args: any) {
     const p1 = sourcePoint.clone();
     p1.offset(30, 0);
 
     const p2 = targetPoint.clone();
     p2.offset(-30, 0);
 
-    const path = new joint.g.Path(joint.g.Path.createSegment('M', sourcePoint));
-    path.appendSegment(joint.g.Path.createSegment('C', p1, p2, targetPoint));
+    const path = new (joint.g as any).Path((joint.g as any).Path.createSegment('M', sourcePoint));
+    path.appendSegment((joint.g as any).Path.createSegment('C', p1, p2, targetPoint));
     return path;
 };
 
 class GraphViewEdge {
-    constructor(graphView, paper, graph, graphSchema, edgeData, edgeSchema, onEdgeSelected) {
+    static STATES = {
+        DEFAULT: 0,
+        SELECTED: 1
+    };
+
+    _graphView: GraphView;
+
+    _config: any;
+
+    _paper: any;
+
+    _graph: any;
+
+    _graphSchema: any;
+
+    edgeData: any;
+
+    _edgeSchema: any;
+
+    state: number;
+
+    model: any;
+
+    _contextMenu: any;
+
+    constructor(graphView: GraphView, paper: any, graph: any, graphSchema: any, edgeData: any, edgeSchema: any, onEdgeSelected: (edgeData: any) => void) {
         this._graphView = graphView;
         this._config = graphView._config;
         this._paper = paper;
@@ -67,7 +94,7 @@ class GraphViewEdge {
         this.model = link;
     }
 
-    static createLink(defaultStyles, edgeSchema, edgeData) {
+    static createLink(defaultStyles: any, edgeSchema: any, edgeData?: any): any {
         const link = new joint.shapes.standard.Link();
         link.attr({
             line: {
@@ -103,21 +130,21 @@ class GraphViewEdge {
         return link;
     }
 
-    addContextMenu(items) {
+    addContextMenu(items: any[]): void {
         if (this._graphView._config.readOnly) return;
         this._contextMenu = new Menu({
             items: items
         });
         this._paper.el.appendChild(this._contextMenu.dom);
         const edgeElement = this._paper.findViewByModel(this.model).el;
-        edgeElement.addEventListener('contextmenu', (e) => {
+        edgeElement.addEventListener('contextmenu', (e: MouseEvent) => {
             e.preventDefault();
             this._contextMenu.position(e.clientX, e.clientY);
             this._contextMenu.hidden = false;
         });
     }
 
-    select() {
+    select(): void {
         const edgeSchema = this._edgeSchema;
         this.model.attr('line/stroke', edgeSchema.strokeSelected || this._config.defaultStyles.edge.strokeSelected);
         this.model.attr('line/strokeWidth', edgeSchema.strokeWidthSelected || this._config.defaultStyles.edge.strokeWidthSelected);
@@ -127,7 +154,7 @@ class GraphViewEdge {
         });
     }
 
-    deselect() {
+    deselect(): void {
         const edgeSchema = this._edgeSchema;
         this.model.attr('line/stroke', edgeSchema.stroke || this._config.defaultStyles.edge.stroke);
         this.model.attr('line/strokeWidth', edgeSchema.strokeWidth || this._config.defaultStyles.edge.strokeWidth);
@@ -138,7 +165,7 @@ class GraphViewEdge {
         this.state = GraphViewEdge.STATES.DEFAULT;
     }
 
-    mute() {
+    mute(): void {
         const edgeSchema = this._edgeSchema;
         this.model.attr('line/stroke', '#42495B');
         this.model.attr('line/strokeWidth', edgeSchema.strokeWidth || this._config.defaultStyles.edge.stroke);
@@ -148,7 +175,7 @@ class GraphViewEdge {
         });
     }
 
-    addSourceMarker() {
+    addSourceMarker(): void {
         const edgeSchema = this._edgeSchema;
         this.model.attr('line/sourceMarker', {
             'type': 'path',
@@ -158,7 +185,7 @@ class GraphViewEdge {
         });
     }
 
-    addTargetMarker() {
+    addTargetMarker(): void {
         const edgeSchema = this._edgeSchema;
         this.model.attr('line/targetMarker', {
             'type': 'path',
@@ -168,10 +195,5 @@ class GraphViewEdge {
         });
     }
 }
-
-GraphViewEdge.STATES = {
-    DEFAULT: 0,
-    SELECTED: 1
-};
 
 export default GraphViewEdge;
