@@ -1,4 +1,4 @@
-import * as joint from '@joint/core';
+import { dia, shapes } from '@joint/core';
 import { Menu, Container, Label, TextInput, BooleanInput, NumericInput, VectorInput } from '@playcanvas/pcui';
 
 import type GraphView from './graph-view';
@@ -25,9 +25,9 @@ class GraphViewNode {
 
     _config: any;
 
-    _paper: any;
+    _paper: dia.Paper;
 
-    _graph: any;
+    _graph: dia.Graph;
 
     _graphSchema: any;
 
@@ -37,15 +37,15 @@ class GraphViewNode {
 
     state: number;
 
-    model: any;
+    model: dia.Element;
 
-    _contextMenu: any;
+    _contextMenu: Menu | null;
 
     _suppressChangeTargetEvent: boolean;
 
     _hasLinked: boolean;
 
-    constructor(graphView: GraphView, paper: any, graph: any, graphSchema: any, nodeData: any, nodeSchema: any, onCreateEdge: (edgeId: string, edge: any) => void, onNodeSelected: (nodeData: any) => void) {
+    constructor(graphView: GraphView, paper: dia.Paper, graph: dia.Graph, graphSchema: any, nodeData: any, nodeSchema: any, onCreateEdge: (edgeId: string, edge: any) => void, onNodeSelected: (nodeData: any) => void) {
         this._graphView = graphView;
         this._config = graphView._config;
         this._paper = paper;
@@ -82,7 +82,7 @@ class GraphViewNode {
         } else {
             labelName = nodeData.attributes && nodeData.attributes.name || nodeData.name;
         }
-        const rect = new (joint.shapes as any).html.Element({
+        const rect = new (shapes as any).html.Element({
             attrs: {
                 body: {
                     fill: this.getSchemaValue('fill'),
@@ -275,7 +275,7 @@ class GraphViewNode {
                         }
                     }
                 });
-                this._graph.on('change:target', (cell: any) => {
+                this._graph.on('change:target', (cell: dia.Cell) => {
                     if (this._suppressChangeTargetEvent) return;
                     let target = cell.get('target');
                     let source = cell.get('source');
@@ -297,7 +297,7 @@ class GraphViewNode {
                             edgeType: port.type
                         };
                         this._suppressChangeTargetEvent = true;
-                        this._graph.removeCells(cell);
+                        this._graph.removeCells([cell]);
                         this._suppressChangeTargetEvent = false;
                         onCreateEdge(edgeId, edge);
                     }
@@ -512,7 +512,7 @@ class GraphViewNode {
     }
 
     updateNodeType(nodeType: string | number): void {
-        this._paper.findViewByModel(this.model).el.removeEventListener('contextmenu', this._contextMenu._contextMenuEvent);
+        this._paper.findViewByModel(this.model).el.removeEventListener('contextmenu', (this._contextMenu as any)._contextMenuEvent);
         this.addContextMenu(this._graphSchema.nodes[nodeType].contextMenuItems);
     }
 

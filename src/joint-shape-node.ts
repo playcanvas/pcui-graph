@@ -1,8 +1,8 @@
-import * as joint from '@joint/core';
+import { dia, shapes, util } from '@joint/core';
 import _ from 'lodash';
 
-const jointShapeElement = () => (joint.shapes.standard.Rectangle as any).extend({
-    defaults: (joint.util as any).deepSupplement({
+const jointShapeElement = () => (shapes.standard.Rectangle as any).extend({
+    defaults: (util as any).deepSupplement({
         type: 'html.Element',
         markup: [{
             tagName: 'rect',
@@ -32,13 +32,13 @@ const jointShapeElement = () => (joint.shapes.standard.Rectangle as any).extend(
             tagName: 'path',
             selector: 'marker'
         }]
-    }, (joint.shapes.standard.Rectangle as any).prototype.defaults)
+    }, (shapes.standard.Rectangle as any).prototype.defaults)
 });
 
-const jointShapeElementView = (paper: any) => joint.dia.ElementView.extend({
+const jointShapeElementView = (paper: dia.Paper) => dia.ElementView.extend({
     initialize: function () {
         _.bindAll(this, 'updateBox');
-        joint.dia.ElementView.prototype.initialize.apply(this, arguments as any);
+        dia.ElementView.prototype.initialize.apply(this, arguments as any);
 
         this.div = document.createElement('div');
         this.div.setAttribute('id', `nodediv_${this.model.id}`);
@@ -52,7 +52,7 @@ const jointShapeElementView = (paper: any) => joint.dia.ElementView.extend({
         this.model.on('remove', this.removeBox, this);
     },
     render: function () {
-        joint.dia.ElementView.prototype.render.apply(this, arguments as any);
+        dia.ElementView.prototype.render.apply(this, arguments as any);
         this.el.appendChild(this._fo);
         this.updateBox();
         return this;
