@@ -346,7 +346,7 @@ class GraphView extends JointGraph {
         const mouseMoveEvent = (e: MouseEvent) => {
             const mousePos = this.getWindowToGraphPosition(new Vec2(e.clientX, e.clientY));
             const sourceNodeView = this._paper.findViewByModel(this.getNode(nodeId).model);
-            const sourceNodePos = this.getGraphPosition(sourceNodeView.el.getBoundingClientRect());
+            const sourceNodePos = this.getGraphPosition();
             let pointerVector = mousePos.clone().sub(sourceNodePos);
             const direction = (new Vec2(e.clientX, e.clientY)).clone().sub(sourceNodeView.el.getBoundingClientRect()).normalize().mulScalar(20);
             pointerVector = sourceNodePos.add(pointerVector).sub(direction);
@@ -435,10 +435,7 @@ class GraphView extends JointGraph {
         this._paper.translate(posX, posY);
     }
 
-    getGraphPosition(rect?: DOMRect): Vec2 {
-        if (rect) {
-            return new Vec2(rect.x, rect.y);
-        }
+    getGraphPosition(): Vec2 {
         const t = this._paper.translate();
         return new Vec2([t.tx, t.ty]);
     }
