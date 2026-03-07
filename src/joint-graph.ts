@@ -85,9 +85,13 @@ class JointGraph {
                 });
             },
             validateConnection: (cellViewS: any, magnetS: any, cellViewT: any, magnetT: any, end: any, linkView: any) => {
+                // Can't connect to self
                 if (cellViewS.model.id === cellViewT.model.id) return false;
+
+                // Need valid magnets
                 if (!magnetS || !magnetT) return false;
 
+                // Get port info from the parent group element
                 const sPortGroup = magnetS.parentNode;
                 const tPortGroup = magnetT.parentNode;
                 if (!sPortGroup || !tPortGroup) return false;
@@ -96,13 +100,16 @@ class JointGraph {
                 const tPort = tPortGroup.getAttribute('port');
                 if (!sPort || !tPort) return false;
 
+                // Can't connect in-to-in or out-to-out
                 if ((sPort.includes('in') && tPort.includes('in')) || (sPort.includes('out') && tPort.includes('out'))) return false;
 
+                // Check if source port is already connected (for 'in' ports)
                 if (sPort.includes('in')) {
                     const innerBody = sPortGroup.querySelector('.port-inner-body');
                     if (innerBody && innerBody.getAttribute('visibility') !== 'hidden') return false;
                 }
 
+                // Check edge type compatibility (JointJS 4.x converts edgeType to edge-type)
                 const sEdgeType = magnetS.getAttribute('edge-type') || magnetS.getAttribute('edgeType');
                 const tEdgeType = magnetT.getAttribute('edge-type') || magnetT.getAttribute('edgeType');
                 if (sEdgeType !== tEdgeType) return false;
