@@ -40,7 +40,7 @@ export const DEFAULT_CONFIG = {
             textColor: '#FFFFFF',
             textColorSecondary: '#b1b8ba',
             includeIcon: true,
-            icon: '',
+            icon: '',
             iconColor: '#F60',
             baseHeight: 28,
             baseWidth: 226,
