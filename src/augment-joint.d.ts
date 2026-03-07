@@ -18,7 +18,9 @@ declare module '@joint/core' {
     namespace shapes {
         namespace html {
             class Element extends dia.Element { }
-            class ElementView extends dia.ElementView { }
+            class ElementView extends dia.ElementView {
+                updateBox(): void;
+            }
         }
     }
 }
