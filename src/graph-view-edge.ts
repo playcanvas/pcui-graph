@@ -1,17 +1,17 @@
-import * as joint from '@joint/core';
+import { connectors, dia, g, shapes } from '@joint/core';
 import { Menu } from '@playcanvas/pcui';
 
 import type GraphView from './graph-view';
 
-(joint.connectors as any).smoothInOut = function (sourcePoint: joint.g.Point, targetPoint: joint.g.Point) {
+(connectors as any).smoothInOut = function (sourcePoint: g.Point, targetPoint: g.Point) {
     const p1 = sourcePoint.clone();
     p1.offset(30, 0);
 
     const p2 = targetPoint.clone();
     p2.offset(-30, 0);
 
-    const path = new joint.g.Path(joint.g.Path.createSegment('M', sourcePoint));
-    path.appendSegment(joint.g.Path.createSegment('C', p1, p2, targetPoint));
+    const path = new g.Path(g.Path.createSegment('M', sourcePoint));
+    path.appendSegment(g.Path.createSegment('C', p1, p2, targetPoint));
     return path;
 };
 
@@ -25,9 +25,9 @@ class GraphViewEdge {
 
     _config: any;
 
-    _paper: joint.dia.Paper;
+    _paper: dia.Paper;
 
-    _graph: joint.dia.Graph;
+    _graph: dia.Graph;
 
     _graphSchema: any;
 
@@ -37,11 +37,11 @@ class GraphViewEdge {
 
     state: number;
 
-    model: joint.shapes.standard.Link;
+    model: shapes.standard.Link;
 
     _contextMenu: Menu | null;
 
-    constructor(graphView: GraphView, paper: joint.dia.Paper, graph: joint.dia.Graph, graphSchema: any, edgeData: any, edgeSchema: any, onEdgeSelected: (edgeData: any) => void) {
+    constructor(graphView: GraphView, paper: dia.Paper, graph: dia.Graph, graphSchema: any, edgeData: any, edgeSchema: any, onEdgeSelected: (edgeData: any) => void) {
         this._graphView = graphView;
         this._config = graphView._config;
         this._paper = paper;
@@ -95,8 +95,8 @@ class GraphViewEdge {
         this.model = link;
     }
 
-    static createLink(defaultStyles: any, edgeSchema: any, edgeData?: any): joint.shapes.standard.Link {
-        const link = new joint.shapes.standard.Link();
+    static createLink(defaultStyles: any, edgeSchema: any, edgeData?: any): shapes.standard.Link {
+        const link = new shapes.standard.Link();
         link.attr({
             line: {
                 strokeWidth: edgeSchema.strokeWidth || defaultStyles.edge.strokeWidth,
