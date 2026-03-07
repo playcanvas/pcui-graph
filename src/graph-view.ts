@@ -111,8 +111,8 @@ class GraphView extends JointGraph {
             },
             'cell:mouseleave': (cellView: dia.CellView, e: dia.Event) => {
                 let selectedEdge: GraphViewEdge | null;
-                const mouseEvt = e as unknown as MouseEvent;
-                if (mouseEvt.relatedTarget && (mouseEvt.relatedTarget as Element).classList.contains('graph-node-input')) return;
+                const related = (e as unknown as MouseEvent).relatedTarget;
+                if (related instanceof Element && related.classList.contains('graph-node-input')) return;
                 const node = this.getNode(cellView.model.id);
                 if (node && node.state !== GraphViewNode.STATES.SELECTED) {
                     selectedEdge = this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE' ? this.getEdge(this._parent._selectedItem._id) : null;
