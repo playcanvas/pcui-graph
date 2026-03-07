@@ -113,6 +113,20 @@ class Graph extends Element {
     }
 
     /**
+     * The currently selected item in the graph, or null if nothing is selected.
+     *
+     * @type {{ type: ('NODE'|'EDGE'), id: string|number, edgeId: string|number|undefined }|null}
+     */
+    get selectedItem() {
+        if (!this._selectedItem) return null;
+        return {
+            type: this._selectedItem.type,
+            id: this._selectedItem.id,
+            edgeId: this._selectedItem.edgeId
+        };
+    }
+
+    /**
      * Destroy the graph. Clears the graph from the DOM and removes all event listeners associated
      * with the graph.
      */
