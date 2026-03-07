@@ -1,8 +1,8 @@
 import * as joint from '@joint/core';
 import _ from 'lodash';
 
-const jointShapeElement = () => joint.shapes.standard.Rectangle.extend({
-    defaults: joint.util.deepSupplement({
+const jointShapeElement = () => (joint.shapes.standard.Rectangle as any).extend({
+    defaults: (joint.util as any).deepSupplement({
         type: 'html.Element',
         markup: [{
             tagName: 'rect',
@@ -32,13 +32,13 @@ const jointShapeElement = () => joint.shapes.standard.Rectangle.extend({
             tagName: 'path',
             selector: 'marker'
         }]
-    }, joint.shapes.standard.Rectangle.prototype.defaults)
+    }, (joint.shapes.standard.Rectangle as any).prototype.defaults)
 });
 
-const jointShapeElementView = paper => joint.dia.ElementView.extend({
+const jointShapeElementView = (paper: any) => joint.dia.ElementView.extend({
     initialize: function () {
         _.bindAll(this, 'updateBox');
-        joint.dia.ElementView.prototype.initialize.apply(this, arguments);
+        joint.dia.ElementView.prototype.initialize.apply(this, arguments as any);
 
         this.div = document.createElement('div');
         this.div.setAttribute('id', `nodediv_${this.model.id}`);
@@ -52,7 +52,7 @@ const jointShapeElementView = paper => joint.dia.ElementView.extend({
         this.model.on('remove', this.removeBox, this);
     },
     render: function () {
-        joint.dia.ElementView.prototype.render.apply(this, arguments);
+        joint.dia.ElementView.prototype.render.apply(this, arguments as any);
         this.el.appendChild(this._fo);
         this.updateBox();
         return this;
@@ -63,7 +63,7 @@ const jointShapeElementView = paper => joint.dia.ElementView.extend({
         this._fo.setAttribute('height', bbox.height);
         this.div.setAttribute('style', `width: ${bbox.width}px; height: ${bbox.height}px;`);
     },
-    removeBox: function (evt) {
+    removeBox: function (evt: any) {
         this._fo.remove();
     }
 });

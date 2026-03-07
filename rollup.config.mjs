@@ -1,11 +1,11 @@
-import { babel } from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
+import typescript from '@rollup/plugin-typescript';
 import postcss from 'rollup-plugin-postcss';
 
 const umd = {
-    input: 'src/index.js',
+    input: 'src/index.ts',
     output: {
         file: 'dist/pcui-graph.js',
         format: 'umd',
@@ -22,14 +22,18 @@ const umd = {
             extensions: ['.css', '.scss']
         }),
         commonjs({ transformMixedEsModules: true }),
-        babel({ babelHelpers: 'bundled' }),
+        typescript({
+            noEmitOnError: true,
+            tsconfig: 'tsconfig.json',
+            sourceMap: true
+        }),
         resolve(),
         process.env.NODE_ENV === 'production' && terser()
     ]
 };
 
 const module = {
-    input: 'src/index.js',
+    input: 'src/index.ts',
     output: {
         file: 'dist/pcui-graph.mjs',
         format: 'module'
@@ -37,7 +41,11 @@ const module = {
     external: ['@playcanvas/observer', '@playcanvas/pcui'],
     plugins: [
         commonjs({ transformMixedEsModules: true }),
-        babel({ babelHelpers: 'bundled' }),
+        typescript({
+            noEmitOnError: true,
+            tsconfig: 'tsconfig.json',
+            sourceMap: true
+        }),
         postcss({
             minimize: false,
             extensions: ['.css', '.scss']
@@ -46,7 +54,6 @@ const module = {
         process.env.NODE_ENV === 'production' && terser()
     ]
 };
-
 
 const styles = {
     input: 'src/styles/index.js',
@@ -62,7 +69,6 @@ const styles = {
         })
     ]
 };
-
 
 let targets;
 if (process.env.target) {

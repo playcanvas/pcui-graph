@@ -1,5 +1,5 @@
 import React from 'react';
-import Graph from '../src/index.js';
+import Graph from '../src/index.ts';
 import '@playcanvas/pcui/styles';
 import '../src/styles/index.js';
 

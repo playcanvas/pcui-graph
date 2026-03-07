@@ -10,7 +10,7 @@ export const GRAPH_ACTIONS = {
     DESELECT_ITEM: 'EVENT_DESELECT_ITEM',
     UPDATE_TRANSLATE: 'EVENT_UPDATE_TRANSLATE',
     UPDATE_SCALE: 'EVENT_UPDATE_SCALE'
-};
+} as const;
 
 export const DEFAULT_CONFIG = {
     readOnly: false,
@@ -40,7 +40,7 @@ export const DEFAULT_CONFIG = {
             textColor: '#FFFFFF',
             textColorSecondary: '#b1b8ba',
             includeIcon: true,
-            icon: '',
+            icon: '',
             iconColor: '#F60',
             baseHeight: 28,
             baseWidth: 226,
