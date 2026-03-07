@@ -1,6 +1,6 @@
 {
   "name": "@playcanvas/pcui-graph",
-  "version": "5.1.0",
+  "version": "5.2.0",
   "author": "PlayCanvas <support@playcanvas.com>",
   "homepage": "https://github.com/playcanvas/pcui-graph",
   "description": "A PCUI plugin for creating node-based graphs",
