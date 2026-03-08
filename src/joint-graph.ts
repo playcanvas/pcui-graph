@@ -1,36 +1,7 @@
-import { dia, g, shapes, V } from '@joint/core';
+import { dia, g, shapes } from '@joint/core';
 
+import './joint-patches';
 import { Vec2 } from './lib/vec2';
-
-(V as any).matrixToTransformString = function (matrix: any) {
-    if (!matrix) matrix = true;
-    return `matrix(${[
-        matrix.a || 1,
-        matrix.b || 0,
-        matrix.c || 0,
-        matrix.d || 1,
-        matrix.e || 0,
-        matrix.f || 0
-    ]})`;
-};
-
-(V as any).prototype.transform = function (matrix: any, opt: any) {
-
-    const node = this.node;
-    if ((V as any).isUndefined(matrix)) {
-        return (node.parentNode) ?
-            this.getTransformToElement(node.parentNode) :
-            node.getScreenCTM();
-    }
-
-    if (opt && opt.absolute) {
-        return this.attr('transform', (V as any).matrixToTransformString(matrix));
-    }
-
-    const svgTransform = (V as any).createSVGTransform(matrix);
-    node.transform.baseVal.appendItem(svgTransform);
-    return this;
-};
 
 class JointGraph {
     _config: any;
