@@ -2,7 +2,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
-import postcss from 'rollup-plugin-postcss';
+import sass from 'rollup-plugin-sass';
 
 const umd = {
     input: 'src/index.ts',
@@ -10,6 +10,7 @@ const umd = {
         file: 'dist/pcui-graph.js',
         format: 'umd',
         name: 'pcuiGraph',
+        sourcemap: true,
         globals: {
             '@playcanvas/observer': 'observer',
             '@playcanvas/pcui': 'pcui'
@@ -17,10 +18,6 @@ const umd = {
     },
     external: ['@playcanvas/observer', '@playcanvas/pcui'],
     plugins: [
-        postcss({
-            minimize: false,
-            extensions: ['.css', '.scss']
-        }),
         commonjs({ transformMixedEsModules: true }),
         typescript({
             noEmitOnError: true,
@@ -36,7 +33,8 @@ const module = {
     input: 'src/index.ts',
     output: {
         file: 'dist/pcui-graph.mjs',
-        format: 'module'
+        format: 'module',
+        sourcemap: true
     },
     external: ['@playcanvas/observer', '@playcanvas/pcui'],
     plugins: [
@@ -45,10 +43,6 @@ const module = {
             noEmitOnError: true,
             tsconfig: 'tsconfig.json',
             sourceMap: true
-        }),
-        postcss({
-            minimize: false,
-            extensions: ['.css', '.scss']
         }),
         resolve(),
         process.env.NODE_ENV === 'production' && terser()
@@ -63,9 +57,10 @@ const styles = {
     },
     plugins: [
         resolve(),
-        postcss({
-            minimize: false,
-            extensions: ['.css', '.scss']
+        sass({
+            api: 'modern',
+            insert: true,
+            output: false
         })
     ]
 };
