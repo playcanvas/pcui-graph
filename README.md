@@ -17,7 +17,7 @@ Create node-based visual graphs in the browser. Supports undirected / directed g
 
 To install PCUI Graph, run:
 
-    npm install @playcanvas/pcui-graph --save-dev
+    npm install @playcanvas/pcui-graph
 
 Then import the library and its styles into your project:
 
@@ -65,12 +65,16 @@ The source lives in `src/` and is organized as follows:
 
 | File | Purpose |
 |------|---------|
-| `index.js` | Main `Graph` class and exports |
-| `graph-view.js` | Core graph view (wraps JointJS) |
-| `graph-view-node.js` | Node element |
-| `graph-view-edge.js` | Edge / connection element |
-| `constants.js` | Default configuration and event constants |
-| `selected-item.js` | Selection handling |
+| `index.ts` | Main `Graph` class and exports |
+| `graph-view.ts` | Core graph view (wraps JointJS) |
+| `graph-view-node.ts` | Node element |
+| `graph-view-edge.ts` | Edge / connection element |
+| `joint-graph.ts` | Base JointJS paper, pan, zoom and resize |
+| `joint-shape-node.ts` | Custom JointJS HTML element shape |
+| `constants.ts` | Default configuration and event constants |
+| `selected-item.ts` | Selection handling |
+| `util.ts` | Utility functions |
+| `lib/vec2.ts` | 2D vector math |
 | `styles/style.scss` | SCSS styles |
 
 To build and lint:
