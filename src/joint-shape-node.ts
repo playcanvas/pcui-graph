@@ -1,5 +1,4 @@
 import { dia, shapes, util } from '@joint/core';
-import _ from 'lodash';
 
 const jointShapeElement = () => (shapes.standard.Rectangle as any).extend({
     defaults: (util as any).deepSupplement({
@@ -37,7 +36,7 @@ const jointShapeElement = () => (shapes.standard.Rectangle as any).extend({
 
 const jointShapeElementView = (paper: dia.Paper) => dia.ElementView.extend({
     initialize: function () {
-        _.bindAll(this, 'updateBox');
+        this.updateBox = this.updateBox.bind(this);
         dia.ElementView.prototype.initialize.apply(this, arguments as any);
 
         this.div = document.createElement('div');
