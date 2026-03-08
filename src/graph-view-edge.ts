@@ -35,11 +35,11 @@ class GraphViewEdge {
 
     _edgeSchema: any;
 
-    state: number;
+    state = GraphViewEdge.STATES.DEFAULT;
 
     model: shapes.standard.Link;
 
-    _contextMenu: Menu | null;
+    _contextMenu: Menu | null = null;
 
     constructor(graphView: GraphView, paper: dia.Paper, graph: dia.Graph, graphSchema: any, edgeData: any, edgeSchema: any, onEdgeSelected: (edgeData: any) => void) {
         this._graphView = graphView;
@@ -49,8 +49,6 @@ class GraphViewEdge {
         this._graphSchema = graphSchema;
         this.edgeData = edgeData;
         this._edgeSchema = edgeSchema;
-        this.state = GraphViewEdge.STATES.DEFAULT;
-        this._contextMenu = null;
 
         const link = GraphViewEdge.createLink(this._config.defaultStyles, edgeSchema, edgeData);
         const sourceNode = this._graphView.getNode(edgeData.from);

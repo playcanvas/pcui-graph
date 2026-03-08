@@ -40,17 +40,17 @@ class JointGraph {
 
     _paper: dia.Paper;
 
-    _panPaper: boolean;
+    _panPaper = false;
 
-    _translate: Vec2;
+    _translate = new Vec2();
 
-    _totalTranslate: Vec2;
+    _totalTranslate = new Vec2();
 
-    _pan: Vec2;
+    _pan = new Vec2();
 
-    _mousePos: Vec2;
+    _mousePos = new Vec2();
 
-    ignoreAdjustVertices: boolean;
+    ignoreAdjustVertices = false;
 
     constructor(dom: HTMLElement, config: any = {}) {
 
@@ -131,12 +131,6 @@ class JointGraph {
         });
         graphResizeObserver.observe(dom);
 
-        this._panPaper = false;
-        this._translate = new Vec2();
-        this._totalTranslate = new Vec2();
-        this._pan = new Vec2();
-        this._mousePos = new Vec2();
-        this.ignoreAdjustVertices = false;
         this._paper.on('blank:pointerdown', (e: dia.Event) => {
             this._panPaper = true;
             this._mousePos = new Vec2(e.offsetX, e.offsetY);
