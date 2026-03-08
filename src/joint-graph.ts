@@ -201,7 +201,7 @@ class JointGraph {
         if (model instanceof dia.Element) {
             // `cell` is an element
             // Group connected links by the id of the *other* endpoint (not this element)
-            const groups: Record<string, dia.Link[]> = {};
+            const groups: Record<string, dia.Link[]> = Object.create(null);
             for (const link of graph.getConnectedLinks(model)) {
                 const ids = [link.source().id, link.target().id];
                 const key = String(ids.filter(id => id !== model.id)[0]);
