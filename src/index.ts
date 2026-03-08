@@ -553,7 +553,9 @@ class Graph extends Element {
      * @param nodeId - The node to delete.
      */
     deleteNode(nodeId: string | number): void {
-        const { node, edges } = this._deleteNode(nodeId);
+        const result = this._deleteNode(nodeId);
+        if (!result) return;
+        const { node, edges } = result;
         for (const edgeId of edges) {
             this.deleteEdge(edgeId);
         }
