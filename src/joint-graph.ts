@@ -239,6 +239,13 @@ class JointGraph {
             return ((siblingSourceId === sourceId) && (siblingTargetId === targetId)) ||
                 ((siblingSourceId === targetId) && (siblingTargetId === sourceId));
         });
+        // Sort by model ID so offset assignment is stable across calls
+        // (internal cell order can change due to toBack/toFront operations)
+        siblings.sort((a: dia.Link, b: dia.Link) => {
+            if (a.id < b.id) return -1;
+            if (a.id > b.id) return 1;
+            return 0;
+        });
         const numSiblings = siblings.length;
         switch (numSiblings) {
             case 0: {
