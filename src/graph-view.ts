@@ -170,10 +170,11 @@ class GraphView extends JointGraph {
         const source = cell.get('source');
         const target = cell.get('target');
         if (source && source.port && target && target.port) {
-            const sourceView = this._paper.findViewByModel(source.id) as any;
-            const targetView = this._paper.findViewByModel(target.id) as any;
-            sourceView._portElementsCache[source.port].portContentElement.children()[1].attr('visibility', connected ? 'visible' : 'hidden');
-            targetView._portElementsCache[target.port].portContentElement.children()[1].attr('visibility', connected ? 'visible' : 'hidden');
+            const sourceView = this._paper.findViewByModel<dia.ElementView>(source.id);
+            const targetView = this._paper.findViewByModel<dia.ElementView>(target.id);
+            const visibility = connected ? 'visible' : 'hidden';
+            sourceView?.findPortNode(source.port)?.children[1]?.setAttribute('visibility', visibility);
+            targetView?.findPortNode(target.port)?.children[1]?.setAttribute('visibility', visibility);
         }
     }
 
