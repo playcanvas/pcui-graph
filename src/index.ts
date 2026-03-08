@@ -553,11 +553,12 @@ class Graph extends Element {
      * @param nodeId - The node to delete.
      */
     deleteNode(nodeId: string | number): void {
-        const { node, edges, edgeData } = this._deleteNode(nodeId);
-        Object.values(edges).forEach((e: any) => {
-            const edge = edgeData[e];
-            this.deleteEdge(`${edge.from}-${edge.to}`);
-        });
+        const result = this._deleteNode(nodeId);
+        if (!result) return;
+        const { node, edges } = result;
+        for (const edgeId of edges) {
+            this.deleteEdge(edgeId);
+        }
         this._graphData.unset(`data.nodes.${nodeId}`);
         this.view.removeNode(node.id);
     }
