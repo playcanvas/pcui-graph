@@ -14,7 +14,7 @@ var GRAPH_ENUM = {
     NODE: {
         VARIABLE_FLOAT: 0,
         MULTIPLY: 1,
-        OUT: 2,
+        FRAGMENT_OUTPUT: 2,
         ADD: 3,
         SINE: 4,
         TEXTURE: 5,
