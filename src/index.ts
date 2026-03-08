@@ -50,13 +50,13 @@ class Graph extends Element {
 
     _contextMenuItems: any[];
 
-    _suppressGraphDataEvents: boolean;
+    _suppressGraphDataEvents = false;
 
     _config: any;
 
-    _selectedItem: SelectedItem | null;
+    _selectedItem: SelectedItem | null = null;
 
-    suppressNodeSelect: boolean;
+    suppressNodeSelect = false;
 
     view: GraphView;
 
@@ -92,9 +92,6 @@ class Graph extends Element {
         this._graphSchema = schema;
         this._graphData = new Observer({ data: options.initialData ? options.initialData : {} });
         this._contextMenuItems = options.contextMenuItems || [];
-        this._suppressGraphDataEvents = false;
-        this._selectedItem = null;
-        this.suppressNodeSelect = false;
 
         this._config = {
             ...DEFAULT_CONFIG,

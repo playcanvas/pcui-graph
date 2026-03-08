@@ -35,17 +35,17 @@ class GraphViewNode {
 
     nodeSchema: any;
 
-    state: number;
+    state = GraphViewNode.STATES.DEFAULT;
 
     model: dia.Element;
 
     _contextMenu: Menu | null;
 
-    _contextMenuHandler: ((e: MouseEvent) => void) | null;
+    _contextMenuHandler: ((e: MouseEvent) => void) | null = null;
 
-    _suppressChangeTargetEvent: boolean;
+    _suppressChangeTargetEvent = false;
 
-    _hasLinked: boolean;
+    _hasLinked = false;
 
     constructor(graphView: GraphView, paper: dia.Paper, graph: dia.Graph, graphSchema: any, nodeData: any, nodeSchema: any, onCreateEdge: (edgeId: string, edge: any) => void, onNodeSelected: (nodeData: any) => void) {
         this._graphView = graphView;
@@ -55,10 +55,6 @@ class GraphViewNode {
         this._graphSchema = graphSchema;
         this.nodeData = nodeData;
         this.nodeSchema = nodeSchema;
-        this.state = GraphViewNode.STATES.DEFAULT;
-        this._contextMenuHandler = null;
-        this._suppressChangeTargetEvent = false;
-        this._hasLinked = false;
 
         const rectHeight = this.getSchemaValue('baseHeight');
         let portHeight = 0;

@@ -19,15 +19,15 @@ class GraphView extends JointGraph {
 
     _graphData: any;
 
-    _nodes: Record<string, GraphViewNode>;
+    _nodes: Record<string, GraphViewNode> = {};
 
-    _edges: Record<string, GraphViewEdge>;
+    _edges: Record<string, GraphViewEdge> = {};
 
-    _cells: dia.Cell[];
+    _cells: dia.Cell[] = [];
 
-    _cellMountedFunctions: (() => void)[];
+    _cellMountedFunctions: (() => void)[] = [];
 
-    _batchingCells: boolean;
+    _batchingCells = false;
 
     _viewMenu: Menu;
 
@@ -40,13 +40,6 @@ class GraphView extends JointGraph {
         this._graphData = graphData;
 
         this._config = config;
-
-        this._nodes = {};
-        this._edges = {};
-
-        this._cells = [];
-        this._cellMountedFunctions = [];
-        this._batchingCells = false;
 
         const htmlShapes = shapes as Record<string, any>;
         htmlShapes.html = {};
