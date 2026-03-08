@@ -35,7 +35,12 @@ var GRAPH_SCHEMA = {
             name: 'Variable Float',
             fill: 'rgb(54, 67, 70, 0.8)',
             stroke: '#20292b',
-            contextMenuItems: [],
+            contextMenuItems: [
+                {
+                    text: 'Delete node',
+                    action: GRAPH_ACTIONS.DELETE_NODE
+                }
+            ],
             outPorts: [
                 {
                     name: 'output',
@@ -47,7 +52,12 @@ var GRAPH_SCHEMA = {
             name: 'Variable Vec2',
             fill: 'rgb(54, 67, 70, 0.8)',
             stroke: '#20292b',
-            contextMenuItems: [],
+            contextMenuItems: [
+                {
+                    text: 'Delete node',
+                    action: GRAPH_ACTIONS.DELETE_NODE
+                }
+            ],
             outPorts: [
                 {
                     name: 'output',
@@ -59,7 +69,12 @@ var GRAPH_SCHEMA = {
             name: 'Multiply',
             fill: 'rgb(54, 67, 70, 0.8)',
             stroke: '#20292b',
-            contextMenuItems: [],
+            contextMenuItems: [
+                {
+                    text: 'Delete node',
+                    action: GRAPH_ACTIONS.DELETE_NODE
+                }
+            ],
             inPorts: [
                 {
                     name: 'left',
@@ -131,7 +146,12 @@ var GRAPH_SCHEMA = {
             name: 'Fragment Output',
             fill: 'rgb(54, 67, 70, 0.8)',
             stroke: '#20292b',
-            contextMenuItems: [],
+            contextMenuItems: [
+                {
+                    text: 'Delete node',
+                    action: GRAPH_ACTIONS.DELETE_NODE
+                }
+            ],
             inPorts: [
                 {
                     name: 'rgba',
@@ -151,7 +171,12 @@ var GRAPH_SCHEMA = {
             name: 'Texture',
             fill: 'rgb(54, 67, 70, 0.8)',
             stroke: '#20292b',
-            contextMenuItems: [],
+            contextMenuItems: [
+                {
+                    text: 'Delete node',
+                    action: GRAPH_ACTIONS.DELETE_NODE
+                }
+            ],
             inPorts: [
                 {
                     name: 'uv',
