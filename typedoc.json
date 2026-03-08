@@ -1,7 +1,7 @@
 {
     "$schema": "https://typedoc.org/schema.json",
     "entryPoints": [
-        "./src/index.js"
+        "./src/index.ts"
     ],
     "exclude": [
         "**/node_modules/**"
