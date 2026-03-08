@@ -531,8 +531,8 @@ class GraphViewNode {
         switch (event) {
             case 'updatePosition': {
                 nodeView.on('element:pointerup', () => {
-                    const newPos = this._graphView.getWindowToGraphPosition(nodeView.getBBox(), false);
-                    callback(this.nodeData.id, newPos);
+                    const pos = this.model.position();
+                    callback(this.nodeData.id, { x: pos.x, y: pos.y });
                 });
                 break;
             }
