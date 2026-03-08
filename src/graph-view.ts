@@ -317,6 +317,7 @@ class GraphView extends JointGraph {
     removeEdge(id: string): void {
         const edge = this.getEdge(id);
         if (edge) {
+            edge.destroy();
             this._graph.removeCells([edge.model]);
             delete this._edges[edge.model.id];
         }

@@ -41,6 +41,10 @@ class GraphViewEdge {
 
     _contextMenu: Menu | null = null;
 
+    _contextMenuHandler: ((e: MouseEvent) => void) | null = null;
+
+    _edgeElement: SVGElement | null = null;
+
     constructor(graphView: GraphView, paper: dia.Paper, graph: dia.Graph, graphSchema: any, edgeData: any, edgeSchema: any, onEdgeSelected: (edgeData: any) => void) {
         this._graphView = graphView;
         this._config = graphView._config;
@@ -135,12 +139,28 @@ class GraphViewEdge {
             items: items
         });
         this._paper.el.appendChild(this._contextMenu.dom);
-        const edgeElement = this._paper.findViewByModel(this.model).el;
-        edgeElement.addEventListener('contextmenu', (e: MouseEvent) => {
-            e.preventDefault();
-            this._contextMenu.position(e.clientX, e.clientY);
-            this._contextMenu.hidden = false;
-        });
+        this._edgeElement = this._paper.findViewByModel(this.model)?.el ?? null;
+        if (this._edgeElement) {
+            this._contextMenuHandler = (e: MouseEvent) => {
+                e.preventDefault();
+                this._contextMenu!.position(e.clientX, e.clientY);
+                this._contextMenu!.hidden = false;
+            };
+            this._edgeElement.addEventListener('contextmenu', this._contextMenuHandler);
+        }
+    }
+
+    destroy(): void {
+        if (this._edgeElement && this._contextMenuHandler) {
+            this._edgeElement.removeEventListener('contextmenu', this._contextMenuHandler);
+            this._contextMenuHandler = null;
+            this._edgeElement = null;
+        }
+        if (this._contextMenu) {
+            this._contextMenu.dom.remove();
+            this._contextMenu.destroy();
+            this._contextMenu = null;
+        }
     }
 
     select(): void {
