@@ -65,7 +65,7 @@ const GRAPH_SCHEMA = {
     }
 };
 
-var GRAPH_DATA = {
+const GRAPH_DATA = {
     nodes: {
         1234: {
             id: 1234,

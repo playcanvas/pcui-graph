@@ -10,7 +10,7 @@ export default {
     }
 };
 
-var GRAPH_ENUM = {
+const GRAPH_ENUM = {
     NODE: {
         VARIABLE_FLOAT: 0,
         MULTIPLY: 1,
@@ -29,15 +29,15 @@ var GRAPH_ENUM = {
     }
 };
 
-var NODE_CONTEXT_MENU_ITEMS = [
+const NODE_CONTEXT_MENU_ITEMS = [
     { text: 'Delete node', action: GRAPH_ACTIONS.DELETE_NODE }
 ];
 
-var EDGE_CONTEXT_MENU_ITEMS = [
+const EDGE_CONTEXT_MENU_ITEMS = [
     { text: 'Delete edge', action: GRAPH_ACTIONS.DELETE_EDGE }
 ];
 
-var GRAPH_SCHEMA = {
+const GRAPH_SCHEMA = {
     nodes: {
         [GRAPH_ENUM.NODE.VARIABLE_FLOAT]: {
             name: 'Variable Float',
@@ -215,7 +215,7 @@ var GRAPH_SCHEMA = {
     }
 };
 
-var GRAPH_DATA = {
+const GRAPH_DATA = {
     nodes: {
         1234: {
             id: 1234,
@@ -322,7 +322,7 @@ var GRAPH_DATA = {
     }
 };
 
-var GRAPH_CONTEXT_MENU_ITEMS = [
+const GRAPH_CONTEXT_MENU_ITEMS = [
     {
         text: 'New add',
         action: GRAPH_ACTIONS.ADD_NODE,
