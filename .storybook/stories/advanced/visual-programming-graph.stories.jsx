@@ -29,18 +29,21 @@ var GRAPH_ENUM = {
     }
 };
 
+var NODE_CONTEXT_MENU_ITEMS = [
+    { text: 'Delete node', action: GRAPH_ACTIONS.DELETE_NODE }
+];
+
+var EDGE_CONTEXT_MENU_ITEMS = [
+    { text: 'Delete edge', action: GRAPH_ACTIONS.DELETE_EDGE }
+];
+
 var GRAPH_SCHEMA = {
     nodes: {
         [GRAPH_ENUM.NODE.VARIABLE_FLOAT]: {
             name: 'Variable Float',
             fill: 'rgb(54, 67, 70, 0.8)',
             stroke: '#20292b',
-            contextMenuItems: [
-                {
-                    text: 'Delete node',
-                    action: GRAPH_ACTIONS.DELETE_NODE
-                }
-            ],
+            contextMenuItems: NODE_CONTEXT_MENU_ITEMS,
             outPorts: [
                 {
                     name: 'output',
@@ -52,12 +55,7 @@ var GRAPH_SCHEMA = {
             name: 'Variable Vec2',
             fill: 'rgb(54, 67, 70, 0.8)',
             stroke: '#20292b',
-            contextMenuItems: [
-                {
-                    text: 'Delete node',
-                    action: GRAPH_ACTIONS.DELETE_NODE
-                }
-            ],
+            contextMenuItems: NODE_CONTEXT_MENU_ITEMS,
             outPorts: [
                 {
                     name: 'output',
@@ -69,12 +67,7 @@ var GRAPH_SCHEMA = {
             name: 'Multiply',
             fill: 'rgb(54, 67, 70, 0.8)',
             stroke: '#20292b',
-            contextMenuItems: [
-                {
-                    text: 'Delete node',
-                    action: GRAPH_ACTIONS.DELETE_NODE
-                }
-            ],
+            contextMenuItems: NODE_CONTEXT_MENU_ITEMS,
             inPorts: [
                 {
                     name: 'left',
@@ -96,12 +89,7 @@ var GRAPH_SCHEMA = {
             name: 'Add',
             fill: 'rgb(54, 67, 70, 0.8)',
             stroke: '#20292b',
-            contextMenuItems: [
-                {
-                    text: 'Delete node',
-                    action: GRAPH_ACTIONS.DELETE_NODE
-                }
-            ],
+            contextMenuItems: NODE_CONTEXT_MENU_ITEMS,
             inPorts: [
                 {
                     name: 'left',
@@ -123,12 +111,7 @@ var GRAPH_SCHEMA = {
             name: 'Sine',
             fill: 'rgb(54, 67, 70, 0.8)',
             stroke: '#20292b',
-            contextMenuItems: [
-                {
-                    text: 'Delete node',
-                    action: GRAPH_ACTIONS.DELETE_NODE
-                }
-            ],
+            contextMenuItems: NODE_CONTEXT_MENU_ITEMS,
             inPorts: [
                 {
                     name: 'input',
@@ -146,12 +129,7 @@ var GRAPH_SCHEMA = {
             name: 'Fragment Output',
             fill: 'rgb(54, 67, 70, 0.8)',
             stroke: '#20292b',
-            contextMenuItems: [
-                {
-                    text: 'Delete node',
-                    action: GRAPH_ACTIONS.DELETE_NODE
-                }
-            ],
+            contextMenuItems: NODE_CONTEXT_MENU_ITEMS,
             inPorts: [
                 {
                     name: 'rgba',
@@ -171,12 +149,7 @@ var GRAPH_SCHEMA = {
             name: 'Texture',
             fill: 'rgb(54, 67, 70, 0.8)',
             stroke: '#20292b',
-            contextMenuItems: [
-                {
-                    text: 'Delete node',
-                    action: GRAPH_ACTIONS.DELETE_NODE
-                }
-            ],
+            contextMenuItems: NODE_CONTEXT_MENU_ITEMS,
             inPorts: [
                 {
                     name: 'uv',
@@ -213,56 +186,31 @@ var GRAPH_SCHEMA = {
             fill: 'rgb(54, 67, 70, 0.8)',
             strokeWidth: 2,
             targetMarker: null,
-            contextMenuItems: [
-                {
-                    text: 'Delete edge',
-                    action: GRAPH_ACTIONS.DELETE_EDGE
-                }
-            ],
+            contextMenuItems: EDGE_CONTEXT_MENU_ITEMS,
         },
         [GRAPH_ENUM.EDGE.VEC_2]: {
             stroke: '#0379EE',
             strokeWidth: 2,
             targetMarker: null,
-            contextMenuItems: [
-                {
-                    text: 'Delete edge',
-                    action: GRAPH_ACTIONS.DELETE_EDGE
-                }
-            ],
+            contextMenuItems: EDGE_CONTEXT_MENU_ITEMS,
         },
         [GRAPH_ENUM.EDGE.VEC_3]: {
             stroke: '#0379EE',
             strokeWidth: 2,
             targetMarker: null,
-            contextMenuItems: [
-                {
-                    text: 'Delete edge',
-                    action: GRAPH_ACTIONS.DELETE_EDGE
-                }
-            ],
+            contextMenuItems: EDGE_CONTEXT_MENU_ITEMS,
         },
         [GRAPH_ENUM.EDGE.VEC_4]: {
             stroke: '#0379EE',
             strokeWidth: 2,
             targetMarker: null,
-            contextMenuItems: [
-                {
-                    text: 'Delete edge',
-                    action: GRAPH_ACTIONS.DELETE_EDGE
-                }
-            ],
+            contextMenuItems: EDGE_CONTEXT_MENU_ITEMS,
         },
         [GRAPH_ENUM.EDGE.MATRIX]: {
             stroke: '#0379EE',
             strokeWidth: 2,
             targetMarker: null,
-            contextMenuItems: [
-                {
-                    text: 'Delete edge',
-                    action: GRAPH_ACTIONS.DELETE_EDGE
-                }
-            ],
+            contextMenuItems: EDGE_CONTEXT_MENU_ITEMS,
         }
     }
 };
