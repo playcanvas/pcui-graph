@@ -167,7 +167,7 @@ class GraphViewEdge {
     mute(): void {
         const edgeSchema = this._edgeSchema;
         this.model.attr('line/stroke', '#42495B');
-        this.model.attr('line/strokeWidth', edgeSchema.strokeWidth || this._config.defaultStyles.edge.stroke);
+        this.model.attr('line/strokeWidth', edgeSchema.strokeWidth || this._config.defaultStyles.edge.strokeWidth);
         this.model.attr('line/targetMarker', {
             stroke: '#9BA1A3',
             fill: '#9BA1A3'
