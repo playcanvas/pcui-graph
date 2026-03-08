@@ -40,7 +40,7 @@
     "url": "git+https://github.com/playcanvas/pcui-graph.git"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production rollup -c --environment target:all && npm run bundle:styles && npm run build:types",
+    "build": "cross-env NODE_ENV=production rollup -c && npm run bundle:styles && npm run build:types",
     "build:storybook": "cross-env ENVIRONMENT=production storybook build -o storybook",
     "build:types": "tsc --project ./tsconfig.json --declaration --emitDeclarationOnly --outDir types",
     "bundle:styles": "scss-bundle -e ./src/styles/style.scss -o ./dist/pcui-graph.scss",
@@ -52,7 +52,7 @@
     "publint": "publint",
     "serve": "serve",
     "storybook": "storybook dev -p 9000",
-    "watch": "rollup -c --environment target:all --watch",
+    "watch": "rollup -c --watch",
     "watch:umd": "rollup -c --environment target:umd --watch",
     "watch:module": "rollup -c --environment target:module --watch"
   },

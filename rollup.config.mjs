@@ -71,13 +71,19 @@ const styles = {
 };
 
 let targets;
-if (process.env.target) {
-    switch (process.env.target.toLowerCase()) {
-        case 'umd':      targets = [umd]; break;
-        case 'module':      targets = [module]; break;
-        case 'styles':      targets = [styles]; break;
-        case 'all':      targets = [umd, module, styles]; break;
-    }
+switch (process.env.target?.toLowerCase()) {
+    case 'umd':
+        targets = [umd];
+        break;
+    case 'module':
+        targets = [module];
+        break;
+    case 'styles':
+        targets = [styles];
+        break;
+    default:
+        targets = [umd, module, styles];
+        break;
 }
 
 export default targets;
