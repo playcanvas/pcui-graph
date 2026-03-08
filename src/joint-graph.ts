@@ -1,5 +1,4 @@
 import { dia, g, shapes, V } from '@joint/core';
-import _ from 'lodash';
 
 import { Vec2 } from './lib/vec2';
 
@@ -159,7 +158,7 @@ class JointGraph {
         this._paper.on('blank:mousewheel', handleCanvasMouseWheel);
 
         if (config.adjustVertices) {
-            const adjustGraphVertices = _.partial(this.adjustVertices.bind(this), this._graph);
+            const adjustGraphVertices = (cell: dia.Cell | dia.CellView) => this.adjustVertices(this._graph, cell);
 
             // adjust vertices when a cell is removed or its source/target was changed
             this._graph.on('add remove change:source change:target', adjustGraphVertices);
@@ -201,19 +200,16 @@ class JointGraph {
         const model = 'model' in cell ? cell.model : cell;
         if (model instanceof dia.Element) {
             // `cell` is an element
-            _.chain(graph.getConnectedLinks(model))
-            .groupBy((link: dia.Link) => {
-                // the key of the group is the model id of the link's source or target
-                // cell id is omitted
+            // Group connected links by the id of the *other* endpoint (not this element)
+            const groups: Record<string, dia.Link[]> = Object.create(null);
+            for (const link of graph.getConnectedLinks(model)) {
                 const ids = [link.source().id, link.target().id];
-                return ids.filter(id => id !== model.id)[0];
-            })
-            .each((group: dia.Link[], key: string) => {
-                // if the member of the group has both source and target model
-                // then adjust vertices
-                if (key !== 'undefined') this.adjustVertices(graph, _.first(group)!);
-            })
-            .value();
+                const key = String(ids.filter(id => id !== model.id)[0]);
+                (groups[key] ??= []).push(link);
+            }
+            for (const [key, group] of Object.entries(groups)) {
+                if (key !== 'undefined') this.adjustVertices(graph, group[0]);
+            }
             return;
         }
         // `cell` is a link
@@ -225,7 +221,7 @@ class JointGraph {
         // the link is interpreted as having no siblings
         if (!sourceId || !targetId) return;
         // identify link siblings
-        const siblings = _.filter(graph.getLinks(), (sibling: dia.Link) => {
+        const siblings = graph.getLinks().filter((sibling: dia.Link) => {
             const siblingSourceId = sibling.source().id;
             const siblingTargetId = sibling.target().id;
             // if source and target are the same
@@ -261,7 +257,7 @@ class JointGraph {
                 // constant
                 // the maximum distance between two sibling links
                 const GAP = 20;
-                _.each(siblings, (sibling: dia.Link, index: number) => {
+                siblings.forEach((sibling: dia.Link, index: number) => {
                     // we want offset values to be calculated as 0, 20, 20, 40, 40, 60, 60 ...
                     let offset = GAP * Math.ceil(index / 2);
                     // place the vertices at points which are `offset` pixels perpendicularly away
