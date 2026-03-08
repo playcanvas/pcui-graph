@@ -96,6 +96,19 @@ class JointGraph {
             }
         });
 
+        // JointJS Paper sets inline width/height on the element. When the element
+        // is not yet in the DOM, those values are 0px which overrides the CSS
+        // 100% sizing and prevents the ResizeObserver from ever firing. Clear
+        // the inline dimensions so CSS can take over once the element is inserted.
+        // Clear width/height independently, but only if JointJS has set them to 0px
+        // inline to avoid wiping intentional inline sizing.
+        if (!dom.offsetWidth && dom.style.width === '0px') {
+            dom.style.width = '';
+        }
+        if (!dom.offsetHeight && dom.style.height === '0px') {
+            dom.style.height = '';
+        }
+
         const graphResizeObserver = new ResizeObserver(() => {
             this._resizeGraph(dom);
         });
