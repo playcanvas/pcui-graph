@@ -24,6 +24,14 @@
   "module": "dist/pcui-graph.mjs",
   "types": "types/index.d.ts",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./dist/pcui-graph.mjs"
+    },
+    "./styles": "./styles/dist/index.mjs",
+    "./dist/*": "./dist/*"
+  },
   "bugs": {
     "url": "https://github.com/playcanvas/pcui-graph/issues"
   },
