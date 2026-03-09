@@ -4,6 +4,9 @@
   "author": "PlayCanvas <support@playcanvas.com>",
   "homepage": "https://github.com/playcanvas/pcui-graph",
   "description": "A PCUI plugin for creating node-based graphs",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "keywords": [
     "components",
     "css",
