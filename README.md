@@ -73,7 +73,6 @@ The source lives in `src/` and is organized as follows:
 | `joint-shape-node.ts` | Custom JointJS HTML element shape |
 | `constants.ts` | Default configuration and event constants |
 | `selected-item.ts` | Selection handling |
-| `util.ts` | Utility functions |
 | `lib/vec2.ts` | 2D vector math |
 | `styles/style.scss` | SCSS styles |
 

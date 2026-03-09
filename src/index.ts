@@ -22,7 +22,6 @@ import { Element } from '@playcanvas/pcui';
 import { GRAPH_ACTIONS, DEFAULT_CONFIG } from './constants';
 import GraphView from './graph-view';
 import SelectedItem from './selected-item';
-import { deepCopyFunction } from './util';
 
 interface GraphOptions {
     initialData?: any;
@@ -317,7 +316,7 @@ class Graph extends Element {
             this._dispatchEvent(GRAPH_ACTIONS.SELECT_EDGE, { edge, edgeId, prevItem: this._selectedItem });
         });
         if (edgeSchema.contextMenuItems) {
-            const contextMenuItems = deepCopyFunction(edgeSchema.contextMenuItems).map((item: any) => {
+            const contextMenuItems = structuredClone(edgeSchema.contextMenuItems).map((item: any) => {
                 if (item.action === GRAPH_ACTIONS.DELETE_EDGE) {
                     item.onSelect = () => {
                         this._dispatchEvent(GRAPH_ACTIONS.DELETE_EDGE, { edgeId: edgeId, edge: this._graphData.get(`data.edges.${edgeId}`) });
@@ -423,7 +422,7 @@ class Graph extends Element {
     }
 
     _initializeNodeContextMenuItems(node: any, items: any[]): any[] {
-        const contextMenuItems = deepCopyFunction(items).map((item: any) => {
+        const contextMenuItems = structuredClone(items).map((item: any) => {
             if (item.action === GRAPH_ACTIONS.ADD_EDGE) {
                 item.onSelect = () => this._createUnconnectedEdgeForNode(node, item.edgeType);
             }
