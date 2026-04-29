@@ -471,8 +471,7 @@ class Graph extends Element {
             });
         }
         if (nodeSchema.contextMenuItems) {
-            const contextMenuItems = this._initializeNodeContextMenuItems(node, nodeSchema.contextMenuItems);
-            this.view.addNodeContextMenu(node.id, contextMenuItems);
+            this.view.addNodeContextMenu(node.id, nodeSchema.contextMenuItems);
         }
     }
 
