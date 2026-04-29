@@ -1,6 +1,8 @@
 {
     "compilerOptions": {
         "noImplicitAny": true,
+        "strictNullChecks": false,
+        "rootDir": "./src",
         "target": "es2020",
         "module": "esnext",
         "jsx": "react",
@@ -12,7 +14,7 @@
         ],
         "esModuleInterop": true,
         "sourceMap": true,
-        "moduleResolution": "node",
+        "moduleResolution": "bundler",
         "skipLibCheck": true,
         "resolveJsonModule": true,
         "forceConsistentCasingInFileNames": true,
