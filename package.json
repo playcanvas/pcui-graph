@@ -114,7 +114,7 @@
     "typedoc": "0.28.19",
     "typedoc-plugin-mdn-links": "5.1.1",
     "typedoc-plugin-rename-defaults": "0.7.3",
-    "typescript": "5.9.3"
+    "typescript": "6.0.3"
   },
   "peerDependencies": {
     "@playcanvas/observer": "^1.0.0",
