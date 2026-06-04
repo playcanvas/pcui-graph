@@ -1,11 +1,11 @@
-import playcanvasConfig from '@playcanvas/eslint-config';
+import legacyConfig from '@playcanvas/eslint-config/legacy';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import storybook from 'eslint-plugin-storybook';
 import globals from 'globals';
 
 export default [
-    ...playcanvasConfig,
+    ...legacyConfig,
     {
         files: ['src/**/*.ts'],
         languageOptions: {
