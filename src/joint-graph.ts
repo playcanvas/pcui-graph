@@ -2,9 +2,10 @@ import { dia, g, shapes } from '@joint/core';
 
 import './joint-patches';
 import { Vec2 } from './lib/vec2';
+import type { GraphConfig } from './types';
 
 class JointGraph {
-    _config: any;
+    _config: GraphConfig;
 
     _graph: dia.Graph;
 
@@ -22,7 +23,7 @@ class JointGraph {
 
     ignoreAdjustVertices = false;
 
-    constructor(dom: HTMLElement, config: any = {}) {
+    constructor(dom: HTMLElement, config: GraphConfig = {} as GraphConfig) {
         this._config = config;
         this._graph = new dia.Graph({}, { cellNamespace: shapes });
 
@@ -75,8 +76,12 @@ class JointGraph {
                 if (!sPort || !tPort) return false;
 
                 // Can't connect in-to-in or out-to-out
-                if ((sPort.includes('in') && tPort.includes('in')) || (sPort.includes('out') && tPort.includes('out')))
+                if (
+                    (sPort.includes('in') && tPort.includes('in')) ||
+                    (sPort.includes('out') && tPort.includes('out'))
+                ) {
                     return false;
+                }
 
                 // Check if source port is already connected (for 'in' ports)
                 if (sPort.includes('in')) {

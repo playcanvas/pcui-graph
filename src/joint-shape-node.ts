@@ -1,8 +1,13 @@
 import { dia, shapes, util } from '@joint/core';
 
+type ExtendableRectangle = {
+    extend: (properties: object) => unknown;
+    prototype: { defaults: object };
+};
+
 const jointShapeElement = () =>
-    (shapes.standard.Rectangle as any).extend({
-        defaults: (util as any).deepSupplement(
+    (shapes.standard.Rectangle as unknown as ExtendableRectangle).extend({
+        defaults: util.deepSupplement(
             {
                 type: 'html.Element',
                 markup: [
@@ -44,7 +49,7 @@ const jointShapeElement = () =>
                     }
                 ]
             },
-            (shapes.standard.Rectangle as any).prototype.defaults
+            (shapes.standard.Rectangle as unknown as ExtendableRectangle).prototype.defaults
         )
     });
 
@@ -52,7 +57,7 @@ const jointShapeElementView = (paper: dia.Paper) =>
     dia.ElementView.extend({
         initialize: function () {
             this.updateBox = this.updateBox.bind(this);
-            dia.ElementView.prototype.initialize.apply(this, arguments as any);
+            dia.ElementView.prototype.initialize.apply(this, arguments as unknown as []);
 
             this.div = document.createElement('div');
             this.div.setAttribute('id', `nodediv_${this.model.id}`);
@@ -66,7 +71,7 @@ const jointShapeElementView = (paper: dia.Paper) =>
             this.model.on('remove', this.removeBox, this);
         },
         render: function () {
-            dia.ElementView.prototype.render.apply(this, arguments as any);
+            dia.ElementView.prototype.render.apply(this, arguments as unknown as []);
             this.el.appendChild(this._fo);
             this.updateBox();
             return this;
@@ -77,7 +82,7 @@ const jointShapeElementView = (paper: dia.Paper) =>
             this._fo.setAttribute('height', bbox.height);
             this.div.setAttribute('style', `width: ${bbox.width}px; height: ${bbox.height}px;`);
         },
-        removeBox: function (evt: any) {
+        removeBox: function (evt: unknown) {
             this._fo.remove();
         }
     });

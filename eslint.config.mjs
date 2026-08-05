@@ -34,7 +34,6 @@ export default [
         rules: {
             ...tsPlugin.configs.recommended.rules,
             '@typescript-eslint/ban-ts-comment': 'off',
-            '@typescript-eslint/no-explicit-any': 'off',
             '@typescript-eslint/no-unused-vars': 'off',
             'jsdoc/require-param-type': 'off',
             'jsdoc/require-returns': 'off',

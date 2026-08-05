@@ -22,20 +22,41 @@ import { Element } from '@playcanvas/pcui';
 import { GRAPH_ACTIONS, DEFAULT_CONFIG } from './constants';
 import GraphView from './graph-view';
 import SelectedItem from './selected-item';
+import type {
+    AttributeSchema,
+    ContextMenuItem,
+    DefaultStyles,
+    DeletedNode,
+    EdgeData,
+    EdgeSchema,
+    GraphConfig,
+    GraphData,
+    GraphEventMap,
+    GraphSchema,
+    Id,
+    NodeData,
+    NodeSchema,
+    Value,
+    Vector
+} from './types';
 
-interface GraphOptions {
-    initialData?: any;
+type GraphOptions = {
+    initialData?: GraphData;
     dom?: HTMLElement;
-    contextMenuItems?: any[];
+    contextMenuItems?: ContextMenuItem[];
     readOnly?: boolean;
     passiveUIEvents?: boolean;
     incrementNodeNames?: boolean;
     restrictTranslate?: boolean;
     edgeHoverEffect?: boolean;
     includeFonts?: boolean;
-    defaultStyles?: any;
+    defaultStyles?: Partial<Omit<DefaultStyles, 'background' | 'node' | 'edge'>> & {
+        background?: Partial<DefaultStyles['background']>;
+        node?: Partial<DefaultStyles['node']>;
+        edge?: Partial<DefaultStyles['edge']>;
+    };
     adjustVertices?: boolean;
-}
+};
 
 /**
  * Represents a new Graph.
@@ -43,15 +64,15 @@ interface GraphOptions {
 class Graph extends Element {
     static GRAPH_ACTIONS = GRAPH_ACTIONS;
 
-    _graphSchema: any;
+    _graphSchema: GraphSchema;
 
-    _graphData: any;
+    _graphData: Observer;
 
-    _contextMenuItems: any[];
+    _contextMenuItems: ContextMenuItem[];
 
     _suppressGraphDataEvents = false;
 
-    _config: any;
+    _config: GraphConfig;
 
     _selectedItem: SelectedItem | null = null;
 
@@ -83,7 +104,7 @@ class Graph extends Element {
      * @param options.adjustVertices - If true, multiple edges connected between two
      * nodes will be spaced apart.
      */
-    constructor(schema: any, options: GraphOptions = {}) {
+    constructor(schema: GraphSchema, options: GraphOptions = {}) {
         super({
             dom: options.dom
         });
@@ -124,7 +145,7 @@ class Graph extends Element {
         }
         if (this._config.readOnly) this._config.selfContainedMode = true;
 
-        this.view = null as any;
+        this.view = null as unknown as GraphView;
         this._buildGraphFromData();
         if (this._config.defaultStyles.initialScale) {
             this.setGraphScale(this._config.defaultStyles.initialScale);
@@ -141,7 +162,7 @@ class Graph extends Element {
      * The current graph data. Contains an object with any nodes and edges present in the graph.
      * This can be passed into the graph constructor to reload the current graph.
      */
-    get data(): any {
+    get data(): GraphData {
         return this._graphData.get('data');
     }
 
@@ -178,7 +199,7 @@ class Graph extends Element {
                     if (nodeSchema.attributes && !node.attributes) {
                         node.attributes = {};
                     }
-                    nodeSchema.attributes.forEach((attribute: any) => {
+                    nodeSchema.attributes.forEach((attribute) => {
                         if (!node.attributes[attribute.name] && attribute.defaultValue) {
                             this._suppressGraphDataEvents = true;
                             this._graphData.set(
@@ -215,14 +236,14 @@ class Graph extends Element {
     }
 
     _addCanvasContextMenu(): void {
-        const updateItem = (item: any) => {
+        const updateItem = (item: ContextMenuItem) => {
             switch (item.action) {
                 case GRAPH_ACTIONS.ADD_NODE: {
                     item.onSelect = (e: MouseEvent) => {
-                        const node: any = {
+                        const node = {
                             ...item,
                             id: Number(`${Date.now()}${Math.floor(Math.random() * 10000)}`)
-                        };
+                        } as unknown as NodeData;
                         if (item.attributes) {
                             node.attributes = { ...item.attributes };
                         }
@@ -234,7 +255,7 @@ class Graph extends Element {
                             node.attributes = {};
                         }
                         if (nodeSchema.attributes) {
-                            nodeSchema.attributes.forEach((attribute: any) => {
+                            nodeSchema.attributes.forEach((attribute) => {
                                 if (!node.attributes[attribute.name] && attribute.defaultValue) {
                                     node.attributes[attribute.name] = attribute.defaultValue;
                                 }
@@ -247,7 +268,7 @@ class Graph extends Element {
                         while (!element.classList.contains('pcui-menu-items')) {
                             element = element.parentElement!;
                         }
-                        let pos: any = {
+                        let pos = {
                             x: Number(element.style.left.replace('px', '')),
                             y: Number(element.style.top.replace('px', ''))
                         };
@@ -263,7 +284,7 @@ class Graph extends Element {
         const viewContextMenuItems = this._contextMenuItems.map((item) => {
             item = updateItem(item);
             if (!item.items) return item;
-            item.items.map((subitem: any) => {
+            item.items.map((subitem) => {
                 return updateItem(subitem);
             });
             return item;
@@ -276,7 +297,7 @@ class Graph extends Element {
      *
      * @param node - The node to select
      */
-    selectNode(node: any): void {
+    selectNode(node: NodeData): void {
         this.deselectItem();
         this._selectedItem = new SelectedItem(this, 'NODE', node.id);
         this._selectedItem.selectItem();
@@ -288,7 +309,7 @@ class Graph extends Element {
      * @param edge - The edge to select
      * @param edgeId - The edge id of the edge to select
      */
-    selectEdge(edge: any, edgeId: string | number): void {
+    selectEdge(edge: EdgeData, edgeId: string | number): void {
         this.deselectItem();
         this._selectedItem = new SelectedItem(this, 'EDGE', `${edge.from}-${edge.to}`, edgeId);
         this._selectedItem.selectItem();
@@ -304,7 +325,7 @@ class Graph extends Element {
         }
     }
 
-    _isValidEdge(edgeType: string, source: string | number, target: string | number): boolean {
+    _isValidEdge(edgeType: Id, source: Id, target: Id): boolean {
         const edge = this._graphSchema.edges[edgeType];
         return (
             edge.from.includes(this._graphData.get(`data.nodes.${source}.nodeType`)) &&
@@ -319,13 +340,13 @@ class Graph extends Element {
      * @param edgeId - The edge id for the new edge.
      * @param _batching - Internal flag, unused.
      */
-    createEdge(edge: any, edgeId: string | number, _batching?: boolean): void {
+    createEdge(edge: EdgeData, edgeId: string | number, _batching?: boolean): void {
         const edgeSchema = this._graphSchema.edges[edge.edgeType];
-        this.view.addEdge(edge, edgeSchema, (edge: any) => {
+        this.view.addEdge(edge, edgeSchema, (edge) => {
             this._dispatchEvent(GRAPH_ACTIONS.SELECT_EDGE, { edge, edgeId, prevItem: this._selectedItem });
         });
         if (edgeSchema.contextMenuItems) {
-            const contextMenuItems = structuredClone(edgeSchema.contextMenuItems).map((item: any) => {
+            const contextMenuItems = structuredClone(edgeSchema.contextMenuItems).map((item) => {
                 if (item.action === GRAPH_ACTIONS.DELETE_EDGE) {
                     item.onSelect = () => {
                         this._dispatchEvent(GRAPH_ACTIONS.DELETE_EDGE, {
@@ -359,7 +380,7 @@ class Graph extends Element {
         }
     }
 
-    _onEdgeConnected(edgeType: string, from: number, to: number): void {
+    _onEdgeConnected(edgeType: Id, from: Id, to: Id): void {
         const edgeId = Number(`${Date.now()}${Math.floor(Math.random() * 10000)}`);
         const edge = {
             from: from,
@@ -370,7 +391,7 @@ class Graph extends Element {
         this._dispatchEvent(GRAPH_ACTIONS.ADD_EDGE, { edge, edgeId });
     }
 
-    _createUnconnectedEdgeForNode(node: any, edgeType: string): void {
+    _createUnconnectedEdgeForNode(node: NodeData, edgeType: Id): void {
         const edgeSchema = this._graphSchema.edges[edgeType];
         this.view.addUnconnectedEdge(
             node.id,
@@ -381,11 +402,11 @@ class Graph extends Element {
         );
     }
 
-    _onCreateEdge(edgeId: string, edge: any): void {
+    _onCreateEdge(edgeId: string, edge: EdgeData): void {
         this._dispatchEvent(GRAPH_ACTIONS.ADD_EDGE, { edge, edgeId });
     }
 
-    _onNodeSelected(node: any): void {
+    _onNodeSelected(node: NodeData): void {
         if (this.suppressNodeSelect) {
             this.suppressNodeSelect = false;
         } else {
@@ -405,29 +426,29 @@ class Graph extends Element {
         }
     }
 
-    _onNodeAttributeUpdated(nodeId: string | number, attribute: any, value: any): void {
+    _onNodeAttributeUpdated(nodeId: string | number, attribute: AttributeSchema, value: Value): void {
         const node = this._graphData.get(`data.nodes.${nodeId}`);
-        let prevAttributeValue: any;
+        let prevAttributeValue: Value;
         let attributeKey: string | undefined =
             node.attributes[attribute.name] !== undefined ? attribute.name : undefined;
         if (!attributeKey) {
             Object.keys(node.attributes).forEach((k: string) => {
-                const item = node.attributes[k];
+                const item = node.attributes[k] as { name?: string };
                 if (item.name === attribute.name) attributeKey = k;
             });
         }
-        if (Number.isFinite(node.attributes[attributeKey!].x)) {
-            prevAttributeValue = { ...node.attributes[attributeKey!] };
+        if (Number.isFinite((node.attributes[attributeKey!] as Vector).x)) {
+            prevAttributeValue = { ...(node.attributes[attributeKey!] as Vector) };
         } else {
             prevAttributeValue = node.attributes[attributeKey!];
         }
         if (Array.isArray(value)) {
             const keyMap = ['x', 'y', 'z', 'w'];
-            value.forEach((v: any, i: number) => {
-                node.attributes[attributeKey!][keyMap[i]] = v;
+            value.forEach((v, i) => {
+                (node.attributes[attributeKey!] as Record<string, Value>)[keyMap[i]] = v;
             });
-        } else if (Object.keys(prevAttributeValue).includes('x') && Number.isFinite(value)) {
-            node.attributes[attributeKey!].x = value;
+        } else if (Object.keys(prevAttributeValue as object).includes('x') && Number.isFinite(value)) {
+            (node.attributes[attributeKey!] as Vector).x = value as number;
         } else {
             node.attributes[attributeKey!] = value;
         }
@@ -440,8 +461,8 @@ class Graph extends Element {
         });
     }
 
-    _initializeNodeContextMenuItems(node: any, items: any[]): any[] {
-        const contextMenuItems = structuredClone(items).map((item: any) => {
+    _initializeNodeContextMenuItems(node: NodeData, items: ContextMenuItem[]) {
+        const contextMenuItems = structuredClone(items).map((item) => {
             if (item.action === GRAPH_ACTIONS.ADD_EDGE) {
                 item.onSelect = () => this._createUnconnectedEdgeForNode(node, item.edgeType);
             }
@@ -462,7 +483,7 @@ class Graph extends Element {
      * @param _nodeSchema - Internal, unused.
      * @param _batching - Internal, unused.
      */
-    createNode(node: any, _nodeSchema?: any, _batching?: boolean): void {
+    createNode(node: NodeData, _nodeSchema?: NodeSchema, _batching?: boolean): void {
         const nodeSchema = this._graphSchema.nodes[node.nodeType];
         node = this.view.addNode(node, nodeSchema, this._onCreateEdge.bind(this), this._onNodeSelected.bind(this));
 
@@ -471,7 +492,7 @@ class Graph extends Element {
         }
         this.view.addNodeEvent(node.id, 'updatePosition', this._onNodePositionUpdated.bind(this));
         if (nodeSchema.attributes) {
-            nodeSchema.attributes.forEach((attribute: any) => {
+            nodeSchema.attributes.forEach((attribute) => {
                 this.view.addNodeEvent(node.id, 'updateAttribute', this._onNodeAttributeUpdated.bind(this), attribute);
             });
         }
@@ -502,7 +523,7 @@ class Graph extends Element {
      * @param attributeName - The name of the attribute to update.
      * @param value - The new value for the attribute.
      */
-    updateNodeAttribute(nodeId: string | number, attributeName: string, value: any): void {
+    updateNodeAttribute(nodeId: string | number, attributeName: string, value: Value): void {
         if (!this._graphData.get(`data.nodes.${nodeId}`)) return;
         this._graphData.set(`data.nodes.${nodeId}.attributes.${attributeName}`, value);
         this.view.updateNodeAttribute(nodeId, attributeName, value);
@@ -533,12 +554,12 @@ class Graph extends Element {
         }
     }
 
-    _deleteNode(nodeId: string | number): any {
+    _deleteNode(nodeId: string | number): DeletedNode | void {
         if (!this._graphData.get(`data.nodes.${nodeId}`)) return;
         if (this._selectedItem && this._selectedItem._id === nodeId) this.deselectItem();
         const node = this._graphData.get(`data.nodes.${nodeId}`);
         const edges: string[] = [];
-        const edgeData: Record<string, any> = {};
+        const edgeData: Record<string, EdgeData> = {};
         const edgeKeys = Object.keys(this._graphData.get('data.edges'));
         for (let i = 0; i < edgeKeys.length; i++) {
             const edge = this._graphData.get(`data.edges.${edgeKeys[i]}`);
@@ -571,7 +592,7 @@ class Graph extends Element {
      *
      * @param edgeId - The edge to delete.
      */
-    deleteEdge(edgeId: string): void {
+    deleteEdge(edgeId: Id): void {
         if (!this._graphData.get(`data.edges.${edgeId}`)) return;
         const { from, to, outPort, inPort } = this._graphData.get(`data.edges.${edgeId}`) || {};
         if (this._selectedItem && this._selectedItem._id === `${from}-${to}`) this.deselectItem();
@@ -588,7 +609,7 @@ class Graph extends Element {
             const edge = edges[edgeKey];
             const edgeSchema = this._graphSchema.edges[edge.edgeType];
             if ([edge.from, edge.to].includes(from) && [edge.from, edge.to].includes(to)) {
-                this.view.addEdge(edge, edgeSchema, (edge: any) => {
+                this.view.addEdge(edge, edgeSchema, (edge) => {
                     this.selectEdge(edge, edgeKey);
                 });
                 this.selectEdge(edge, edgeKey);
@@ -657,40 +678,44 @@ class Graph extends Element {
      * @param callback - The callback to call when the event is triggered.
      */
     // @ts-ignore - intentional override: Graph uses DOM events, not PCUI EventEmitter
-    on(eventName: string, callback: (detail: any) => void): void {
-        if (this._config.readOnly && !eventName.includes('EVENT_SELECT_') && !eventName.includes('EVENT_DESELECT'))
+    on<K extends string>(
+        eventName: K,
+        callback: (detail: K extends keyof GraphEventMap ? GraphEventMap[K] : unknown) => void
+    ): void {
+        if (this._config.readOnly && !eventName.includes('EVENT_SELECT_') && !eventName.includes('EVENT_DESELECT')) {
             return;
+        }
         this.dom.addEventListener(eventName, (e: Event) => {
-            callback((e as CustomEvent).detail);
+            callback((e as CustomEvent<K extends keyof GraphEventMap ? GraphEventMap[K] : unknown>).detail);
         });
     }
 
-    _dispatchEvent(action: string, data?: any): void {
+    _dispatchEvent(action: string, data?: Value): void {
         this.dom.dispatchEvent(new CustomEvent(action, { detail: data }));
     }
 
     _registerInternalEventListeners(): void {
-        this.on(GRAPH_ACTIONS.ADD_NODE, ({ node }: any) => {
+        this.on(GRAPH_ACTIONS.ADD_NODE, ({ node }) => {
             this.createNode(node);
             this.selectNode(node);
         });
-        this.on(GRAPH_ACTIONS.DELETE_NODE, ({ node, edgeData, edges }: any) => {
+        this.on(GRAPH_ACTIONS.DELETE_NODE, ({ node }) => {
             this.deleteNode(node.id);
         });
-        this.on(GRAPH_ACTIONS.SELECT_NODE, ({ node }: any) => {
+        this.on(GRAPH_ACTIONS.SELECT_NODE, ({ node }) => {
             if (this._selectedItem) {
                 this._selectedItem.deselectItem();
             }
             this._selectedItem = new SelectedItem(this, 'NODE', node.id);
             this._selectedItem.selectItem();
         });
-        this.on(GRAPH_ACTIONS.UPDATE_NODE_POSITION, ({ nodeId, node }: any) => {
+        this.on(GRAPH_ACTIONS.UPDATE_NODE_POSITION, ({ nodeId, node }) => {
             this.updateNodePosition(nodeId, { x: node.posX, y: node.posY });
         });
-        this.on(GRAPH_ACTIONS.UPDATE_NODE_ATTRIBUTE, ({ node }: any) => {
+        this.on(GRAPH_ACTIONS.UPDATE_NODE_ATTRIBUTE, ({ node }) => {
             this._graphData.set(`data.nodes.${node.id}`, node);
         });
-        this.on(GRAPH_ACTIONS.ADD_EDGE, ({ edge, edgeId }: any) => {
+        this.on(GRAPH_ACTIONS.ADD_EDGE, ({ edge, edgeId }) => {
             if (Number.isFinite(edge.inPort)) {
                 Object.keys(this._graphData.get('data.edges')).forEach((edgeKey) => {
                     const edgeToCompare = this._graphData.get(`data.edges.${edgeKey}`);
@@ -703,10 +728,10 @@ class Graph extends Element {
             this.suppressNodeSelect = true;
             this.selectEdge(edge, edgeId);
         });
-        this.on(GRAPH_ACTIONS.DELETE_EDGE, ({ edgeId }: any) => {
+        this.on(GRAPH_ACTIONS.DELETE_EDGE, ({ edgeId }) => {
             this.deleteEdge(edgeId);
         });
-        this.on(GRAPH_ACTIONS.SELECT_EDGE, ({ edge }: any) => {
+        this.on(GRAPH_ACTIONS.SELECT_EDGE, ({ edge }) => {
             if (this._selectedItem) {
                 this._selectedItem.deselectItem();
             }
@@ -720,3 +745,16 @@ class Graph extends Element {
 }
 
 export default Graph;
+export type {
+    AttributeSchema,
+    ContextMenuItem,
+    EdgeData,
+    EdgeSchema,
+    GraphConfig,
+    GraphData,
+    GraphEventMap,
+    GraphOptions,
+    GraphSchema,
+    NodeData,
+    NodeSchema
+};

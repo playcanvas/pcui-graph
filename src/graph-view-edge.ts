@@ -2,8 +2,9 @@ import { connectors, dia, g, shapes } from '@joint/core';
 import { Menu } from '@playcanvas/pcui';
 
 import type GraphView from './graph-view';
+import type { ContextMenuItem, DefaultStyles, EdgeData, EdgeSchema, GraphConfig, GraphSchema } from './types';
 
-(connectors as any).smoothInOut = function (sourcePoint: g.Point, targetPoint: g.Point) {
+connectors.smoothInOut = function (sourcePoint: g.Point, targetPoint: g.Point) {
     const p1 = sourcePoint.clone();
     p1.offset(30, 0);
 
@@ -23,17 +24,17 @@ class GraphViewEdge {
 
     _graphView: GraphView;
 
-    _config: any;
+    _config: GraphConfig;
 
     _paper: dia.Paper;
 
     _graph: dia.Graph;
 
-    _graphSchema: any;
+    _graphSchema: GraphSchema;
 
-    edgeData: any;
+    edgeData: EdgeData;
 
-    _edgeSchema: any;
+    _edgeSchema: EdgeSchema;
 
     state = GraphViewEdge.STATES.DEFAULT;
 
@@ -49,10 +50,10 @@ class GraphViewEdge {
         graphView: GraphView,
         paper: dia.Paper,
         graph: dia.Graph,
-        graphSchema: any,
-        edgeData: any,
-        edgeSchema: any,
-        onEdgeSelected: (edgeData: any) => void
+        graphSchema: GraphSchema,
+        edgeData: EdgeData,
+        edgeSchema: EdgeSchema,
+        onEdgeSelected: (edgeData: EdgeData) => void
     ) {
         this._graphView = graphView;
         this._config = graphView._config;
@@ -105,7 +106,7 @@ class GraphViewEdge {
         this.model = link;
     }
 
-    static createLink(defaultStyles: any, edgeSchema: any, edgeData?: any): shapes.standard.Link {
+    static createLink(defaultStyles: DefaultStyles, edgeSchema: EdgeSchema, edgeData?: EdgeData): shapes.standard.Link {
         const link = new shapes.standard.Link();
         link.attr({
             line: {
@@ -141,7 +142,7 @@ class GraphViewEdge {
         return link;
     }
 
-    addContextMenu(items: any[]): void {
+    addContextMenu(items: ContextMenuItem[]): void {
         if (this._graphView._config.readOnly) return;
         this._contextMenu = new Menu({
             items: items

@@ -7,6 +7,18 @@ import GraphViewNode from './graph-view-node';
 import JointGraph from './joint-graph';
 import { jointShapeElement, jointShapeElementView } from './joint-shape-node';
 import { Vec2 } from './lib/vec2';
+import type {
+    AttributeSchema,
+    ContextMenuItem,
+    EdgeData,
+    EdgeSchema,
+    GraphConfig,
+    GraphObserver,
+    GraphSchema,
+    NodeData,
+    NodeSchema,
+    Value
+} from './types';
 
 import type Graph from './index';
 
@@ -15,9 +27,9 @@ class GraphView extends JointGraph {
 
     _dom: HTMLElement;
 
-    _graphSchema: any;
+    _graphSchema: GraphSchema;
 
-    _graphData: any;
+    _graphData: GraphObserver;
 
     _nodes: Record<string, GraphViewNode> = {};
 
@@ -31,7 +43,13 @@ class GraphView extends JointGraph {
 
     _viewMenu: Menu;
 
-    constructor(parent: Graph, dom: HTMLElement, graphSchema: any, graphData: any, config: any) {
+    constructor(
+        parent: Graph,
+        dom: HTMLElement,
+        graphSchema: GraphSchema,
+        graphData: GraphObserver,
+        config: GraphConfig
+    ) {
         super(dom, config);
 
         this._parent = parent;
@@ -41,7 +59,7 @@ class GraphView extends JointGraph {
 
         this._config = config;
 
-        const htmlShapes = shapes as Record<string, any>;
+        const htmlShapes = shapes as unknown as { html: Record<string, unknown> };
         htmlShapes.html = {};
         htmlShapes.html.Element = jointShapeElement();
         htmlShapes.html.ElementView = jointShapeElementView(this._paper);
@@ -212,14 +230,14 @@ class GraphView extends JointGraph {
         return new Vec2(-translate.tx / scale + pos.x / scale, -translate.ty / scale + pos.y / scale);
     }
 
-    addCanvasContextMenu(items: any[]): void {
+    addCanvasContextMenu(items: ContextMenuItem[]): void {
         this._viewMenu = new Menu({
             items: items
         });
         this._paper.el.appendChild(this._viewMenu.dom);
     }
 
-    addNodeContextMenu(id: string | number, items: any[]): void {
+    addNodeContextMenu(id: string | number, items: ContextMenuItem[]): void {
         const addNodeContextMenuFunction = () => {
             const node = this.getNode(id);
             node.addContextMenu(items);
@@ -231,7 +249,7 @@ class GraphView extends JointGraph {
         }
     }
 
-    addEdgeContextMenu(id: string, items: any[]): void {
+    addEdgeContextMenu(id: string, items: ContextMenuItem[]): void {
         const edge = this.getEdge(id);
         edge.addContextMenu(items);
     }
@@ -241,11 +259,11 @@ class GraphView extends JointGraph {
     }
 
     addNode(
-        nodeData: any,
-        nodeSchema: any,
-        onCreateEdge: (edgeId: string, edge: any) => void,
-        onNodeSelected: (nodeData: any) => void
-    ): any {
+        nodeData: NodeData,
+        nodeSchema: NodeSchema,
+        onCreateEdge: (edgeId: string, edge: EdgeData) => void,
+        onNodeSelected: (nodeData: NodeData) => void
+    ): NodeData {
         const node = new GraphViewNode(
             this,
             this._paper,
@@ -270,7 +288,7 @@ class GraphView extends JointGraph {
         delete this._nodes[modelId];
     }
 
-    updateNodeAttribute(id: string | number, attribute: string, value: any): void {
+    updateNodeAttribute(id: string | number, attribute: string, value: Value): void {
         this.getNode(id).updateAttribute(attribute, value);
     }
 
@@ -286,7 +304,12 @@ class GraphView extends JointGraph {
         this.getNode(id).updateNodeType(nodeType);
     }
 
-    addNodeEvent(id: string | number, event: string, callback: (...args: any[]) => void, attribute?: any): void {
+    addNodeEvent<T extends unknown[]>(
+        id: string | number,
+        event: string,
+        callback: (...args: T) => void,
+        attribute?: AttributeSchema
+    ): void {
         const addNodeEventFunction = () => {
             const node = this.getNode(id);
             node.addEvent(event, callback, attribute);
@@ -302,7 +325,7 @@ class GraphView extends JointGraph {
         return this._edges[id];
     }
 
-    addEdge(edgeData: any, edgeSchema: any, onEdgeSelected: (edgeData: any) => void): any {
+    addEdge(edgeData: EdgeData, edgeSchema: EdgeSchema, onEdgeSelected: (edgeData: EdgeData) => void): EdgeData {
         let edge;
         if (Number.isFinite(edgeData.outPort)) {
             edge = this.getEdge(`${edgeData.from},${edgeData.outPort}-${edgeData.to},${edgeData.inPort}`);
@@ -362,11 +385,11 @@ class GraphView extends JointGraph {
     }
 
     addUnconnectedEdge(
-        nodeId: number,
-        edgeType: string,
-        edgeSchema: any,
-        validateEdge: (edgeType: string, source: number, target: number) => boolean,
-        onEdgeConnected: (edgeType: string, from: number, to: number) => void
+        nodeId: string | number,
+        edgeType: string | number,
+        edgeSchema: EdgeSchema,
+        validateEdge: (edgeType: string | number, source: string | number, target: string | number) => boolean,
+        onEdgeConnected: (edgeType: string | number, from: string | number, to: string | number) => void
     ): void {
         this.disableInputEvents();
         const link = GraphViewEdge.createLink(this._config.defaultStyles, edgeSchema);
