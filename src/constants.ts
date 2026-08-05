@@ -46,7 +46,6 @@ export const DEFAULT_CONFIG = {
             baseWidth: 226,
             textAlignMiddle: false,
             lineHeight: 12
-
         },
         edge: {
             stroke: 'rgb(3, 121, 238)',

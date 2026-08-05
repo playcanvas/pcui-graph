@@ -11,7 +11,7 @@ class BaseComponent extends React.Component {
         if (!nodeElement) return;
         this.element = new Graph(this.props.schema, {
             ...this.props.options,
-            dom: nodeElement,
+            dom: nodeElement
         });
         if (this.onClick) {
             this.element.on('click', this.onClick);
@@ -22,14 +22,14 @@ class BaseComponent extends React.Component {
         if (this.props.parent) {
             this.element.parent = this.props.parent;
         }
-    }
+    };
     getPropertyDescriptor = (obj, prop) => {
         let desc;
         do {
             desc = Object.getOwnPropertyDescriptor(obj, prop);
         } while (!desc && (obj = Object.getPrototypeOf(obj)));
         return desc;
-    }
+    };
 
     componentDidMount() {
         if (this.link) {
@@ -38,7 +38,7 @@ class BaseComponent extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        Object.keys(this.props).forEach(prop => {
+        Object.keys(this.props).forEach((prop) => {
             var propDescriptor = this.getPropertyDescriptor(this.element, prop);
             if (propDescriptor && propDescriptor.set) {
                 this.element[prop] = this.props[prop];
@@ -50,7 +50,7 @@ class BaseComponent extends React.Component {
     }
 
     render() {
-        return <div ref={this.attachElement} />
+        return <div ref={this.attachElement} />;
     }
 }
 

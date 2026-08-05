@@ -18,7 +18,7 @@ const GRAPH_ENUM = {
         ADD: 3,
         SINE: 4,
         TEXTURE: 5,
-        VARIABLE_VEC_2: 6,
+        VARIABLE_VEC_2: 6
     },
     EDGE: {
         FLOAT: 1,
@@ -29,13 +29,9 @@ const GRAPH_ENUM = {
     }
 };
 
-const NODE_CONTEXT_MENU_ITEMS = [
-    { text: 'Delete node', action: GRAPH_ACTIONS.DELETE_NODE }
-];
+const NODE_CONTEXT_MENU_ITEMS = [{ text: 'Delete node', action: GRAPH_ACTIONS.DELETE_NODE }];
 
-const EDGE_CONTEXT_MENU_ITEMS = [
-    { text: 'Delete edge', action: GRAPH_ACTIONS.DELETE_EDGE }
-];
+const EDGE_CONTEXT_MENU_ITEMS = [{ text: 'Delete edge', action: GRAPH_ACTIONS.DELETE_EDGE }];
 
 const GRAPH_SCHEMA = {
     nodes: {
@@ -186,31 +182,31 @@ const GRAPH_SCHEMA = {
             fill: 'rgb(54, 67, 70, 0.8)',
             strokeWidth: 2,
             targetMarker: null,
-            contextMenuItems: EDGE_CONTEXT_MENU_ITEMS,
+            contextMenuItems: EDGE_CONTEXT_MENU_ITEMS
         },
         [GRAPH_ENUM.EDGE.VEC_2]: {
             stroke: '#0379EE',
             strokeWidth: 2,
             targetMarker: null,
-            contextMenuItems: EDGE_CONTEXT_MENU_ITEMS,
+            contextMenuItems: EDGE_CONTEXT_MENU_ITEMS
         },
         [GRAPH_ENUM.EDGE.VEC_3]: {
             stroke: '#0379EE',
             strokeWidth: 2,
             targetMarker: null,
-            contextMenuItems: EDGE_CONTEXT_MENU_ITEMS,
+            contextMenuItems: EDGE_CONTEXT_MENU_ITEMS
         },
         [GRAPH_ENUM.EDGE.VEC_4]: {
             stroke: '#0379EE',
             strokeWidth: 2,
             targetMarker: null,
-            contextMenuItems: EDGE_CONTEXT_MENU_ITEMS,
+            contextMenuItems: EDGE_CONTEXT_MENU_ITEMS
         },
         [GRAPH_ENUM.EDGE.MATRIX]: {
             stroke: '#0379EE',
             strokeWidth: 2,
             targetMarker: null,
-            contextMenuItems: EDGE_CONTEXT_MENU_ITEMS,
+            contextMenuItems: EDGE_CONTEXT_MENU_ITEMS
         }
     }
 };
@@ -262,7 +258,7 @@ const GRAPH_DATA = {
             nodeType: GRAPH_ENUM.NODE.TEXTURE,
             name: 'Texture',
             posX: 650,
-            posY: 50,
+            posY: 50
             // texture: 'https://cdnb.artstation.com/p/assets/images/images/008/977/853/large/brandon-liu-mod9-grass-bliu2.jpg?1516424810'
         },
         1240: {
@@ -346,11 +342,11 @@ const GRAPH_CONTEXT_MENU_ITEMS = [
         action: GRAPH_ACTIONS.ADD_NODE,
         nodeType: GRAPH_ENUM.NODE.TEXTURE,
         name: 'Texture'
-    },
+    }
 ];
 
 // Template function
-const Template = (args) => <Graph schema={GRAPH_SCHEMA} options={{...args}} />;
+const Template = (args) => <Graph schema={GRAPH_SCHEMA} options={{ ...args }} />;
 
 // Default story using the template
 export const VisualProgrammingGraphExample = Template.bind({});

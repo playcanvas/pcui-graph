@@ -1,126 +1,130 @@
 {
-  "name": "@playcanvas/pcui-graph",
-  "version": "5.2.5",
-  "author": "PlayCanvas <support@playcanvas.com>",
-  "homepage": "https://github.com/playcanvas/pcui-graph",
-  "description": "A PCUI plugin for creating node-based graphs",
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "keywords": [
-    "components",
-    "css",
-    "dom",
-    "graph",
-    "html",
-    "javascript",
-    "nodes",
-    "pcui",
-    "playcanvas",
-    "sass",
-    "typescript",
-    "ui"
-  ],
-  "license": "MIT",
-  "main": "dist/pcui-graph.js",
-  "module": "dist/pcui-graph.mjs",
-  "types": "types/index.d.ts",
-  "type": "module",
-  "exports": {
-    ".": {
-      "types": "./types/index.d.ts",
-      "import": "./dist/pcui-graph.mjs"
+    "name": "@playcanvas/pcui-graph",
+    "version": "5.2.5",
+    "author": "PlayCanvas <support@playcanvas.com>",
+    "homepage": "https://github.com/playcanvas/pcui-graph",
+    "description": "A PCUI plugin for creating node-based graphs",
+    "engines": {
+        "node": ">=18.0.0"
     },
-    "./styles": "./styles/dist/index.mjs",
-    "./dist/*": "./dist/*"
-  },
-  "bugs": {
-    "url": "https://github.com/playcanvas/pcui-graph/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/playcanvas/pcui-graph.git"
-  },
-  "scripts": {
-    "build": "cross-env NODE_ENV=production rollup -c && npm run bundle:styles && npm run build:types",
-    "build:storybook": "cross-env ENVIRONMENT=production storybook build -o storybook",
-    "build:types": "tsc --project ./tsconfig.json --declaration --emitDeclarationOnly --outDir types",
-    "bundle:styles": "scss-bundle -e ./src/styles/style.scss -o ./dist/pcui-graph.scss",
-    "docs": "typedoc",
-    "lint": "npm run lint:js && npm run lint:styles",
-    "lint:js": "eslint src/**/*.ts rollup.config.mjs eslint.config.mjs",
-    "lint:js:fix": "eslint src/**/*.ts rollup.config.mjs eslint.config.mjs --fix",
-    "lint:styles": "stylelint src/styles/style.scss",
-    "publint": "publint",
-    "serve": "serve",
-    "storybook": "storybook dev -p 9000",
-    "watch": "rollup -c --watch",
-    "watch:umd": "rollup -c --environment target:umd --watch",
-    "watch:module": "rollup -c --environment target:module --watch"
-  },
-  "files": [
-    "dist",
-    "styles",
-    "types"
-  ],
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+    "keywords": [
+        "components",
+        "css",
+        "dom",
+        "graph",
+        "html",
+        "javascript",
+        "nodes",
+        "pcui",
+        "playcanvas",
+        "sass",
+        "typescript",
+        "ui"
     ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@babel/core": "7.29.0",
-    "@babel/preset-env": "7.29.2",
-    "@babel/preset-react": "7.28.5",
-    "@babel/preset-typescript": "7.28.5",
-    "@joint/core": "4.2.4",
-    "@playcanvas/eslint-config": "2.1.0",
-    "@playcanvas/observer": "1.7.1",
-    "@playcanvas/pcui": "6.1.3",
-    "@rollup/plugin-commonjs": "29.0.2",
-    "@rollup/plugin-node-resolve": "16.0.3",
-    "@rollup/plugin-terser": "1.0.0",
-    "@rollup/plugin-typescript": "12.3.0",
-    "@storybook/addon-docs": "10.3.5",
-    "@storybook/react-webpack5": "10.3.5",
-    "@types/react": "19.2.14",
-    "@typescript-eslint/eslint-plugin": "8.59.1",
-    "@typescript-eslint/parser": "8.59.1",
-    "babel-loader": "10.1.1",
-    "cross-env": "10.1.0",
-    "css-loader": "7.1.4",
-    "eslint": "9.39.4",
-    "eslint-import-resolver-typescript": "4.4.4",
-    "eslint-plugin-storybook": "10.3.5",
-    "globals": "17.5.0",
-    "publint": "0.3.18",
-    "rollup": "4.60.2",
-    "rollup-plugin-sass": "1.15.3",
-    "sass-loader": "16.0.7",
-    "scss-bundle": "3.1.2",
-    "serve": "14.2.6",
-    "storybook": "10.3.5",
-    "style-loader": "4.0.0",
-    "stylelint": "17.9.1",
-    "stylelint-config-standard-scss": "17.0.0",
-    "tslib": "2.8.1",
-    "typedoc": "0.28.19",
-    "typedoc-plugin-mdn-links": "5.1.1",
-    "typedoc-plugin-rename-defaults": "0.7.3",
-    "typescript": "6.0.3"
-  },
-  "peerDependencies": {
-    "@playcanvas/observer": "^1.0.0",
-    "@playcanvas/pcui": "^6.0.0"
-  },
-  "directories": {
-    "doc": "docs"
-  }
+    "license": "MIT",
+    "main": "dist/pcui-graph.js",
+    "module": "dist/pcui-graph.mjs",
+    "types": "types/index.d.ts",
+    "type": "module",
+    "exports": {
+        ".": {
+            "types": "./types/index.d.ts",
+            "import": "./dist/pcui-graph.mjs"
+        },
+        "./styles": "./styles/dist/index.mjs",
+        "./dist/*": "./dist/*"
+    },
+    "bugs": {
+        "url": "https://github.com/playcanvas/pcui-graph/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/playcanvas/pcui-graph.git"
+    },
+    "scripts": {
+        "build": "cross-env NODE_ENV=production rollup -c && npm run bundle:styles && npm run build:types",
+        "build:storybook": "cross-env ENVIRONMENT=production storybook build -o storybook",
+        "build:types": "tsc --project ./tsconfig.json --declaration --emitDeclarationOnly --outDir types",
+        "bundle:styles": "scss-bundle -e ./src/styles/style.scss -o ./dist/pcui-graph.scss",
+        "docs": "typedoc",
+        "fmt": "prettier --check .",
+        "fmt:fix": "prettier --write .",
+        "lint": "npm run lint:js && npm run lint:styles",
+        "lint:fix": "npm run lint:js:fix && npm run lint:styles -- --fix",
+        "lint:js": "eslint src/**/*.ts rollup.config.mjs eslint.config.mjs",
+        "lint:js:fix": "eslint src/**/*.ts rollup.config.mjs eslint.config.mjs --fix",
+        "lint:styles": "stylelint src/styles/style.scss",
+        "publint": "publint",
+        "serve": "serve",
+        "storybook": "storybook dev -p 9000",
+        "watch": "rollup -c --watch",
+        "watch:umd": "rollup -c --environment target:umd --watch",
+        "watch:module": "rollup -c --environment target:module --watch"
+    },
+    "files": [
+        "dist",
+        "styles",
+        "types"
+    ],
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@babel/core": "7.29.0",
+        "@babel/preset-env": "7.29.2",
+        "@babel/preset-react": "7.28.5",
+        "@babel/preset-typescript": "7.28.5",
+        "@joint/core": "4.2.4",
+        "@playcanvas/eslint-config": "3.0.0-beta.8",
+        "@playcanvas/observer": "1.7.1",
+        "@playcanvas/pcui": "6.1.3",
+        "@rollup/plugin-commonjs": "29.0.2",
+        "@rollup/plugin-node-resolve": "16.0.3",
+        "@rollup/plugin-terser": "1.0.0",
+        "@rollup/plugin-typescript": "12.3.0",
+        "@storybook/addon-docs": "10.3.5",
+        "@storybook/react-webpack5": "10.3.5",
+        "@types/react": "19.2.14",
+        "@typescript-eslint/eslint-plugin": "8.59.1",
+        "@typescript-eslint/parser": "8.59.1",
+        "babel-loader": "10.1.1",
+        "cross-env": "10.1.0",
+        "css-loader": "7.1.4",
+        "eslint": "9.39.4",
+        "eslint-import-resolver-typescript": "4.4.4",
+        "eslint-plugin-storybook": "10.3.5",
+        "globals": "17.5.0",
+        "prettier": "3.9.6",
+        "publint": "0.3.18",
+        "rollup": "4.60.2",
+        "rollup-plugin-sass": "1.15.3",
+        "sass-loader": "16.0.7",
+        "scss-bundle": "3.1.2",
+        "serve": "14.2.6",
+        "storybook": "10.3.5",
+        "style-loader": "4.0.0",
+        "stylelint": "17.9.1",
+        "stylelint-config-standard-scss": "17.0.0",
+        "tslib": "2.8.1",
+        "typedoc": "0.28.19",
+        "typedoc-plugin-mdn-links": "5.1.1",
+        "typedoc-plugin-rename-defaults": "0.7.3",
+        "typescript": "6.0.3"
+    },
+    "peerDependencies": {
+        "@playcanvas/observer": "^1.0.0",
+        "@playcanvas/pcui": "^6.0.0"
+    },
+    "directories": {
+        "doc": "docs"
+    }
 }

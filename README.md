@@ -63,18 +63,18 @@ This will automatically open the Storybook in a new browser tab.
 
 The source lives in `src/` and is organized as follows:
 
-| File | Purpose |
-|------|---------|
-| `index.ts` | Main `Graph` class and exports |
-| `graph-view.ts` | Core graph view (wraps JointJS) |
-| `graph-view-node.ts` | Node element |
-| `graph-view-edge.ts` | Edge / connection element |
-| `joint-graph.ts` | Base JointJS paper, pan, zoom and resize |
-| `joint-shape-node.ts` | Custom JointJS HTML element shape |
-| `constants.ts` | Default configuration and event constants |
-| `selected-item.ts` | Selection handling |
-| `lib/vec2.ts` | 2D vector math |
-| `styles/style.scss` | SCSS styles |
+| File                  | Purpose                                   |
+| --------------------- | ----------------------------------------- |
+| `index.ts`            | Main `Graph` class and exports            |
+| `graph-view.ts`       | Core graph view (wraps JointJS)           |
+| `graph-view-node.ts`  | Node element                              |
+| `graph-view-edge.ts`  | Edge / connection element                 |
+| `joint-graph.ts`      | Base JointJS paper, pan, zoom and resize  |
+| `joint-shape-node.ts` | Custom JointJS HTML element shape         |
+| `constants.ts`        | Default configuration and event constants |
+| `selected-item.ts`    | Selection handling                        |
+| `lib/vec2.ts`         | 2D vector math                            |
+| `styles/style.scss`   | SCSS styles                               |
 
 To build and lint:
 

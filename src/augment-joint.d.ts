@@ -5,7 +5,6 @@
 import type { g, dia, connectors as _connectors } from '@joint/core';
 
 declare module '@joint/core' {
-
     namespace connectors {
         function smoothInOut(
             sourcePoint: g.Point,
@@ -17,7 +16,7 @@ declare module '@joint/core' {
 
     namespace shapes {
         namespace html {
-            class Element extends dia.Element { }
+            class Element extends dia.Element {}
             class ElementView extends dia.ElementView {
                 updateBox(): void;
             }

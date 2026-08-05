@@ -2,8 +2,9 @@ import { connectors, dia, g, shapes } from '@joint/core';
 import { Menu } from '@playcanvas/pcui';
 
 import type GraphView from './graph-view';
+import type { ContextMenuItem, DefaultStyles, EdgeData, EdgeSchema, GraphConfig, GraphSchema } from './types';
 
-(connectors as any).smoothInOut = function (sourcePoint: g.Point, targetPoint: g.Point) {
+connectors.smoothInOut = function (sourcePoint: g.Point, targetPoint: g.Point) {
     const p1 = sourcePoint.clone();
     p1.offset(30, 0);
 
@@ -23,17 +24,17 @@ class GraphViewEdge {
 
     _graphView: GraphView;
 
-    _config: any;
+    _config: GraphConfig;
 
     _paper: dia.Paper;
 
     _graph: dia.Graph;
 
-    _graphSchema: any;
+    _graphSchema: GraphSchema;
 
-    edgeData: any;
+    edgeData: EdgeData;
 
-    _edgeSchema: any;
+    _edgeSchema: EdgeSchema;
 
     state = GraphViewEdge.STATES.DEFAULT;
 
@@ -45,7 +46,15 @@ class GraphViewEdge {
 
     _edgeElement: SVGElement | null = null;
 
-    constructor(graphView: GraphView, paper: dia.Paper, graph: dia.Graph, graphSchema: any, edgeData: any, edgeSchema: any, onEdgeSelected: (edgeData: any) => void) {
+    constructor(
+        graphView: GraphView,
+        paper: dia.Paper,
+        graph: dia.Graph,
+        graphSchema: GraphSchema,
+        edgeData: EdgeData,
+        edgeSchema: EdgeSchema,
+        onEdgeSelected: (edgeData: EdgeData) => void
+    ) {
         this._graphView = graphView;
         this._config = graphView._config;
         this._paper = paper;
@@ -97,7 +106,7 @@ class GraphViewEdge {
         this.model = link;
     }
 
-    static createLink(defaultStyles: any, edgeSchema: any, edgeData?: any): shapes.standard.Link {
+    static createLink(defaultStyles: DefaultStyles, edgeSchema: EdgeSchema, edgeData?: EdgeData): shapes.standard.Link {
         const link = new shapes.standard.Link();
         link.attr({
             line: {
@@ -116,10 +125,10 @@ class GraphViewEdge {
         }
         if (edgeSchema.targetMarker || defaultStyles.edge.targetMarker) {
             link.attr('line/targetMarker', {
-                'type': 'path',
-                'd': 'm1.18355,0.8573c-0.56989,-0.39644 -0.57234,-1.2387 -0.00478,-1.63846l7.25619,-5.11089c0.66255,-0.46663 1.57585,0.00721 1.57585,0.81756l0,10.1587c0,0.8077 -0.908,1.2821 -1.57106,0.8209l-7.2562,-5.04781z',
-                'stroke': edgeSchema.stroke || defaultStyles.edge.stroke,
-                'fill': edgeSchema.stroke || defaultStyles.edge.stroke
+                type: 'path',
+                d: 'm1.18355,0.8573c-0.56989,-0.39644 -0.57234,-1.2387 -0.00478,-1.63846l7.25619,-5.11089c0.66255,-0.46663 1.57585,0.00721 1.57585,0.81756l0,10.1587c0,0.8077 -0.908,1.2821 -1.57106,0.8209l-7.2562,-5.04781z',
+                stroke: edgeSchema.stroke || defaultStyles.edge.stroke,
+                fill: edgeSchema.stroke || defaultStyles.edge.stroke
             });
         } else {
             link.attr('line/targetMarker', null);
@@ -133,7 +142,7 @@ class GraphViewEdge {
         return link;
     }
 
-    addContextMenu(items: any[]): void {
+    addContextMenu(items: ContextMenuItem[]): void {
         if (this._graphView._config.readOnly) return;
         this._contextMenu = new Menu({
             items: items
@@ -166,7 +175,10 @@ class GraphViewEdge {
     select(): void {
         const edgeSchema = this._edgeSchema;
         this.model.attr('line/stroke', edgeSchema.strokeSelected || this._config.defaultStyles.edge.strokeSelected);
-        this.model.attr('line/strokeWidth', edgeSchema.strokeWidthSelected || this._config.defaultStyles.edge.strokeWidthSelected);
+        this.model.attr(
+            'line/strokeWidth',
+            edgeSchema.strokeWidthSelected || this._config.defaultStyles.edge.strokeWidthSelected
+        );
         this.model.attr('line/targetMarker', {
             stroke: edgeSchema.strokeSelected || this._config.defaultStyles.edge.strokeSelected,
             fill: edgeSchema.strokeSelected || this._config.defaultStyles.edge.strokeSelected
@@ -178,8 +190,8 @@ class GraphViewEdge {
         this.model.attr('line/stroke', edgeSchema.stroke || this._config.defaultStyles.edge.stroke);
         this.model.attr('line/strokeWidth', edgeSchema.strokeWidth || this._config.defaultStyles.edge.strokeWidth);
         this.model.attr('line/targetMarker', {
-            'stroke': edgeSchema.stroke || this._config.defaultStyles.edge.stroke,
-            'fill': edgeSchema.stroke || this._config.defaultStyles.edge.stroke
+            stroke: edgeSchema.stroke || this._config.defaultStyles.edge.stroke,
+            fill: edgeSchema.stroke || this._config.defaultStyles.edge.stroke
         });
         this.state = GraphViewEdge.STATES.DEFAULT;
     }
@@ -197,20 +209,20 @@ class GraphViewEdge {
     addSourceMarker(): void {
         const edgeSchema = this._edgeSchema;
         this.model.attr('line/sourceMarker', {
-            'type': 'path',
-            'd': 'm-2.57106,0.93353c-0.56989,-0.39644 -0.57234,-1.2387 -0.00478,-1.63846l7.25619,-5.11089c0.66251,-0.46663 1.57585,0.00721 1.57585,0.81756l0,10.1587c0,0.8077 -0.90803,1.2821 -1.57106,0.8209l-7.2562,-5.04781z',
-            'stroke': edgeSchema.stroke || this._config.defaultStyles.edge.stroke,
-            'fill': edgeSchema.stroke || this._config.defaultStyles.edge.stroke
+            type: 'path',
+            d: 'm-2.57106,0.93353c-0.56989,-0.39644 -0.57234,-1.2387 -0.00478,-1.63846l7.25619,-5.11089c0.66251,-0.46663 1.57585,0.00721 1.57585,0.81756l0,10.1587c0,0.8077 -0.90803,1.2821 -1.57106,0.8209l-7.2562,-5.04781z',
+            stroke: edgeSchema.stroke || this._config.defaultStyles.edge.stroke,
+            fill: edgeSchema.stroke || this._config.defaultStyles.edge.stroke
         });
     }
 
     addTargetMarker(): void {
         const edgeSchema = this._edgeSchema;
         this.model.attr('line/targetMarker', {
-            'type': 'path',
-            'd': 'm-2.57106,0.93353c-0.56989,-0.39644 -0.57234,-1.2387 -0.00478,-1.63846l7.25619,-5.11089c0.66251,-0.46663 1.57585,0.00721 1.57585,0.81756l0,10.1587c0,0.8077 -0.90803,1.2821 -1.57106,0.8209l-7.2562,-5.04781z',
-            'stroke': edgeSchema.stroke || this._config.defaultStyles.edge.stroke,
-            'fill': edgeSchema.stroke || this._config.defaultStyles.edge.stroke
+            type: 'path',
+            d: 'm-2.57106,0.93353c-0.56989,-0.39644 -0.57234,-1.2387 -0.00478,-1.63846l7.25619,-5.11089c0.66251,-0.46663 1.57585,0.00721 1.57585,0.81756l0,10.1587c0,0.8077 -0.90803,1.2821 -1.57106,0.8209l-7.2562,-5.04781z',
+            stroke: edgeSchema.stroke || this._config.defaultStyles.edge.stroke,
+            fill: edgeSchema.stroke || this._config.defaultStyles.edge.stroke
         });
     }
 }

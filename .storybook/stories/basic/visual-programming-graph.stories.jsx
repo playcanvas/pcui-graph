@@ -12,10 +12,10 @@ export default {
 const GRAPH_ENUM = {
     NODE: {
         HELLO: 0,
-        WORLD: 1,
+        WORLD: 1
     },
     EDGE: {
-        HELLO_TO_WORLD: 0,
+        HELLO_TO_WORLD: 0
     }
 };
 
@@ -43,7 +43,7 @@ const GRAPH_SCHEMA = {
     edges: {
         [GRAPH_ENUM.EDGE.HELLO_TO_WORLD]: {
             from: GRAPH_ENUM.NODE.HELLO,
-            to: GRAPH_ENUM.NODE.WORLD,
+            to: GRAPH_ENUM.NODE.WORLD
         }
     }
 };
@@ -63,7 +63,7 @@ const GRAPH_DATA = {
             name: 'World',
             posX: 500,
             posY: 200
-        },
+        }
     },
     edges: {
         '1234,0-1235,0': {
@@ -71,13 +71,13 @@ const GRAPH_DATA = {
             from: 1234,
             to: 1235,
             inPort: 0,
-            outPort: 0,
+            outPort: 0
         }
     }
 };
 
 // Template function
-const Template = (args) => <Graph schema={GRAPH_SCHEMA} options={{...args}} />;
+const Template = (args) => <Graph schema={GRAPH_SCHEMA} options={{ ...args }} />;
 
 // Default story using the template
 export const VisualProgrammingGraphExample = Template.bind({});

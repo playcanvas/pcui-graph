@@ -12,10 +12,10 @@ export default {
 
 const GRAPH_ENUM = {
     NODE: {
-        STATE: 0,
+        STATE: 0
     },
     EDGE: {
-        EDGE: 0,
+        EDGE: 0
     }
 };
 
@@ -46,16 +46,8 @@ const GRAPH_SCHEMA = {
             strokeWidth: 2,
             targetMarkerStroke: '#0379EE',
             targetMarker: true,
-            from: [
-                GRAPH_ENUM.NODE.STATE,
-                GRAPH_ENUM.NODE.START_STATE,
-                GRAPH_ENUM.NODE.DEFAULT_STATE
-            ],
-            to: [
-                GRAPH_ENUM.NODE.STATE,
-                GRAPH_ENUM.NODE.DEFAULT_STATE,
-                GRAPH_ENUM.NODE.END_STATE
-            ],
+            from: [GRAPH_ENUM.NODE.STATE, GRAPH_ENUM.NODE.START_STATE, GRAPH_ENUM.NODE.DEFAULT_STATE],
+            to: [GRAPH_ENUM.NODE.STATE, GRAPH_ENUM.NODE.DEFAULT_STATE, GRAPH_ENUM.NODE.END_STATE],
             contextMenuItems: [
                 {
                     text: 'Delete edge',
@@ -123,7 +115,7 @@ const GRAPH_CONTEXT_MENU_ITEMS_ITEMS = [
 ];
 
 // Template function
-const Template = (args) => <Graph schema={GRAPH_SCHEMA} options={{...args}} />;
+const Template = (args) => <Graph schema={GRAPH_SCHEMA} options={{ ...args }} />;
 
 // Default story using the template
 export const DirectedGraphExample = Template.bind({});
