@@ -1,31 +1,23 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
-  "packageRules": [
-    {
-      "matchManagers": [
-        "npm"
-      ],
-      "groupName": "all npm dependencies",
-      "schedule": [
-        "on monday at 10:00am"
-      ]
-    },
-    {
-      "matchDepTypes": ["devDependencies"],
-      "rangeStrategy": "pin"
-    },
-    {
-      "matchDepTypes": ["dependencies"],
-      "rangeStrategy": "widen"
-    },
-    {
-      "matchPackageNames": [
-        "eslint"
-      ],
-      "allowedVersions": "<10.0.0"
-    }
-  ]
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended"],
+    "packageRules": [
+        {
+            "matchManagers": ["npm"],
+            "groupName": "all npm dependencies",
+            "schedule": ["on monday at 10:00am"]
+        },
+        {
+            "matchDepTypes": ["devDependencies"],
+            "rangeStrategy": "pin"
+        },
+        {
+            "matchDepTypes": ["dependencies"],
+            "rangeStrategy": "widen"
+        },
+        {
+            "matchPackageNames": ["eslint"],
+            "allowedVersions": "<10.0.0"
+        }
+    ]
 }

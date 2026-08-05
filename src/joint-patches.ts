@@ -16,9 +16,7 @@ import { V } from '@joint/core';
     const node = this.node;
 
     if ((V as any).isUndefined(matrix)) {
-        return (node.parentNode) ?
-            this.getTransformToElement(node.parentNode) :
-            node.getScreenCTM();
+        return node.parentNode ? this.getTransformToElement(node.parentNode) : node.getScreenCTM();
     }
 
     if (opt && opt.absolute) {

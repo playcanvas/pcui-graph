@@ -54,49 +54,33 @@ const GRAPH_SCHEMA = {
             baseWidth: 150,
             textAlignMiddle: true,
             includeIcon: false
-        },
+        }
     },
     edges: {
         0: {
-            from: [
-                0,
-            ],
-            to: [
-                0, 1, 2, 3
-            ],
+            from: [0],
+            to: [0, 1, 2, 3],
             stroke: '#965070',
             strokeWidth: 3,
             connectionStyle: 'smoothInOut'
         },
         1: {
-            from: [
-                1,
-            ],
-            to: [
-                0, 1, 2, 3
-            ],
+            from: [1],
+            to: [0, 1, 2, 3],
             stroke: '#ff574b',
             strokeWidth: 3,
             connectionStyle: 'smoothInOut'
         },
         2: {
-            from: [
-                2,
-            ],
-            to: [
-                0, 1, 2, 3
-            ],
+            from: [2],
+            to: [0, 1, 2, 3],
             stroke: '#4d7cd7',
             strokeWidth: 3,
             connectionStyle: 'smoothInOut'
         },
         3: {
-            from: [
-                3,
-            ],
-            to: [
-                0, 1, 2, 3
-            ],
+            from: [3],
+            to: [0, 1, 2, 3],
             stroke: '#43fb39',
             strokeWidth: 3,
             connectionStyle: 'smoothInOut'
@@ -104,7 +88,7 @@ const GRAPH_SCHEMA = {
     }
 };
 
-const GRAPH_DATA =  {
+const GRAPH_DATA = {
     nodes: {},
     edges: {
         '02-12': {
@@ -196,7 +180,7 @@ const GRAPH_DATA =  {
 });
 
 // Template function
-const Template = (args) => <Graph schema={GRAPH_SCHEMA} options={{...args}} />;
+const Template = (args) => <Graph schema={GRAPH_SCHEMA} options={{ ...args }} />;
 
 // Default story using the template
 export const VersionControlGraphExample = Template.bind({});
@@ -226,7 +210,7 @@ document.body.setAttribute('style', 'margin: 0px; padding: 0px;');
 
 setTimeout(() => {
     const graph = document.querySelector('.pcui-graph').ui;
-    graph.on('EVENT_SELECT_NODE', ({node}) => {
+    graph.on('EVENT_SELECT_NODE', ({ node }) => {
         if (node.id === '00') {
             graph.createNode({
                 id: `4848583`,
@@ -235,11 +219,14 @@ setTimeout(() => {
                 posX: node.posX,
                 posY: node.posY - 100
             });
-            graph.createEdge({
-                to: '4848583',
-                from :'00',
-                edgeType: 0
-            }, `00-${4848583}`);
+            graph.createEdge(
+                {
+                    to: '4848583',
+                    from: '00',
+                    edgeType: 0
+                },
+                `00-${4848583}`
+            );
         }
     });
 }, 0);

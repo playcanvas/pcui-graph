@@ -1,11 +1,7 @@
 {
     "$schema": "https://typedoc.org/schema.json",
-    "entryPoints": [
-        "./src/index.ts"
-    ],
-    "exclude": [
-        "**/node_modules/**"
-    ],
+    "entryPoints": ["./src/index.ts"],
+    "exclude": ["**/node_modules/**"],
     "excludeNotDocumented": true,
     "externalSymbolLinkMappings": {
         "@playcanvas/pcui": {
@@ -26,10 +22,7 @@
     "sidebarLinks": {
         "Home": "/"
     },
-    "plugin": [
-        "typedoc-plugin-mdn-links",
-        "typedoc-plugin-rename-defaults"
-    ],
+    "plugin": ["typedoc-plugin-mdn-links", "typedoc-plugin-rename-defaults"],
     "readme": "none",
     "searchGroupBoosts": {
         "Classes": 2

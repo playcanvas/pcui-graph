@@ -30,12 +30,8 @@ const GRAPH_SCHEMA = {
     },
     edges: {
         [GRAPH_ENUM.EDGE.HELLO_TO_WORLD]: {
-            from: [
-                GRAPH_ENUM.NODE.HELLO
-            ],
-            to: [
-                GRAPH_ENUM.NODE.WORLD
-            ]
+            from: [GRAPH_ENUM.NODE.HELLO],
+            to: [GRAPH_ENUM.NODE.WORLD]
         }
     }
 };
@@ -55,7 +51,7 @@ const GRAPH_DATA = {
             name: 'World',
             posX: 100,
             posY: 300
-        },
+        }
     },
     edges: {
         '1234-1235': {
@@ -67,7 +63,7 @@ const GRAPH_DATA = {
 };
 
 // Template function
-const Template = (args) => <Graph schema={GRAPH_SCHEMA} options={{...args}} />;
+const Template = (args) => <Graph schema={GRAPH_SCHEMA} options={{ ...args }} />;
 
 // Default story using the template
 export const DirectedGraphExample = Template.bind({});

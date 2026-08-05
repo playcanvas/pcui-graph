@@ -11,6 +11,7 @@
 # production
 /dist
 /docs
+/storybook
 /styles/dist
 /types
 

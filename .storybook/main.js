@@ -4,9 +4,9 @@ const config = {
     addons: ['@storybook/addon-docs'],
 
     webpackFinal: async (config, { configType }) => {
-        config.module.rules = config.module.rules.filter(rule => {
+        config.module.rules = config.module.rules.filter((rule) => {
             if (!rule.test) return true;
-            return !rule.test.test(".scss");
+            return !rule.test.test('.scss');
         });
         config.module.rules.push({
             test: /\.(js|jsx|ts|tsx)$/,
@@ -20,11 +20,7 @@ const config = {
         });
         config.module.rules.push({
             test: /\.scss$/,
-            use: [
-                'style-loader',
-                'css-loader',
-                'sass-loader'
-            ],
+            use: ['style-loader', 'css-loader', 'sass-loader']
         });
 
         config.resolve.extensions.push('.js', '.jsx', '.ts', '.tsx');

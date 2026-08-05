@@ -13,12 +13,12 @@ const GRAPH_ENUM = {
     NODE: {
         RED: 0,
         GREEN: 1,
-        BLUE: 2,
+        BLUE: 2
     },
     EDGE: {
         RED_TO_BLUE: 0,
         RED_TO_GREEN: 1,
-        BLUE_TO_GREEN:2,
+        BLUE_TO_GREEN: 2
     }
 };
 
@@ -42,30 +42,18 @@ const GRAPH_SCHEMA = {
     },
     edges: {
         [GRAPH_ENUM.EDGE.RED_TO_BLUE]: {
-            from: [
-                GRAPH_ENUM.NODE.RED,
-            ],
-            to: [
-                GRAPH_ENUM.NODE.BLUE,
-            ],
+            from: [GRAPH_ENUM.NODE.RED],
+            to: [GRAPH_ENUM.NODE.BLUE],
             stroke: 'magenta'
         },
         [GRAPH_ENUM.EDGE.RED_TO_GREEN]: {
-            from: [
-                GRAPH_ENUM.NODE.RED,
-            ],
-            to: [
-                GRAPH_ENUM.NODE.GREEN,
-            ],
+            from: [GRAPH_ENUM.NODE.RED],
+            to: [GRAPH_ENUM.NODE.GREEN],
             stroke: 'yellow'
         },
         [GRAPH_ENUM.EDGE.BLUE_TO_GREEN]: {
-            from: [
-                GRAPH_ENUM.NODE.BLUE,
-            ],
-            to: [
-                GRAPH_ENUM.NODE.GREEN,
-            ],
+            from: [GRAPH_ENUM.NODE.BLUE],
+            to: [GRAPH_ENUM.NODE.GREEN],
             stroke: 'cyan'
         }
     }
@@ -78,7 +66,7 @@ const GRAPH_DATA = {
             nodeType: GRAPH_ENUM.NODE.RED,
             name: 'Red',
             posX: 100,
-            posY: 100,
+            posY: 100
         },
         1235: {
             id: 1235,
@@ -93,7 +81,7 @@ const GRAPH_DATA = {
             name: 'Blue',
             posX: 300,
             posY: 200
-        },
+        }
     },
     edges: {
         '1234-1236': {
@@ -115,7 +103,7 @@ const GRAPH_DATA = {
 };
 
 // Template function
-const Template = (args) => <Graph schema={GRAPH_SCHEMA} options={{...args}} />;
+const Template = (args) => <Graph schema={GRAPH_SCHEMA} options={{ ...args }} />;
 
 // Default story using the template
 export const StyledGraphExample = Template.bind({});
@@ -136,7 +124,6 @@ StyledGraphExample.args = {
         }
     }
 };
-
 
 document.getElementById('storybook-root').setAttribute('style', 'position: fixed; width: 100%; height: 100%');
 document.body.setAttribute('style', 'margin: 0px; padding: 0px;');

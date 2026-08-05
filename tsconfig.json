@@ -7,11 +7,7 @@
         "module": "esnext",
         "jsx": "react",
         "types": ["react"],
-        "lib": [
-            "es2020",
-            "dom",
-            "dom.iterable"
-        ],
+        "lib": ["es2020", "dom", "dom.iterable"],
         "esModuleInterop": true,
         "sourceMap": true,
         "moduleResolution": "bundler",

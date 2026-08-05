@@ -4,9 +4,7 @@
         "font-family-no-missing-generic-family-keyword": [
             true,
             {
-                "ignoreFontFamilies": [
-                    "pc-icon"
-                ]
+                "ignoreFontFamilies": ["pc-icon"]
             }
         ],
         "no-descending-specificity": null,

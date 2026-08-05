@@ -47,7 +47,16 @@ class GraphViewNode {
 
     _hasLinked = false;
 
-    constructor(graphView: GraphView, paper: dia.Paper, graph: dia.Graph, graphSchema: any, nodeData: any, nodeSchema: any, onCreateEdge: (edgeId: string, edge: any) => void, onNodeSelected: (nodeData: any) => void) {
+    constructor(
+        graphView: GraphView,
+        paper: dia.Paper,
+        graph: dia.Graph,
+        graphSchema: any,
+        nodeData: any,
+        nodeSchema: any,
+        onCreateEdge: (edgeId: string, edge: any) => void,
+        onNodeSelected: (nodeData: any) => void
+    ) {
         this._graphView = graphView;
         this._config = graphView._config;
         this._paper = paper;
@@ -60,10 +69,10 @@ class GraphViewNode {
         let portHeight = 0;
         let attributeHeight = 0;
         if (nodeSchema.inPorts) {
-            portHeight = (nodeSchema.inPorts.length * 25) + 10;
+            portHeight = nodeSchema.inPorts.length * 25 + 10;
         }
         if (nodeSchema.outPorts) {
-            const outHeight = (nodeSchema.outPorts.length * 25) + 10;
+            const outHeight = nodeSchema.outPorts.length * 25 + 10;
             if (outHeight > portHeight) portHeight = outHeight;
         }
         const visibleAttributes = nodeSchema.attributes && nodeSchema.attributes.filter((a: any) => !a.hidden);
@@ -73,13 +82,17 @@ class GraphViewNode {
         const rectSize = { x: this.getSchemaValue('baseWidth'), y: rectHeight + portHeight + attributeHeight };
 
         let labelName;
-        const formattedText = nodeSchema.headerTextFormatter && nodeSchema.headerTextFormatter(nodeData.attributes, nodeData.id);
+        const formattedText =
+            nodeSchema.headerTextFormatter && nodeSchema.headerTextFormatter(nodeData.attributes, nodeData.id);
         if (typeof formattedText === 'string') {
             labelName = nodeSchema.headerTextFormatter(nodeData.attributes, nodeData.id);
         } else if (nodeSchema.outPorts || nodeSchema.inPorts) {
-            labelName = nodeData.attributes && nodeData.attributes.name ? `${nodeData.attributes.name} (${nodeSchema.name})` : nodeSchema.name;
+            labelName =
+                nodeData.attributes && nodeData.attributes.name
+                    ? `${nodeData.attributes.name} (${nodeSchema.name})`
+                    : nodeSchema.name;
         } else {
-            labelName = nodeData.attributes && nodeData.attributes.name || nodeData.name;
+            labelName = (nodeData.attributes && nodeData.attributes.name) || nodeData.name;
         }
         const rect = new (shapes as any).html.Element({
             attrs: {
@@ -107,30 +120,36 @@ class GraphViewNode {
                 inBackground: {
                     fill: this.getSchemaValue('fillSecondary'),
                     width: this.getSchemaValue('inPorts') ? rectSize.x / 2 - 1 : rectSize.x - 2,
-                    height: (rectSize.y - rectHeight - 2) >= 0 ? rectSize.y - rectHeight - 2 : 0,
+                    height: rectSize.y - rectHeight - 2 >= 0 ? rectSize.y - rectHeight - 2 : 0,
                     refX: 1,
                     refY: rectHeight + 1
                 },
                 outBackground: {
                     fill: this.getSchemaValue('fill'),
                     width: this.getSchemaValue('inPorts') ? rectSize.x / 2 - 1 : 0,
-                    height: (rectSize.y - rectHeight - 2) >= 0 ? rectSize.y - rectHeight - 2 : 0,
+                    height: rectSize.y - rectHeight - 2 >= 0 ? rectSize.y - rectHeight - 2 : 0,
                     refX: rectSize.x / 2,
                     refY: rectHeight + 1
                 },
-                icon: this.getSchemaValue('includeIcon') ? {
-                    text: this.getSchemaValue('icon'),
-                    fontFamily: 'pc-icon',
-                    fontSize: 14,
-                    fill: this.getSchemaValue('iconColor'),
-                    x: 8,
-                    y: 19
-                } : undefined,
+                icon: this.getSchemaValue('includeIcon')
+                    ? {
+                          text: this.getSchemaValue('icon'),
+                          fontFamily: 'pc-icon',
+                          fontSize: 14,
+                          fill: this.getSchemaValue('iconColor'),
+                          x: 8,
+                          y: 19
+                      }
+                    : undefined,
                 label: {
                     text: labelName,
                     fill: this.getSchemaValue('textColor'),
                     textAnchor: this.getSchemaValue('textAlignMiddle') ? 'middle' : 'left',
-                    x: !this.getSchemaValue('textAlignMiddle') ? (this.getSchemaValue('includeIcon') ? 28 : 14) : rectSize.x / 2,
+                    x: !this.getSchemaValue('textAlignMiddle')
+                        ? this.getSchemaValue('includeIcon')
+                            ? 28
+                            : 14
+                        : rectSize.x / 2,
                     y: !this.getSchemaValue('textAlignMiddle') ? 14 : rectHeight / 2,
                     fontSize: 12,
                     fontWeight: 600,
@@ -139,28 +158,32 @@ class GraphViewNode {
                     lineSpacing: 50,
                     lineHeight: this.getSchemaValue('lineHeight')
                 },
-                marker: nodeData.marker ? {
-                    refX: rectSize.x - 20,
-                    fill: this.getSchemaValue('stroke'),
-                    d: 'M0 0 L20 0 L20 20 Z'
-                } : null,
-                texture: nodeData.texture ? {
-                    href: nodeData.texture,
-                    fill: 'red',
-                    width: 95,
-                    height: 95,
-                    refX: 5,
-                    refY: 65
-                } : null
+                marker: nodeData.marker
+                    ? {
+                          refX: rectSize.x - 20,
+                          fill: this.getSchemaValue('stroke'),
+                          d: 'M0 0 L20 0 L20 20 Z'
+                      }
+                    : null,
+                texture: nodeData.texture
+                    ? {
+                          href: nodeData.texture,
+                          fill: 'red',
+                          width: 95,
+                          height: 95,
+                          refX: 5,
+                          refY: 65
+                      }
+                    : null
             },
             ports: {
                 groups: {
-                    'in': {
+                    in: {
                         position: {
                             name: 'line',
                             args: {
                                 start: { x: 0, y: rectHeight },
-                                end: { x: 0, y: rectHeight + (25 * (nodeSchema.inPorts ? nodeSchema.inPorts.length : 0)) }
+                                end: { x: 0, y: rectHeight + 25 * (nodeSchema.inPorts ? nodeSchema.inPorts.length : 0) }
                             }
                         },
                         label: {
@@ -171,16 +194,19 @@ class GraphViewNode {
                                 }
                             }
                         },
-                        markup: [{
-                            tagName: 'circle',
-                            selector: 'portBody',
-                            className: 'port-body'
-                        }, {
-                            tagName: 'circle',
-                            selector: 'portInnerBody',
-                            className: 'port-inner-body',
-                            attributes: { visibility: 'hidden' }
-                        }],
+                        markup: [
+                            {
+                                tagName: 'circle',
+                                selector: 'portBody',
+                                className: 'port-body'
+                            },
+                            {
+                                tagName: 'circle',
+                                selector: 'portInnerBody',
+                                className: 'port-inner-body',
+                                attributes: { visibility: 'hidden' }
+                            }
+                        ],
                         attrs: {
                             portBody: {
                                 strokeWidth: 2,
@@ -199,29 +225,36 @@ class GraphViewNode {
                             }
                         }
                     },
-                    'out': {
+                    out: {
                         position: {
                             name: 'line',
                             args: {
                                 start: { x: rectSize.x - 10, y: rectHeight },
-                                end: { x: rectSize.x - 10, y: rectHeight + (25 * (nodeSchema.outPorts ? nodeSchema.outPorts.length : 0)) }
+                                end: {
+                                    x: rectSize.x - 10,
+                                    y: rectHeight + 25 * (nodeSchema.outPorts ? nodeSchema.outPorts.length : 0)
+                                }
                             }
                         },
                         label: {
                             position: {
-                                name: 'left', args: { y: 5, x: -5 }
+                                name: 'left',
+                                args: { y: 5, x: -5 }
                             }
                         },
-                        markup: [{
-                            tagName: 'circle',
-                            selector: 'portBody',
-                            className: 'port-body'
-                        }, {
-                            tagName: 'circle',
-                            selector: 'portInnerBody',
-                            className: 'port-inner-body',
-                            attributes: { visibility: 'hidden' }
-                        }],
+                        markup: [
+                            {
+                                tagName: 'circle',
+                                selector: 'portBody',
+                                className: 'port-body'
+                            },
+                            {
+                                tagName: 'circle',
+                                selector: 'portInnerBody',
+                                className: 'port-inner-body',
+                                attributes: { visibility: 'hidden' }
+                            }
+                        ],
                         attrs: {
                             portBody: {
                                 strokeWidth: 2,
@@ -252,17 +285,20 @@ class GraphViewNode {
                     id: `in${i}`,
                     group: 'in',
                     edgeType: port.edgeType,
-                    markup: [{
-                        tagName: 'circle',
-                        selector: 'portBody',
-                        className: 'port-body',
-                        attributes: { id: `${nodeData.id}-in${i}`, edgeType: port.type }
-                    }, {
-                        tagName: 'circle',
-                        selector: 'portInnerBody',
-                        className: 'port-inner-body',
-                        attributes: { visibility: 'hidden' }
-                    }],
+                    markup: [
+                        {
+                            tagName: 'circle',
+                            selector: 'portBody',
+                            className: 'port-body',
+                            attributes: { id: `${nodeData.id}-in${i}`, edgeType: port.type }
+                        },
+                        {
+                            tagName: 'circle',
+                            selector: 'portInnerBody',
+                            className: 'port-inner-body',
+                            attributes: { visibility: 'hidden' }
+                        }
+                    ],
                     attrs: {
                         portBody: {
                             stroke: this._graphSchema.edges[port.type].stroke || this._config.defaultStyles.edge.stroke
@@ -305,32 +341,37 @@ class GraphViewNode {
         }
 
         if (nodeSchema.outPorts) {
-            nodeSchema.outPorts.forEach((port: any, i: number) => rect.addPort({
-                id: `out${i}`,
-                group: 'out',
-                markup: [{
-                    tagName: 'circle',
-                    selector: 'portBody',
-                    className: 'port-body',
-                    attributes: { id: `${nodeData.id}-out${i}`, edgeType: port.type }
-                }, {
-                    tagName: 'circle',
-                    selector: 'portInnerBody',
-                    className: 'port-inner-body',
-                    attributes: { visibility: 'hidden' }
-                }],
-                attrs: {
-                    type: port.type,
-                    portBody: {
-                        stroke: this._graphSchema.edges[port.type].stroke || this._config.defaultStyles.edge.stroke
-                    },
-                    text: {
-                        text: port.textFormatter ? port.textFormatter(nodeData.attributes) : port.name,
-                        fill: this.getSchemaValue('textColorSecondary'),
-                        'font-size': 14
+            nodeSchema.outPorts.forEach((port: any, i: number) =>
+                rect.addPort({
+                    id: `out${i}`,
+                    group: 'out',
+                    markup: [
+                        {
+                            tagName: 'circle',
+                            selector: 'portBody',
+                            className: 'port-body',
+                            attributes: { id: `${nodeData.id}-out${i}`, edgeType: port.type }
+                        },
+                        {
+                            tagName: 'circle',
+                            selector: 'portInnerBody',
+                            className: 'port-inner-body',
+                            attributes: { visibility: 'hidden' }
+                        }
+                    ],
+                    attrs: {
+                        type: port.type,
+                        portBody: {
+                            stroke: this._graphSchema.edges[port.type].stroke || this._config.defaultStyles.edge.stroke
+                        },
+                        text: {
+                            text: port.textFormatter ? port.textFormatter(nodeData.attributes) : port.name,
+                            fill: this.getSchemaValue('textColorSecondary'),
+                            'font-size': 14
+                        }
                     }
-                }
-            }));
+                })
+            );
         }
 
         const containers: Container[] = [];
@@ -363,48 +404,49 @@ class GraphViewNode {
                         input = new BooleanInput({ class: 'graph-node-input', value: nodeValue });
                         break;
                     case 'NUMERIC_INPUT':
-                        input = new NumericInput({ class: 'graph-node-input', hideSlider: true, value: nodeValue && nodeValue.x ? nodeValue.x : nodeValue });
-                        break;
-                    case 'VEC_2_INPUT':
-                        input = new VectorInput({ dimensions: 2,
+                        input = new NumericInput({
                             class: 'graph-node-input',
                             hideSlider: true,
-                            value: [
-                                nodeValue.x,
-                                nodeValue.y
-                            ] } as any);
+                            value: nodeValue && nodeValue.x ? nodeValue.x : nodeValue
+                        });
+                        break;
+                    case 'VEC_2_INPUT':
+                        input = new VectorInput({
+                            dimensions: 2,
+                            class: 'graph-node-input',
+                            hideSlider: true,
+                            value: [nodeValue.x, nodeValue.y]
+                        } as any);
                         input.dom.setAttribute('style', 'margin-right: 6px;');
                         input.inputs.forEach((inp: any) => inp._sliderControl.dom.remove());
                         break;
                     case 'VEC_3_INPUT':
-                        input = new VectorInput({ dimensions: 3,
+                        input = new VectorInput({
+                            dimensions: 3,
                             class: 'graph-node-input',
                             hideSlider: true,
-                            value: [
-                                nodeValue.x,
-                                nodeValue.y,
-                                nodeValue.z
-                            ] } as any);
+                            value: [nodeValue.x, nodeValue.y, nodeValue.z]
+                        } as any);
                         input.dom.setAttribute('style', 'margin-right: 6px;');
                         input.inputs.forEach((inp: any) => inp._sliderControl.dom.remove());
                         break;
                     case 'VEC_4_INPUT':
-                        input = new VectorInput({ dimensions: 4,
+                        input = new VectorInput({
+                            dimensions: 4,
                             class: 'graph-node-input',
                             hideSlider: true,
-                            value: [
-                                nodeValue.x,
-                                nodeValue.y,
-                                nodeValue.z,
-                                nodeValue.w
-                            ] } as any);
+                            value: [nodeValue.x, nodeValue.y, nodeValue.z, nodeValue.w]
+                        } as any);
                         input.dom.setAttribute('style', 'margin-right: 6px;');
                         input.inputs.forEach((inp: any) => inp._sliderControl.dom.remove());
                         break;
                 }
                 input.enabled = !this._graphView._config.readOnly;
                 input.dom.setAttribute('id', `input_${attribute.name}`);
-                container.dom.setAttribute('style', `margin-top: ${i === 0 ? 33 + portHeight : 5}px; margin-bottom: 5px;`);
+                container.dom.setAttribute(
+                    'style',
+                    `margin-top: ${i === 0 ? 33 + portHeight : 5}px; margin-bottom: 5px;`
+                );
                 container.append(label);
                 container.append(input);
                 containers.push(container);
@@ -475,14 +517,22 @@ class GraphViewNode {
         if (this.nodeSchema.outPorts) {
             this.nodeSchema.outPorts.forEach((port: any, i: number) => {
                 if (port.textFormatter) {
-                    document.getElementById(`${this.nodeData.id}-out${i}`)!.parentElement!.parentElement!.querySelector('tspan')!.innerHTML = port.textFormatter(this.nodeData.attributes);
+                    document
+                        .getElementById(`${this.nodeData.id}-out${i}`)!
+                        .parentElement!.parentElement!.querySelector('tspan')!.innerHTML = port.textFormatter(
+                        this.nodeData.attributes
+                    );
                 }
             });
         }
         if (this.nodeSchema.inPorts) {
             this.nodeSchema.inPorts.forEach((port: any, i: number) => {
                 if (port.textFormatter) {
-                    document.getElementById(`${this.nodeData.id}-in${i}`)!.parentElement!.parentElement!.querySelector('tspan')!.innerHTML = port.textFormatter(this.nodeData.attributes);
+                    document
+                        .getElementById(`${this.nodeData.id}-in${i}`)!
+                        .parentElement!.parentElement!.querySelector('tspan')!.innerHTML = port.textFormatter(
+                        this.nodeData.attributes
+                    );
                 }
             });
         }
@@ -490,7 +540,9 @@ class GraphViewNode {
 
     updateAttribute(attribute: string, value: any): void {
         this.nodeData.attributes[attribute] = value;
-        const attributeElement = document.querySelector(`#nodediv_${this.model.id}`)!.querySelector(`#input_${attribute}`) as any;
+        const attributeElement = document
+            .querySelector(`#nodediv_${this.model.id}`)!
+            .querySelector(`#input_${attribute}`) as any;
         if (attributeElement) {
             attributeElement.ui.suspendEvents = true;
             if (Number.isFinite(value.x)) {
@@ -505,7 +557,9 @@ class GraphViewNode {
     }
 
     setAttributeErrorState(attribute: string, value: boolean): void {
-        const attributeElement = document.querySelector(`#nodediv_${this.model.id}`)!.querySelector(`#input_${attribute}`) as any;
+        const attributeElement = document
+            .querySelector(`#nodediv_${this.model.id}`)!
+            .querySelector(`#input_${attribute}`) as any;
         if (attributeElement) {
             attributeElement.ui.error = value;
         }
@@ -533,7 +587,9 @@ class GraphViewNode {
                 break;
             }
             case 'updateAttribute': {
-                const attributeElement = document.querySelector(`#nodediv_${this.model.id}`)!.querySelector(`#input_${attribute.name}`) as any;
+                const attributeElement = document
+                    .querySelector(`#nodediv_${this.model.id}`)!
+                    .querySelector(`#input_${attribute.name}`) as any;
                 if (!attributeElement) break;
                 attributeElement.ui.on('change', (value: any) => {
                     if (attribute.name === 'name') {
@@ -544,7 +600,9 @@ class GraphViewNode {
                                 nameTaken = true;
                             }
                         });
-                        const attrEl = document.querySelector(`#nodediv_${this.model.id}`)!.querySelector(`#input_${attribute.name}`) as any;
+                        const attrEl = document
+                            .querySelector(`#nodediv_${this.model.id}`)!
+                            .querySelector(`#input_${attribute.name}`) as any;
                         if (nameTaken) {
                             attrEl.ui.error = true;
                             return;

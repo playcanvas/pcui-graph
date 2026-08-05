@@ -130,7 +130,10 @@ class Graph extends Element {
             this.setGraphScale(this._config.defaultStyles.initialScale);
         }
         if (this._config.defaultStyles.initialPosition) {
-            this.setGraphPosition(this._config.defaultStyles.initialPosition.x, this._config.defaultStyles.initialPosition.y);
+            this.setGraphPosition(
+                this._config.defaultStyles.initialPosition.x,
+                this._config.defaultStyles.initialPosition.y
+            );
         }
     }
 
@@ -178,7 +181,10 @@ class Graph extends Element {
                     nodeSchema.attributes.forEach((attribute: any) => {
                         if (!node.attributes[attribute.name] && attribute.defaultValue) {
                             this._suppressGraphDataEvents = true;
-                            this._graphData.set(`data.nodes.${nodeKey}.attributes.${attribute.name}`, attribute.defaultValue);
+                            this._graphData.set(
+                                `data.nodes.${nodeKey}.attributes.${attribute.name}`,
+                                attribute.defaultValue
+                            );
                             this._suppressGraphDataEvents = false;
                         }
                     });
@@ -300,7 +306,10 @@ class Graph extends Element {
 
     _isValidEdge(edgeType: string, source: string | number, target: string | number): boolean {
         const edge = this._graphSchema.edges[edgeType];
-        return edge.from.includes(this._graphData.get(`data.nodes.${source}.nodeType`)) && edge.to.includes(this._graphData.get(`data.nodes.${target}.nodeType`));
+        return (
+            edge.from.includes(this._graphData.get(`data.nodes.${source}.nodeType`)) &&
+            edge.to.includes(this._graphData.get(`data.nodes.${target}.nodeType`))
+        );
     }
 
     /**
@@ -319,14 +328,20 @@ class Graph extends Element {
             const contextMenuItems = structuredClone(edgeSchema.contextMenuItems).map((item: any) => {
                 if (item.action === GRAPH_ACTIONS.DELETE_EDGE) {
                     item.onSelect = () => {
-                        this._dispatchEvent(GRAPH_ACTIONS.DELETE_EDGE, { edgeId: edgeId, edge: this._graphData.get(`data.edges.${edgeId}`) });
+                        this._dispatchEvent(GRAPH_ACTIONS.DELETE_EDGE, {
+                            edgeId: edgeId,
+                            edge: this._graphData.get(`data.edges.${edgeId}`)
+                        });
                     };
                 }
                 return item;
             });
             const addEdgeContextMenuFunction = () => {
                 if (Number.isFinite(edge.outPort)) {
-                    this.view.addEdgeContextMenu(`${edge.from},${edge.outPort}-${edge.to},${edge.inPort}`, contextMenuItems);
+                    this.view.addEdgeContextMenu(
+                        `${edge.from},${edge.outPort}-${edge.to},${edge.inPort}`,
+                        contextMenuItems
+                    );
                 } else {
                     this.view.addEdgeContextMenu(`${edge.from}-${edge.to}`, contextMenuItems);
                 }
@@ -357,7 +372,13 @@ class Graph extends Element {
 
     _createUnconnectedEdgeForNode(node: any, edgeType: string): void {
         const edgeSchema = this._graphSchema.edges[edgeType];
-        this.view.addUnconnectedEdge(node.id, edgeType, edgeSchema, this._isValidEdge.bind(this), this._onEdgeConnected.bind(this));
+        this.view.addUnconnectedEdge(
+            node.id,
+            edgeType,
+            edgeSchema,
+            this._isValidEdge.bind(this),
+            this._onEdgeConnected.bind(this)
+        );
     }
 
     _onCreateEdge(edgeId: string, edge: any): void {
@@ -387,7 +408,8 @@ class Graph extends Element {
     _onNodeAttributeUpdated(nodeId: string | number, attribute: any, value: any): void {
         const node = this._graphData.get(`data.nodes.${nodeId}`);
         let prevAttributeValue: any;
-        let attributeKey: string | undefined = node.attributes[attribute.name] !== undefined ? attribute.name : undefined;
+        let attributeKey: string | undefined =
+            node.attributes[attribute.name] !== undefined ? attribute.name : undefined;
         if (!attributeKey) {
             Object.keys(node.attributes).forEach((k: string) => {
                 const item = node.attributes[k];
@@ -411,14 +433,11 @@ class Graph extends Element {
         }
         if (JSON.stringify(node.attributes[attributeKey!]) === JSON.stringify(prevAttributeValue)) return;
         this.updateNodeAttribute(nodeId, attribute.name, value);
-        this._dispatchEvent(
-            GRAPH_ACTIONS.UPDATE_NODE_ATTRIBUTE,
-            {
-                node: node,
-                attribute: attribute.name,
-                attributeKey: attributeKey
-            }
-        );
+        this._dispatchEvent(GRAPH_ACTIONS.UPDATE_NODE_ATTRIBUTE, {
+            node: node,
+            attribute: attribute.name,
+            attributeKey: attributeKey
+        });
     }
 
     _initializeNodeContextMenuItems(node: any, items: any[]): any[] {
@@ -445,29 +464,15 @@ class Graph extends Element {
      */
     createNode(node: any, _nodeSchema?: any, _batching?: boolean): void {
         const nodeSchema = this._graphSchema.nodes[node.nodeType];
-        node = this.view.addNode(
-            node,
-            nodeSchema,
-            this._onCreateEdge.bind(this),
-            this._onNodeSelected.bind(this)
-        );
+        node = this.view.addNode(node, nodeSchema, this._onCreateEdge.bind(this), this._onNodeSelected.bind(this));
 
         if (!this._graphData.get(`data.nodes.${node.id}`)) {
             this._graphData.set(`data.nodes.${node.id}`, node);
         }
-        this.view.addNodeEvent(
-            node.id,
-            'updatePosition',
-            this._onNodePositionUpdated.bind(this)
-        );
+        this.view.addNodeEvent(node.id, 'updatePosition', this._onNodePositionUpdated.bind(this));
         if (nodeSchema.attributes) {
             nodeSchema.attributes.forEach((attribute: any) => {
-                this.view.addNodeEvent(
-                    node.id,
-                    'updateAttribute',
-                    this._onNodeAttributeUpdated.bind(this),
-                    attribute
-                );
+                this.view.addNodeEvent(node.id, 'updateAttribute', this._onNodeAttributeUpdated.bind(this), attribute);
             });
         }
         if (nodeSchema.contextMenuItems) {
@@ -653,7 +658,8 @@ class Graph extends Element {
      */
     // @ts-ignore - intentional override: Graph uses DOM events, not PCUI EventEmitter
     on(eventName: string, callback: (detail: any) => void): void {
-        if (this._config.readOnly && (!eventName.includes('EVENT_SELECT_') && !eventName.includes('EVENT_DESELECT'))) return;
+        if (this._config.readOnly && !eventName.includes('EVENT_SELECT_') && !eventName.includes('EVENT_DESELECT'))
+            return;
         this.dom.addEventListener(eventName, (e: Event) => {
             callback((e as CustomEvent).detail);
         });

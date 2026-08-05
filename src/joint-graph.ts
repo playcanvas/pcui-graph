@@ -23,7 +23,6 @@ class JointGraph {
     ignoreAdjustVertices = false;
 
     constructor(dom: HTMLElement, config: any = {}) {
-
         this._config = config;
         this._graph = new dia.Graph({}, { cellNamespace: shapes });
 
@@ -54,7 +53,12 @@ class JointGraph {
                     }
                 });
             },
-            validateConnection: (cellViewS: dia.CellView, magnetS: SVGElement, cellViewT: dia.CellView, magnetT: SVGElement) => {
+            validateConnection: (
+                cellViewS: dia.CellView,
+                magnetS: SVGElement,
+                cellViewT: dia.CellView,
+                magnetT: SVGElement
+            ) => {
                 // Can't connect to self
                 if (cellViewS.model.id === cellViewT.model.id) return false;
 
@@ -71,7 +75,8 @@ class JointGraph {
                 if (!sPort || !tPort) return false;
 
                 // Can't connect in-to-in or out-to-out
-                if ((sPort.includes('in') && tPort.includes('in')) || (sPort.includes('out') && tPort.includes('out'))) return false;
+                if ((sPort.includes('in') && tPort.includes('in')) || (sPort.includes('out') && tPort.includes('out')))
+                    return false;
 
                 // Check if source port is already connected (for 'in' ports)
                 if (sPort.includes('in')) {
@@ -126,7 +131,10 @@ class JointGraph {
             if (this._panPaper) {
                 this._pan = this._mousePos.clone().sub(new Vec2(e.offsetX, e.offsetY));
                 this._mousePos = new Vec2(e.offsetX, e.offsetY);
-                this._paper.translate(this._paper.translate().tx - this._pan.x, this._paper.translate().ty - this._pan.y);
+                this._paper.translate(
+                    this._paper.translate().tx - this._pan.x,
+                    this._paper.translate().ty - this._pan.y
+                );
             }
         });
 
@@ -136,7 +144,8 @@ class JointGraph {
             const newScale = oldScale + delta * 0.025;
             this._scaleToPoint(newScale, x, y);
         };
-        const handleCellMouseWheel = (cellView: dia.CellView, e: dia.Event, x: number, y: number, delta: number) => handleCanvasMouseWheel(e, x, y, delta);
+        const handleCellMouseWheel = (cellView: dia.CellView, e: dia.Event, x: number, y: number, delta: number) =>
+            handleCanvasMouseWheel(e, x, y, delta);
 
         this._paper.on('cell:mousewheel', handleCellMouseWheel);
         this._paper.on('blank:mousewheel', handleCanvasMouseWheel);
@@ -161,8 +170,8 @@ class JointGraph {
             const currentScale = this._paper.scale().sx;
             const beta = currentScale / nextScale;
 
-            const ax = x - (x * beta);
-            const ay = y - (y * beta);
+            const ax = x - x * beta;
+            const ay = y - y * beta;
 
             const translate = this._paper.translate();
 
@@ -188,7 +197,7 @@ class JointGraph {
             const groups: Record<string, dia.Link[]> = Object.create(null);
             for (const link of graph.getConnectedLinks(model)) {
                 const ids = [link.source().id, link.target().id];
-                const key = String(ids.filter(id => id !== model.id)[0]);
+                const key = String(ids.filter((id) => id !== model.id)[0]);
                 (groups[key] ??= []).push(link);
             }
             for (const [key, group] of Object.entries(groups)) {
@@ -210,8 +219,10 @@ class JointGraph {
             const siblingTargetId = sibling.target().id;
             // if source and target are the same
             // or if source and target are reversed
-            return ((siblingSourceId === sourceId) && (siblingTargetId === targetId)) ||
-                ((siblingSourceId === targetId) && (siblingTargetId === sourceId));
+            return (
+                (siblingSourceId === sourceId && siblingTargetId === targetId) ||
+                (siblingSourceId === targetId && siblingTargetId === sourceId)
+            );
         });
         // Sort by model ID so offset assignment is stable across calls
         // (internal cell order can change due to toBack/toFront operations)
@@ -225,13 +236,15 @@ class JointGraph {
             case 0: {
                 // the link has no siblings
                 break;
-            } case 1: {
+            }
+            case 1: {
                 // there is only one link
                 // no vertices needed
                 model.unset('vertices');
                 model.set('connector', { name: 'normal' });
                 break;
-            } default: {
+            }
+            default: {
                 // there are multiple siblings
                 // we need to create vertices
                 const sourceCenter = graph.getCell(sourceId).getBBox().center();
@@ -254,16 +267,16 @@ class JointGraph {
                     //  |---->  index 0 sibling - centerline (between source and target centers)
                     //  |
                     //  v  even indices
-                    const sign = ((index % 2) ? 1 : -1);
+                    const sign = index % 2 ? 1 : -1;
                     // to assure symmetry, if there is an even number of siblings
                     // shift all vertices leftward perpendicularly away from the centerline
-                    if ((numSiblings % 2) === 0) {
-                        offset -= ((GAP / 2) * sign);
+                    if (numSiblings % 2 === 0) {
+                        offset -= (GAP / 2) * sign;
                     }
                     // make reverse links count the same as non-reverse
-                    const reverse = ((theta < 180) ? 1 : -1);
+                    const reverse = theta < 180 ? 1 : -1;
                     // we found the vertex
-                    const angle = g.toRad(theta + (sign * reverse * 90));
+                    const angle = g.toRad(theta + sign * reverse * 90);
 
                     const shift = g.Point.fromPolar(offset * sign, angle);
                     this.ignoreAdjustVertices = true;

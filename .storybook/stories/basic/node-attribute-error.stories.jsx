@@ -12,7 +12,7 @@ export default {
 
 const GRAPH_ENUM = {
     NODE: {
-        HELLO_WORLD: 0,
+        HELLO_WORLD: 0
     }
 };
 
@@ -47,7 +47,7 @@ const GRAPH_DATA = {
 };
 
 // Template function
-const Template = (args) => <Graph schema={GRAPH_SCHEMA} options={{...args}} />;
+const Template = (args) => <Graph schema={GRAPH_SCHEMA} options={{ ...args }} />;
 
 // Default story using the template
 export const NodeAttributeErrorGraphExample = Template.bind({});

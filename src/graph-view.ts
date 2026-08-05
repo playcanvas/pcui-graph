@@ -56,7 +56,9 @@ class GraphView extends JointGraph {
             parent._dispatchEvent(GRAPH_ACTIONS.UPDATE_SCALE, { scale: this._paper.scale().sx });
         });
         this._paper.on('blank:pointerup', () => {
-            parent._dispatchEvent(GRAPH_ACTIONS.UPDATE_TRANSLATE, { pos: { x: this._paper.translate().tx, y: this._paper.translate().ty } });
+            parent._dispatchEvent(GRAPH_ACTIONS.UPDATE_TRANSLATE, {
+                pos: { x: this._paper.translate().tx, y: this._paper.translate().ty }
+            });
         });
         this._paper.on({
             'blank:contextmenu': (event: dia.Event) => {
@@ -73,7 +75,10 @@ class GraphView extends JointGraph {
                 const node = this.getNode(cellView.model.id);
                 if (node && node.state !== GraphViewNode.STATES.SELECTED) {
                     node.hover();
-                    selectedEdge = this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE' ? this.getEdge(this._parent._selectedItem._id) : null;
+                    selectedEdge =
+                        this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE'
+                            ? this.getEdge(this._parent._selectedItem._id)
+                            : null;
                     if (selectedEdge) selectedEdgeId = selectedEdge.model.id;
                     if (this._config.edgeHoverEffect) {
                         Object.keys(this._edges).forEach((edgeKey) => {
@@ -90,11 +95,14 @@ class GraphView extends JointGraph {
                 const edge = this.getEdge(cellView.model.id);
                 if (this._config.edgeHoverEffect && edge && edge.state !== GraphViewEdge.STATES.SELECTED) {
                     edge.deselect();
-                    selectedEdge = this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE' ? this.getEdge(this._parent._selectedItem._id) : null;
+                    selectedEdge =
+                        this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE'
+                            ? this.getEdge(this._parent._selectedItem._id)
+                            : null;
                     if (selectedEdge) selectedEdgeId = selectedEdge.model.id;
                     Object.keys(this._edges).forEach((edgeKey) => {
                         const currEdge = this.getEdge(edgeKey);
-                        if ((edge.model.id !== currEdge.model.id) && (selectedEdgeId !== currEdge.model.id)) {
+                        if (edge.model.id !== currEdge.model.id && selectedEdgeId !== currEdge.model.id) {
                             currEdge.mute();
                         }
                     });
@@ -108,8 +116,14 @@ class GraphView extends JointGraph {
                 if (related instanceof Element && related.classList.contains('graph-node-input')) return;
                 const node = this.getNode(cellView.model.id);
                 if (node && node.state !== GraphViewNode.STATES.SELECTED) {
-                    selectedEdge = this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE' ? this.getEdge(this._parent._selectedItem._id) : null;
-                    if (!selectedEdge || ![selectedEdge.edgeData.from, selectedEdge.edgeData.to].includes(node.nodeData.id)) {
+                    selectedEdge =
+                        this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE'
+                            ? this.getEdge(this._parent._selectedItem._id)
+                            : null;
+                    if (
+                        !selectedEdge ||
+                        ![selectedEdge.edgeData.from, selectedEdge.edgeData.to].includes(node.nodeData.id)
+                    ) {
                         node.hoverRemove();
                     }
                     if (this._config.edgeHoverEffect) {
@@ -134,11 +148,20 @@ class GraphView extends JointGraph {
                             }
                         }
                     });
-                    selectedEdge = this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE' ? this.getEdge(this._parent._selectedItem._id) : null;
-                    if (!selectedEdge || ![selectedEdge.edgeData.from, selectedEdge.edgeData.to].includes(edge.edgeData.from)) {
+                    selectedEdge =
+                        this._parent._selectedItem && this._parent._selectedItem._type === 'EDGE'
+                            ? this.getEdge(this._parent._selectedItem._id)
+                            : null;
+                    if (
+                        !selectedEdge ||
+                        ![selectedEdge.edgeData.from, selectedEdge.edgeData.to].includes(edge.edgeData.from)
+                    ) {
                         this.getNode(edge.edgeData.from).hoverRemove();
                     }
-                    if (!selectedEdge || ![selectedEdge.edgeData.from, selectedEdge.edgeData.to].includes(edge.edgeData.to)) {
+                    if (
+                        !selectedEdge ||
+                        ![selectedEdge.edgeData.from, selectedEdge.edgeData.to].includes(edge.edgeData.to)
+                    ) {
                         this.getNode(edge.edgeData.to).hoverRemove();
                     }
                 }
@@ -161,7 +184,7 @@ class GraphView extends JointGraph {
     applyBatchedCells(): void {
         this._batchingCells = false;
         this._graph.addCells(this._cells);
-        this._cellMountedFunctions.forEach(f => f());
+        this._cellMountedFunctions.forEach((f) => f());
         this._cells = [];
         this._cellMountedFunctions = [];
     }
@@ -186,10 +209,7 @@ class GraphView extends JointGraph {
             pos.x -= paperPosition.x;
             pos.y -= paperPosition.y;
         }
-        return new Vec2(
-            (-translate.tx / scale) + (pos.x / scale),
-            (-translate.ty / scale) + (pos.y / scale)
-        );
+        return new Vec2(-translate.tx / scale + pos.x / scale, -translate.ty / scale + pos.y / scale);
     }
 
     addCanvasContextMenu(items: any[]): void {
@@ -220,7 +240,12 @@ class GraphView extends JointGraph {
         return this._nodes[id];
     }
 
-    addNode(nodeData: any, nodeSchema: any, onCreateEdge: (edgeId: string, edge: any) => void, onNodeSelected: (nodeData: any) => void): any {
+    addNode(
+        nodeData: any,
+        nodeSchema: any,
+        onCreateEdge: (edgeId: string, edge: any) => void,
+        onNodeSelected: (nodeData: any) => void
+    ): any {
         const node = new GraphViewNode(
             this,
             this._paper,
@@ -336,7 +361,13 @@ class GraphView extends JointGraph {
         });
     }
 
-    addUnconnectedEdge(nodeId: number, edgeType: string, edgeSchema: any, validateEdge: (edgeType: string, source: number, target: number) => boolean, onEdgeConnected: (edgeType: string, from: number, to: number) => void): void {
+    addUnconnectedEdge(
+        nodeId: number,
+        edgeType: string,
+        edgeSchema: any,
+        validateEdge: (edgeType: string, source: number, target: number) => boolean,
+        onEdgeConnected: (edgeType: string, from: number, to: number) => void
+    ): void {
         this.disableInputEvents();
         const link = GraphViewEdge.createLink(this._config.defaultStyles, edgeSchema);
         link.source(this.getNode(nodeId).model);
@@ -347,7 +378,11 @@ class GraphView extends JointGraph {
             const sourceNodePos = this.getGraphPosition();
             let pointerVector = mousePos.clone().sub(sourceNodePos);
             const rect = sourceNodeView.el.getBoundingClientRect();
-            const direction = (new Vec2(e.clientX, e.clientY)).clone().sub(new Vec2(rect.x, rect.y)).normalize().mulScalar(20);
+            const direction = new Vec2(e.clientX, e.clientY)
+                .clone()
+                .sub(new Vec2(rect.x, rect.y))
+                .normalize()
+                .mulScalar(20);
             pointerVector = sourceNodePos.add(pointerVector).sub(direction);
             link.target({
                 x: pointerVector.x,
@@ -358,7 +393,11 @@ class GraphView extends JointGraph {
             if (!this.getNode(cellView.model.id)) return;
             const targetNodeId = this.getNode(cellView.model.id).nodeData.id;
             const nodeModel = this.getNode(nodeId).model;
-            if ((cellView.model.id !== nodeModel.id) && !cellView.model.isLink() && validateEdge(edgeType, nodeId, targetNodeId)) {
+            if (
+                cellView.model.id !== nodeModel.id &&
+                !cellView.model.isLink() &&
+                validateEdge(edgeType, nodeId, targetNodeId)
+            ) {
                 link.target(cellView.model);
                 onEdgeConnected(edgeType, nodeId, targetNodeId);
             }
