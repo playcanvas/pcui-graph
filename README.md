@@ -50,6 +50,10 @@ const graph = new Graph(schema);
 document.body.appendChild(graph.dom);
 ```
 
+## Developing with AI
+
+Coding agents: start from the [PCUI guides index](https://developer.playcanvas.com/user-manual/pcui/llms.txt), which covers PCUI Graph, and the [PCUI Graph API index](https://api.playcanvas.com/pcui-graph/llms.txt). Both link a Markdown version of every page.
+
 ## Storybook
 
 Examples of graphs created using PCUI Graph are available in the [Storybook](https://playcanvas.github.io/pcui-graph/storybook/). You can also run it locally as a development environment:
